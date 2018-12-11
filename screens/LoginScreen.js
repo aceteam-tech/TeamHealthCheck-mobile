@@ -80,9 +80,11 @@ export default class LoginScreen extends React.Component {
 
     componentDidMount(){
         const user = this.props.navigation.getParam('user')
-        this.setState({
-            email: user && user.username || 'privoskar@gmail.com'
-        })
+        if(user){
+            this.setState({
+                email: user.username
+            })
+        }
     }
 
     render () {
