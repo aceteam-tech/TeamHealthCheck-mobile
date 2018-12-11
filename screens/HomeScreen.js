@@ -1,11 +1,12 @@
 import React from 'react';
-import {TouchableOpacity,} from 'react-native';
-import {Button, Text, Card, CardItem, Icon, Content} from 'native-base'
+import {AsyncStorage, TouchableOpacity,} from 'react-native';
+import {Button, Text, Card, CardItem, Icon, Content, Input} from 'native-base'
 import styled from 'styled-components/native'
+import colors from '../constants/Colors'
 
 const Page = styled.View`
     flex: 1;
-    backgroundColor: white;
+    backgroundColor: ${colors.air};
     justifyContent: space-between;
 `
 
@@ -16,14 +17,14 @@ const TeamIcon = styled.Image`
 `
 
 const Header = styled.View`
-    backgroundColor: #0CAADC;
+    backgroundColor: ${colors.primary};
     height: 150px;
     justifyContent: center;
     align-items: center;
 `
 
 const HeaderText = styled.Text`
-  color: #fff;
+  color: ${colors.air};
   font-size: 20px;
   font-weight: bold;
 `
@@ -53,6 +54,7 @@ export default class HomeScreen extends React.Component {
     };
 
     render () {
+        AsyncStorage.removeItem('userToken')
         return (
             <Page>
                 <Content>
