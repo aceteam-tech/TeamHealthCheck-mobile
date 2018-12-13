@@ -39,3 +39,7 @@ export const getSession = () => {
 export const getUser = () => {
     return Auth.currentAuthenticatedUser()
 }
+
+export const signOut = () => {
+    return Auth.signOut()
+}
