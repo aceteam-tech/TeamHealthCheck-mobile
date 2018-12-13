@@ -1,8 +1,9 @@
 import React from 'react';
-import {AsyncStorage, TouchableOpacity,} from 'react-native';
-import {Button, Text, Card, CardItem, Icon, Content, Input} from 'native-base'
+import {TouchableOpacity} from 'react-native';
+import {Button, Text, Card, CardItem, Icon, Content} from 'native-base'
 import styled from 'styled-components/native'
 import colors from '../constants/Colors'
+import {myTeams} from '../adapters/api';
 
 const Page = styled.View`
     flex: 1;
@@ -53,8 +54,18 @@ export default class HomeScreen extends React.Component {
         header: null,
     };
 
+    state = {
+        teams: []
+    }
+
+    async componentDidMount () {
+        const teams = await myTeams()
+        if(teams){
+            this.setState({teams})
+        }
+    }
+
     render () {
-        AsyncStorage.removeItem('userToken')
         return (
             <Page>
                 <Content>
@@ -63,28 +74,20 @@ export default class HomeScreen extends React.Component {
                     </Header>
                     <TeamsList>
                         {
-                            [{
-                                id: 1,
-                                description: 'Ace Team',
-                                image: 'https://s3.amazonaws.com/squad-health-check/AceTeam-Logo-05a.png'
-                            }, {
-                                "description": "Cloud Ops",
-                                "id": "e118e8f0-90b6-4b55-b0be-9b0386772c6b",
-                                "image": "http://w-files.pl/wp-content/uploads/2016/04/Simple-Cloud-Icon.png"
-                            }].map(group => (
-                                <Card key={group.id} style={squadCardStyles}>
+                            this.state.teams.map(team => (
+                                <Card key={team.id} style={squadCardStyles}>
                                     <TouchableOpacity
                                         onPress={() => this.props.navigation.navigate('Team', {
-                                            id: group.id,
-                                            title: group.description
+                                            id: team.id,
+                                            title: team.name
                                         })}>
                                         <CardItem style={cardItemStyles}>
                                             {
-                                                !!group.image &&
+                                                !!team.image &&
                                                 <TeamIcon
-                                                    source={{uri: group.image}}/>
+                                                    source={{uri: team.image}}/>
                                             }
-                                            <Text style={{flex: 1}}>{group.description}</Text>
+                                            <Text style={{flex: 1}}>{team.name}</Text>
                                             <Icon name='ios-arrow-forward'
                                                   type='Ionicons'
                                                   style={{color: '#0CAADC', fontSize: 30}}/>

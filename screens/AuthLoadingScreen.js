@@ -5,26 +5,30 @@ import {
     StatusBar,
     View,
 } from 'react-native';
+import {getUser} from '../adapters/auth'
 
 export default class AuthLoadingScreen extends React.Component {
-    constructor(props) {
+    constructor (props) {
         super(props);
         this._bootstrapAsync();
     }
 
     // Fetch the token from storage then navigate to our appropriate place
     _bootstrapAsync = async () => {
-        const userToken = await AsyncStorage.getItem('userToken');
-
-        this.props.navigation.navigate(userToken ? 'Main' : 'Auth');
+        try {
+            const user = await getUser()
+            this.props.navigation.navigate('Main');
+        } catch (e) {
+            this.props.navigation.navigate('Auth');
+        }
     };
 
     // Render any loading content that you like here
-    render() {
+    render () {
         return (
             <View>
-                <ActivityIndicator />
-                <StatusBar barStyle="default" />
+                <ActivityIndicator/>
+                <StatusBar barStyle="default"/>
             </View>
         );
     }

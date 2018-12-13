@@ -73,8 +73,7 @@ export default class LoginScreen extends React.Component {
     }
 
     login = async () => {
-        const accessToken = await login(this.state.email, this.state.password)
-        await AsyncStorage.setItem('userToken', accessToken);
+        await login(this.state.email, this.state.password)
         this.props.navigation.navigate('AuthLoading', {email: this.state.email})
     }
 
