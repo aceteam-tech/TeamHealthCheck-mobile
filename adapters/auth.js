@@ -5,6 +5,11 @@ Amplify.configure({
         region: 'eu-west-2',
         userPoolId: 'eu-west-2_yHlHtMIYI',
         userPoolWebClientId: '7p91oe8imidq26nptcuja7n532',
+        identityPoolId: 'eu-west-2:cc96b0d1-0936-4d46-a611-bf8a419970aa'
+    },
+    Storage: {
+        bucket: 'squad-health-check',
+        region: 'us-east-1'
     }
 });
 
