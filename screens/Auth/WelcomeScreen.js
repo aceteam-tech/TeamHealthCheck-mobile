@@ -2,10 +2,10 @@ import React from 'react';
 import {Button, Text, View} from 'native-base'
 import {Image} from 'react-native'
 import styled from 'styled-components/native'
-import {login} from '../adapters/auth'
-import colors from '../constants/Colors'
-import IconUser from '../assets/images/icon-user-2x.png'
-import WelcomeBG from '../assets/images/welcome-bg.jpg'
+import {login} from '../../adapters/auth'
+import colors from '../../constants/Colors'
+import IconUser from '../../assets/images/icon-user-2x.png'
+import WelcomeBG from '../../assets/images/welcome-bg.jpg'
 
 const Page = styled.ImageBackground`
     flex: 1;

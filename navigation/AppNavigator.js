@@ -1,12 +1,12 @@
 import React from 'react';
 import {createSwitchNavigator} from 'react-navigation';
 
-import MainTabNavigator from './MainTabNavigator';
+import TeamsNavigator from './TeamsNavigator';
 import AuthNavigator from './AuthNavigator';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 
 export default createSwitchNavigator({
     AuthLoading: AuthLoadingScreen,
-    Auth: AuthNavigator,
-    Main: MainTabNavigator,
+    AuthFlow: AuthNavigator,
+    TeamsFlow: TeamsNavigator,
 });

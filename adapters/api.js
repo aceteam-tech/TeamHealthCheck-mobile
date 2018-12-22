@@ -25,8 +25,12 @@ const makeRequest = async (resource, method, body) => {
     }
 }
 
-export const myTeams = () => {
+export const getMyTeams = () => {
     return makeRequest('my-teams', 'GET')
+}
+
+export const getTeam = (teamId) => {
+    return makeRequest(`team?id=${teamId}`, 'GET')
 }
 
 export const addTeam = async (teamName) => {

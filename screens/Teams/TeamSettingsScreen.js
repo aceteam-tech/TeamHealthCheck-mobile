@@ -2,9 +2,9 @@ import React from 'react';
 import {Button, Text, Input, Label, Item, Form} from 'native-base'
 import {KeyboardAvoidingView, Image} from 'react-native'
 import styled from 'styled-components/native'
-import colors from '../constants/Colors'
+import colors from '../../constants/Colors'
 import {ImagePicker, Permissions, FileSystem} from 'expo'
-import {uploadFile} from '../adapters/api'
+import {uploadFile} from '../../adapters/api'
 import {Buffer} from 'buffer'
 import uuid from 'uuid/v4'
 

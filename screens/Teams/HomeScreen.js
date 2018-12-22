@@ -1,9 +1,11 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
-import {Button, Text, Card, CardItem, Icon, Content} from 'native-base'
+import {TouchableOpacity, View} from 'react-native';
+import {Text, Card, CardItem, Icon, Content} from 'native-base'
 import styled from 'styled-components/native'
-import colors from '../constants/Colors'
-import {myTeams} from '../adapters/api';
+import colors from '../../constants/Colors'
+import Button from '../../components/Button'
+import {getMyTeams} from '../../adapters/api';
+import {signOut} from '../../adapters/auth';
 
 const Page = styled.View`
     flex: 1;
@@ -49,23 +51,38 @@ const cardItemStyles = {
     borderRadius: 10
 }
 
-export default class HomeScreen extends React.Component {
-    static navigationOptions = {
-        header: null,
-    };
+const buttonText = {
+    color: colors.air,
+    fontSize: 14,
+    textAlign: 'center',
+    fontWeight: 'bold'
+}
 
+const button = {
+    justifyContent: 'center',
+    width: '90%',
+    backgroundColor: colors.primary,
+    textAlign: 'center',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginBottom: 30,
+}
+
+export default class HomeScreen extends React.Component {
     state = {
         teams: []
     }
 
     async componentDidMount () {
-        const teams = await myTeams()
+        const teams = await getMyTeams()
         if(teams){
             this.setState({teams})
         }
+        // await signOut()
     }
 
     render () {
+        console.log(this.state.teams)
         return (
             <Page>
                 <Content>
@@ -77,10 +94,7 @@ export default class HomeScreen extends React.Component {
                             this.state.teams.map(team => (
                                 <Card key={team.id} style={squadCardStyles}>
                                     <TouchableOpacity
-                                        onPress={() => this.props.navigation.navigate('Team', {
-                                            id: team.id,
-                                            title: team.name
-                                        })}>
+                                        onPress={() => this.props.navigation.navigate('TeamDashboard', {team})}>
                                         <CardItem style={cardItemStyles}>
                                             {
                                                 !!team.image &&
@@ -98,11 +112,21 @@ export default class HomeScreen extends React.Component {
                             ))
                         }
                     </TeamsList>
+                    {/*<Button full style={{backgroundColor: '#0CAADC'}}*/}
+                            {/*onPress={() => this.props.navigation.navigate('AddTeam')}>*/}
+                        {/*<Text>Create new team</Text>*/}
+                    {/*</Button>*/}
                 </Content>
-                <Button full style={{backgroundColor: '#0CAADC'}}
-                        onPress={() => this.props.navigation.navigate('AddTeam')}>
-                    <Text>Create new team</Text>
-                </Button>
+                <View>
+                    <Button onPress={() => this.props.navigation.navigate('AddTeam')}
+                            text='Add new team'
+                            version='primary'
+                    />
+                    <Button onPress={() => this.props.navigation.navigate('AddTeam')}
+                            text='Join team'
+                            version='secondary'
+                    />
+                </View>
             </Page>
         )
     }

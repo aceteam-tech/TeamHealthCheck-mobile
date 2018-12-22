@@ -17,9 +17,9 @@ export default class AuthLoadingScreen extends React.Component {
     _bootstrapAsync = async () => {
         try {
             const user = await getUser()
-            this.props.navigation.navigate('Main');
+            this.props.navigation.navigate('TeamsFlow');
         } catch (e) {
-            this.props.navigation.navigate('Auth');
+            this.props.navigation.navigate('AuthFlow');
         }
     };
 

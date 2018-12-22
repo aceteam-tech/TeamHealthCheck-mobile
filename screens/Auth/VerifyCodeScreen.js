@@ -1,12 +1,9 @@
 import React from 'react';
 import {Button, Text, Input, Label, Item, Form} from 'native-base'
-import {KeyboardAvoidingView, Image, AsyncStorage} from 'react-native'
+import {KeyboardAvoidingView} from 'react-native'
 import styled from 'styled-components/native'
-import {login} from '../adapters/auth'
-import colors from '../constants/Colors'
-import AvatarPlaceholder from '../assets/images/avatar-placeholder-2x.png'
-import IconLogin from '../assets/images/icon-login-2x.png'
-import IconPassword from '../assets/images/icon-password-2x.png'
+import {verify} from '../../adapters/auth'
+import colors from '../../constants/Colors'
 
 const Page = styled.View`
     flex: 1;
@@ -14,12 +11,12 @@ const Page = styled.View`
 `
 
 const Header = styled.View`
-    margin-top: 40px;
     backgroundColor: ${colors.primary};
     height: 150px;
-    justifyContent: space-around;
+    justifyContent: center;
     align-items: center;
-    flex: 2;
+    flex: 1;
+    align-items: center;
 `
 
 const HeaderText = styled.Text`
@@ -29,13 +26,13 @@ const HeaderText = styled.Text`
 `
 
 const Footer = styled.View`
-    flex: 2;
+    flex: 1;
     justify-content: center;
 `
 
 const button = {
-    paddingLeft: '25%',
-    paddingRight: '25%',
+    paddingLeft: '30%',
+    paddingRight: '30%',
     textAlign: 'center',
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -56,14 +53,14 @@ const inputStyle = {
     color: colors.air
 }
 
-export default class LoginScreen extends React.Component {
+export default class VerifyCodeScreen extends React.Component {
     static navigationOptions = {
         header: null,
     };
 
     state = {
         email: '',
-        password: ''
+        code: ''
     }
 
     onTextChange = (key, value) => {
@@ -72,37 +69,29 @@ export default class LoginScreen extends React.Component {
         })
     }
 
-    login = async () => {
-        await login(this.state.email, this.state.password)
-        this.props.navigation.navigate('AuthLoading', {email: this.state.email})
+    verify = async () => {
+        await verify(this.state.email, this.state.code)
+        this.props.navigation.navigate('Login', {email: this.state.email})
     }
 
     componentDidMount(){
-        const user = this.props.navigation.getParam('user')
-        if(user){
-            this.setState({
-                email: user.username
-            })
-        }
+        this.setState({
+            email: this.props.navigation.getParam('user').username
+        })
     }
 
     render () {
         return (
             <Page>
                 <Header>
-                    <HeaderText>{'log in'.toUpperCase()}</HeaderText>
-                    <Image source={AvatarPlaceholder}
-                           resizeMode='contain'
-                           style={{height: 150}}/>
+                    <HeaderText>Verify Account</HeaderText>
                 </Header>
                 <KeyboardAvoidingView style={{flex: 1}}
                                       behavior="padding"
                                       keyboardVerticalOffset={20}>
                     <Form style={{flex: 1, justifyContent: 'space-around', marginRight: 15}}>
-                        <Item>
-                            <Image source={IconLogin}
-                                   style={{height: 18}}
-                                   resizeMode='contain'/>
+                        <Item floatingLabel>
+                            <Label style={labelStyle}>Email</Label>
                             <Input style={inputStyle}
                                    autoCapitalize='none'
                                    keyboardType='email-address'
@@ -111,21 +100,18 @@ export default class LoginScreen extends React.Component {
                                    value={this.state.email}
                                    onChangeText={(val) => this.onTextChange('email', val)}/>
                         </Item>
-                        <Item>
-                            <Image source={IconPassword}
-                                   style={{height: 18}}
-                                   resizeMode='contain'/>
+                        <Item floatingLabel>
+                            <Label style={labelStyle}>Code</Label>
                             <Input style={inputStyle}
                                    autoCorrect={false}
-                                   secureTextEntry
-                                   textContentType='password'
-                                   value={this.state.password}
-                                   onChangeText={(val) => this.onTextChange('password', val)}/>
+                                   keyboardType='decimal-pad'
+                                   value={this.state.name}
+                                   onChangeText={(val) => this.onTextChange('code', val)}/>
                         </Item>
                     </Form>
                 </KeyboardAvoidingView>
                 <Footer>
-                    <Button rounded light onPress={this.login} style={button}>
+                    <Button rounded light onPress={this.verify} style={button}>
                         <Text style={buttonText}>{'Continue'.toUpperCase()}</Text>
                     </Button>
                 </Footer>

@@ -2,8 +2,8 @@ import React from 'react';
 import {Button, Text, Input, Label, Item, Form} from 'native-base'
 import {KeyboardAvoidingView} from 'react-native'
 import styled from 'styled-components/native'
-import {signUp} from '../adapters/auth'
-import colors from '../constants/Colors'
+import {signUp} from '../../adapters/auth'
+import colors from '../../constants/Colors'
 
 const Page = styled.View`
     flex: 1;

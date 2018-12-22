@@ -3,18 +3,20 @@ import {Platform} from 'react-native';
 import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
-import AddTeamScreen from '../screens/AddTeamScreen';
+import SettingsScreen from '../screens/Mocked/SettingsScreen';
+import TeamScreen from '../screens/Teams/TeamScreen';
+import TeamSettingsScreen from '../screens/Teams/TeamSettingsScreen';
+import TeamDashboardScreen from '../screens/Teams/TeamDashboardScreen';
 
-const HomeStack = createStackNavigator({
-    Home: HomeScreen,
-    AddTeam: AddTeamScreen,
+const DashboardStack = createStackNavigator({
+    TeamDashboard: TeamDashboardScreen,
+    TeamSettings: TeamSettingsScreen,
+}, {
+    headerMode: 'none'
 });
 
-HomeStack.navigationOptions = {
-    tabBarLabel: 'Home',
+DashboardStack.navigationOptions = {
+    tabBarLabel: 'Dashboard',
     tabBarIcon: ({focused}) => (
         <TabBarIcon
             focused={focused}
@@ -27,12 +29,14 @@ HomeStack.navigationOptions = {
     ),
 };
 
-const LinksStack = createStackNavigator({
-    Links: LinksScreen,
+const TeamStack = createStackNavigator({
+    Team: TeamScreen
+}, {
+    headerMode: 'none'
 });
 
-LinksStack.navigationOptions = {
-    tabBarLabel: 'Links',
+TeamStack.navigationOptions = {
+    tabBarLabel: 'Team',
     tabBarIcon: ({focused}) => (
         <TabBarIcon
             focused={focused}
@@ -43,6 +47,8 @@ LinksStack.navigationOptions = {
 
 const SettingsStack = createStackNavigator({
     Settings: SettingsScreen,
+}, {
+    headerMode: 'none'
 });
 
 SettingsStack.navigationOptions = {
@@ -56,7 +62,7 @@ SettingsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-    HomeStack,
-    LinksStack,
+    DashboardStack,
+    TeamStack,
     SettingsStack,
 });
