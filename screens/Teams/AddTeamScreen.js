@@ -71,7 +71,7 @@ export default class AddTeamScreen extends React.Component {
 
     async addTeam(){
         await addTeam(this.state.name)
-        this.props.navigation.push('Home')
+        this.props.navigation.push('Teams')
     }
     
     async componentDidMount() {

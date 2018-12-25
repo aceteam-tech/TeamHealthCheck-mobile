@@ -1,21 +1,20 @@
 import React from 'react';
-import {Button, Text, Input, Label, Item, Form} from 'native-base'
-import {KeyboardAvoidingView, Image, AsyncStorage} from 'react-native'
+import {Button, Text, Input, Item, Form} from 'native-base'
+import {KeyboardAvoidingView, Image} from 'react-native'
 import styled from 'styled-components/native'
 import {login} from '../../adapters/auth'
 import colors from '../../constants/Colors'
-import AvatarPlaceholder from '../../assets/images/avatar-placeholder-2x.png'
 import IconLogin from '../../assets/images/icon-login-2x.png'
+import IconUser from '../../assets/images/icon-user-2x.png'
 import IconPassword from '../../assets/images/icon-password-2x.png'
+import BgBlueGradient from '../../assets/images/bg-blue-gradient-2x.png'
 
-const Page = styled.View`
+const Page = styled.ImageBackground`
     flex: 1;
-    backgroundColor: ${colors.primary};
 `
 
 const Header = styled.View`
     margin-top: 40px;
-    backgroundColor: ${colors.primary};
     height: 150px;
     justifyContent: space-around;
     align-items: center;
@@ -31,6 +30,25 @@ const HeaderText = styled.Text`
 const Footer = styled.View`
     flex: 2;
     justify-content: center;
+`
+
+const ForgotPassword = NoAccountYet = styled.TouchableOpacity`
+  margin-top: 25px;
+  justify-content: center;
+  align-items: center;
+`
+
+const ForgotPasswordText = NoAccountYetText = styled.Text`
+  color: #fff;
+`
+
+const Separator = styled.View`
+  border-color: white;
+  border-bottom-width: 1px;
+  width: 20%;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
 `
 
 const button = {
@@ -56,6 +74,11 @@ const inputStyle = {
     color: colors.air
 }
 
+const inputWrapperStyle = {
+    borderBottomWidth: 1,
+    borderColor: colors.air
+}
+
 export default class LoginScreen extends React.Component {
     static navigationOptions = {
         header: null,
@@ -77,9 +100,9 @@ export default class LoginScreen extends React.Component {
         this.props.navigation.navigate('AuthLoading', {email: this.state.email})
     }
 
-    componentDidMount(){
+    componentDidMount () {
         const user = this.props.navigation.getParam('user')
-        if(user){
+        if (user) {
             this.setState({
                 email: user.username
             })
@@ -88,32 +111,33 @@ export default class LoginScreen extends React.Component {
 
     render () {
         return (
-            <Page>
+            <Page source={BgBlueGradient}>
                 <Header>
-                    <HeaderText>{'log in'.toUpperCase()}</HeaderText>
-                    <Image source={AvatarPlaceholder}
+                    <HeaderText>{'Log In'}</HeaderText>
+                    <Image source={IconUser}
                            resizeMode='contain'
-                           style={{height: 150}}/>
+                           style={{height: 120}}/>
                 </Header>
                 <KeyboardAvoidingView style={{flex: 1}}
                                       behavior="padding"
                                       keyboardVerticalOffset={20}>
                     <Form style={{flex: 1, justifyContent: 'space-around', marginRight: 15}}>
-                        <Item>
+                        <Item style={inputWrapperStyle}>
                             <Image source={IconLogin}
-                                   style={{height: 18}}
+                                   style={{height: 18, marginLeft: 10}}
                                    resizeMode='contain'/>
                             <Input style={inputStyle}
                                    autoCapitalize='none'
                                    keyboardType='email-address'
                                    textContentType='emailAddress'
                                    autoCorrect={false}
+                                   underlineColorAndroid='transparent'
                                    value={this.state.email}
                                    onChangeText={(val) => this.onTextChange('email', val)}/>
                         </Item>
-                        <Item>
+                        <Item style={inputWrapperStyle}>
                             <Image source={IconPassword}
-                                   style={{height: 18}}
+                                   style={{height: 18, marginLeft: 10}}
                                    resizeMode='contain'/>
                             <Input style={inputStyle}
                                    autoCorrect={false}
@@ -124,10 +148,21 @@ export default class LoginScreen extends React.Component {
                         </Item>
                     </Form>
                 </KeyboardAvoidingView>
+                <ForgotPassword>
+                    <ForgotPasswordText>
+                        Forgot password?
+                    </ForgotPasswordText>
+                </ForgotPassword>
                 <Footer>
                     <Button rounded light onPress={this.login} style={button}>
                         <Text style={buttonText}>{'Continue'.toUpperCase()}</Text>
                     </Button>
+                    <Separator />
+                    <NoAccountYet>
+                        <NoAccountYetText>
+                            Don't have an account yet?
+                        </NoAccountYetText>
+                    </NoAccountYet>
                 </Footer>
             </Page>
         )
