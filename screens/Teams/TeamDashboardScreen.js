@@ -2,6 +2,8 @@ import React from 'react';
 import {Button, Text, Card, CardItem, Icon, Content} from 'native-base'
 import styled from 'styled-components/native'
 import colors from '../../constants/Colors'
+import {observer} from 'mobx-react/native'
+import teamStore from '../../model/team-store'
 
 const Page = styled.View`
     flex: 1;
@@ -52,45 +54,48 @@ const cardItemStyles = {
     borderRadius: 10
 }
 
+const TeamDashboardComponent = observer(({store}) => (
+    <Page>
+        {
+            !!store.team &&
+            <Content>
+                <Header>
+                    <HeaderText>Team Dashboard</HeaderText>
+                </Header>
+                <CategoriesList>
+                    {
+                        store.team.categories.map(category => (
+                            <Card key={category.id} style={squadCardStyles}>
+                                <CardItem style={cardItemStyles}>
+                                    {
+                                        !!category.image &&
+                                        <TeamIconWrapper>
+                                            <TeamIcon
+                                                source={{uri: category.image}}/>
+                                        </TeamIconWrapper>
+                                    }
+                                    <Text style={[
+                                        {
+                                            flex: 2,
+                                            color: colors.primary,
+                                            fontSize: 20
+                                        },
+                                        !category.image && {textAlign: 'center'}
+                                    ]}>{category.name}</Text>
+                                </CardItem>
+                            </Card>
+                        ))
+                    }
+                </CategoriesList>
+            </Content>
+        }
+    </Page>
+))
+
 export default class TeamDashboardScreen extends React.Component {
     render () {
-        const team = this.props.navigation.getParam('team')
-        return (
-            <Page>
-                {
-                    !!team &&
-                    <Content>
-                        <Header>
-                            <HeaderText>Team Dashboard</HeaderText>
-                        </Header>
-                        <CategoriesList>
-                            {
-                                team.categories.map(category => (
-                                    <Card key={category.id} style={squadCardStyles}>
-                                        <CardItem style={cardItemStyles}>
-                                            {
-                                                !!category.image &&
-                                                <TeamIconWrapper>
-                                                    <TeamIcon
-                                                        source={{uri: category.image}}/>
-                                                </TeamIconWrapper>
-                                            }
-                                            <Text style={[
-                                                {
-                                                    flex: 2,
-                                                    color: colors.primary,
-                                                    fontSize: 20
-                                                },
-                                                !category.image && {textAlign: 'center'}
-                                            ]}>{category.name}</Text>
-                                        </CardItem>
-                                    </Card>
-                                ))
-                            }
-                        </CategoriesList>
-                    </Content>
-                }
-            </Page>
-        )
+        return <TeamDashboardComponent
+            store={teamStore}
+        />
     }
 }

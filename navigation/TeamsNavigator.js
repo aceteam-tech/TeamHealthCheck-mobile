@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from 'react-navigation';
 
-import TeamsScreen from '../screens/Teams/HomeScreen';
+import TeamsScreen from '../screens/Teams/TeamsScreen';
 import AddTeamScreen from '../screens/Teams/AddTeamScreen';
 import MainTabNavigator from './MainTabNavigator';
 

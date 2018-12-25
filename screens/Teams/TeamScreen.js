@@ -2,6 +2,8 @@ import React from 'react';
 import {Button, Text, Card, CardItem, Icon, Content} from 'native-base'
 import styled from 'styled-components/native'
 import colors from '../../constants/Colors'
+import teamStore from '../../model/team-store'
+import {observer} from 'mobx-react/native'
 
 const Page = styled.View`
     flex: 1;
@@ -68,49 +70,48 @@ const cardItemStyles = {
     borderRadius: 10
 }
 
-export default class HomeScreen extends React.Component {
-    static navigationOptions = {
-        header: null,
-    };
+const TeamComponent = observer(({store}) => (
+    <Page>
+        {
+            !!store.team &&
+            <Content>
+                <Header>
+                    <HeaderText>Team</HeaderText>
+                </Header>
+                <TeamsList>
+                    <Card style={squadCardStyles}>
+                        <CardItem style={cardItemStyles}>
+                            {
+                                !!store.team.image &&
+                                <TeamIconWrapper>
+                                    <TeamIcon
+                                        source={{uri: store.team.image}}/>
+                                </TeamIconWrapper>
+                            }
+                            <Text style={[
+                                {
+                                    flex: 2,
+                                    color: colors.primary,
+                                    fontSize: 20
+                                },
+                                !store.team.image && {textAlign: 'center'}
+                            ]}>{store.team.name}</Text>
+                        </CardItem>
+                    </Card>
+                </TeamsList>
+                <Button rounded onPress={() => {
+                }} style={button}>
+                    <Text style={buttonText}>{'Invite Members'.toUpperCase()}</Text>
+                </Button>
+            </Content>
+        }
+    </Page>
+))
 
+export default class TeamScreen extends React.Component {
     render () {
-        const team = this.props.navigation.getParam('team')
-        return (
-            <Page>
-                {
-                    !!team &&
-                    <Content>
-                        <Header>
-                            <HeaderText>Team</HeaderText>
-                        </Header>
-                        <TeamsList>
-                            <Card style={squadCardStyles}>
-                                <CardItem style={cardItemStyles}>
-                                    {
-                                        !!team.image &&
-                                        <TeamIconWrapper>
-                                            <TeamIcon
-                                                source={{uri: team.image}}/>
-                                        </TeamIconWrapper>
-                                    }
-                                    <Text style={[
-                                        {
-                                            flex: 2,
-                                            color: colors.primary,
-                                            fontSize: 20
-                                        },
-                                        !team.image && {textAlign: 'center'}
-                                    ]}>{team.name}</Text>
-                                </CardItem>
-                            </Card>
-                        </TeamsList>
-                        <Button rounded onPress={() => {
-                        }} style={button}>
-                            <Text style={buttonText}>{'Invite Members'.toUpperCase()}</Text>
-                        </Button>
-                    </Content>
-                }
-            </Page>
-        )
+        return <TeamComponent
+            store={teamStore}
+        />
     }
 }

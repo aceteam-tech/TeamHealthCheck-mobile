@@ -4,6 +4,7 @@ import {KeyboardAvoidingView} from 'react-native'
 import styled from 'styled-components/native'
 import {verify} from '../../adapters/auth'
 import colors from '../../constants/Colors'
+import IconEnvelope from '../../assets/images/icon-envelope-2x.png'
 
 const Page = styled.View`
     flex: 1;
