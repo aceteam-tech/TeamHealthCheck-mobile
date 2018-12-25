@@ -21,6 +21,7 @@ const buttonStyle = {
     default: {
         justifyContent: 'center',
         width: '90%',
+        height: 50,
         textAlign: 'center',
         marginLeft: 'auto',
         marginRight: 'auto',

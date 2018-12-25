@@ -4,14 +4,9 @@ import {KeyboardAvoidingView} from 'react-native'
 import styled from 'styled-components/native'
 import {signUp} from '../../adapters/auth'
 import colors from '../../constants/Colors'
-
-const Page = styled.View`
-    flex: 1;
-    backgroundColor: ${colors.primary};
-`
+import Page from '../../components/Page'
 
 const Header = styled.View`
-    backgroundColor: ${colors.primary};
     height: 150px;
     justifyContent: center;
     align-items: center;
