@@ -100,6 +100,10 @@ export default class LoginScreen extends React.Component {
         this.props.navigation.navigate('AuthLoading', {email: this.state.email})
     }
 
+    forgotPassword = async () => {
+        this.props.navigation.navigate('ForgotPassword', {email: this.state.email})
+    }
+
     componentDidMount () {
         const user = this.props.navigation.getParam('user')
         if (user) {
@@ -148,7 +152,7 @@ export default class LoginScreen extends React.Component {
                         </Item>
                     </Form>
                 </KeyboardAvoidingView>
-                <ForgotPassword>
+                <ForgotPassword onPress={this.forgotPassword}>
                     <ForgotPasswordText>
                         Forgot password?
                     </ForgotPasswordText>

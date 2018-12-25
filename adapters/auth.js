@@ -37,6 +37,14 @@ export const login = (username, password) => {
         .catch(err => console.log(err));
 }
 
+export const forgotPassword = (username) => {
+    return  Auth.forgotPassword(username)
+}
+
+export const forgotPasswordSubmit = (username, code, newPassword) => {
+    return  Auth.forgotPasswordSubmit(username, code, newPassword)
+}
+
 export const getSession = () => {
     return Auth.currentSession()
 }
