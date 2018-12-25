@@ -162,7 +162,7 @@ export default class LoginScreen extends React.Component {
                         <Text style={buttonText}>{'Continue'.toUpperCase()}</Text>
                     </Button>
                     <Separator />
-                    <NoAccountYet>
+                    <NoAccountYet onPress={()=>this.props.navigation.navigate('Register')}>
                         <NoAccountYetText>
                             Don't have an account yet?
                         </NoAccountYetText>
