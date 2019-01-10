@@ -1,21 +1,21 @@
 import React from 'react';
-import {Button, Text, Input, Label, Item, Form} from 'native-base'
-import {KeyboardAvoidingView} from 'react-native'
+import {Button, Text, Input, Label, Item, Form, Icon} from 'native-base'
+import {KeyboardAvoidingView, Image, View, TouchableOpacity} from 'react-native'
 import styled from 'styled-components/native'
 import {signUp} from '../../adapters/auth'
 import colors from '../../constants/Colors'
 import Page from '../../components/Page'
+import IconCreateAccount from '../../assets/images/icon-create-account-2x.png'
 
 const Header = styled.View`
-    height: 150px;
     justifyContent: center;
     align-items: center;
-    flex: 1;
     align-items: center;
 `
 
 const HeaderText = styled.Text`
   color: ${colors.air};
+  margin-top: 20px;
   font-size: 20px;
   font-weight: bold;
 `
@@ -36,7 +36,7 @@ const button = {
 
 const buttonText = {
     color: colors.primary,
-    fontSize: 12,
+    fontSize: 15,
     fontWeight: 'bold'
 }
 
@@ -71,11 +71,22 @@ export default class RegisterScreen extends React.Component {
     }
 
     render () {
+        const {goBack} = this.props.navigation
         return (
             <Page>
-                <Header>
-                    <HeaderText>Create Account</HeaderText>
-                </Header>
+                <View>
+                    <TouchableOpacity onPress={()=>goBack(null)}>
+                        <Icon name='ios-arrow-back'
+                              type='Ionicons'
+                              style={{color: '#FFF', fontSize: 30, marginLeft: 20, marginBottom: 20}}/>
+                    </TouchableOpacity>
+                    <Header>
+                        <Image source={IconCreateAccount}
+                               resizeMode='contain'
+                               style={{height: 120}}/>
+                        <HeaderText>Create Account</HeaderText>
+                    </Header>
+                </View>
                 <KeyboardAvoidingView style={{flex: 1}}
                                       behavior="padding"
                                       keyboardVerticalOffset={20}>

@@ -28,12 +28,12 @@ const buttonStyle = {
         marginBottom: 30,
     },
     primary: {
-        backgroundColor: colors.primary
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        borderColor: colors.air
     },
     secondary: {
-        backgroundColor: colors.air,
-        borderWidth: 2,
-        borderColor: colors.primary
+        backgroundColor: colors.air
     }
 }
 
