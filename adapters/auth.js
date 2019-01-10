@@ -21,20 +21,14 @@ export const signUp = (email, password, name) => {
             name
         }
     })
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
 }
 
 export const verify = (username, code) => {
     return Auth.confirmSignUp(username, code)
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
 }
 
 export const login = (username, password) => {
     return Auth.signIn(username, password)
-        .then(user => console.log(user))
-        .catch(err => console.log(err));
 }
 
 export const forgotPassword = (username) => {
