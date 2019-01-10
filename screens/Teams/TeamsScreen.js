@@ -4,24 +4,21 @@ import {Text, Card, CardItem, Icon, Content} from 'native-base'
 import styled from 'styled-components/native'
 import colors from '../../constants/Colors'
 import Button from '../../components/Button'
-import {getMyTeams} from '../../adapters/api';
+import {getMyTeams} from '../../adapters/api'
 import teamsStore from '../../model/team-store'
-
-const Page = styled.View`
-    flex: 1;
-    backgroundColor: ${colors.air};
-    justifyContent: space-between;
-`
+import Page from '../../components/Page'
+import {signOut} from '../../adapters/auth'
 
 const TeamIcon = styled.Image`
-    width: 50; 
-    height: 50;
-    marginRight: 20;
+    width: 60px; 
+    height: 60px;
+`
+
+const TeamIconWrapper = styled.View`
+    width: 60px;
 `
 
 const Header = styled.View`
-    backgroundColor: ${colors.primary};
-    height: 150px;
     justifyContent: center;
     align-items: center;
 `
@@ -32,15 +29,11 @@ const HeaderText = styled.Text`
   font-weight: bold;
 `
 
-const TeamsList = styled.View`
-  margin-top: -30px;
-`
-
 const squadCardStyles = {
-    marginRight: 20,
-    marginLeft: 20,
+    marginRight: 15,
+    marginLeft: 15,
     borderRadius: 10,
-    height: 120,
+    height: 100,
     justifyContent: 'center',
     marginBottom: 15
 }
@@ -53,44 +46,56 @@ const cardItemStyles = {
 
 const TeamsScreenComponent = ({teams, chooseTeam, navigate}) => (
     <Page>
+        <Header>
+            <HeaderText>Teams</HeaderText>
+        </Header>
         <Content>
-            <Header>
-                <HeaderText>Teams</HeaderText>
-            </Header>
-            <TeamsList>
-                {
-                    teams.map(team => (
-                        <Card key={team.id} style={squadCardStyles}>
-                            <TouchableOpacity
-                                onPress={() => chooseTeam(team)}>
-                                <CardItem style={cardItemStyles}>
+            {
+                teams.map(team => (
+                    <Card key={team.id} style={squadCardStyles}>
+                        <TouchableOpacity
+                            onPress={() => chooseTeam(team)}>
+                            <CardItem style={cardItemStyles}>
+                                <TeamIconWrapper>
                                     {
                                         !!team.image &&
                                         <TeamIcon
                                             source={{uri: team.image}}/>
                                     }
-                                    <Text style={{flex: 1}}>{team.name}</Text>
-                                    <Icon name='ios-arrow-forward'
-                                          type='Ionicons'
-                                          style={{color: '#0CAADC', fontSize: 30}}/>
-                                </CardItem>
+                                </TeamIconWrapper>
+                                <Text style={{
+                                    flex: 1,
+                                    color: colors.primary,
+                                    textAlign: 'center',
+                                    fontSize: 18
+                                }}>{team.name}</Text>
+                                {/*<Icon name='ios-arrow-forward'*/}
+                                {/*type='Ionicons'*/}
+                                {/*style={{color: '#0CAADC', fontSize: 30}}/>*/}
+                            </CardItem>
 
-                            </TouchableOpacity>
-                        </Card>
-                    ))
-                }
-            </TeamsList>
+                        </TouchableOpacity>
+                    </Card>
+                ))
+            }
+            <View>
+                <Button onPress={() => navigate('AddTeam')}
+                        text='Add new team'
+                        version='primary'
+                />
+                <Button onPress={() => navigate('AddTeam')}
+                        text='Join team'
+                        version='secondary'
+                />
+                <Button onPress={() => {
+                    signOut()
+                    navigate('Welcome')
+                }}
+                        text='Temporary Logout'
+                        version='secondary'
+                />
+            </View>
         </Content>
-        <View>
-            <Button onPress={() => navigate('AddTeam')}
-                    text='Add new team'
-                    version='primary'
-            />
-            <Button onPress={() => navigate('AddTeam')}
-                    text='Join team'
-                    version='secondary'
-            />
-        </View>
     </Page>
 )
 
@@ -101,7 +106,7 @@ export default class TeamsScreen extends React.Component {
 
     async componentDidMount () {
         const teams = await getMyTeams()
-        if(teams){
+        if (teams) {
             this.setState({teams})
         }
     }
