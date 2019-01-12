@@ -67,7 +67,7 @@ export default class RegisterScreen extends React.Component {
 
     register = async () => {
         const user = await signUp(this.state.email, this.state.password, this.state.name)
-        this.props.navigation.navigate('Verify', {user})
+        this.props.navigation.navigate('Verify', user)
     }
 
     render () {

@@ -94,12 +94,9 @@ export default class LoginScreen extends React.Component {
     }
 
     componentDidMount () {
-        const user = this.props.navigation.getParam('user')
-        if (user) {
-            this.setState({
-                email: user.username
-            })
-        }
+        this.setState({
+            email: this.props.navigation.getParam('email')
+        })
     }
 
     render () {
@@ -147,9 +144,9 @@ export default class LoginScreen extends React.Component {
                     </ForgotPasswordText>
                 </ForgotPassword>
                 <Footer>
-                    <Button  onPress={this.login} text='Continue' version='secondary'/>
-                    <Separator />
-                    <NoAccountYet onPress={()=>this.props.navigation.navigate('Register')}>
+                    <Button onPress={this.login} text='Continue' version='secondary'/>
+                    <Separator/>
+                    <NoAccountYet onPress={() => this.props.navigation.navigate('Register')}>
                         <NoAccountYetText>
                             Don't have an account yet?
                         </NoAccountYetText>

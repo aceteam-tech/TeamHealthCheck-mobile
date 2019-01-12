@@ -46,7 +46,7 @@ const labelStyle = {
 
 const inputStyle = {
     backgroundColor: colors.air,
-    width: 50,
+    width: 40,
     height: 50,
     borderRadius: 5,
     margin: 5,
@@ -60,23 +60,48 @@ export default class VerifyCodeScreen extends React.Component {
         header: null,
     };
 
+    code = []
+
     state = {
-        code: ''
+        code: ['', '', '', '', '', '']
     }
 
-    onTextChange = (key, value) => {
+    onCodeChange = async (i, key) => {
+        if(key !== 'Backspace') {
+            this.state.code.splice(i, 1, key)
+            if (i < 5 && key) {
+                this.code[i + 1].focus()
+            }
+        }
+        else if (i === 0) {
+            this.state.code.splice(i, 1, '')
+            this.code[i].focus()
+        }
+        else {
+            if (!this.state.code[i]) {
+                this.state.code.splice(i - 1, 2, '', '')
+            } else {
+                this.state.code.splice(i, 1, '')
+            }
+            this.code[i - 1].focus()
+        }
         this.setState({
-            [key]: value
+            code: this.state.code
         })
+        if(i === 5){
+            await this.verify()
+        }
     }
 
     verify = async () => {
-        await verify(this.state.email, this.state.code)
-        this.props.navigation.navigate('Login', {email: this.state.email})
+        const email = this.props.navigation.getParam('user').username
+        const code = this.state.code.join('')
+        await verify(email, code)
+        this.props.navigation.navigate('Login', {email})
     }
 
     render () {
-        const email = this.props.navigation.getParam('user').email
+        const email = this.props.navigation.getParam('user').username
         const {goBack} = this.props.navigation
         return (
             <Page>
@@ -99,27 +124,56 @@ export default class VerifyCodeScreen extends React.Component {
                 <KeyboardAvoidingView style={{flex: 1}}
                                       behavior="padding"
                                       keyboardVerticalOffset={20}>
-                    <Form style={{flex: 1, justifyContent: 'center', flexDirection: 'row', marginTop: 40}}>
+                    <Form style={{flex: 1, justifyContent: 'center', flexDirection: 'row', marginTop: 40, marginLeft: 50, marginRight: 50}}>
                         <TextInput style={inputStyle}
                                    autoCorrect={false}
                                    keyboardType='decimal-pad'
-                                   value={this.state.name}
-                                   onChangeText={(val) => this.onTextChange('code', val)}/>
+                                   value={this.state.code[0]}
+                                   maxLength={1}
+                                   caretHidden={true}
+                                   ref={ref => this.code[0] = ref}
+                                   onKeyPress={(e) => this.onCodeChange(0, e.nativeEvent.key)}
+                                   onEndEditing={this.onEndEditing}/>
                         <TextInput style={inputStyle}
                                    autoCorrect={false}
                                    keyboardType='decimal-pad'
-                                   value={this.state.name}
-                                   onChangeText={(val) => this.onTextChange('code', val)}/>
+                                   caretHidden={true}
+                                   value={this.state.code[1]}
+                                   onKeyPress={(e) => this.onCodeChange(1, e.nativeEvent.key)}
+                                   maxLength={1}
+                                   ref={ref => this.code[1] = ref}/>
                         <TextInput style={inputStyle}
                                    autoCorrect={false}
                                    keyboardType='decimal-pad'
-                                   value={this.state.name}
-                                   onChangeText={(val) => this.onTextChange('code', val)}/>
+                                   value={this.state.code[2]}
+                                   caretHidden={true}
+                                   ref={ref => this.code[2] = ref}
+                                   maxLength={1}
+                                   onKeyPress={(e) => this.onCodeChange(2, e.nativeEvent.key)}/>
                         <TextInput style={inputStyle}
                                    autoCorrect={false}
                                    keyboardType='decimal-pad'
-                                   value={this.state.name}
-                                   onChangeText={(val) => this.onTextChange('code', val)}/>
+                                   value={this.state.code[3]}
+                                   caretHidden={true}
+                                   ref={ref => this.code[3] = ref}
+                                   maxLength={1}
+                                   onKeyPress={(e) => this.onCodeChange(3, e.nativeEvent.key)}/>
+                        <TextInput style={inputStyle}
+                                   autoCorrect={false}
+                                   keyboardType='decimal-pad'
+                                   value={this.state.code[4]}
+                                   caretHidden={true}
+                                   ref={ref => this.code[4] = ref}
+                                   maxLength={1}
+                                   onKeyPress={(e) => this.onCodeChange(4, e.nativeEvent.key)}/>
+                        <TextInput style={inputStyle}
+                                   autoCorrect={false}
+                                   keyboardType='decimal-pad'
+                                   value={this.state.code[5]}
+                                   caretHidden={true}
+                                   ref={ref => this.code[5] = ref}
+                                   maxLength={1}
+                                   onKeyPress={(e) => this.onCodeChange(5, e.nativeEvent.key)}/>
                     </Form>
                 </KeyboardAvoidingView>
                 <Footer>
