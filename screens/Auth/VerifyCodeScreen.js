@@ -127,6 +127,7 @@ export default class VerifyCodeScreen extends React.Component {
                     <Form style={{flex: 1, justifyContent: 'center', flexDirection: 'row', marginTop: 40, marginLeft: 50, marginRight: 50}}>
                         <TextInput style={inputStyle}
                                    autoCorrect={false}
+                                   autoFocus={true}
                                    keyboardType='decimal-pad'
                                    value={this.state.code[0]}
                                    maxLength={1}
