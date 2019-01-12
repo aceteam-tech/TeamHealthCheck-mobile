@@ -120,9 +120,12 @@ export default class LoginScreen extends React.Component {
                                    autoCapitalize='none'
                                    keyboardType='email-address'
                                    textContentType='emailAddress'
+                                   returnKeyType='next'
                                    autoCorrect={false}
                                    underlineColorAndroid='transparent'
                                    value={this.state.email}
+                                   onSubmitEditing={() => this.passwordInput.wrappedInstance.focus()}
+                                   blurOnSubmit={false}
                                    onChangeText={(val) => this.onTextChange('email', val)}/>
                         </Item>
                         <Item style={inputWrapperStyle}>
@@ -132,8 +135,11 @@ export default class LoginScreen extends React.Component {
                             <Input style={inputStyle}
                                    autoCorrect={false}
                                    secureTextEntry
+                                   returnKeyType='send'
+                                   ref={input => {this.passwordInput = input}}
                                    textContentType='password'
                                    value={this.state.password}
+                                   onSubmitEditing={this.login}
                                    onChangeText={(val) => this.onTextChange('password', val)}/>
                         </Item>
                     </Form>

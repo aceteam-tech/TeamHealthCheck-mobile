@@ -1,11 +1,12 @@
 import React from 'react';
-import {Button, Text, Input, Label, Item, Form, Icon} from 'native-base'
-import {KeyboardAvoidingView, Image, View, TouchableOpacity, TextInput} from 'react-native'
+import {Button, Text, Form, Icon} from 'native-base'
+import {KeyboardAvoidingView, Image, View, TouchableOpacity} from 'react-native'
 import styled from 'styled-components/native'
 import {verify} from '../../adapters/auth'
 import colors from '../../constants/Colors'
 import IconVerificationCode from '../../assets/images/icon-verification-code-2x.png'
 import Page from '../../components/Page'
+import PinInput from '../../components/PinInput'
 
 const Header = styled.View`
     justifyContent: center;
@@ -38,21 +39,6 @@ const buttonText = {
     color: colors.primary,
     fontSize: 12,
     fontWeight: 'bold'
-}
-
-const labelStyle = {
-    color: colors.air
-}
-
-const inputStyle = {
-    backgroundColor: colors.air,
-    width: 40,
-    height: 50,
-    borderRadius: 5,
-    margin: 5,
-    fontSize: 36,
-    color: colors.primary,
-    textAlign: 'center'
 }
 
 export default class VerifyCodeScreen extends React.Component {
@@ -125,56 +111,17 @@ export default class VerifyCodeScreen extends React.Component {
                                       behavior="padding"
                                       keyboardVerticalOffset={20}>
                     <Form style={{flex: 1, justifyContent: 'center', flexDirection: 'row', marginTop: 40, marginLeft: 50, marginRight: 50}}>
-                        <TextInput style={inputStyle}
-                                   autoCorrect={false}
-                                   autoFocus={true}
-                                   keyboardType='decimal-pad'
-                                   value={this.state.code[0]}
-                                   maxLength={1}
-                                   caretHidden={true}
-                                   ref={ref => this.code[0] = ref}
-                                   onKeyPress={(e) => this.onCodeChange(0, e.nativeEvent.key)}
-                                   onEndEditing={this.onEndEditing}/>
-                        <TextInput style={inputStyle}
-                                   autoCorrect={false}
-                                   keyboardType='decimal-pad'
-                                   caretHidden={true}
-                                   value={this.state.code[1]}
-                                   onKeyPress={(e) => this.onCodeChange(1, e.nativeEvent.key)}
-                                   maxLength={1}
-                                   ref={ref => this.code[1] = ref}/>
-                        <TextInput style={inputStyle}
-                                   autoCorrect={false}
-                                   keyboardType='decimal-pad'
-                                   value={this.state.code[2]}
-                                   caretHidden={true}
-                                   ref={ref => this.code[2] = ref}
-                                   maxLength={1}
-                                   onKeyPress={(e) => this.onCodeChange(2, e.nativeEvent.key)}/>
-                        <TextInput style={inputStyle}
-                                   autoCorrect={false}
-                                   keyboardType='decimal-pad'
-                                   value={this.state.code[3]}
-                                   caretHidden={true}
-                                   ref={ref => this.code[3] = ref}
-                                   maxLength={1}
-                                   onKeyPress={(e) => this.onCodeChange(3, e.nativeEvent.key)}/>
-                        <TextInput style={inputStyle}
-                                   autoCorrect={false}
-                                   keyboardType='decimal-pad'
-                                   value={this.state.code[4]}
-                                   caretHidden={true}
-                                   ref={ref => this.code[4] = ref}
-                                   maxLength={1}
-                                   onKeyPress={(e) => this.onCodeChange(4, e.nativeEvent.key)}/>
-                        <TextInput style={inputStyle}
-                                   autoCorrect={false}
-                                   keyboardType='decimal-pad'
-                                   value={this.state.code[5]}
-                                   caretHidden={true}
-                                   ref={ref => this.code[5] = ref}
-                                   maxLength={1}
-                                   onKeyPress={(e) => this.onCodeChange(5, e.nativeEvent.key)}/>
+                        {
+                            [0,1,2,3,4,5].map(i => (
+                                <PinInput
+                                    autoFocus={i === 0}
+                                    value={this.state.code[i]}
+                                    handle={(ref) => {this.code[i] = ref}}
+                                    onChange={this.onCodeChange}
+                                    index={i}
+                                />
+                            ))
+                        }
                     </Form>
                 </KeyboardAvoidingView>
                 <Footer>
