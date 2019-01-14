@@ -3,7 +3,7 @@ import {Platform} from 'react-native';
 import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import SettingsScreen from '../screens/Mocked/SettingsScreen';
+import HealthCheckScreen from '../screens/HealthCheck/HealthCheckScreen';
 import TeamScreen from '../screens/Teams/TeamScreen';
 import TeamSettingsScreen from '../screens/Teams/TeamSettingsScreen';
 import TeamDashboardScreen from '../screens/Teams/TeamDashboardScreen';
@@ -45,14 +45,14 @@ TeamStack.navigationOptions = {
     ),
 };
 
-const SettingsStack = createStackNavigator({
-    Settings: SettingsScreen,
+const HealthCheckStack = createStackNavigator({
+    HealthCheck: HealthCheckScreen,
 }, {
     headerMode: 'none'
 });
 
-SettingsStack.navigationOptions = {
-    tabBarLabel: 'Settings',
+HealthCheckStack.navigationOptions = {
+    tabBarLabel: 'HealthCheck',
     tabBarIcon: ({focused}) => (
         <TabBarIcon
             focused={focused}
@@ -62,7 +62,7 @@ SettingsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
+    HealthCheckStack,
     DashboardStack,
     TeamStack,
-    SettingsStack,
 });
