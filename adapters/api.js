@@ -25,11 +25,16 @@ const makeRequest = async (resource, method, body) => {
     }
 }
 
-export const getMyTeams = () => {
+export const getMyTeams = async () => {
     return makeRequest('my-teams', 'GET')
 }
 
-export const getTeam = (teamId) => {
+export const getHealthCheckStatus = async (teamId) => {
+    console.log({'teamId': teamId});
+    return makeRequest(`health-check/status?teamId=${teamId}`, 'GET')
+}
+
+export const getTeam = async (teamId) => {
     return makeRequest(`team?id=${teamId}`, 'GET')
 }
 
@@ -37,7 +42,7 @@ export const addTeam = async (teamName) => {
     return makeRequest('my-teams', 'POST', {teamName})
 }
 
-export const uploadFile = (filename, file) => {
+export const uploadFile = async (filename, file) => {
     return Storage.put(filename, file, {
         customPrefix: {
             public: 'team-logos/'
