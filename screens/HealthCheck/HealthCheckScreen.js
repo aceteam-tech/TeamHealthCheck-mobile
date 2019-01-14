@@ -30,12 +30,6 @@ const Footer = styled.View`
     justify-content: center;
 `
 
-const cardItemStyles = {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 10
-}
-
 const HealthCheckComponent = observer(({healthCheckStore}) => {
     const {ended, usersSubmitted} = healthCheckStore.healthCheck
     return (
@@ -88,7 +82,6 @@ const HealthCheckComponent = observer(({healthCheckStore}) => {
 export default class HealthCheckScreen extends React.Component {
     async componentDidMount () {
         const healthCheck = await getHealthCheckStatus(teamStore.team.id)
-        console.log({'healthCheck': healthCheck});
         healthCheckStore.setHealthCheck(healthCheck)
     }
 
