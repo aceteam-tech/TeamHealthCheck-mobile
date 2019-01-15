@@ -5,6 +5,7 @@ import Page from '../../components/Page'
 import styled from 'styled-components/native'
 import {forgotPassword} from '../../adapters/auth'
 import colors from '../../constants/Colors'
+import {buttonStyle, buttonTextStyle, labelStyle, inputStyle} from '../../constants/Style'
 import IconKey from "../../assets/images/icon-key-3x.png"
 
 const Header = styled.View`
@@ -23,29 +24,6 @@ const Footer = styled.View`
     flex: 1;
     justify-content: center;
 `
-
-const button = {
-    paddingLeft: '30%',
-    paddingRight: '30%',
-    textAlign: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: 30,
-}
-
-const buttonText = {
-    color: colors.primary,
-    fontSize: 15,
-    fontWeight: 'bold'
-}
-
-const labelStyle = {
-    color: colors.air
-}
-
-const inputStyle = {
-    color: colors.air
-}
 
 export default class ForgotPasswordScreen extends React.Component {
     state = {
@@ -104,8 +82,8 @@ export default class ForgotPasswordScreen extends React.Component {
                     </Form>
                 </KeyboardAvoidingView>
                 <Footer>
-                    <Button rounded light onPress={this.forgotPassword} style={button}>
-                        <Text style={buttonText}>{'Send'.toUpperCase()}</Text>
+                    <Button rounded light onPress={this.forgotPassword} style={buttonStyle}>
+                        <Text style={buttonTextStyle}>{'Send'.toUpperCase()}</Text>
                     </Button>
                 </Footer>
             </Page>

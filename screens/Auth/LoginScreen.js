@@ -40,25 +40,6 @@ const ForgotPasswordText = NoAccountYetText = styled.Text`
   color: #fff;
 `
 
-const button = {
-    paddingLeft: '25%',
-    paddingRight: '25%',
-    textAlign: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: 30,
-}
-
-const buttonText = {
-    color: colors.primary,
-    fontSize: 12,
-    fontWeight: 'bold'
-}
-
-const labelStyle = {
-    color: colors.air
-}
-
 const inputStyle = {
     color: colors.air
 }

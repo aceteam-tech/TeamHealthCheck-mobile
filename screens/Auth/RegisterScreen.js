@@ -4,8 +4,10 @@ import {KeyboardAvoidingView, Image, View, TouchableOpacity} from 'react-native'
 import styled from 'styled-components/native'
 import {signUp} from '../../adapters/auth'
 import colors from '../../constants/Colors'
+import {buttonStyle, buttonTextStyle, labelStyle, inputStyle} from '../../constants/Style'
 import Page from '../../components/Page'
 import IconCreateAccount from '../../assets/images/icon-create-account-2x.png'
+
 
 const Header = styled.View`
     justifyContent: center;
@@ -24,29 +26,6 @@ const Footer = styled.View`
     flex: 1;
     justify-content: center;
 `
-
-const button = {
-    paddingLeft: '30%',
-    paddingRight: '30%',
-    textAlign: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: 30,
-}
-
-const buttonText = {
-    color: colors.primary,
-    fontSize: 15,
-    fontWeight: 'bold'
-}
-
-const labelStyle = {
-    color: colors.air
-}
-
-const inputStyle = {
-    color: colors.air
-}
 
 export default class RegisterScreen extends React.Component {
     static navigationOptions = {
@@ -122,8 +101,8 @@ export default class RegisterScreen extends React.Component {
                     </Form>
                 </KeyboardAvoidingView>
                 <Footer>
-                    <Button rounded light onPress={this.register} style={button}>
-                        <Text style={buttonText}>{'Continue'.toUpperCase()}</Text>
+                    <Button rounded light onPress={this.register} style={buttonStyle}>
+                        <Text style={buttonTextStyle}>{'Continue'.toUpperCase()}</Text>
                     </Button>
                 </Footer>
             </Page>
