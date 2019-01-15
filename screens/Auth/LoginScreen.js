@@ -21,7 +21,7 @@ const Header = styled.View`
 
 const HeaderText = styled.Text`
   color: ${colors.air};
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
 `
 

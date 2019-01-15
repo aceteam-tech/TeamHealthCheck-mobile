@@ -11,7 +11,6 @@ import PinInput from '../../components/PinInput'
 const Header = styled.View`
     justifyContent: center;
     align-items: center;
-    align-items: center;
 `
 
 const HeaderText = styled.Text`
