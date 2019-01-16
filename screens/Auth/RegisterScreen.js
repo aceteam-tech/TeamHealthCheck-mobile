@@ -74,28 +74,38 @@ export default class RegisterScreen extends React.Component {
                             <Label style={labelStyle}>Full name</Label>
                             <Input style={inputStyle}
                                    autoCorrect={false}
+                                   blurOnSubmit={false}
                                    autoCapitalize='words'
                                    textContentType='givenName'
+                                   returnKeyType='next'
                                    value={this.state.name}
+                                   onSubmitEditing={() => this.mailInput.wrappedInstance.focus()}
                                    onChangeText={(val) => this.onTextChange('name', val)}/>
                         </Item>
                         <Item floatingLabel>
                             <Label style={labelStyle}>Email</Label>
                             <Input style={inputStyle}
+                                   getRef={input => this.mailInput = input}
                                    autoCapitalize='none'
+                                   returnKeyType='next'
                                    keyboardType='email-address'
                                    textContentType='emailAddress'
                                    autoCorrect={false}
+                                   blurOnSubmit={false}
                                    value={this.state.email}
+                                   onSubmitEditing={() => this.passwordInput.wrappedInstance.focus()}
                                    onChangeText={(val) => this.onTextChange('email', val)}/>
                         </Item>
                         <Item floatingLabel>
                             <Label style={labelStyle}>Password</Label>
                             <Input style={inputStyle}
+                                   getRef={input => this.passwordInput = input}
+                                   returnKeyType='send'
                                    autoCorrect={false}
                                    secureTextEntry
                                    textContentType='password'
                                    value={this.state.password}
+                                   onSubmitEditing={this.register}
                                    onChangeText={(val) => this.onTextChange('password', val)}/>
                         </Item>
                     </Form>
