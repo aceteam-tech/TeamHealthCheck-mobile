@@ -21,7 +21,7 @@ const Header = styled.View`
 
 const HeaderText = styled.Text`
   color: ${colors.air};
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
 `
 
@@ -39,25 +39,6 @@ const ForgotPassword = NoAccountYet = styled.TouchableOpacity`
 const ForgotPasswordText = NoAccountYetText = styled.Text`
   color: #fff;
 `
-
-const button = {
-    paddingLeft: '25%',
-    paddingRight: '25%',
-    textAlign: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: 30,
-}
-
-const buttonText = {
-    color: colors.primary,
-    fontSize: 12,
-    fontWeight: 'bold'
-}
-
-const labelStyle = {
-    color: colors.air
-}
 
 const inputStyle = {
     color: colors.air
@@ -85,8 +66,13 @@ export default class LoginScreen extends React.Component {
     }
 
     login = async () => {
-        await login(this.state.email, this.state.password)
-        this.props.navigation.navigate('AuthLoading', {email: this.state.email})
+        try {
+            await login(this.state.email, this.state.password)
+            this.props.navigation.navigate('AuthLoading', {email: this.state.email})
+        }
+        catch (e) {
+            console.error(e)
+        }
     }
 
     forgotPassword = async () => {

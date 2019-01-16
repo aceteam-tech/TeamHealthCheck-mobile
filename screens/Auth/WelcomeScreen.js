@@ -4,6 +4,7 @@ import {Image} from 'react-native'
 import styled from 'styled-components/native'
 import {login} from '../../adapters/auth'
 import colors from '../../constants/Colors'
+import {buttonStyle, buttonTextStyle} from '../../constants/Style'
 import IconUser from '../../assets/images/icon-user-2x.png'
 import WelcomeBG from '../../assets/images/welcome-bg.jpg'
 
@@ -46,21 +47,6 @@ const Footer = styled.View`
     justify-content: flex-start;
 `
 
-const button = {
-    paddingLeft: '25%',
-    paddingRight: '25%',
-    textAlign: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: 30,
-}
-
-const buttonText = {
-    color: colors.primary,
-    fontSize: 14,
-    fontWeight: '900'
-}
-
 export default class WelcomeScreen extends React.Component {
     static navigationOptions = {
         header: null,
@@ -88,14 +74,14 @@ export default class WelcomeScreen extends React.Component {
                         <Button rounded
                                 light
                                 onPress={()=>this.props.navigation.navigate('Login')}
-                                style={button}>
-                            <Text style={buttonText}>Sign In</Text>
+                                style={buttonStyle}>
+                            <Text style={buttonTextStyle}>Sign In</Text>
                         </Button>
                         <Button rounded
                                 light
                                 onPress={()=>this.props.navigation.navigate('Register')}
-                                style={button}>
-                            <Text style={buttonText}>Sign Up</Text>
+                                style={buttonStyle}>
+                            <Text style={buttonTextStyle}>Sign Up</Text>
                         </Button>
                     </Footer>
                 </Content>

@@ -4,8 +4,10 @@ import {KeyboardAvoidingView, Image, View, TouchableOpacity} from 'react-native'
 import styled from 'styled-components/native'
 import {signUp} from '../../adapters/auth'
 import colors from '../../constants/Colors'
+import {buttonStyle, buttonTextStyle, labelStyle, inputStyle} from '../../constants/Style'
 import Page from '../../components/Page'
 import IconCreateAccount from '../../assets/images/icon-create-account-2x.png'
+
 
 const Header = styled.View`
     justifyContent: center;
@@ -24,29 +26,6 @@ const Footer = styled.View`
     flex: 1;
     justify-content: center;
 `
-
-const button = {
-    paddingLeft: '30%',
-    paddingRight: '30%',
-    textAlign: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: 30,
-}
-
-const buttonText = {
-    color: colors.primary,
-    fontSize: 15,
-    fontWeight: 'bold'
-}
-
-const labelStyle = {
-    color: colors.air
-}
-
-const inputStyle = {
-    color: colors.air
-}
 
 export default class RegisterScreen extends React.Component {
     static navigationOptions = {
@@ -95,35 +74,45 @@ export default class RegisterScreen extends React.Component {
                             <Label style={labelStyle}>Full name</Label>
                             <Input style={inputStyle}
                                    autoCorrect={false}
+                                   blurOnSubmit={false}
                                    autoCapitalize='words'
                                    textContentType='givenName'
+                                   returnKeyType='next'
                                    value={this.state.name}
+                                   onSubmitEditing={() => this.mailInput.wrappedInstance.focus()}
                                    onChangeText={(val) => this.onTextChange('name', val)}/>
                         </Item>
                         <Item floatingLabel>
                             <Label style={labelStyle}>Email</Label>
                             <Input style={inputStyle}
+                                   getRef={input => this.mailInput = input}
                                    autoCapitalize='none'
+                                   returnKeyType='next'
                                    keyboardType='email-address'
                                    textContentType='emailAddress'
                                    autoCorrect={false}
+                                   blurOnSubmit={false}
                                    value={this.state.email}
+                                   onSubmitEditing={() => this.passwordInput.wrappedInstance.focus()}
                                    onChangeText={(val) => this.onTextChange('email', val)}/>
                         </Item>
                         <Item floatingLabel>
                             <Label style={labelStyle}>Password</Label>
                             <Input style={inputStyle}
+                                   getRef={input => this.passwordInput = input}
+                                   returnKeyType='send'
                                    autoCorrect={false}
                                    secureTextEntry
                                    textContentType='password'
                                    value={this.state.password}
+                                   onSubmitEditing={this.register}
                                    onChangeText={(val) => this.onTextChange('password', val)}/>
                         </Item>
                     </Form>
                 </KeyboardAvoidingView>
                 <Footer>
-                    <Button rounded light onPress={this.register} style={button}>
-                        <Text style={buttonText}>{'Continue'.toUpperCase()}</Text>
+                    <Button rounded light onPress={this.register} style={buttonStyle}>
+                        <Text style={buttonTextStyle}>{'Continue'.toUpperCase()}</Text>
                     </Button>
                 </Footer>
             </Page>

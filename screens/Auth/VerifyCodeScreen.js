@@ -4,13 +4,13 @@ import {KeyboardAvoidingView, Image, View, TouchableOpacity} from 'react-native'
 import styled from 'styled-components/native'
 import {verify} from '../../adapters/auth'
 import colors from '../../constants/Colors'
+import {buttonStyle, buttonTextStyle} from '../../constants/Style'
 import IconVerificationCode from '../../assets/images/icon-verification-code-2x.png'
 import Page from '../../components/Page'
 import PinInput from '../../components/PinInput'
 
 const Header = styled.View`
     justifyContent: center;
-    align-items: center;
     align-items: center;
 `
 
@@ -125,8 +125,8 @@ export default class VerifyCodeScreen extends React.Component {
                     </Form>
                 </KeyboardAvoidingView>
                 <Footer>
-                    <Button rounded light onPress={this.verify} style={button}>
-                        <Text style={buttonText}>{'Continue'.toUpperCase()}</Text>
+                    <Button rounded light onPress={this.verify} style={buttonStyle}>
+                        <Text style={buttonTextStyle}>{'Continue'.toUpperCase()}</Text>
                     </Button>
                 </Footer>
             </Page>
