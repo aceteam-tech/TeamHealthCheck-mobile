@@ -66,8 +66,13 @@ export default class LoginScreen extends React.Component {
     }
 
     login = async () => {
-        await login(this.state.email, this.state.password)
-        this.props.navigation.navigate('AuthLoading', {email: this.state.email})
+        try {
+            await login(this.state.email, this.state.password)
+            this.props.navigation.navigate('AuthLoading', {email: this.state.email})
+        }
+        catch (e) {
+            console.error(e)
+        }
     }
 
     forgotPassword = async () => {

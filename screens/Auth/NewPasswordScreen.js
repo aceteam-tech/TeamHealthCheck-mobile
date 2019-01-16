@@ -3,10 +3,10 @@ import {Button, Text, Input, Item, Form, Icon, Label} from 'native-base'
 import {KeyboardAvoidingView, Image, TouchableOpacity, View} from 'react-native'
 import Page from '../../components/Page'
 import styled from 'styled-components/native'
-import {forgotPassword} from '../../adapters/auth'
+import {forgotPasswordSubmit} from '../../adapters/auth'
 import colors from '../../constants/Colors'
 import {buttonStyle, buttonTextStyle, labelStyle, inputStyle} from '../../constants/Style'
-import IconKey from "../../assets/images/icon-key-3x.png"
+import IconLocker from "../../assets/images/icon-locker-3x.png"
 
 const Header = styled.View`
     justifyContent: center;
@@ -25,9 +25,11 @@ const Footer = styled.View`
     justify-content: center;
 `
 
-export default class ForgotPasswordScreen extends React.Component {
+export default class NewPasswordScreen extends React.Component {
     state = {
-        email: ''
+        email: '',
+        password: '',
+        code: ''
     }
 
     onTextChange = (key, value) => {
@@ -37,11 +39,12 @@ export default class ForgotPasswordScreen extends React.Component {
     }
 
     forgotPassword = async () => {
-        try {
-            await forgotPassword(this.state.email)
-            this.props.navigation.navigate('NewPassword', {email: this.state.email})
-        } catch (e) {
-            console.error(e)
+        try{
+            await forgotPasswordSubmit(this.state.email, this.state.code, this.state.password)
+            this.props.navigation.navigate('Login')
+        }
+        catch (e) {
+         console.error(e)
         }
     }
 
@@ -61,10 +64,13 @@ export default class ForgotPasswordScreen extends React.Component {
                               style={{color: '#FFF', fontSize: 30, marginLeft: 20, marginBottom: 20}}/>
                     </TouchableOpacity>
                     <Header>
-                        <Image source={IconKey}
+                        <Image source={IconLocker}
                                resizeMode='contain'
                                style={{height: 120}}/>
-                        <HeaderText>Change Password</HeaderText>
+                        <HeaderText>Forgot Password?</HeaderText>
+                        <Text style={{color: colors.air, marginTop: 16, fontSize: 15}}>
+                            Don't you worry, we got you.
+                        </Text>
                     </Header>
                 </View>
                 <KeyboardAvoidingView style={{flex: 1}}
@@ -72,23 +78,35 @@ export default class ForgotPasswordScreen extends React.Component {
                                       keyboardVerticalOffset={20}>
                     <Form style={{flex: 1, justifyContent: 'space-around', marginRight: 15}}>
                         <Item floatingLabel>
-                            <Label style={labelStyle}>Email address</Label>
+                            <Label style={labelStyle}>New Password</Label>
                             <Input style={inputStyle}
-                                   autoCapitalize='none'
-                                   returnKeyType='send'
-                                   keyboardType='email-address'
-                                   textContentType='emailAddress'
                                    autoCorrect={false}
-                                   value={this.state.email}
-                                   onSubmitEditing={this.forgotPassword}
-                                   onChangeText={(val) => this.onTextChange('email', val)}/>
+                                   secureTextEntry
+                                   textContentType='password'
+                                   value={this.state.password}
+                                   returnKeyType='next'
+                                   blurOnSubmit={false}
+                                   onSubmitEditing={() => this.codeInput.wrappedInstance.focus()}
+                                   onChangeText={(val) => this.onTextChange('password', val)}/>
+                        </Item>
 
+                        <Item floatingLabel>
+                            <Label style={labelStyle}>Verification Code</Label>
+                            <Input style={inputStyle}
+                                   getRef={input => this.codeInput = input}
+                                   autoCorrect={false}
+                                   returnKeyType='done'
+                                   keyboardType='number-pad'
+                                   textContentType='none'
+                                   value={this.state.code}
+                                   onSubmitEditing={this.forgotPassword}
+                                   onChangeText={(val) => this.onTextChange('code', val)}/>
                         </Item>
                     </Form>
                 </KeyboardAvoidingView>
                 <Footer>
                     <Button rounded light onPress={this.forgotPassword} style={buttonStyle}>
-                        <Text style={buttonTextStyle}>{'Send'.toUpperCase()}</Text>
+                        <Text style={buttonTextStyle}>{'Done'.toUpperCase()}</Text>
                     </Button>
                 </Footer>
             </Page>
