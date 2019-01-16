@@ -42,6 +42,14 @@ export const addTeam = async (teamName) => {
     return makeRequest('my-teams', 'POST', {teamName})
 }
 
+export const createHealthCheck = async (teamId) => {
+    return makeRequest('health-check', 'POST', {teamId})
+}
+
+export const endHealthCheck = async (teamId) => {
+    return makeRequest('health-check/end', 'POST', {teamId})
+}
+
 export const uploadFile = async (filename, file) => {
     return Storage.put(filename, file, {
         customPrefix: {

@@ -39,11 +39,11 @@ export const forgotPasswordSubmit = (username, code, newPassword) => {
     return  Auth.forgotPasswordSubmit(username, code, newPassword)
 }
 
-export const getSession = () => {
+export const getSession = async () => {
     return Auth.currentSession()
 }
 
-export const getUser = () => {
+export const getUser = async () => {
     return Auth.currentAuthenticatedUser()
 }
 

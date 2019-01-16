@@ -2,7 +2,8 @@ import {observable} from 'mobx'
 
 class ObservableTeamStore {
     @observable team = {
-        name: ''
+        name: '',
+        users: []
     }
 
     setTeam (team) {
