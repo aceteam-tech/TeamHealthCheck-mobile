@@ -18,7 +18,9 @@ const DashboardStack = createStackNavigator({
 
 DashboardStack.navigationOptions = {
     tabBarIcon: ({focused}) => (
-        <Image source={require('../assets/images/icon-diagram.png')}/>
+        focused ?
+            <Image source={require('../assets/images/icon-diagram-active.png')}/> :
+            <Image source={require('../assets/images/icon-diagram-inactive.png')}/>
     ),
 };
 
@@ -31,7 +33,9 @@ const TeamStack = createStackNavigator({
 TeamStack.navigationOptions = {
     tabBarLabel: 'Team',
     tabBarIcon: ({focused}) => (
-        <Image source={require('../assets/images/icon-team.png')}/>
+        focused ?
+        <Image source={require('../assets/images/icon-team-active.png')}/> :
+        <Image source={require('../assets/images/icon-team-inactive.png')}/>
     ),
 };
 
@@ -45,10 +49,9 @@ const HealthCheckStack = createStackNavigator({
 HealthCheckStack.navigationOptions = {
     tabBarLabel: 'HealthCheck',
     tabBarIcon: ({focused}) => (
-        <TabBarIcon
-            focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-        />
+        focused ?
+            <Image source={require('../assets/images/icon-health-check-active.png')}/> :
+            <Image source={require('../assets/images/icon-health-check-inactive.png')}/>
     ),
 };
 
