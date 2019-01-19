@@ -9,7 +9,7 @@ import IconUser from '../../assets/images/icon-user-2x.png'
 import IconPassword from '../../assets/images/icon-password-2x.png'
 import Page from '../../components/Page'
 import Separator from '../../components/Separator'
-import Button from '../../components/Button'
+import Button from '../../components/Button/Button.component'
 
 const Header = styled.View`
     margin-top: 40px;

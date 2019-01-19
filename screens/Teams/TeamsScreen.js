@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {Content} from 'native-base'
 import styled from 'styled-components/native'
 import colors from '../../constants/Colors'
-import Button from '../../components/Button'
+import Button from '../../components/Button/Button.component'
 import {getMyTeams} from '../../adapters/api'
 import teamsStore from '../../model/team-store'
 import Page from '../../components/Page'

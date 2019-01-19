@@ -6,8 +6,8 @@ import colors from '../../../constants/Colors'
 import {addTeam} from '../../../adapters/api'
 import {getSession} from '../../../adapters/auth'
 import IconUpload from './upload-2x.png'
-import Button from '../../../components/Button'
-import {getInitials} from './AddTeam.helpers'
+import Button from '../../../components/Button/Button.component'
+import TeamLogo from '../../../components/TeamLogo/TeamLogo.component'
 
 const Page = styled.View`
     flex: 1;
@@ -43,25 +43,6 @@ const Footer = styled.View`
     justify-content: flex-end;
     margin-bottom: 30px;
 `
-
-const TeamLogo = styled.View`
-  background-color: ${colors.air};
-  height: 60px;
-  width: 60px;
-  border-radius: 10px;
-  justify-content: center;
-  align-items: center;
-`
-
-const TeamLogoText = styled.Text`
-  color: ${colors.primary};
-  font-size: 18px;
-  font-weight: 900;
-`
-
-const labelStyle = {
-    color: colors.air
-}
 
 const inputStyle = {
     color: colors.air
@@ -112,11 +93,7 @@ export default class AddTeamScreen extends React.Component {
                             <Item>
                                 {
                                     !!this.state.name &&
-                                    <TeamLogo>
-                                        <TeamLogoText>
-                                            {getInitials(this.state.name)}
-                                        </TeamLogoText>
-                                    </TeamLogo>
+                                    <TeamLogo name={this.state.name} size={50}/>
                                 }
 
                                 {/*<Label style={labelStyle}>Team name</Label>*/}

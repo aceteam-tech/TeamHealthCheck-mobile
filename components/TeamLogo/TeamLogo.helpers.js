@@ -1,4 +1,4 @@
-export const getInitials = (name) => {
+export const getTeamInitials = (name) => {
     const words = name.split(' ').filter(w => w !== '')
     if (words.length < 2) {
         return name.slice(0, 3).replace(/\s/g, '')

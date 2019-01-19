@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import {getInitials} from './AddTeam.helpers';
+import {getInitials} from './Avatar.helpers';
 
 describe('getInitials function', () => {
     describe('Happy path', () => {
@@ -14,11 +14,11 @@ describe('getInitials function', () => {
         })
         it('For 3 characters', () => {
             const initials = getInitials('Ace')
-            expect(initials).toEqual('Ace')
+            expect(initials).toEqual('Ac')
         })
         it('For 4 characters', () => {
             const initials = getInitials('Acet')
-            expect(initials).toEqual('Ace')
+            expect(initials).toEqual('Ac')
         })
         it('For two words', () => {
             const initials = getInitials('Ace Team')
@@ -26,11 +26,11 @@ describe('getInitials function', () => {
         })
         it('For three words', () => {
             const initials = getInitials('Ace Team Guys')
-            expect(initials).toEqual('ATG')
+            expect(initials).toEqual('AT')
         })
         it('For more than three words', () => {
             const initials = getInitials('Ace Team Guys Test Test')
-            expect(initials).toEqual('ATG')
+            expect(initials).toEqual('AT')
         })
     });
     describe('Edge cases', () => {

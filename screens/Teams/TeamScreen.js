@@ -1,31 +1,21 @@
 import React from 'react';
-import {Button, Text, Card, CardItem, Icon, Content} from 'native-base'
+import {Content} from 'native-base'
 import styled from 'styled-components/native'
 import colors from '../../constants/Colors'
 import teamStore from '../../model/team-store'
 import {observer} from 'mobx-react/native'
-
-const Page = styled.View`
-    flex: 1;
-    backgroundColor: ${colors.air};
-    justifyContent: space-between;
-`
-
-const TeamIconWrapper = styled.View`
-    flex: 1;
-    marginRight: 20;
-`
-
-const TeamIcon = styled.Image`
-    width: 50; 
-    height: 50;
-`
+import TeamLogo from '../../components/TeamLogo/TeamLogo.component'
+import Page from '../../components/Page'
+import Button from '../../components/Button/Button.component'
+import UserListItem from '../../components/UserListItem'
 
 const Header = styled.View`
-    backgroundColor: ${colors.primary};
-    height: 150px;
-    justifyContent: center;
+    justifyContent: space-around;
     align-items: center;
+`
+
+const DynamicContent = styled.View`
+  flex: 1;
 `
 
 const HeaderText = styled.Text`
@@ -34,76 +24,43 @@ const HeaderText = styled.Text`
   font-weight: bold;
 `
 
-const TeamsList = styled.View`
-  margin-top: -30px;
+const TeamLogoWrapper = styled.View`
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
 `
 
-const squadCardStyles = {
-    marginRight: 20,
-    marginLeft: 20,
-    borderRadius: 10,
-    height: 120,
-    justifyContent: 'center',
-    marginBottom: 15
-}
+const AddButtonWrapper = styled.View`
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  flex-direction: row;
+`
 
-const buttonText = {
-    color: colors.air,
-    fontSize: 12,
-    fontWeight: 'bold'
-}
-
-const button = {
-    paddingLeft: '25%',
-    paddingRight: '25%',
-    backgroundColor: 'rgb(32,36,46)',
-    textAlign: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: 30,
-}
-
-const cardItemStyles = {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-    borderRadius: 10
-}
-
-const TeamComponent = observer(({store}) => (
+const TeamComponent = observer(({store, navigate}) => (
     <Page>
         {
             !!store.team &&
-            <Content>
+            <DynamicContent>
                 <Header>
-                    <HeaderText>Team</HeaderText>
+                    <HeaderText>{store.team.name}</HeaderText>
                 </Header>
-                <TeamsList>
-                    <Card style={squadCardStyles}>
-                        <CardItem style={cardItemStyles}>
-                            {
-                                !!store.team.image &&
-                                <TeamIconWrapper>
-                                    <TeamIcon
-                                        source={{uri: store.team.image}}/>
-                                </TeamIconWrapper>
-                            }
-                            <Text style={[
-                                {
-                                    flex: 2,
-                                    color: colors.primary,
-                                    fontSize: 20
-                                },
-                                !store.team.image && {textAlign: 'center'}
-                            ]}>{store.team.name}</Text>
-                        </CardItem>
-                    </Card>
-                </TeamsList>
-                <Button rounded onPress={() => {
-                }} style={button}>
-                    <Text style={buttonText}>{'Invite Members'.toUpperCase()}</Text>
-                </Button>
-            </Content>
+                <Content>
+                    <TeamLogoWrapper>
+                        <TeamLogo name={store.team.name}/>
+                    </TeamLogoWrapper>
+                    {
+                        store.team.users.map(u => (
+                            <UserListItem key={u.id} user={u}/>
+                        ))
+                    }
+                </Content>
+                <AddButtonWrapper>
+                    <Button onPress={() => {
+                    }} version='add'/>
+                </AddButtonWrapper>
+            </DynamicContent>
         }
     </Page>
 ))
@@ -112,6 +69,7 @@ export default class TeamScreen extends React.Component {
     render () {
         return <TeamComponent
             store={teamStore}
+            navigate={this.props.navigation.navigate}
         />
     }
 }

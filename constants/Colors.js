@@ -13,5 +13,6 @@ export default {
     noticeText: '#fff',
 //    My
     primary: tintColor,
-    air: '#fff'
+    dark: '#343434',
+    air: '#fff',
 };
