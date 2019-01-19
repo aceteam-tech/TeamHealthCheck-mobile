@@ -5,7 +5,7 @@ import styled from 'styled-components/native'
 import {login} from '../../adapters/auth'
 import colors from '../../constants/Colors'
 import {buttonStyle, buttonTextStyle} from '../../constants/Style'
-import IconUser from '../../assets/images/icon-user-2x.png'
+import IconUser from '../../assets/images-large/icon-user-2x.png'
 import WelcomeBG from '../../assets/images/welcome-bg.jpg'
 
 const Page = styled.ImageBackground`

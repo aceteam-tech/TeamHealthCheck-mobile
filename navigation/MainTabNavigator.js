@@ -1,5 +1,5 @@
 import React from 'react';
-import {Platform} from 'react-native';
+import {Platform, Image} from 'react-native';
 import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
@@ -17,16 +17,8 @@ const DashboardStack = createStackNavigator({
 });
 
 DashboardStack.navigationOptions = {
-    tabBarLabel: 'Dashboard',
     tabBarIcon: ({focused}) => (
-        <TabBarIcon
-            focused={focused}
-            name={
-                Platform.OS === 'ios'
-                    ? `ios-information-circle${focused ? '' : '-outline'}`
-                    : 'md-information-circle'
-            }
-        />
+        <Image source={require('../assets/images/icon-diagram.png')}/>
     ),
 };
 
@@ -39,10 +31,7 @@ const TeamStack = createStackNavigator({
 TeamStack.navigationOptions = {
     tabBarLabel: 'Team',
     tabBarIcon: ({focused}) => (
-        <TabBarIcon
-            focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
-        />
+        <Image source={require('../assets/images/icon-team.png')}/>
     ),
 };
 
@@ -67,4 +56,8 @@ export default createBottomTabNavigator({
     HealthCheckStack,
     DashboardStack,
     TeamStack,
+}, {
+    tabBarOptions: {
+        showLabel: false
+    }
 });

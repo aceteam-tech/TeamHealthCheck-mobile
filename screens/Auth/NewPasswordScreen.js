@@ -6,7 +6,7 @@ import styled from 'styled-components/native'
 import {forgotPasswordSubmit} from '../../adapters/auth'
 import colors from '../../constants/Colors'
 import {buttonStyle, buttonTextStyle, labelStyle, inputStyle} from '../../constants/Style'
-import IconLocker from "../../assets/images/icon-locker-3x.png"
+import IconLocker from "../../assets/images-x-large/icon-locker-3x.png"
 
 const Header = styled.View`
     justifyContent: center;

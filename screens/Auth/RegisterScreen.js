@@ -6,7 +6,7 @@ import {signUp} from '../../adapters/auth'
 import colors from '../../constants/Colors'
 import {buttonStyle, buttonTextStyle, labelStyle, inputStyle} from '../../constants/Style'
 import Page from '../../components/Page'
-import IconCreateAccount from '../../assets/images/icon-create-account-2x.png'
+import IconCreateAccount from '../../assets/images-large/icon-create-account-2x.png'
 
 
 const Header = styled.View`

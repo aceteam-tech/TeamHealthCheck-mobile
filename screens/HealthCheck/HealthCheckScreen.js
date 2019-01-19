@@ -9,15 +9,12 @@ import teamStore from '../../model/team-store'
 import userStore from '../../model/user-store'
 import healthCheckStore from '../../model/health-check-store'
 import {getHealthCheckStatus, createHealthCheck, endHealthCheck} from '../../adapters/api';
-import Card from '../../components/Card'
+import UserListItem from '../../components/UserListItem'
 import {observer} from 'mobx-react/native';
 
 const Header = styled.View`
-    margin-top: 40px;
-    height: 150px;
     justifyContent: space-around;
     align-items: center;
-    flex: 2;
 `
 
 const HeaderText = styled.Text`
@@ -27,8 +24,20 @@ const HeaderText = styled.Text`
 `
 
 const Footer = styled.View`
-    flex: 2;
     justify-content: center;
+`
+
+const Section = styled.Text`
+  text-align: center;
+  color: ${colors.air};
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+`
+
+const Body = styled.View`
+  flex: 1;
+  justify-content: center;
 `
 
 const onCreateHealthCheck = async (teamId) => {
@@ -63,34 +72,34 @@ const HealthCheckComponent = observer(({healthCheckStore, teamStore, userStore, 
             </Header>
             {
                 !ended &&
-                <View>
-                    {
-                        !!usersNotVoted.length &&
-                        <View>
-                            <Text>
-                                Users who haven't voted:
-                            </Text>
-                            {
-                                usersNotVoted.map(u => (
-                                    <Card key={u.id} onPress={f => f} item={u}/>
-                                ))
-                            }
-                        </View>
-                    }
+                <Body>
                     {
                         !!usersVoted.length &&
                         <View>
-                            <Text>
-                                Users who have voted:
-                            </Text>
+                            <Section>
+                                Voted
+                            </Section>
                             {
                                 usersSubmitted.map(u => (
-                                    <Card key={u.id} onPress={f => f} item={u}/>
+                                    <UserListItem key={u.id} user={u} />
                                 ))
                             }
                         </View>
                     }
-                </View>
+                    {
+                        !!usersNotVoted.length &&
+                        <View>
+                            <Section>
+                                Not voted
+                            </Section>
+                            {
+                                usersNotVoted.map(u => (
+                                    <UserListItem key={u.id} user={u} />
+                                ))
+                            }
+                        </View>
+                    }
+                </Body>
             }
             {
                 !!ended &&

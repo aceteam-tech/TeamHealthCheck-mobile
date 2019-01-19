@@ -11,6 +11,7 @@ const ListItem = styled.View`
   align-items: center;
   padding-bottom: 10px;
   margin-left: 20px;
+  margin-bottom: 20px;
 `
 
 const ListIcon = styled.View`
