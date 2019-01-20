@@ -39,6 +39,14 @@ const Body = styled.View`
   justify-content: center;
 `
 
+const NoHealthCheckText = styled.Text`
+  text-align: center;
+  color: ${colors.air};
+  font-size: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+`
+
 const onCreateHealthCheck = async (teamId) => {
     const healthCheck = await createHealthCheck(teamId)
     healthCheckStore.setHealthCheck(healthCheck)
@@ -94,9 +102,11 @@ const HealthCheckComponent = observer(({healthCheckStore, teamStore, userStore, 
             }
             {
                 !!ended &&
-                <Text>
-                    There is no active health check at the moment
-                </Text>
+                <Body>
+                    <NoHealthCheckText>
+                        There is no active Health Check at the moment...
+                    </NoHealthCheckText>
+                </Body>
             }
             <Footer>
                 {
@@ -105,7 +115,7 @@ const HealthCheckComponent = observer(({healthCheckStore, teamStore, userStore, 
                 }
                 {
                     !!ended ?
-                        <Button onPress={() => onCreateHealthCheck(teamId)} text='Start Health Check'
+                        <Button onPress={() => onCreateHealthCheck(teamId)} text='Create Health Check'
                                 version='secondary'/> :
                         <Button onPress={() => onEndHealthCheck(teamId)} text='End Health Check' version='secondary'/>
                 }
