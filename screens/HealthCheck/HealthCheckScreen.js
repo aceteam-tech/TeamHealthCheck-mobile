@@ -9,7 +9,7 @@ import teamStore from '../../model/team-store'
 import userStore from '../../model/user-store'
 import healthCheckStore from '../../model/health-check-store'
 import {getHealthCheckStatus, createHealthCheck, endHealthCheck} from '../../adapters/api';
-import UserListItem from '../../components/UserListItem'
+import UsersCompactList from '../../components/UsersCompactList'
 import {observer} from 'mobx-react/native';
 
 const Header = styled.View`
@@ -28,10 +28,9 @@ const Footer = styled.View`
 `
 
 const Section = styled.Text`
-  text-align: center;
   color: ${colors.air};
-  font-size: 20px;
-  margin-top: 20px;
+  font-size: 16px;
+  margin-left: 20px;
   margin-bottom: 10px;
 `
 
@@ -73,32 +72,24 @@ const HealthCheckComponent = observer(({healthCheckStore, teamStore, userStore, 
             {
                 !ended &&
                 <Body>
-                    {
-                        !!usersVoted.length &&
-                        <View>
-                            <Section>
-                                Voted
-                            </Section>
-                            {
-                                usersSubmitted.map(u => (
-                                    <UserListItem key={u.id} user={u} />
-                                ))
-                            }
-                        </View>
-                    }
-                    {
-                        !!usersNotVoted.length &&
-                        <View>
-                            <Section>
-                                Not voted
-                            </Section>
-                            {
-                                usersNotVoted.map(u => (
-                                    <UserListItem key={u.id} user={u} />
-                                ))
-                            }
-                        </View>
-                    }
+                {
+                    !!usersVoted.length &&
+                    <View>
+                        <Section>
+                            Voted
+                        </Section>
+                        <UsersCompactList users={usersSubmitted}/>
+                    </View>
+                }
+                {
+                    !!usersNotVoted.length &&
+                    <View>
+                        <Section>
+                            Not voted
+                        </Section>
+                        <UsersCompactList users={usersNotVoted}/>
+                    </View>
+                }
                 </Body>
             }
             {
@@ -110,12 +101,13 @@ const HealthCheckComponent = observer(({healthCheckStore, teamStore, userStore, 
             <Footer>
                 {
                     votingEnabled &&
-                    <Button onPress={()=>navigate('CategoryVote')} text='Vote' version='primary'/>
+                    <Button onPress={() => navigate('CategoryVote')} text='Vote' version='primary'/>
                 }
                 {
                     !!ended ?
-                        <Button onPress={()=>onCreateHealthCheck(teamId)} text='Start Health Check' version='secondary'/> :
-                        <Button onPress={()=>onEndHealthCheck(teamId)} text='End Health Check' version='secondary'/>
+                        <Button onPress={() => onCreateHealthCheck(teamId)} text='Start Health Check'
+                                version='secondary'/> :
+                        <Button onPress={() => onEndHealthCheck(teamId)} text='End Health Check' version='secondary'/>
                 }
             </Footer>
         </Page>
