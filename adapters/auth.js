@@ -3,9 +3,9 @@ import Amplify, { Auth } from 'aws-amplify';
 Amplify.configure({
     Auth: {
         region: 'eu-west-2',
-        userPoolId: 'eu-west-2_VFKlODaIG',
-        userPoolWebClientId: '7dt9g54rakj7ls78elg2v19e6j',
-        identityPoolId: 'eu-west-2:cc96b0d1-0936-4d46-a611-bf8a419970aa'
+        userPoolId: 'eu-west-2_iFqVx5R66',
+        userPoolWebClientId: '4508nt753g645odnpv91p2c501',
+        identityPoolId: 'eu-west-2:1a4f044b-e90c-48cc-9c11-a1b557c6367e'
     },
     Storage: {
         bucket: 'squad-health-check',

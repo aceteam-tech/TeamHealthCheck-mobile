@@ -1,7 +1,7 @@
 import {Storage} from 'aws-amplify'
 import {getSession} from './auth';
 
-const apiUrl = `https://7kl9tiowqe.execute-api.eu-west-2.amazonaws.com/dev/`
+const apiUrl = `https://nr64wikhb3.execute-api.eu-west-2.amazonaws.com/chirs/`
 
 const makeRequest = async (resource, method, body) => {
     try{

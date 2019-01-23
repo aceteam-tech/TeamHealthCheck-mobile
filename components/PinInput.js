@@ -14,10 +14,10 @@ const PinInput = styled.TextInput`
 `
 
 export default ({autoFocus, value, handle, onChange, onEnd, index}) => (
-    <PinInput key={index} 
+    <PinInput 
               autoCorrect={false}
               autoFocus={autoFocus || false}
-              keyboardType='decimal-pad'
+              keyboardType='default'
               value={value}
               maxLength={1}
               caretHidden={true}
