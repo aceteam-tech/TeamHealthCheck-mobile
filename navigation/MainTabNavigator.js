@@ -8,6 +8,7 @@ import CategoryVoteScreen from '../screens/HealthCheck/CategoryVoteScreen';
 import TeamScreen from '../screens/Teams/TeamScreen';
 import TeamSettingsScreen from '../screens/Teams/TeamSettingsScreen';
 import TeamDashboardScreen from '../screens/Teams/TeamDashboardScreen';
+import InviteScreen from "../screens/Teams/InviteScreen";
 
 const DashboardStack = createStackNavigator({
     TeamDashboard: TeamDashboardScreen,
@@ -25,7 +26,8 @@ DashboardStack.navigationOptions = {
 };
 
 const TeamStack = createStackNavigator({
-    Team: TeamScreen
+    Team: TeamScreen,
+    Invite: InviteScreen
 }, {
     headerMode: 'none'
 });

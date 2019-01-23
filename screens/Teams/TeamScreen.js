@@ -57,7 +57,7 @@ const TeamComponent = observer(({store, navigate}) => (
                     }
                 </Content>
                 <AddButtonWrapper>
-                    <Button onPress={() => {
+                    <Button onPress={() => { navigate('Invite')
                     }} version='add'/>
                 </AddButtonWrapper>
             </DynamicContent>
