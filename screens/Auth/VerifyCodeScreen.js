@@ -114,11 +114,12 @@ export default class VerifyCodeScreen extends React.Component {
                         {
                             [0,1,2,3,4,5].map(i => (
                                 <PinInput
+                                    key={i}
+                                    index={i}
                                     autoFocus={i === 0}
                                     value={this.state.code[i]}
                                     handle={(ref) => {this.code[i] = ref}}
                                     onChange={this.onCodeChange}
-                                    index={i}
                                 />
                             ))
                         }
