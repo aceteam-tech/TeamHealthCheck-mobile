@@ -78,7 +78,15 @@ const HealthCheckComponent = observer(({healthCheckStore, teamStore, userStore, 
                 <HeaderText>Health Check</HeaderText>
             </Header>
             {
-                !ended &&
+                typeof ended === 'undefined' &&
+                <Body>
+                    <NoHealthCheckText>
+                        Loading...
+                    </NoHealthCheckText>
+                </Body>
+            }
+            {
+                ended === false &&
                 <Body>
                 {
                     !!usersVoted.length &&
