@@ -26,6 +26,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "babel-plugin-dotenv": "^0.1.1",
     "babel-preset-expo": "^5.0.0",
     "jest-expo": "^31.0.0"
   },
