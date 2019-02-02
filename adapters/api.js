@@ -1,7 +1,6 @@
 import {Storage} from 'aws-amplify'
 import {getSession} from './auth';
-
-const apiUrl = `https://7kl9tiowqe.execute-api.eu-west-2.amazonaws.com/dev/`
+import {API_URL} from 'babel-dotenv'
 
 const makeRequest = async (resource, method, body) => {
     try{
@@ -17,7 +16,7 @@ const makeRequest = async (resource, method, body) => {
         if(body){
             params.body = JSON.stringify(body)
         }
-        const response = await fetch(apiUrl+resource, params)
+        const response = await fetch(API_URL+resource, params)
         return response.json()
     } catch(e) {
         console.error(e);

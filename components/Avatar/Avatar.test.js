@@ -1,5 +1,3 @@
-import 'react-native';
-import React from 'react';
 import {getInitials} from './Avatar.helpers';
 
 describe('getInitials function', () => {

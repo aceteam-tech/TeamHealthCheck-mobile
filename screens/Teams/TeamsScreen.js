@@ -1,55 +1,56 @@
 import React from 'react';
 import {View} from 'react-native';
 import {Content} from 'native-base'
-import styled from 'styled-components/native'
-import colors from '../../constants/Colors'
+import {MaterialIcons} from '@expo/vector-icons'
 import Button from '../../components/Button/Button.component'
 import {getMyTeams} from '../../adapters/api'
 import teamsStore from '../../model/team-store'
 import Page from '../../components/Page'
 import {signOut} from '../../adapters/auth'
-import Card from '../../components/Card'
+import TeamCard from '../../components/TeamCard'
+import Header from '../../components/Header'
+import styled from 'styled-components/native/dist/styled-components.native.esm';
 
-const Header = styled.View`
-    justifyContent: center;
-    align-items: center;
+const AddButtonWrapper = styled.View`
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  flex-direction: row;
 `
 
-const HeaderText = styled.Text`
-  color: ${colors.air};
-  font-size: 20px;
-  font-weight: bold;
+const HeaderWrapper = styled.View`
+  margin-bottom: 30px;
 `
 
 const TeamsScreenComponent = ({teams, chooseTeam, navigate}) => (
     <Page>
-        <Header>
-            <HeaderText>Teams</HeaderText>
-        </Header>
+        <HeaderWrapper>
+            <Header title='Teams' right={
+                <MaterialIcons color='white' size={27} name='menu'/>
+            } />
+        </HeaderWrapper>
         <Content>
             {
                 teams.map(team => (
-                    <Card key={team.id} onPress={chooseTeam} item={team} />
+                    <TeamCard key={team.id} onPress={chooseTeam} item={team}/>
                 ))
             }
             <View>
-                <Button onPress={() => navigate('AddTeam')}
-                        text='Add new team'
-                        version='primary'
-                />
-                <Button onPress={() => navigate('AddTeam')}
-                        text='Join team'
-                        version='secondary'
-                />
-                <Button onPress={() => {
-                    signOut()
-                    navigate('Welcome')
-                }}
-                        text='Temporary Logout'
-                        version='secondary'
-                />
+                {/*<Button onPress={() => navigate('AddTeam')}*/}
+                        {/*text='Add new team'*/}
+                        {/*version='primary'*/}
+                {/*/>*/}
+                {/*<Button onPress={() => navigate('AddTeam')}*/}
+                        {/*text='Join team'*/}
+                        {/*version='secondary'*/}
+                {/*/>*/}
+
             </View>
         </Content>
+        <AddButtonWrapper>
+            <Button onPress={() => navigate('AddTeam')} version='add'/>
+        </AddButtonWrapper>
+        <Button onPress={() => {signOut(); navigate('Welcome')}} text='Temporary Logout' version='secondary'/>
     </Page>
 )
 

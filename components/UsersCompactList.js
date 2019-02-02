@@ -1,6 +1,5 @@
 import React from 'react';
 import chunk from 'lodash/chunk'
-import {View} from 'react-native'
 import styled from 'styled-components/native'
 import colors from '../constants/Colors'
 import Avatar from './Avatar/Avatar.component'
