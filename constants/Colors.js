@@ -15,4 +15,5 @@ export default {
     primary: tintColor,
     dark: '#343434',
     air: '#fff',
+    separator: 'rgba(255,255,255,.61)'
 };
