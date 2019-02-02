@@ -1,5 +1,4 @@
 import React from 'react';
-import {Text} from 'native-base'
 import {View} from 'react-native'
 import styled from 'styled-components/native'
 import colors from '../../constants/Colors'
@@ -11,17 +10,7 @@ import healthCheckStore from '../../model/health-check-store'
 import {getHealthCheckStatus, createHealthCheck, endHealthCheck} from '../../adapters/api';
 import UsersCompactList from '../../components/UsersCompactList'
 import {observer} from 'mobx-react/native';
-
-const Header = styled.View`
-    justifyContent: space-around;
-    align-items: center;
-`
-
-const HeaderText = styled.Text`
-  color: ${colors.air};
-  font-size: 20px;
-  font-weight: bold;
-`
+import Header from '../../components/Header'
 
 const Footer = styled.View`
     justify-content: center;
@@ -57,6 +46,61 @@ const onEndHealthCheck = async (teamId) => {
     healthCheckStore.setHealthCheck(healthCheck)
 }
 
+const HealthCheckLoading = () => (
+    <Body>
+    <NoHealthCheckText>
+        Loading...
+    </NoHealthCheckText>
+    </Body>
+)
+
+const HealthCheckInactive = ({teamId}) => (
+    <Body>
+    <Body>
+    <NoHealthCheckText>
+        There is no active Health Check at the moment...
+    </NoHealthCheckText>
+    </Body>
+    <Footer>
+        <Button onPress={() => onCreateHealthCheck(teamId)}
+                text='Create Health Check'
+                version='secondary'/>
+    </Footer>
+    </Body>
+)
+
+const HealthCheckActive = ({usersVoted, usersNotVoted, usersSubmitted, votingEnabled, navigate, teamId}) => (
+    <Body>
+    <Body>
+    {
+        !!usersVoted.length &&
+        <View>
+            <Section>
+                Voted
+            </Section>
+            <UsersCompactList users={usersSubmitted}/>
+        </View>
+    }
+    {
+        !!usersNotVoted.length &&
+        <View>
+            <Section>
+                Not voted
+            </Section>
+            <UsersCompactList users={usersNotVoted}/>
+        </View>
+    }
+    </Body>
+    <Footer>
+        {
+            votingEnabled &&
+            <Button onPress={() => navigate('CategoryVote')} text='Vote' version='primary'/>
+        }
+        <Button onPress={() => onEndHealthCheck(teamId)} text='End Health Check' version='secondary'/>
+    </Footer>
+    </Body>
+)
+
 const HealthCheckComponent = observer(({healthCheckStore, teamStore, userStore, navigate}) => {
     const {ended, usersSubmitted} = healthCheckStore.healthCheck
     const {users, id: teamId} = teamStore.team
@@ -74,60 +118,24 @@ const HealthCheckComponent = observer(({healthCheckStore, teamStore, userStore, 
     }
     return (
         <Page>
-            <Header>
-                <HeaderText>Health Check</HeaderText>
-            </Header>
+            <Header title='Health Check' />
             {
-                typeof ended === 'undefined' &&
-                <Body>
-                    <NoHealthCheckText>
-                        Loading...
-                    </NoHealthCheckText>
-                </Body>
+                typeof ended === 'undefined' && <HealthCheckLoading />
             }
             {
-                ended === false &&
-                <Body>
-                {
-                    !!usersVoted.length &&
-                    <View>
-                        <Section>
-                            Voted
-                        </Section>
-                        <UsersCompactList users={usersSubmitted}/>
-                    </View>
-                }
-                {
-                    !!usersNotVoted.length &&
-                    <View>
-                        <Section>
-                            Not voted
-                        </Section>
-                        <UsersCompactList users={usersNotVoted}/>
-                    </View>
-                }
-                </Body>
+                ended === false && <HealthCheckActive
+                    usersVoted={usersVoted}
+                    usersNotVoted={usersNotVoted}
+                    usersSubmitted={usersSubmitted}
+                    votingEnabled={votingEnabled}
+                    navigate={navigate}
+                    teamId={teamId}
+                />
             }
             {
-                !!ended &&
-                <Body>
-                    <NoHealthCheckText>
-                        There is no active Health Check at the moment...
-                    </NoHealthCheckText>
-                </Body>
+                !!ended && <HealthCheckInactive
+                    teamId={teamId}/>
             }
-            <Footer>
-                {
-                    votingEnabled &&
-                    <Button onPress={() => navigate('CategoryVote')} text='Vote' version='primary'/>
-                }
-                {
-                    !!ended ?
-                        <Button onPress={() => onCreateHealthCheck(teamId)} text='Create Health Check'
-                                version='secondary'/> :
-                        <Button onPress={() => onEndHealthCheck(teamId)} text='End Health Check' version='secondary'/>
-                }
-            </Footer>
         </Page>
     )
 })
