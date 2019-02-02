@@ -2,7 +2,8 @@ import React from 'react'
 import {CardItem, Card} from 'native-base'
 import {TouchableOpacity} from 'react-native';
 import colors from '../constants/Colors';
-import styled from 'styled-components/native/dist/styled-components.native.esm';
+import styled from 'styled-components/native'
+import TeamLogo from './TeamLogo/TeamLogo.component'
 
 const CardIcon = styled.Image`
     width: 60px; 
@@ -42,9 +43,9 @@ export default ({item, onPress}) => (
             <CardItem style={cardItemStyles}>
                 <IconWrapper>
                     {
-                        !!item.image &&
-                        <CardIcon
-                            source={{uri: item.image}}/>
+                        !!item.image ?
+                            <CardIcon source={{uri: item.image}}/> :
+                            <TeamLogo name={item.name} size={60} />
                     }
                 </IconWrapper>
                 <CardText>{item.name}</CardText>
