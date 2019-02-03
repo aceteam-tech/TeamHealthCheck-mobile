@@ -9,7 +9,7 @@ import Page from '../../components/Page'
 import {signOut} from '../../adapters/auth'
 import TeamCard from '../../components/TeamCard'
 import Header from '../../components/Header'
-import styled from 'styled-components/native/dist/styled-components.native.esm';
+import styled from 'styled-components/native'
 
 const AddButtonWrapper = styled.View`
   justify-content: flex-end;
