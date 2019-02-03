@@ -1,93 +1,47 @@
 import React from 'react';
-import {Button, Text, Card, CardItem, Icon, Content} from 'native-base'
+import {Content} from 'native-base'
 import styled from 'styled-components/native'
-import colors from '../../constants/Colors'
 import {observer} from 'mobx-react/native'
 import teamStore from '../../model/team-store'
+import Page from '../../components/Page'
+import Header from '../../components/Header'
+import CategoryListItem from '../../components/CategoryListItem'
+import colors from '../../constants/Colors';
 
-const Page = styled.View`
-    flex: 1;
-    backgroundColor: ${colors.air};
-    justifyContent: space-between;
+const HeaderWrapper = styled.View`
+  margin-bottom: 30px;
 `
-
-const TeamIconWrapper = styled.View`
-    flex: 1;
-    marginRight: 20;
+const Body = styled.View`
+  flex: 1;
+  justify-content: center;
 `
-
-const TeamIcon = styled.Image`
-    width: 50; 
-    height: 50;
-`
-
-const Header = styled.View`
-    backgroundColor: ${colors.primary};
-    height: 150px;
-    justifyContent: center;
-    align-items: center;
-`
-
-const HeaderText = styled.Text`
+const NoHealthCheckText = styled.Text`
+  text-align: center;
   color: ${colors.air};
   font-size: 20px;
-  font-weight: bold;
+  margin-left: 50px;
+  margin-right: 50px;
 `
-
-const CategoriesList = styled.View`
-  margin-top: -30px;
-`
-
-const squadCardStyles = {
-    marginRight: 20,
-    marginLeft: 20,
-    borderRadius: 10,
-    height: 120,
-    justifyContent: 'center',
-    marginBottom: 15
-}
-
-const cardItemStyles = {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-    borderRadius: 10
-}
 
 const TeamDashboardComponent = observer(({store}) => (
     <Page>
+        <HeaderWrapper>
+            <Header title='Dashboard'/>
+        </HeaderWrapper>
         {
-            !!store.team &&
-            <Content>
-                <Header>
-                    <HeaderText>Team Dashboard</HeaderText>
-                </Header>
-                <CategoriesList>
+            !!store.lastHealthCheck ?
+                <Content>
                     {
-                        store.team.categories.map(category => (
-                            <Card key={category.id} style={squadCardStyles}>
-                                <CardItem style={cardItemStyles}>
-                                    {
-                                        !!category.image &&
-                                        <TeamIconWrapper>
-                                            <TeamIcon
-                                                source={{uri: category.image}}/>
-                                        </TeamIconWrapper>
-                                    }
-                                    <Text style={[
-                                        {
-                                            flex: 2,
-                                            color: colors.primary,
-                                            fontSize: 20
-                                        },
-                                        !category.image && {textAlign: 'center'}
-                                    ]}>{category.name}</Text>
-                                </CardItem>
-                            </Card>
+                        store.lastHealthCheck.map(c => (
+                            <CategoryListItem key={c.id} category={c}/>
                         ))
                     }
-                </CategoriesList>
-            </Content>
+                </Content> :
+                <Body>
+                <NoHealthCheckText>
+                    Finish your first Health Check to see the results here
+                </NoHealthCheckText>
+                </Body>
         }
     </Page>
 ))
