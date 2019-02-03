@@ -41,7 +41,7 @@ export default class InviteScreen extends React.Component {
                 </HeaderWrapper>
                 <View>
                     <CodeLabel style={labelStyle}>Join your team code</CodeLabel>
-                    <Code>{teamStore.team.invitationCode}</Code>
+                    <Code>{teamStore.team.code}</Code>
                 </View>
             </Page>
         )
