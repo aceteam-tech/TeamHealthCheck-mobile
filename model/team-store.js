@@ -3,13 +3,11 @@ import {observable} from 'mobx'
 class ObservableTeamStore {
     @observable team = {
         name: '',
-        users: [],
-        invitationCode: 101010
+        users: []
     }
 
     setTeam (team) {
         this.team = team
-        this.team.invitationCode = 101010
     }
 }
 
