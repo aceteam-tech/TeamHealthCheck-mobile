@@ -35,7 +35,7 @@ export default class InviteScreen extends React.Component {
                         <TouchableOpacity onPress={() => goBack(null)}>
                             <Icon name='ios-arrow-back'
                                   type='Ionicons'
-                                  style={{color: '#FFF', fontSize: 30}}/>
+                                  style={{color: colors.air, fontSize: 30}}/>
                         </TouchableOpacity>
                     }/>
                 </HeaderWrapper>
