@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {Content} from 'native-base'
 import {MaterialIcons} from '@expo/vector-icons'
 import Button from '../../components/Button/Button.component'
-import {getMyTeams} from '../../adapters/api'
+import {getMyTeams, getHealthChecks} from '../../adapters/api'
 import teamsStore from '../../model/team-store'
 import Page from '../../components/Page'
 import {signOut} from '../../adapters/auth'
@@ -67,8 +67,10 @@ export default class TeamsScreen extends React.Component {
         }
     }
 
-    chooseTeam = (team) => {
+    chooseTeam = async (team) => {
+        const healthChecks = await getHealthChecks(team.id)
         teamsStore.setTeam(team)
+        teamsStore.setHealthChecks(healthChecks)
         this.props.navigation.navigate('TeamDashboard')
     }
 

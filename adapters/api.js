@@ -33,6 +33,10 @@ export const getHealthCheckStatus = async (teamId) => {
     return makeRequest(`health-check/status?teamId=${teamId}`, 'GET')
 }
 
+export const getHealthChecks = async (teamId) => {
+    return makeRequest(`health-checks?teamId=${teamId}`, 'GET')
+}
+
 export const getTeam = async (teamId) => {
     return makeRequest(`team?id=${teamId}`, 'GET')
 }
