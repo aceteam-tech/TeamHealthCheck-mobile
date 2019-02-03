@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text, Input, Item, Form} from 'native-base'
-import {KeyboardAvoidingView, Image} from 'react-native'
+import {Input, Item, Form, Icon} from 'native-base'
+import {KeyboardAvoidingView, Image, TouchableOpacity} from 'react-native'
 import styled from 'styled-components/native'
 import {login} from '../../adapters/auth'
 import colors from '../../constants/Colors'
@@ -10,20 +10,7 @@ import IconPassword from '../../assets/images-large/icon-password-2x.png'
 import Page from '../../components/Page'
 import Separator from '../../components/Separator'
 import Button from '../../components/Button/Button.component'
-
-const Header = styled.View`
-    margin-top: 40px;
-    height: 150px;
-    justifyContent: space-around;
-    align-items: center;
-    flex: 2;
-`
-
-const HeaderText = styled.Text`
-  color: ${colors.air};
-  font-size: 25px;
-  font-weight: bold;
-`
+import Header from '../../components/Header'
 
 const Footer = styled.View`
     flex: 2;
@@ -48,6 +35,10 @@ const inputWrapperStyle = {
     borderBottomWidth: 1,
     borderColor: colors.air
 }
+
+const HeaderWrapper = styled.View`
+  margin-bottom: 30px;
+`
 
 export default class LoginScreen extends React.Component {
     static navigationOptions = {
@@ -86,14 +77,21 @@ export default class LoginScreen extends React.Component {
     }
 
     render () {
+        const {goBack} = this.props.navigation
         return (
             <Page>
-                <Header>
-                    <HeaderText>{'Log In'}</HeaderText>
-                    <Image source={IconUser}
-                           resizeMode='contain'
-                           style={{height: 120}}/>
-                </Header>
+                <HeaderWrapper>
+                    <Header title='Log In' left={
+                        <TouchableOpacity onPress={() => goBack(null)}>
+                            <Icon name='ios-arrow-back'
+                                  type='Ionicons'
+                                  style={{color: colors.air, fontSize: 30}}/>
+                        </TouchableOpacity>
+                    } />
+                </HeaderWrapper>
+                <Image source={IconUser}
+                       resizeMode='contain'
+                       style={{height: 120, alignSelf: 'center'}}/>
                 <KeyboardAvoidingView style={{flex: 1}}
                                       behavior="padding"
                                       keyboardVerticalOffset={20}>

@@ -41,6 +41,10 @@ export const addTeam = async (teamName) => {
     return makeRequest('my-teams', 'POST', {teamName})
 }
 
+export const joinTeam = async (code) => {
+    return makeRequest('join-team', 'POST', {code})
+}
+
 export const createHealthCheck = async (teamId) => {
     return makeRequest('health-check', 'POST', {teamId})
 }

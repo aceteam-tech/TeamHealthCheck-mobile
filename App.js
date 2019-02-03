@@ -37,6 +37,9 @@ export default class App extends React.Component {
         return Promise.all([
             Asset.loadAsync([
                 require('./assets/images-large/bg-blue-gradient-2x.png'),
+                require('./assets/images/welcome-bg.jpg'),
+                require('./assets/images-large/icon-user-2x.png'),
+                require('./assets/images-large/icon-id-2x.png')
             ]),
             Font.loadAsync({
                 Roboto: require("native-base/Fonts/Roboto.ttf"),

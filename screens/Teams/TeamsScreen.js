@@ -50,6 +50,7 @@ const TeamsScreenComponent = ({teams, chooseTeam, navigate}) => (
         <AddButtonWrapper>
             <Button onPress={() => navigate('AddTeam')} version='add'/>
         </AddButtonWrapper>
+        <Button onPress={() => navigate('JoinTeam')} text='Join Team' version='primary'/>
         <Button onPress={() => {signOut(); navigate('Welcome')}} text='Temporary Logout' version='secondary'/>
     </Page>
 )
