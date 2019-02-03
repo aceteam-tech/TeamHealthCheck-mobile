@@ -4,12 +4,12 @@ class ObservableTeamStore {
     @observable team = {
         name: '',
         users: [],
-        invitationCode: 1010
+        invitationCode: 101010
     }
 
     setTeam (team) {
-        this.team = team;
-        this.team.invitationCode = 1010;
+        this.team = team
+        this.team.invitationCode = 101010
     }
 }
 
