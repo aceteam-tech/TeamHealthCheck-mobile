@@ -17,13 +17,18 @@ class ObservableHealthCheckStore {
 
     setHealthCheck(healthCheck) {
         this.healthCheck = healthCheck
+        this.currentCategoryIndex = 0
+        this.categoriesToSend = []
     }
 
-    nextCategory = (value) => {
+    updateCategory = (value) => {
         this.categoriesToSend.push({
             id: this.currentCategory.id,
             value
         })
+    }
+
+    nextCategory = () => {
         this.currentCategoryIndex += 1
     }
 

@@ -6,23 +6,25 @@ import colors from '../../constants/Colors'
 import Page from '../../components/Page'
 import Header from '../../components/Header'
 import healthCheckStore from '../../model/health-check-store'
+import teamStore from '../../model/team-store'
 import Loading from '../../components/Loading'
-import {observer} from 'mobx-react/native';
+import {observer} from 'mobx-react/native'
 import Button from '../../components/Button/Button.component'
-import {sendStatus} from '../../adapters/api';
+import {sendStatus, getHealthCheckStatus} from '../../adapters/api'
 
 const HeaderWrapper = styled.View`
   margin-bottom: 50px;
 `
-const VotingSummaryComponent = observer(({navigation, healthCheckStore}) => {
+const VotingSummaryComponent = observer(({navigation, healthCheckStore, teamStore}) => {
     if(!healthCheckStore.healthCheck.categories) return <Loading />
 
     const send = async () => {
         const healthCheckId = healthCheckStore.healthCheck.id
         const {categoriesToSend} = healthCheckStore
-        const status = await sendStatus(healthCheckId, categoriesToSend)
-        console.log({'status': status})
-        navigation.navigate('TeamDashboard')
+        await sendStatus(healthCheckId, categoriesToSend)
+        const newStatus = await getHealthCheckStatus(teamStore.team.id)
+        healthCheckStore.setHealthCheck(newStatus)
+        navigation.navigate('HealthCheck')
     }
 
     return (
@@ -45,6 +47,7 @@ export default class CategoryVoteScreen extends React.Component {
     render () {
         return <VotingSummaryComponent
             healthCheckStore={healthCheckStore}
+            teamStore={teamStore}
             navigation={this.props.navigation}
         />
     }

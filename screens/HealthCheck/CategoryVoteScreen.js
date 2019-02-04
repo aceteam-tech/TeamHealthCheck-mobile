@@ -25,16 +25,13 @@ const CategoryVoteText = styled.Text`
 `
 
 const CategoryVoteComponent = observer(({navigation, healthCheckStore}) => {
-    if(!healthCheckStore.healthCheck.categories) return <Loading />
+    if (!healthCheckStore.healthCheck.categories) return <Loading/>
     const category = healthCheckStore.currentCategory
-    const {nextCategory, lastCategory} = healthCheckStore
+    const {nextCategory, lastCategory, updateCategory} = healthCheckStore
 
     const onCategoryChosen = (value) => {
-        console.log(lastCategory);
-        if(lastCategory){
-            return navigation.navigate('Summary')
-        }
-        nextCategory(value)
+        updateCategory(value)
+        lastCategory ? navigation.push('Summary') : nextCategory()
     }
 
     return (
@@ -51,17 +48,17 @@ const CategoryVoteComponent = observer(({navigation, healthCheckStore}) => {
             <Image source={categories[category.image]}
                    resizeMode='contain'
                    style={{height: 120, alignSelf: 'center', marginBottom: 30}}/>
-            <CategoryVoteBox onPress={()=>onCategoryChosen(2)}>
+            <CategoryVoteBox onPress={() => onCategoryChosen(2)}>
                 <CategoryVoteText>
                     {category.descriptionGreen}
                 </CategoryVoteText>
             </CategoryVoteBox>
-            <CategoryVoteBox onPress={()=>onCategoryChosen(1)}>
+            <CategoryVoteBox onPress={() => onCategoryChosen(1)}>
                 <CategoryVoteText>
                     Ok. Could be better...
                 </CategoryVoteText>
             </CategoryVoteBox>
-            <CategoryVoteBox onPress={()=>onCategoryChosen(0)}>
+            <CategoryVoteBox onPress={() => onCategoryChosen(0)}>
                 <CategoryVoteText>
                     {category.descriptionRed}
                 </CategoryVoteText>
