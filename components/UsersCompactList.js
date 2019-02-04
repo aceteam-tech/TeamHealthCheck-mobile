@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 import chunk from 'lodash/chunk'
 import styled from 'styled-components/native'
+import PropTypes from 'prop-types'
 import colors from '../constants/Colors'
 import Avatar from './Avatar/Avatar.component'
-import PropTypes from 'prop-types';
 
 const UsersList = styled.View`
   
@@ -33,7 +33,7 @@ const ListText = styled.Text`
   font-size: 14px;
 `
 
-const UsersCompactList = ({users}) => {
+const UsersCompactList = ({ users }) => {
     const chunked = chunk(users, 3)
     return (
         <UsersList>
@@ -44,7 +44,7 @@ const UsersCompactList = ({users}) => {
                             arr.map(u => (
                                 <User key={u.id}>
                                     <ListIcon>
-                                        <Avatar name={u.name} size={29}/>
+                                        <Avatar name={u.name} size={29} />
                                     </ListIcon>
                                     <ListText>{u.name}</ListText>
                                 </User>

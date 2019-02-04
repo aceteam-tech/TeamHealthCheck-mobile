@@ -1,8 +1,10 @@
-import React from 'react';
-import { Platform, StatusBar} from 'react-native';
-import { AppLoading, Asset, Font, Icon } from 'expo';
-import AppNavigator from './navigation/AppNavigator';
+import React from 'react'
+import { Platform, StatusBar } from 'react-native'
+import {
+    AppLoading, Asset, Font, Icon
+} from 'expo'
 import styled from 'styled-components/native'
+import AppNavigator from './navigation/AppNavigator'
 
 const Container = styled.View`
     flex: 1;
@@ -22,39 +24,36 @@ export default class App extends React.Component {
                     onError={this._handleLoadingError}
                     onFinish={this._handleFinishLoading}
                 />
-            );
-        } else {
-            return (
-                <Container>
-                    {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-                    <AppNavigator />
-                </Container>
-            );
+            )
         }
+        return (
+            <Container>
+                {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+                <AppNavigator />
+            </Container>
+        )
     }
 
-    _loadResourcesAsync = async () => {
-        return Promise.all([
-            Asset.loadAsync([
-                require('./assets/images-large/bg-blue-gradient-2x.png'),
-                require('./assets/images/welcome-bg.jpg'),
-                require('./assets/images-large/icon-user-2x.png'),
-                require('./assets/images-large/icon-id-2x.png')
-            ]),
-            Font.loadAsync({
-                Roboto: require("native-base/Fonts/Roboto.ttf"),
-                Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
-            }),
-        ]);
-    };
+    _loadResourcesAsync = async () => Promise.all([
+        Asset.loadAsync([
+            require('./assets/images-large/bg-blue-gradient-2x.png'),
+            require('./assets/images/welcome-bg.jpg'),
+            require('./assets/images-large/icon-user-2x.png'),
+            require('./assets/images-large/icon-id-2x.png')
+        ]),
+        Font.loadAsync({
+            Roboto: require('native-base/Fonts/Roboto.ttf'),
+            Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf')
+        }),
+    ]);
 
-    _handleLoadingError = error => {
+    _handleLoadingError = (error) => {
         // In this case, you might want to report the error to your error
         // reporting service, for example Sentry
-        console.warn(error);
+        console.warn(error)
     };
 
     _handleFinishLoading = () => {
-        this.setState({ isLoadingComplete: true });
+        this.setState({ isLoadingComplete: true })
     };
 }

@@ -1,5 +1,4 @@
-import React from 'react'
-import {createStackNavigator} from 'react-navigation'
+import { createStackNavigator } from 'react-navigation'
 import TeamsScreen from '../screens/Teams/TeamsScreen'
 import AddTeamScreen from '../screens/Teams/AddTeam/AddTeamScreen'
 import JoinTeamScreen from '../screens/Teams/JoinTeamScreen'
@@ -12,4 +11,4 @@ export default createStackNavigator({
     Main: MainTabNavigator,
 }, {
     headerMode: 'none'
-});
+})

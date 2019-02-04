@@ -1,9 +1,9 @@
-import {observable} from 'mobx'
+import { observable } from 'mobx'
 
 class ObservableHealthCheckStore {
     @observable healthCheck = {}
 
-    setHealthCheck (healthCheck) {
+    setHealthCheck(healthCheck) {
         this.healthCheck = healthCheck
     }
 }

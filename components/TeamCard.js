@@ -1,6 +1,6 @@
 import React from 'react'
-import colors from '../constants/Colors';
 import styled from 'styled-components/native'
+import colors from '../constants/Colors'
 import TeamLogo from './TeamLogo/TeamLogo.component'
 
 const CardIcon = styled.View`
@@ -28,15 +28,19 @@ const TeamCard = styled.TouchableOpacity`
   align-items: center;
 `
 
-export default ({item, onPress}) => (
+export default ({ item, onPress }) => (
     <TeamCard
-        onPress={() => onPress(item)}>
+        onPress={() => onPress(item)}
+    >
         <CardIcon>
-            <TeamLogo name={item.name} size={60}/>
+            <TeamLogo name={item.name} size={60} />
         </CardIcon>
         <TeamInfo>
             <CardText>{item.name}</CardText>
-            <TeamMembers>Members: {item.users.length}</TeamMembers>
+            <TeamMembers>
+Members:
+                {item.users.length}
+            </TeamMembers>
         </TeamInfo>
     </TeamCard>
 )

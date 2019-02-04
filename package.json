@@ -16,6 +16,7 @@
     "amazon-cognito-identity-js": "^3.0.5",
     "aws-amplify": "^1.1.13",
     "expo": "^31.0.2",
+    "lodash": "^4.17.11",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
     "native-base": "^2.8.1",
@@ -27,8 +28,8 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "babel-plugin-dotenv": "^0.1.1",
     "babel-eslint": "^10.0.1",
+    "babel-plugin-dotenv": "^0.1.1",
     "babel-preset-expo": "^5.0.0",
     "eslint": "^5.13.0",
     "eslint-config-airbnb": "^17.1.0",
