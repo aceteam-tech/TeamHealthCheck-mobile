@@ -27,7 +27,8 @@ module.exports = {
         'arrow-body-style': 'off',
         'object-curly-newline': 'off',
         'operator-linebreak': 'off',
-        'arrow-parens': 'off'
+        'arrow-parens': 'off',
+        'import/no-unresolved': 'warn'
     },
     'globals': {
         "fetch": false
