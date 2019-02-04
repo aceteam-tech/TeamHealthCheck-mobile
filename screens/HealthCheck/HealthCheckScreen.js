@@ -7,7 +7,7 @@ import Button from '../../components/Button/Button.component'
 import teamStore from '../../model/team-store'
 import userStore from '../../model/user-store'
 import healthCheckStore from '../../model/health-check-store'
-import {getHealthCheckStatus, createHealthCheck, endHealthCheck} from '../../adapters/api';
+import {getHealthCheckStatus, createHealthCheck, endHealthCheck, getHealthChecks} from '../../adapters/api';
 import UsersCompactList from '../../components/UsersCompactList'
 import {observer} from 'mobx-react/native';
 import Header from '../../components/Header'
@@ -42,9 +42,12 @@ const onCreateHealthCheck = async (teamId) => {
     healthCheckStore.setHealthCheck(healthCheck)
 }
 
-const onEndHealthCheck = async (teamId) => {
+const onEndHealthCheck = async (teamId, navigate) => {
     const healthCheck = await endHealthCheck(teamId)
+    const healthChecks = await getHealthChecks(teamId)
     healthCheckStore.setHealthCheck(healthCheck)
+    teamStore.setHealthChecks(healthChecks)
+    return navigate('TeamDashboard')
 }
 
 const HealthCheckInactive = ({teamId}) => (
@@ -89,7 +92,7 @@ const HealthCheckActive = ({usersVoted, usersNotVoted, usersSubmitted, votingEna
             votingEnabled &&
             <Button onPress={() => navigate('CategoryVote')} text='Vote' version='primary'/>
         }
-        <Button onPress={() => onEndHealthCheck(teamId)} text='End Health Check' version='secondary'/>
+        <Button onPress={() => onEndHealthCheck(teamId, navigate)} text='End Health Check' version='secondary'/>
     </Footer>
     </Body>
 )
