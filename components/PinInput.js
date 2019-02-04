@@ -13,9 +13,7 @@ const PinInput = styled.TextInput`
     textAlign: center
 `
 
-export default ({
-    autoFocus, value, handle, onChange, onEnd, index
-}) => (
+export default ({ autoFocus, value, handle, onChange, index }) => (
     <PinInput
         key={index}
         autoCorrect={false}

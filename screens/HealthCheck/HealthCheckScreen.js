@@ -11,6 +11,7 @@ import {getHealthCheckStatus, createHealthCheck, endHealthCheck} from '../../ada
 import UsersCompactList from '../../components/UsersCompactList'
 import {observer} from 'mobx-react/native';
 import Header from '../../components/Header'
+import Loading from '../../components/Loading'
 
 const Footer = styled.View`
     justify-content: center;
@@ -45,14 +46,6 @@ const onEndHealthCheck = async (teamId) => {
     const healthCheck = await endHealthCheck(teamId)
     healthCheckStore.setHealthCheck(healthCheck)
 }
-
-const HealthCheckLoading = () => (
-    <Body>
-    <NoHealthCheckText>
-        Loading...
-    </NoHealthCheckText>
-    </Body>
-)
 
 const HealthCheckInactive = ({teamId}) => (
     <Body>
@@ -120,7 +113,7 @@ const HealthCheckComponent = observer(({healthCheckStore, teamStore, userStore, 
         <Page>
             <Header title='Health Check' />
             {
-                typeof ended === 'undefined' && <HealthCheckLoading />
+                typeof ended === 'undefined' && <Loading />
             }
             {
                 ended === false && <HealthCheckActive
