@@ -1,12 +1,11 @@
-import React from 'react';
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation'
 
-import RegisterScreen from '../screens/Auth/RegisterScreen';
-import VerifyCodeScreen from '../screens/Auth/VerifyCodeScreen';
-import LoginScreen from '../screens/Auth/LoginScreen';
-import ForgotPasswordScreen from '../screens/Auth/ForgotPasswordScreen';
-import WelcomeScreen from '../screens/Auth/WelcomeScreen';
-import NewPasswordScreen from "../screens/Auth/NewPasswordScreen"
+import RegisterScreen from '../screens/Auth/RegisterScreen'
+import VerifyCodeScreen from '../screens/Auth/VerifyCodeScreen'
+import LoginScreen from '../screens/Auth/LoginScreen'
+import ForgotPasswordScreen from '../screens/Auth/ForgotPasswordScreen'
+import WelcomeScreen from '../screens/Auth/WelcomeScreen'
+import NewPasswordScreen from '../screens/Auth/NewPasswordScreen'
 
 export default createStackNavigator({
     Welcome: WelcomeScreen,
@@ -17,4 +16,4 @@ export default createStackNavigator({
     Verify: VerifyCodeScreen,
 }, {
     headerMode: 'none'
-});
+})
