@@ -1,9 +1,9 @@
-import {observable} from 'mobx'
+import { observable } from 'mobx'
 
 class ObservableUserStore {
     @observable user = {}
 
-    setUser (user) {
+    setUser(user) {
         this.user = user
     }
 }

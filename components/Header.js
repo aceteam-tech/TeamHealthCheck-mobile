@@ -26,7 +26,7 @@ const HeaderRight = styled.View`
   align-items: flex-end;
 `
 
-export default ({title, left, right}) => (
+export default ({ title, left, right }) => (
     <Header>
         <HeaderLeft>
             {left}

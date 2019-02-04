@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components/native'
-import colors from '../constants/Colors';
+import colors from '../constants/Colors'
 
 const PinInput = styled.TextInput`
     background-color: ${colors.air};
@@ -13,14 +13,18 @@ const PinInput = styled.TextInput`
     textAlign: center
 `
 
-export default ({autoFocus, value, handle, onChange, onEnd, index}) => (
-    <PinInput key={index} 
-              autoCorrect={false}
-              autoFocus={autoFocus || false}
-              keyboardType='decimal-pad'
-              value={value}
-              maxLength={1}
-              caretHidden={true}
-              ref={ref => handle(ref)}
-              onKeyPress={(e) => onChange(index, e.nativeEvent.key)}/>
+export default ({
+    autoFocus, value, handle, onChange, onEnd, index
+}) => (
+    <PinInput
+        key={index}
+        autoCorrect={false}
+        autoFocus={autoFocus || false}
+        keyboardType="decimal-pad"
+        value={value}
+        maxLength={1}
+        caretHidden
+        ref={ref => handle(ref)}
+        onKeyPress={e => onChange(index, e.nativeEvent.key)}
+    />
 )

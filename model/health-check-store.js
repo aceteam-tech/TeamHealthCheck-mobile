@@ -1,20 +1,21 @@
-import {observable} from 'mobx'
-import {computed} from 'mobx/lib/mobx';
+import { observable, computed } from 'mobx'
 
 class ObservableHealthCheckStore {
     @observable healthCheck = {}
+
     @observable currentCategoryIndex = 0
+
     @observable categoriesToSend = []
 
     @computed get lastCategory() {
-        return this.currentCategoryIndex === this.healthCheck.categories.length-1
+        return this.currentCategoryIndex === this.healthCheck.categories.length - 1
     }
 
-    @computed get currentCategory(){
+    @computed get currentCategory() {
         return this.healthCheck.categories[this.currentCategoryIndex]
     }
 
-    setHealthCheck (healthCheck) {
+    setHealthCheck(healthCheck) {
         this.healthCheck = healthCheck
     }
 
@@ -26,7 +27,7 @@ class ObservableHealthCheckStore {
         this.currentCategoryIndex += 1
     }
 
-    previousCategory () {
+    previousCategory() {
         this.currentCategoryIndex -= 1
     }
 }

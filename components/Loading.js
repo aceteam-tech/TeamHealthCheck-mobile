@@ -8,8 +8,8 @@ const Body = styled.View`
 
 export default () => (
     <Body>
-    <NoHealthCheckText>
+        <NoHealthCheckText>
         Loading...
-    </NoHealthCheckText>
+        </NoHealthCheckText>
     </Body>
 )
