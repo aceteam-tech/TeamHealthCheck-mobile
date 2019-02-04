@@ -4,6 +4,7 @@ import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 
 import HealthCheckScreen from '../screens/HealthCheck/HealthCheckScreen';
 import CategoryVoteScreen from '../screens/HealthCheck/CategoryVoteScreen';
+import VotingSummaryScreen from '../screens/HealthCheck/VotingSummaryScreen';
 import TeamScreen from '../screens/Teams/TeamScreen';
 import TeamSettingsScreen from '../screens/Teams/TeamSettingsScreen';
 import TeamDashboardScreen from '../screens/Teams/TeamDashboardScreen';
@@ -43,6 +44,7 @@ TeamStack.navigationOptions = {
 const HealthCheckStack = createStackNavigator({
     HealthCheck: HealthCheckScreen,
     CategoryVote: CategoryVoteScreen,
+    Summary: VotingSummaryScreen,
 }, {
     headerMode: 'none'
 });
