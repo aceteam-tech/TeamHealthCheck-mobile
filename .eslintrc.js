@@ -25,7 +25,9 @@ module.exports = {
         'global-require': 'off',
         'no-console': ['error', { allow: ["warn", "error"] }],
         'arrow-body-style': 'off',
-        'object-curly-newline': 'off'
+        'object-curly-newline': 'off',
+        'operator-linebreak': 'off',
+        'arrow-parens': 'off'
     },
     'globals': {
         "fetch": false

@@ -29,10 +29,10 @@ const TeamDashboardComponent = observer(({store}) => (
             <Header title='Dashboard'/>
         </HeaderWrapper>
         {
-            !!store.lastHealthCheck ?
+            !!store.lastResults ?
                 <Content>
                     {
-                        store.lastHealthCheck.map(c => (
+                        store.lastResults.map(c => (
                             <CategoryListItem key={c.id} category={c}/>
                         ))
                     }
