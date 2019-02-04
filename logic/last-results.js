@@ -5,10 +5,10 @@ function sortCategories(categories) {
 export const lastResults = (healthChecks) => {
     if (healthChecks.length === 0) return undefined
 
-    healthChecks.sort((a, b) => a.date - b.date)
+    const ordered = healthChecks.slice().sort((a, b) => a.date - b.date)
 
-    const currentResults = healthChecks[healthChecks.length - 1]?.categories
-    const previousResults = healthChecks[healthChecks.length - 2]?.categories
+    const currentResults = ordered[ordered.length - 1]?.categories
+    const previousResults = ordered[ordered.length - 2]?.categories
 
     return sortCategories(
         previousResults ?
