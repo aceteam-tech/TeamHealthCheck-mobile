@@ -26,10 +26,7 @@ const makeRequest = async (resource, method, body) => {
 
 export const getMyTeams = async () => makeRequest('my-teams', 'GET')
 
-export const getHealthCheckStatus = async (teamId) => {
-    console.log({ teamId })
-    return makeRequest(`health-check/status?teamId=${teamId}`, 'GET')
-}
+export const getHealthCheckStatus = async teamId => makeRequest(`health-check/status?teamId=${teamId}`, 'GET')
 
 export const getHealthChecks = async teamId => makeRequest(`health-checks?teamId=${teamId}`, 'GET')
 

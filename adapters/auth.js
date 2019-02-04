@@ -28,7 +28,9 @@ export const login = (username, password) => Auth.signIn(username, password)
 
 export const forgotPassword = username => Auth.forgotPassword(username)
 
-export const forgotPasswordSubmit = (username, code, newPassword) => Auth.forgotPasswordSubmit(username, code, newPassword)
+export const forgotPasswordSubmit = (username, code, newPassword) => {
+    return Auth.forgotPasswordSubmit(username, code, newPassword)
+}
 
 export const getSession = async () => Auth.currentSession()
 

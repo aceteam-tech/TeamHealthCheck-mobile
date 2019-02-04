@@ -1,5 +1,9 @@
 import { observable, computed } from 'mobx'
 
+function sortCategories(categories) {
+    return categories.slice().sort((a, b) => a.value - b.value)
+}
+
 class ObservableTeamStore {
     @observable team = {
         name: '',
@@ -22,13 +26,9 @@ class ObservableTeamStore {
                     previousValue
                 }
             })
-            return this.sortCategories(categories)
+            return sortCategories(categories)
         }
-        return this.sortCategories(this.healthChecks[this.healthChecks.length - 1].categories)
-    }
-
-    sortCategories(categories) {
-        return categories.slice().sort((a, b) => a.value - b.value)
+        return sortCategories(this.healthChecks[this.healthChecks.length - 1].categories)
     }
 
     setTeam(team) {

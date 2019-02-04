@@ -65,7 +65,11 @@ const CategoryListItem = ({ category }) => {
 }
 
 CategoryListItem.propTypes = {
-    name: PropTypes.string
+    category: PropTypes.shape({
+        value: PropTypes.number,
+        previousValue: PropTypes.number,
+        name: PropTypes.string
+    })
 }
 
 export default CategoryListItem
