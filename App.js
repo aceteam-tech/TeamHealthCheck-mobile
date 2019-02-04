@@ -39,7 +39,19 @@ export default class App extends React.Component {
                 require('./assets/images-large/bg-blue-gradient-2x.png'),
                 require('./assets/images/welcome-bg.jpg'),
                 require('./assets/images-large/icon-user-2x.png'),
-                require('./assets/images-large/icon-id-2x.png')
+                require('./assets/images-large/icon-id-2x.png'),
+            //    Categories
+                require('./assets/categories/delivering-value.png'),
+                require('./assets/categories/fun.png'),
+                require('./assets/categories/health-of-codebase.png'),
+                require('./assets/categories/learning.png'),
+                require('./assets/categories/mission.png'),
+                require('./assets/categories/pawns-or-players.png'),
+                require('./assets/categories/releasing-process.png'),
+                require('./assets/categories/speed.png'),
+                require('./assets/categories/suitable-process.png'),
+                require('./assets/categories/support.png'),
+                require('./assets/categories/teamwork.png'),
             ]),
             Font.loadAsync({
                 Roboto: require("native-base/Fonts/Roboto.ttf"),
