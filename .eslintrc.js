@@ -13,6 +13,8 @@ module.exports = {
       'prefer-destructuring': 'warn',
       'no-underscore-dangle': 'warn',
       'max-len': 'warn',
+      'class-methods-use-this': 'warn',
+      'react/no-array-index-key': 'warn',
       'import/prefer-default-export': 'warning',
       'react/prefer-stateless-function': 'warning',
       'react/require-default-props': 'warning',
