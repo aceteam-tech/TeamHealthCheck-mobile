@@ -1,54 +1,77 @@
 import React from 'react';
-import {Text, Icon} from 'native-base'
-import {View, TouchableOpacity} from 'react-native'
+import {Icon} from 'native-base'
+import {TouchableOpacity, Image} from 'react-native'
 import styled from 'styled-components/native'
 import colors from '../../constants/Colors'
 import Page from '../../components/Page'
+import Header from '../../components/Header'
+import healthCheckStore from '../../model/health-check-store'
+import Loading from '../../components/Loading'
+import categories from '../../assets/categories/category-icons'
+import {observer} from 'mobx-react/native';
 
-const Header = styled.View`
-    margin-top: 40px;
-    height: 150px;
-    justifyContent: space-around;
-    align-items: center;
-    flex: 2;
+const HeaderWrapper = styled.View`
+  margin-bottom: 50px;
+`
+const CategoryVoteBox = styled.TouchableOpacity`
+  background-color: ${colors.air};
+  border-radius: 10px;
+  margin: 10px 30px;
+  padding: 20px;
+`
+const CategoryVoteText = styled.Text`
+  color: ${colors.primary};
+  font-size: 16px;
 `
 
-const HeaderText = styled.Text`
-  color: ${colors.air};
-  font-size: 20px;
-  font-weight: bold;
-`
+const CategoryVoteComponent = observer(({navigation, healthCheckStore}) => {
+    if (!healthCheckStore.healthCheck.categories) return <Loading/>
+    const category = healthCheckStore.currentCategory
+    const {nextCategory, lastCategory, updateCategory} = healthCheckStore
 
-const Footer = styled.View`
-    flex: 2;
-    justify-content: center;
-`
+    const onCategoryChosen = (value) => {
+        updateCategory(value)
+        lastCategory ? navigation.push('Summary') : nextCategory()
+    }
 
-const CategoryVoteComponent = ({goBack}) => {
     return (
         <Page>
-            <TouchableOpacity onPress={()=>goBack(null)}>
-                <Icon name='ios-arrow-back'
-                      type='Ionicons'
-                      style={{color: '#FFF', fontSize: 30, marginLeft: 20, marginBottom: 20}}/>
-            </TouchableOpacity>
-            <Header>
-                <HeaderText>Health Check</HeaderText>
-            </Header>
-            <Text>
-                Category
-            </Text>
-            <Footer>
-
-            </Footer>
+            <HeaderWrapper>
+                <Header title={category.name} left={
+                    <TouchableOpacity onPress={() => navigation.goBack(null)}>
+                        <Icon name='ios-arrow-back'
+                              type='Ionicons'
+                              style={{color: colors.air, fontSize: 30}}/>
+                    </TouchableOpacity>
+                }/>
+            </HeaderWrapper>
+            <Image source={categories[category.image]}
+                   resizeMode='contain'
+                   style={{height: 120, alignSelf: 'center', marginBottom: 30}}/>
+            <CategoryVoteBox onPress={() => onCategoryChosen(2)}>
+                <CategoryVoteText>
+                    {category.descriptionGreen}
+                </CategoryVoteText>
+            </CategoryVoteBox>
+            <CategoryVoteBox onPress={() => onCategoryChosen(1)}>
+                <CategoryVoteText>
+                    Ok. Could be better...
+                </CategoryVoteText>
+            </CategoryVoteBox>
+            <CategoryVoteBox onPress={() => onCategoryChosen(0)}>
+                <CategoryVoteText>
+                    {category.descriptionRed}
+                </CategoryVoteText>
+            </CategoryVoteBox>
         </Page>
     )
-}
+})
 
 export default class CategoryVoteScreen extends React.Component {
     render () {
         return <CategoryVoteComponent
-            goBack={this.props.navigation.goBack}
+            healthCheckStore={healthCheckStore}
+            navigation={this.props.navigation}
         />
     }
 }

@@ -1,8 +1,7 @@
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components/native'
 import colors from '../constants/Colors'
 import Avatar from './Avatar/Avatar.component'
-import PropTypes from 'prop-types';
 
 const ListItem = styled.View`
   border-bottom-width: 1px;
@@ -23,17 +22,13 @@ const ListText = styled.Text`
   font-size: 16px;
 `
 
-const UserListItem = ({user}) => (
+const UserListItem = ({ user }) => (
     <ListItem>
         <ListIcon>
-            <Avatar name={user.name} size={42}/>
+            <Avatar name={user.name} size={42} />
         </ListIcon>
         <ListText>{user.name}</ListText>
     </ListItem>
 )
-
-UserListItem.propTypes = {
-    name: PropTypes.string
-}
 
 export default UserListItem

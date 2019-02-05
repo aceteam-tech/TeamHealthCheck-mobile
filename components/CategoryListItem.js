@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components/native'
+import PropTypes from 'prop-types'
 import colors from '../constants/Colors'
-import PropTypes from 'prop-types';
 
 const ListItem = styled.View`
   border-bottom-width: 1px;
@@ -32,7 +32,7 @@ const RelativeValue = styled.View`
   margin-left: 10px;
   padding: 2px 10px;
   border-radius: 5px;
-  background-color: ${({value}) => value > 0 ? '#95e1d5' : '#f9a9a9'};
+  background-color: ${({ value }) => (value > 0 ? '#95e1d5' : '#f9a9a9')};
 `
 
 const getRelativeValue = (current, previous) => {
@@ -42,7 +42,7 @@ const getRelativeValue = (current, previous) => {
     return ''
 }
 
-const CategoryListItem = ({category}) => {
+const CategoryListItem = ({ category }) => {
     const relativeValue = getRelativeValue(category.value, category.previousValue)
     return (
         <ListItem>
@@ -52,10 +52,12 @@ const CategoryListItem = ({category}) => {
             <ListValues>
                 <ListText>{category.value}</ListText>
                 {
-                    !!relativeValue &&
-                    <RelativeValue value={relativeValue}>
-                        <ListText>{relativeValue}</ListText>
-                    </RelativeValue>
+                    !!relativeValue
+                    && (
+                        <RelativeValue value={relativeValue}>
+                            <ListText>{relativeValue}</ListText>
+                        </RelativeValue>
+                    )
                 }
             </ListValues>
         </ListItem>
@@ -63,7 +65,11 @@ const CategoryListItem = ({category}) => {
 }
 
 CategoryListItem.propTypes = {
-    name: PropTypes.string
+    category: PropTypes.shape({
+        value: PropTypes.number,
+        previousValue: PropTypes.number,
+        name: PropTypes.string
+    })
 }
 
 export default CategoryListItem
