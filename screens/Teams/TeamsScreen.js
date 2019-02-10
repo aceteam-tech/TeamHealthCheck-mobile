@@ -1,5 +1,5 @@
-import React from 'react';
-import {Image, View, Text} from 'react-native'
+import React from 'react'
+import {Image, Text, Animated} from 'react-native'
 import {Content} from 'native-base'
 import {MaterialIcons} from '@expo/vector-icons'
 import Button from '../../components/Button/Button.component'
@@ -24,7 +24,7 @@ const HeaderWrapper = styled.View`
   margin-bottom: 30px;
 `
 
-const MenuWrapper = styled.TouchableOpacity`
+const MenuShadow = styled.TouchableOpacity`
   position: absolute;
   top: 0;
   bottom: 0; 
@@ -34,7 +34,7 @@ const MenuWrapper = styled.TouchableOpacity`
   display: ${props => props.open ? 'flex' : 'none'}
 `
 
-const Menu = styled.View`
+const Menu = styled(Animated.View)`
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -57,18 +57,38 @@ const MenuItem = styled.TouchableOpacity`
 `
 
 class TeamsScreenComponent extends React.Component {
-    state={
-        isOpen: false
+    state = {
+        isOpen: false,
+        bounceValue: new Animated.Value(200),
     }
 
-    render(){
+    toggleMenu() {
+
+        let toValue = 200
+
+        if (!this.state.isOpen) {
+            toValue = 0
+        }
+
+        Animated.spring(
+            this.state.bounceValue,
+            {
+                toValue: toValue,
+            }
+        ).start()
+
+
+        this.setState({isOpen: !this.state.isOpen})
+    }
+
+    render() {
         const {teams, chooseTeam, navigate} = this.props
         return (
             <Page>
                 <HeaderWrapper>
                     <Header title='Teams' right={
                         <MaterialIcons color='white' size={27} name='menu'/>
-                    } />
+                    }/>
                 </HeaderWrapper>
                 <Content>
                     {
@@ -78,25 +98,31 @@ class TeamsScreenComponent extends React.Component {
                     }
                 </Content>
                 <AddButtonWrapper>
-                    <Button onPress={() => this.setState({isOpen: true})} version='add'/>
+                    <Button onPress={() => this.toggleMenu()} version='add'/>
                 </AddButtonWrapper>
-                <MenuWrapper open={this.state.isOpen} onPress={() => this.setState({isOpen: false})}>
-                    <Menu>
-                        <MenuItem onPress={() => {navigate('JoinTeam'); this.setState({isOpen:false})}}>
-                            <Image source={IconLink}
-                                   resizeMode='contain'
-                                   style={{height: 40, alignSelf: 'center', margin: 10}}/>
-                                   <Text>Join Team</Text>
-                        </MenuItem>
+                <MenuShadow open={this.state.isOpen} onPress={() => this.toggleMenu()}/>
 
-                        <MenuItem onPress={() => {navigate('AddTeam'); this.setState({isOpen:false})}}>
-                            <Image source={IconPlus}
-                                   resizeMode='contain'
-                                   style={{height: 40, alignSelf: 'center', margin: 10}}/>
-                            <Text>Add Team</Text>
-                        </MenuItem>
-                    </Menu>
-                </MenuWrapper>
+                <Menu style={{transform: [{translateY: this.state.bounceValue}]}}>
+                    <MenuItem onPress={() => {
+                        navigate('JoinTeam')
+                        this.toggleMenu()
+                    }}>
+                        <Image source={IconLink}
+                               resizeMode='contain'
+                               style={{height: 40, alignSelf: 'center', margin: 10}}/>
+                        <Text>Join Team</Text>
+                    </MenuItem>
+
+                    <MenuItem onPress={() => {
+                        navigate('AddTeam')
+                        this.toggleMenu()
+                    }}>
+                        <Image source={IconPlus}
+                               resizeMode='contain'
+                               style={{height: 40, alignSelf: 'center', margin: 10}}/>
+                        <Text>Add Team</Text>
+                    </MenuItem>
+                </Menu>
 
             </Page>
         )
@@ -108,7 +134,7 @@ export default class TeamsScreen extends React.Component {
         teams: []
     }
 
-    async componentDidMount () {
+    async componentDidMount() {
         const teams = await getMyTeams()
         if (teams) {
             this.setState({teams})
@@ -122,7 +148,7 @@ export default class TeamsScreen extends React.Component {
         this.props.navigation.navigate('TeamDashboard')
     }
 
-    render () {
+    render() {
         return <TeamsScreenComponent
             teams={this.state.teams}
             chooseTeam={this.chooseTeam}
