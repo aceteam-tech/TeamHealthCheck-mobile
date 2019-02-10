@@ -1,27 +1,16 @@
 import React from 'react';
 import {Content} from 'native-base'
 import styled from 'styled-components/native'
-import colors from '../../constants/Colors'
 import teamStore from '../../model/team-store'
 import {observer} from 'mobx-react/native'
 import TeamLogo from '../../components/TeamLogo/TeamLogo.component'
 import Page from '../../components/Page'
 import Button from '../../components/Button/Button.component'
 import UserListItem from '../../components/UserListItem'
-
-const Header = styled.View`
-    justifyContent: space-around;
-    align-items: center;
-`
+import Header from '../../components/Header'
 
 const DynamicContent = styled.View`
   flex: 1;
-`
-
-const HeaderText = styled.Text`
-  color: ${colors.air};
-  font-size: 20px;
-  font-weight: bold;
 `
 
 const TeamLogoWrapper = styled.View`
@@ -43,9 +32,8 @@ const TeamComponent = observer(({store, navigate}) => (
         {
             !!store.team &&
             <DynamicContent>
-                <Header>
-                    <HeaderText>{store.team.name}</HeaderText>
-                </Header>
+                <Header title={store.team.name} />
+
                 <Content>
                     <TeamLogoWrapper>
                         <TeamLogo name={store.team.name}/>

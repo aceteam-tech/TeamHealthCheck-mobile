@@ -1,24 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Button as NativeButton, Text} from 'native-base'
+import IconPlus from '../../assets/images-x-large/icon-plus-3x.png'
 import colors from '../../constants/Colors';
-
-const textStyle = {
-    fontSize: 32,
-    textAlign: 'center',
-    color: colors.primary,
-    fontWeight: '300'
-}
+import {Image} from "react-native"
 
 const buttonStyle = {
     width: 50,
     height: 50,
-    backgroundColor: colors.air
+    backgroundColor: colors.air,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
 }
 
 const Button = ({onPress}) => (
     <NativeButton rounded style={buttonStyle} onPress={onPress}>
-        <Text style={textStyle}>+</Text>
+        <Image source={IconPlus}
+               resizeMode='contain'
+               style={{height: 18}}/>
     </NativeButton>
 )
 

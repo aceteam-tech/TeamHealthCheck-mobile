@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import colors from '../constants/Colors'
+import ifNotch from '../helpers/ifNotch'
 
 const Header = styled.View`
   flex-direction: row;
@@ -27,7 +28,7 @@ const HeaderRight = styled.View`
 `
 
 export default ({ title, left, right }) => (
-    <Header>
+    <Header style={{marginTop: ifNotch ? 15 : 0}}>
         <HeaderLeft>
             {left}
         </HeaderLeft>
