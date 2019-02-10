@@ -8,10 +8,15 @@ export default createStackNavigator({
     Teams: TeamsScreen,
     AddTeam: AddTeamScreen,
     JoinTeam: JoinTeamScreen,
-    Main: MainTabNavigator,
+    Main: {
+        screen:MainTabNavigator,
+        navigationOptions: () => ({
+            gesturesEnabled: false
+        })
+    },
 }, {
     headerMode: 'none',
-    navigationOptions: {
-        gesturesEnabled: false
+    defaultNavigationOptions: {
+        gesturesEnabled: true
     }
 })
