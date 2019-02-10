@@ -8,6 +8,10 @@ class RegisterFormStore {
         this.form[key] = value
     }
 
+    clear() {
+        this.form = {}
+    }
+
     @computed get errors() {
         return Object.keys(this.form).map(key => ({
             key,

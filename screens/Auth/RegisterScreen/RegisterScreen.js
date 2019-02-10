@@ -39,6 +39,7 @@ const Footer = styled.View`
 const registerFn = async (navigate) => {
     const { name, email, password } = registerFormStore.form
     const user = await signUp(email, password, name)
+    registerFormStore.clear()
     navigate('Verify', user)
 }
 
