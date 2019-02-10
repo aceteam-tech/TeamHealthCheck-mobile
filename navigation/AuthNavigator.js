@@ -1,6 +1,6 @@
 import { createStackNavigator } from 'react-navigation'
 
-import RegisterScreen from '../screens/Auth/RegisterScreen'
+import RegisterScreen from '../screens/Auth/RegisterScreen/RegisterScreen'
 import VerifyCodeScreen from '../screens/Auth/VerifyCodeScreen'
 import LoginScreen from '../screens/Auth/LoginScreen'
 import ForgotPasswordScreen from '../screens/Auth/ForgotPasswordScreen'
