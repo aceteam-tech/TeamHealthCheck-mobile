@@ -30,7 +30,7 @@ const MenuWrapper = styled.TouchableOpacity`
   bottom: 0; 
   left: 0;
   right: 0;
-  background-color: rgba(0,0,0,.15);
+  background-color: rgba(0,0,0,.5);
   display: ${props => props.open ? 'flex' : 'none'}
 `
 
@@ -45,6 +45,7 @@ const Menu = styled.View`
     flex-direction: row;
     align-items: center;
     padding-bottom: ${ifNotch ? 20 : 0};
+    box-shadow: 0 -2px 3px rgba(0,0,0,0.15);
 `
 
 const MenuItem = styled.TouchableOpacity`

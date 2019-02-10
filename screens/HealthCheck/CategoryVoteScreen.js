@@ -9,19 +9,10 @@ import healthCheckStore from '../../model/health-check-store'
 import Loading from '../../components/Loading'
 import categories from '../../assets/categories/category-icons'
 import {observer} from 'mobx-react/native';
+import CategoryVoteBox from '../../components/CategoryVoteBox'
 
 const HeaderWrapper = styled.View`
   margin-bottom: 50px;
-`
-const CategoryVoteBox = styled.TouchableOpacity`
-  background-color: ${colors.air};
-  border-radius: 10px;
-  margin: 10px 30px;
-  padding: 20px;
-`
-const CategoryVoteText = styled.Text`
-  color: ${colors.primary};
-  font-size: 16px;
 `
 
 const CategoryVoteComponent = observer(({navigation, healthCheckStore}) => {
@@ -48,21 +39,9 @@ const CategoryVoteComponent = observer(({navigation, healthCheckStore}) => {
             <Image source={categories[category.image]}
                    resizeMode='contain'
                    style={{height: 120, alignSelf: 'center', marginBottom: 30}}/>
-            <CategoryVoteBox onPress={() => onCategoryChosen(2)}>
-                <CategoryVoteText>
-                    {category.descriptionGreen}
-                </CategoryVoteText>
-            </CategoryVoteBox>
-            <CategoryVoteBox onPress={() => onCategoryChosen(1)}>
-                <CategoryVoteText>
-                    Ok. Could be better...
-                </CategoryVoteText>
-            </CategoryVoteBox>
-            <CategoryVoteBox onPress={() => onCategoryChosen(0)}>
-                <CategoryVoteText>
-                    {category.descriptionRed}
-                </CategoryVoteText>
-            </CategoryVoteBox>
+            <CategoryVoteBox text={category.descriptionGreen} color={'green'} onPress={() => onCategoryChosen(2)} />
+            <CategoryVoteBox text={'Ok. Could be better...'} color={'#FFDC0F'} onPress={() => onCategoryChosen(1)} />
+            <CategoryVoteBox text={category.descriptionRed} color={'red'} onPress={() => onCategoryChosen(0)} />
         </Page>
     )
 })
