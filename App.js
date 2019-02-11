@@ -20,7 +20,15 @@ export default class App extends React.Component {
             require('./assets/images/welcome-bg.jpg'),
             require('./assets/images-large/icon-user-2x.png'),
             require('./assets/images-large/icon-id-2x.png'),
-            //    Categories
+            // Menu
+            require('./assets/images/icon-diagram-active.png'),
+            require('./assets/images/icon-diagram-inactive.png'),
+            require('./assets/images/icon-health-check-active.png'),
+            require('./assets/images/icon-health-check-inactive.png'),
+            require('./assets/images/icon-team-active.png'),
+            require('./assets/images/icon-team-inactive.png'),
+
+            // Categories
             require('./assets/categories/delivering-value.png'),
             require('./assets/categories/fun.png'),
             require('./assets/categories/health-of-codebase.png'),

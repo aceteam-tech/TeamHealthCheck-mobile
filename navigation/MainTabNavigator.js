@@ -19,6 +19,7 @@ const DashboardStack = createStackNavigator({
 })
 
 DashboardStack.navigationOptions = {
+    tabBarLabel: 'Dashboard',
     tabBarIcon: ({ focused }) => (
         focused
             ? <Image source={require('../assets/images/icon-diagram-active.png')} />
@@ -51,7 +52,7 @@ const HealthCheckStack = createStackNavigator({
 })
 
 HealthCheckStack.navigationOptions = {
-    tabBarLabel: 'HealthCheck',
+    tabBarLabel: 'Health Check',
     tabBarIcon: ({ focused }) => (
         focused
             ? <Image source={require('../assets/images/icon-health-check-active.png')} />
@@ -65,6 +66,12 @@ export default createBottomTabNavigator({
     TeamStack,
 }, {
     tabBarOptions: {
-        showLabel: false
+        style: {
+            height: 70
+        },
+        tabStyle: {
+            paddingBottom: 10,
+            paddingTop: 10
+        }
     }
 })
