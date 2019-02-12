@@ -1,20 +1,25 @@
 import React from 'react';
-import {View} from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
+import { MaterialIcons } from '@expo/vector-icons'
 import colors from '../../constants/Colors'
-import Page from '../../components/Page'
 import Button from '../../components/Button/Button.component'
 import teamStore from '../../model/team-store'
 import userStore from '../../model/user-store'
 import healthCheckStore from '../../model/health-check-store'
-import {getHealthCheckStatus, createHealthCheck, endHealthCheck, getHealthChecks} from '../../adapters/api';
+import { getHealthCheckStatus, createHealthCheck, endHealthCheck, getHealthChecks } from '../../adapters/api';
 import UsersCompactList from '../../components/UsersCompactList'
-import {observer} from 'mobx-react/native';
+import { observer } from 'mobx-react/native';
 import Header from '../../components/Header'
 import Loading from '../../components/Loading'
+import PageWithMenu from '../../components/PageWithMenu'
 
 const Footer = styled.View`
     justify-content: center;
+`
+
+const PageContent = styled.View`
+  flex: 1;
 `
 
 const Section = styled.Text`
@@ -50,7 +55,7 @@ const onEndHealthCheck = async (teamId, navigate) => {
     return navigate('TeamDashboard')
 }
 
-const HealthCheckInactive = ({teamId}) => (
+const HealthCheckInactive = ({ teamId }) => (
     <Body>
     <Body>
     <NoHealthCheckText>
@@ -65,7 +70,7 @@ const HealthCheckInactive = ({teamId}) => (
     </Body>
 )
 
-const HealthCheckActive = ({usersVoted, usersNotVoted, usersSubmitted, votingEnabled, navigate, teamId}) => (
+const HealthCheckActive = ({ usersVoted, usersNotVoted, usersSubmitted, votingEnabled, navigate, teamId }) => (
     <Body>
     <Body>
     {
@@ -97,9 +102,9 @@ const HealthCheckActive = ({usersVoted, usersNotVoted, usersSubmitted, votingEna
     </Body>
 )
 
-const HealthCheckComponent = observer(({healthCheckStore, teamStore, userStore, navigate}) => {
-    const {ended, usersSubmitted} = healthCheckStore.healthCheck
-    const {users, id: teamId} = teamStore.team
+const HealthCheckComponent = observer(({ healthCheckStore, teamStore, userStore, navigate }) => {
+    const { ended, usersSubmitted } = healthCheckStore.healthCheck
+    const { users, id: teamId } = teamStore.team
     let usersNotVoted = []
     let usersVoted = usersSubmitted || []
     let votingEnabled = false
@@ -109,40 +114,48 @@ const HealthCheckComponent = observer(({healthCheckStore, teamStore, userStore, 
         } else {
             usersNotVoted = users
         }
-        const {sub} = userStore.user
+        const { sub } = userStore.user
         votingEnabled = usersNotVoted.map(s => s.id).includes(sub)
     }
     return (
-        <Page>
-            <Header title='Health Check' />
-            {
-                typeof ended === 'undefined' && <Loading />
-            }
-            {
-                ended === false && <HealthCheckActive
-                    usersVoted={usersVoted}
-                    usersNotVoted={usersNotVoted}
-                    usersSubmitted={usersSubmitted}
-                    votingEnabled={votingEnabled}
-                    navigate={navigate}
-                    teamId={teamId}
-                />
-            }
-            {
-                !!ended && <HealthCheckInactive
-                    teamId={teamId}/>
-            }
-        </Page>
+        <PageWithMenu navigate={navigate}>
+            {({ onToggleMenu }) => (
+                <PageContent>
+                    <Header title='Health Check' right={
+                        <TouchableOpacity onPress={onToggleMenu}>
+                            <MaterialIcons color='white' size={27} name='menu'/>
+                        </TouchableOpacity>
+                    }/>
+                    {
+                        typeof ended === 'undefined' && <Loading/>
+                    }
+                    {
+                        ended === false && <HealthCheckActive
+                            usersVoted={usersVoted}
+                            usersNotVoted={usersNotVoted}
+                            usersSubmitted={usersSubmitted}
+                            votingEnabled={votingEnabled}
+                            navigate={navigate}
+                            teamId={teamId}
+                        />
+                    }
+                    {
+                        !!ended && <HealthCheckInactive
+                            teamId={teamId}/>
+                    }
+                </PageContent>
+            )}
+        </PageWithMenu>
     )
 })
 
 export default class HealthCheckScreen extends React.Component {
-    async componentDidMount () {
+    async componentDidMount() {
         const healthCheck = await getHealthCheckStatus(teamStore.team.id)
         healthCheckStore.setHealthCheck(healthCheck)
     }
 
-    render () {
+    render() {
         return <HealthCheckComponent
             healthCheckStore={healthCheckStore}
             teamStore={teamStore}

@@ -1,10 +1,12 @@
 import React from 'react';
-import {Content} from 'native-base'
+import { Content } from 'native-base'
 import styled from 'styled-components/native'
+import { TouchableOpacity } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons'
 import teamStore from '../../model/team-store'
-import {observer} from 'mobx-react/native'
+import { observer } from 'mobx-react/native'
 import TeamLogo from '../../components/TeamLogo/TeamLogo.component'
-import Page from '../../components/Page'
+import PageWithMenu from '../../components/PageWithMenu'
 import Button from '../../components/Button/Button.component'
 import UserListItem from '../../components/UserListItem'
 import Header from '../../components/Header'
@@ -27,12 +29,16 @@ const AddButtonWrapper = styled.View`
   flex-direction: row;
 `
 
-const TeamComponent = observer(({store, navigate}) => (
-    <Page>
-        {
+const TeamComponent = observer(({ store, navigate }) => (
+    <PageWithMenu navigate={navigate}>
+        {({ onToggleMenu }) => (
             !!store.team &&
             <DynamicContent>
-                <Header title={store.team.name} />
+                <Header title={store.team.name} right={
+                    <TouchableOpacity onPress={onToggleMenu}>
+                        <MaterialIcons color='white' size={27} name='menu'/>
+                    </TouchableOpacity>
+                }/>
 
                 <Content>
                     <TeamLogoWrapper>
@@ -45,16 +51,17 @@ const TeamComponent = observer(({store, navigate}) => (
                     }
                 </Content>
                 <AddButtonWrapper>
-                    <Button onPress={() => { navigate('Invite')
+                    <Button onPress={() => {
+                        navigate('Invite')
                     }} version='add'/>
                 </AddButtonWrapper>
             </DynamicContent>
-        }
-    </Page>
+        )}
+    </PageWithMenu>
 ))
 
 export default class TeamScreen extends React.Component {
-    render () {
+    render() {
         return <TeamComponent
             store={teamStore}
             navigate={this.props.navigation.navigate}

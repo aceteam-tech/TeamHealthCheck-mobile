@@ -1,15 +1,20 @@
 import React from 'react';
-import {Content} from 'native-base'
+import { Content } from 'native-base'
+import { TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
-import {observer} from 'mobx-react/native'
+import { MaterialIcons } from '@expo/vector-icons'
+import { observer } from 'mobx-react/native'
 import teamStore from '../../model/team-store'
-import Page from '../../components/Page'
+import PageWithMenu from '../../components/PageWithMenu'
 import Header from '../../components/Header'
 import CategoryListItem from '../../components/CategoryListItem'
-import colors from '../../constants/Colors';
+import colors from '../../constants/Colors'
 
 const HeaderWrapper = styled.View`
   margin-bottom: 30px;
+`
+const PageContent = styled.View`
+  flex: 1;
 `
 const Body = styled.View`
   flex: 1;
@@ -23,33 +28,42 @@ const NoHealthCheckText = styled.Text`
   margin-right: 50px;
 `
 
-const TeamDashboardComponent = observer(({store}) => (
-    <Page>
-        <HeaderWrapper>
-            <Header title='Dashboard'/>
-        </HeaderWrapper>
-        {
-            !!store.lastResults ?
-                <Content>
-                    {
-                        store.lastResults.map(c => (
-                            <CategoryListItem key={c.id} category={c}/>
-                        ))
-                    }
-                </Content> :
-                <Body>
-                <NoHealthCheckText>
-                    Finish your first Health Check to see the results here
-                </NoHealthCheckText>
-                </Body>
-        }
-    </Page>
+const TeamDashboardComponent = observer(({ store, navigate }) => (
+    <PageWithMenu navigate={navigate}>
+        {({ onToggleMenu }) => (
+            <PageContent>
+                <HeaderWrapper>
+                    <Header title='Dashboard' right={
+                        <TouchableOpacity onPress={onToggleMenu}>
+                            <MaterialIcons color='white' size={27} name='menu'/>
+                        </TouchableOpacity>
+                    }/>
+                </HeaderWrapper>
+                {
+                    !!store.lastResults ?
+                        <Content>
+                            {
+                                store.lastResults.map(c => (
+                                    <CategoryListItem key={c.id} category={c}/>
+                                ))
+                            }
+                        </Content> :
+                        <Body>
+                        <NoHealthCheckText>
+                            Finish your first Health Check to see the results here
+                        </NoHealthCheckText>
+                        </Body>
+                }
+            </PageContent>
+        )}
+    </PageWithMenu>
 ))
 
 export default class TeamDashboardScreen extends React.Component {
-    render () {
+    render() {
         return <TeamDashboardComponent
             store={teamStore}
+            navigate={this.props.navigation.navigate}
         />
     }
 }
