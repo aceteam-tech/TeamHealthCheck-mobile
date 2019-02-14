@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Text, Input, Label, Item, Form, Icon } from 'native-base'
 import { KeyboardAvoidingView, Image, View, TouchableOpacity } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import styled from 'styled-components/native'
 import { signUp } from '../../../adapters/auth'
 import colors from '../../../constants/Colors'
@@ -52,22 +53,21 @@ export default observer(({ navigation }) => {
 
     return (
         <Page>
-            <View>
-                <TouchableOpacity onPress={() => goBack(null)}>
-                    <Icon name='ios-arrow-back'
-                          type='Ionicons'
-                          style={{ color: '#FFF', fontSize: 30, marginLeft: 20, marginBottom: 20 }}/>
-                </TouchableOpacity>
-                <Header>
-                    <Image source={IconCreateAccount}
-                           resizeMode='contain'
-                           style={{ height: 120 }}/>
-                    <HeaderText>Create Account</HeaderText>
-                </Header>
-            </View>
-            <KeyboardAvoidingView style={{ flex: 1 }}
-                                  behavior="padding"
-                                  keyboardVerticalOffset={20}>
+            <KeyboardAwareScrollView style={{ flex: 1 }} extraScrollHeight={100}>
+                <View>
+                    <TouchableOpacity onPress={() => goBack(null)}>
+                        <Icon name='ios-arrow-back'
+                              type='Ionicons'
+                              style={{ color: '#FFF', fontSize: 30, marginLeft: 20, marginBottom: 20 }}/>
+                    </TouchableOpacity>
+                    <Header>
+                        <Image source={IconCreateAccount}
+                               resizeMode='contain'
+                               style={{ height: 120 }}/>
+                        <HeaderText>Create Account</HeaderText>
+                    </Header>
+                </View>
+
                 <Form style={{ flex: 1, justifyContent: 'space-around', marginRight: 15 }}>
                     <Item floatingLabel>
                         <Label style={labelStyle}>Full name</Label>
@@ -111,15 +111,15 @@ export default observer(({ navigation }) => {
                     </Item>
                     <ErrorText>{errors.password}</ErrorText>
                 </Form>
-            </KeyboardAvoidingView>
-            <Footer>
-                {
-                    !!formValidated &&
-                    <Button rounded light onPress={register} style={buttonStyle}>
-                        <Text style={buttonTextStyle}>{'Continue'.toUpperCase()}</Text>
-                    </Button>
-                }
-            </Footer>
+                <Footer>
+                    {
+                        !!formValidated &&
+                        <Button rounded light onPress={register} style={buttonStyle}>
+                            <Text style={buttonTextStyle}>{'Continue'.toUpperCase()}</Text>
+                        </Button>
+                    }
+                </Footer>
+            </KeyboardAwareScrollView>
         </Page>
     )
 })
