@@ -52,10 +52,10 @@ export default class VerifyCodeScreen extends React.Component {
         code: ['', '', '', '', '', '']
     }
 
-    onCodeChange = async (i, key) => {
-        if(key !== 'Backspace') {
-            this.state.code.splice(i, 1, key)
-            if (i < 5 && key) {
+    onCodeChange = async (i, input) => {
+        if(input) {
+            this.state.code.splice(i, 1, input)
+            if (i < 5) {
                 this.code[i + 1].focus()
             }
         }

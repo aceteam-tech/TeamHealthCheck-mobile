@@ -18,11 +18,11 @@ export default ({ autoFocus, value, handle, onChange, index }) => (
         key={index}
         autoCorrect={false}
         autoFocus={autoFocus || false}
-        keyboardType="decimal-pad"
+        keyboardType='decimal-pad'
         value={value}
         maxLength={1}
         caretHidden
         ref={ref => handle(ref)}
-        onKeyPress={e => onChange(index, e.nativeEvent.key)}
+        onChange={e => onChange(index, e.nativeEvent.text)}
     />
 )
