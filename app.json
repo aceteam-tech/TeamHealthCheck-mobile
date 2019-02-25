@@ -24,6 +24,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "tech.aceteam.health_check",
+      "versionCode": 2
     }
   }
 }
