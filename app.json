@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "team-health-check",
+    "name": "Team Health Check",
     "slug": "team-health-check",
     "privacy": "public",
     "sdkVersion": "31.0.0",
@@ -8,13 +8,16 @@
       "ios",
       "android"
     ],
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/logo/logo.png",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+    },
+    "android": {
+      "package": "tech.aceteam.TeamHealthCheck"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,7 +26,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "tech.aceteam.TeamHealthCheck"
     }
   }
 }
