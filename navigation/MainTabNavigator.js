@@ -3,17 +3,12 @@ import React from 'react'
 import { Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
 
-import HealthCheckScreen from '../screens/HealthCheck/HealthCheckScreen'
-import CategoryVoteScreen from '../screens/HealthCheck/CategoryVoteScreen'
-import VotingSummaryScreen from '../screens/HealthCheck/VotingSummaryScreen'
-import TeamScreen from '../screens/Teams/TeamScreen'
-import TeamSettingsScreen from '../screens/Teams/TeamSettingsScreen'
-import TeamDashboardScreen from '../screens/Teams/TeamDashboardScreen'
-import InviteScreen from '../screens/Teams/InviteScreen'
+import {HealthCheck, CategoryVote, VotingSummary as Summary} from '../screens/health-check'
+import {Team, TeamSettings, TeamDashboard, Invite} from '../screens/teams'
 
 const DashboardStack = createStackNavigator({
-    TeamDashboard: TeamDashboardScreen,
-    TeamSettings: TeamSettingsScreen,
+    TeamDashboard,
+    TeamSettings
 }, {
     headerMode: 'none'
 })
@@ -22,14 +17,14 @@ DashboardStack.navigationOptions = {
     tabBarLabel: 'Dashboard',
     tabBarIcon: ({ focused }) => (
         focused
-            ? <Image source={require('../assets/images/icon-diagram-active.png')} />
-            : <Image source={require('../assets/images/icon-diagram-inactive.png')} />
+            ? <Image source={require('./icon-diagram-active.png')} />
+            : <Image source={require('./icon-diagram-inactive.png')} />
     ),
 }
 
 const TeamStack = createStackNavigator({
-    Team: TeamScreen,
-    Invite: InviteScreen
+    Team,
+    Invite
 }, {
     headerMode: 'none'
 })
@@ -38,15 +33,15 @@ TeamStack.navigationOptions = {
     tabBarLabel: 'Team',
     tabBarIcon: ({ focused }) => (
         focused
-            ? <Image source={require('../assets/images/icon-team-active.png')} />
-            : <Image source={require('../assets/images/icon-team-inactive.png')} />
+            ? <Image source={require('./icon-team-active.png')} />
+            : <Image source={require('./icon-team-inactive.png')} />
     ),
 }
 
 const HealthCheckStack = createStackNavigator({
-    HealthCheck: HealthCheckScreen,
-    CategoryVote: CategoryVoteScreen,
-    Summary: VotingSummaryScreen,
+    HealthCheck,
+    CategoryVote,
+    Summary
 }, {
     headerMode: 'none'
 })
@@ -55,8 +50,8 @@ HealthCheckStack.navigationOptions = {
     tabBarLabel: 'Health Check',
     tabBarIcon: ({ focused }) => (
         focused
-            ? <Image source={require('../assets/images/icon-health-check-active.png')} />
-            : <Image source={require('../assets/images/icon-health-check-inactive.png')} />
+            ? <Image source={require('./icon-health-check-active.png')} />
+            : <Image source={require('./icon-health-check-inactive.png')} />
     ),
 }
 

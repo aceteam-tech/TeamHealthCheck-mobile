@@ -1,0 +1,6 @@
+export Welcome from './Auth/Welcome/Welcome.screen'
+export Login from './Auth/Login/Login.screen'
+export Register from './Auth/Register/Register.screen'
+export VerifyCode from './Auth/VerifyCode/VerifyCode.screen'
+export ForgotPassword from './Auth/ForgotPassword/ForgotPassword.screen'
+export NewPassword from './Auth/NewPassword/NewPassword.screen'

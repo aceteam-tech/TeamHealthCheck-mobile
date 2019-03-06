@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import colors from '../../constants/Colors';
 import {getTeamInitials} from './TeamLogo.helpers';
-import styled from 'styled-components/native/dist/styled-components.native.esm';
+import styled from 'styled-components/native'
 
 const TeamLogoBorder = styled.View`
   background-color: transparent;

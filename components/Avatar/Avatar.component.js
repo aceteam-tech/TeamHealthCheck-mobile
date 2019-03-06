@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import colors from '../../constants/Colors';
-import {getInitials} from './Avatar.helpers';
-import styled from 'styled-components/native/dist/styled-components.native.esm';
+import colors from '../../constants/Colors'
+import {getInitials} from './Avatar.helpers'
+import styled from 'styled-components/native'
 
 const Avatar = styled.View`
   background-color: ${colors.dark};

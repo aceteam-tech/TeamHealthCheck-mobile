@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Button as NativeButton, Text} from 'native-base'
-import IconPlus from '../../assets/images-x-large/icon-plus-3x.png'
+import IconPlus from './icon-plus-3x.png'
 import colors from '../../constants/Colors';
 import {Image} from "react-native"
 
