@@ -5,9 +5,9 @@ import styled from 'styled-components/native'
 import {joinTeam} from '../../adapters/api'
 import colors from '../../constants/Colors'
 import {buttonStyle, buttonTextStyle} from '../../constants/Style'
-import Page from '../../components/Page'
-import PinInput from '../../components/PinInput'
-import Header from '../../components/Header'
+import Page from '../../components/Page/Page'
+import PinInput from '../../components/PinInput/PinInput'
+import Header from '../../components/Header/Header'
 import teamsStore from '../../model/team-store';
 
 const Footer = styled.View`

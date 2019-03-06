@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import colors from '../constants/Colors'
+import colors from '../../constants/Colors'
 
 const PinInput = styled.TextInput`
     background-color: ${colors.air};

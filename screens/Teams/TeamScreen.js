@@ -6,10 +6,10 @@ import { MaterialIcons } from '@expo/vector-icons'
 import teamStore from '../../model/team-store'
 import { observer } from 'mobx-react/native'
 import TeamLogo from '../../components/TeamLogo/TeamLogo.component'
-import PageWithMenu from '../../components/PageWithMenu'
+import PageWithMenu from '../../components/PageWithMenu/PageWithMenu'
 import Button from '../../components/Button/Button.component'
 import UserListItem from '../../components/UserListItem'
-import Header from '../../components/Header'
+import Header from '../../components/Header/Header'
 
 const DynamicContent = styled.View`
   flex: 1;

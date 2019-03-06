@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import PropTypes from 'prop-types'
-import colors from '../constants/Colors'
+import colors from '../../constants/Colors'
 
 const ListItem = styled.View`
   border-bottom-width: 1px;

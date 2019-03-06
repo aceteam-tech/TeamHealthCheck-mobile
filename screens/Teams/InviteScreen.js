@@ -1,12 +1,12 @@
 import React from 'react'
 import {View, TouchableOpacity} from "react-native"
 import {Icon} from 'native-base'
-import Page from '../../components/Page'
+import Page from '../../components/Page/Page'
 import styled from 'styled-components/native'
 import teamStore from '../../model/team-store'
 import {labelStyle} from "../../constants/Style"
 import colors from "../../constants/Colors"
-import Header from '../../components/Header'
+import Header from '../../components/Header/Header'
 
 const CodeLabel = styled.Text`
     color: ${colors.air};

@@ -10,9 +10,9 @@ import healthCheckStore from '../../model/health-check-store'
 import { getHealthCheckStatus, createHealthCheck, endHealthCheck, getHealthChecks } from '../../adapters/api';
 import UsersCompactList from '../../components/UsersCompactList'
 import { observer } from 'mobx-react/native';
-import Header from '../../components/Header'
-import Loading from '../../components/Loading'
-import PageWithMenu from '../../components/PageWithMenu'
+import Header from '../../components/Header/Header'
+import Loading from '../../components/Loading/Loading'
+import PageWithMenu from '../../components/PageWithMenu/PageWithMenu'
 
 const Footer = styled.View`
     justify-content: center;

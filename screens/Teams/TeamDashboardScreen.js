@@ -5,9 +5,9 @@ import styled from 'styled-components/native'
 import { MaterialIcons } from '@expo/vector-icons'
 import { observer } from 'mobx-react/native'
 import teamStore from '../../model/team-store'
-import PageWithMenu from '../../components/PageWithMenu'
-import Header from '../../components/Header'
-import CategoryListItem from '../../components/CategoryListItem'
+import PageWithMenu from '../../components/PageWithMenu/PageWithMenu'
+import Header from '../../components/Header/Header'
+import CategoryListItem from '../../components/CategoryListItem/CategoryListItem'
 import colors from '../../constants/Colors'
 
 const HeaderWrapper = styled.View`

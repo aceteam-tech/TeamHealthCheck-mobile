@@ -7,10 +7,10 @@ import colors from '../../constants/Colors'
 import IconLogin from '../../assets/images-large/icon-login-2x.png'
 import IconUser from '../../assets/images-large/icon-user-2x.png'
 import IconPassword from '../../assets/images-large/icon-password-2x.png'
-import Page from '../../components/Page'
-import Separator from '../../components/Separator'
+import Page from '../../components/Page/Page'
+import Separator from '../../components/Separator/Separator'
 import Button from '../../components/Button/Button.component'
-import Header from '../../components/Header'
+import Header from '../../components/Header/Header'
 
 const Footer = styled.View`
     flex: 2;

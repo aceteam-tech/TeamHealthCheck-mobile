@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import colors from '../constants/Colors'
+import colors from '../../constants/Colors'
 
 const Body = styled.View`
   flex: 1;

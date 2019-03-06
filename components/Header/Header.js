@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import colors from '../constants/Colors'
-import ifNotch from '../helpers/ifNotch'
+import colors from '../../constants/Colors'
+import ifNotch from '../../helpers/ifNotch'
 
 const Header = styled.View`
   flex-direction: row;

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import BgBlueGradient from '../assets/images-large/bg-blue-gradient-2x.png'
+import BgBlueGradient from '../../assets/images-large/bg-blue-gradient-2x.png'
 
 const Page = styled.ImageBackground`
     flex: 1;

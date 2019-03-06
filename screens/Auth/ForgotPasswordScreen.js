@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, Text, Input, Item, Form, Icon, Label} from 'native-base'
 import {KeyboardAvoidingView, Image, TouchableOpacity, View} from 'react-native'
-import Page from '../../components/Page'
+import Page from '../../components/Page/Page'
 import styled from 'styled-components/native'
 import {forgotPassword} from '../../adapters/auth'
 import colors from '../../constants/Colors'

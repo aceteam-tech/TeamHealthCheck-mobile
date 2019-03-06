@@ -6,7 +6,7 @@ import styled from 'styled-components/native'
 import { signUp } from '../../../adapters/auth'
 import colors from '../../../constants/Colors'
 import { buttonStyle, buttonTextStyle, labelStyle, inputStyle } from '../../../constants/Style'
-import Page from '../../../components/Page'
+import Page from '../../../components/Page/Page'
 import IconCreateAccount from '../../../assets/images-large/icon-id-2x.png'
 import registerFormStore from './register.store'
 import { observer } from 'mobx-react/native';

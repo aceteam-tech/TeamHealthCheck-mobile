@@ -3,13 +3,13 @@ import {Icon} from 'native-base'
 import {TouchableOpacity, Image} from 'react-native'
 import styled from 'styled-components/native'
 import colors from '../../constants/Colors'
-import Page from '../../components/Page'
-import Header from '../../components/Header'
+import Page from '../../components/Page/Page'
+import Header from '../../components/Header/Header'
 import healthCheckStore from '../../model/health-check-store'
-import Loading from '../../components/Loading'
+import Loading from '../../components/Loading/Loading'
 import categories from '../../assets/categories/category-icons'
 import {observer} from 'mobx-react/native';
-import CategoryVoteBox from '../../components/CategoryVoteBox'
+import CategoryVoteBox from '../../components/CategoryVoteBox/CategoryVoteBox'
 
 const HeaderWrapper = styled.View`
   margin-bottom: 50px;

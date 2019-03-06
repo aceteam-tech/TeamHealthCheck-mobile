@@ -6,8 +6,8 @@ import {addTeam} from '../../../adapters/api'
 import Button from '../../../components/Button/Button.component'
 import TeamLogo from '../../../components/TeamLogo/TeamLogo.component'
 import {labelStyle, inputStyle} from '../../../constants/Style'
-import Header from '../../../components/Header'
-import Page from '../../../components/Page'
+import Header from '../../../components/Header/Header'
+import Page from '../../../components/Page/Page'
 
 const LogoWrapper = styled.View`
   flex: 1;

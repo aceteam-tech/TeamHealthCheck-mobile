@@ -6,8 +6,8 @@ import {verify} from '../../adapters/auth'
 import colors from '../../constants/Colors'
 import {buttonStyle, buttonTextStyle} from '../../constants/Style'
 import IconVerificationCode from '../../assets/images-large/icon-verification-code-2x.png'
-import Page from '../../components/Page'
-import PinInput from '../../components/PinInput'
+import Page from '../../components/Page/Page'
+import PinInput from '../../components/PinInput/PinInput'
 
 const Header = styled.View`
     justifyContent: center;
