@@ -1,14 +1,15 @@
 import React from 'react'
-import {Image, Text, Animated} from 'react-native'
-import {Content} from 'native-base'
-import {MaterialIcons} from '@expo/vector-icons'
-import {getMyTeams, getHealthChecks} from '../../../adapters/api'
+import { Image, Text, Animated } from 'react-native'
+import { Content } from 'native-base'
+import { MaterialIcons } from '@expo/vector-icons'
+import { getMyTeams, getHealthChecks } from '../../../adapters/api'
 import teamsStore from '../../../model/team-store'
-import {Header, Button, Page, TeamCard} from '../../../components/index'
+import { Header, Button, Page, TeamCard, Loader } from '../../../components/index'
 import styled from 'styled-components/native'
-import IconLink from './icon-link-3x.png'
-import IconPlus from './icon-plus-3x.png'
 import ifNotch from '../../../helpers/ifNotch'
+
+const iconLink = require('./icon-link-3x.png')
+const iconPlus = require('./icon-plus-3x.png')
 
 const AddButtonWrapper = styled.View`
   justify-content: flex-end;
@@ -56,7 +57,7 @@ const MenuItem = styled.TouchableOpacity`
 class TeamsScreenComponent extends React.Component {
     state = {
         isOpen: false,
-        bounceValue: new Animated.Value(200),
+        bounceValue: new Animated.Value(200)
     }
 
     toggleMenu() {
@@ -70,60 +71,62 @@ class TeamsScreenComponent extends React.Component {
         Animated.spring(
             this.state.bounceValue,
             {
-                toValue: toValue,
+                toValue: toValue
             }
         ).start()
 
-
-        this.setState({isOpen: !this.state.isOpen})
+        this.setState({ isOpen: !this.state.isOpen })
     }
 
     render() {
-        const {teams, chooseTeam, navigate} = this.props
+        const { teams, chooseTeam, navigate } = this.props
         return (
-            <Page>
-                <HeaderWrapper>
-                    <Header title='Teams' right={
-                        <MaterialIcons color='white' size={27} name='menu'/>
-                    }/>
-                </HeaderWrapper>
-                <Content>
-                    {
-                        teams.map(team => (
-                            <TeamCard key={team.id} onPress={chooseTeam} item={team}/>
-                        ))
-                    }
-                </Content>
-                <AddButtonWrapper>
-                    <Button onPress={() => this.toggleMenu()} version='add'/>
-                </AddButtonWrapper>
-                
-                {this.state.isOpen 
+            <Loader assetsToLoad={[iconLink, iconPlus]}>
+                <Page>
+                    <HeaderWrapper>
+                        <Header title='Teams' right={
+                            <MaterialIcons color='white' size={27} name='menu'/>
+                        }/>
+                    </HeaderWrapper>
+                    <Content>
+                        {
+                            teams.map(team => (
+                                <TeamCard key={team.id} onPress={chooseTeam} item={team}/>
+                            ))
+                        }
+                    </Content>
+                    <AddButtonWrapper>
+                        <Button onPress={() => this.toggleMenu()} version='add'/>
+                    </AddButtonWrapper>
+
+                    {this.state.isOpen
                     && <MenuShadow onPress={() => this.toggleMenu()}/>}
 
-                <Menu style={{transform: [{translateY: this.state.bounceValue}]}}>
-                    <MenuItem onPress={() => {
-                        navigate('JoinTeam')
-                        this.toggleMenu()
-                    }}>
-                        <Image source={IconLink}
-                               resizeMode='contain'
-                               style={{height: 40, alignSelf: 'center', margin: 10}}/>
-                        <Text>Join Team</Text>
-                    </MenuItem>
+                    <Menu style={{ transform: [{ translateY: this.state.bounceValue }] }}>
+                        <MenuItem onPress={() => {
+                            navigate('JoinTeam')
+                            this.toggleMenu()
+                        }}>
+                            <Image source={iconLink}
+                                   resizeMode='contain'
+                                   style={{ height: 40, alignSelf: 'center', margin: 10 }}/>
+                            <Text>Join Team</Text>
+                        </MenuItem>
 
-                    <MenuItem onPress={() => {
-                        navigate('AddTeam')
-                        this.toggleMenu()
-                    }}>
-                        <Image source={IconPlus}
-                               resizeMode='contain'
-                               style={{height: 40, alignSelf: 'center', margin: 10}}/>
-                        <Text>Add Team</Text>
-                    </MenuItem>
-                </Menu>
+                        <MenuItem onPress={() => {
+                            navigate('AddTeam')
+                            this.toggleMenu()
+                        }}>
+                            <Image source={iconPlus}
+                                   resizeMode='contain'
+                                   style={{ height: 40, alignSelf: 'center', margin: 10 }}/>
+                            <Text>Add Team</Text>
+                        </MenuItem>
+                    </Menu>
 
-            </Page>
+                </Page>
+
+            </Loader>
         )
     }
 }
@@ -136,7 +139,7 @@ export default class TeamsScreen extends React.Component {
     async componentDidMount() {
         const teams = await getMyTeams()
         if (teams) {
-            this.setState({teams})
+            this.setState({ teams })
         }
     }
 
