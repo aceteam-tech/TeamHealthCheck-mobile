@@ -16,9 +16,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "android": {
-      "package": "tech.aceteam.TeamHealthCheck"
-    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -28,6 +25,10 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "tech.aceteam.TeamHealthCheck"
+    },
+    "android": {
+      "package": "tech.aceteam.TeamHealthCheck",
+      "permissions": []
     }
   }
 }

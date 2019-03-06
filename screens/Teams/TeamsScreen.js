@@ -31,7 +31,7 @@ const MenuShadow = styled.TouchableOpacity`
   left: 0;
   right: 0;
   background-color: rgba(0,0,0,.5);
-  display: ${props => props.open ? 'flex' : 'none'}
+  display: flex
 `
 
 const Menu = styled(Animated.View)`
@@ -100,7 +100,9 @@ class TeamsScreenComponent extends React.Component {
                 <AddButtonWrapper>
                     <Button onPress={() => this.toggleMenu()} version='add'/>
                 </AddButtonWrapper>
-                <MenuShadow open={this.state.isOpen} onPress={() => this.toggleMenu()}/>
+                
+                {this.state.isOpen 
+                    && <MenuShadow onPress={() => this.toggleMenu()}/>}
 
                 <Menu style={{transform: [{translateY: this.state.bounceValue}]}}>
                     <MenuItem onPress={() => {
