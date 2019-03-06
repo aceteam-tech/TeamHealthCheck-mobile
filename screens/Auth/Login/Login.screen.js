@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components/native'
 
-import {Input, Item, Form, Icon} from 'native-base'
-import {KeyboardAvoidingView, Image, TouchableOpacity} from 'react-native'
-import {Button, Header, Separator, Page} from '../../../components'
+import { Input, Item, Form, Icon } from 'native-base'
+import { KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native'
+import { Button, Header, Separator, Page, Loader } from '../../../components'
 
-import {login} from '../../../adapters/auth'
+import { login } from '../../../adapters/auth'
 import colors from '../../../constants/Colors'
 
-import IconLogin from './icon-login-2x.png'
-import IconUser from './icon-user-2x.png'
-import IconPassword from './icon-password-2x.png'
+const iconLogin = require('./icon-login-2x.png')
+const iconUser = require('./icon-user-2x.png')
+const iconPassword = require('./icon-password-2x.png')
 
 const Footer = styled.View`
     flex: 2;
@@ -42,7 +42,7 @@ const HeaderWrapper = styled.View`
 
 export default class LoginScreen extends React.Component {
     static navigationOptions = {
-        header: null,
+        header: null
     };
 
     state = {
@@ -59,7 +59,7 @@ export default class LoginScreen extends React.Component {
     login = async () => {
         try {
             await login(this.state.email, this.state.password)
-            this.props.navigation.navigate('AuthLoading', {email: this.state.email})
+            this.props.navigation.navigate('AuthLoading', { email: this.state.email })
         }
         catch (e) {
             console.error(e)
@@ -67,82 +67,86 @@ export default class LoginScreen extends React.Component {
     }
 
     forgotPassword = async () => {
-        this.props.navigation.navigate('ForgotPassword', {email: this.state.email})
+        this.props.navigation.navigate('ForgotPassword', { email: this.state.email })
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.setState({
             email: this.props.navigation.getParam('email')
         })
     }
 
-    render () {
-        const {goBack} = this.props.navigation
+    render() {
+        const { goBack } = this.props.navigation
         return (
-            <Page>
-                <HeaderWrapper>
-                    <Header title='Log In' left={
-                        <TouchableOpacity onPress={() => goBack(null)}>
-                            <Icon name='ios-arrow-back'
-                                  type='Ionicons'
-                                  style={{color: colors.air, fontSize: 30}}/>
-                        </TouchableOpacity>
-                    } />
-                </HeaderWrapper>
-                <Image source={IconUser}
-                       resizeMode='contain'
-                       style={{height: 120, alignSelf: 'center'}}/>
-                <KeyboardAvoidingView style={{flex: 1}}
-                                      behavior="padding"
-                                      keyboardVerticalOffset={20}>
-                    <Form style={{flex: 1, justifyContent: 'space-around', marginRight: 20}}>
-                        <Item style={inputWrapperStyle}>
-                            <Image source={IconLogin}
-                                   style={{height: 18, marginLeft: 10}}
-                                   resizeMode='contain'/>
-                            <Input style={inputStyle}
-                                   autoCapitalize='none'
-                                   keyboardType='email-address'
-                                   textContentType='emailAddress'
-                                   returnKeyType='next'
-                                   autoCorrect={false}
-                                   underlineColorAndroid='transparent'
-                                   value={this.state.email}
-                                   onSubmitEditing={() => this.passwordInput.wrappedInstance.focus()}
-                                   blurOnSubmit={false}
-                                   onChangeText={(val) => this.onTextChange('email', val)}/>
-                        </Item>
-                        <Item style={inputWrapperStyle}>
-                            <Image source={IconPassword}
-                                   style={{height: 18, marginLeft: 10}}
-                                   resizeMode='contain'/>
-                            <Input style={inputStyle}
-                                   autoCorrect={false}
-                                   secureTextEntry
-                                   returnKeyType='send'
-                                   ref={input => {this.passwordInput = input}}
-                                   textContentType='password'
-                                   value={this.state.password}
-                                   onSubmitEditing={this.login}
-                                   onChangeText={(val) => this.onTextChange('password', val)}/>
-                        </Item>
-                    </Form>
-                </KeyboardAvoidingView>
-                <ForgotPassword onPress={this.forgotPassword}>
-                    <ForgotPasswordText>
-                        Forgot password?
-                    </ForgotPasswordText>
-                </ForgotPassword>
-                <Footer>
-                    <Button onPress={this.login} text='Continue' version='secondary'/>
-                    <Separator/>
-                    <NoAccountYet onPress={() => this.props.navigation.navigate('Register')}>
-                        <NoAccountYetText>
-                            Don't have an account yet?
-                        </NoAccountYetText>
-                    </NoAccountYet>
-                </Footer>
-            </Page>
+            <Loader assetsToLoad={[iconLogin, iconPassword, iconUser]}>
+                <Page>
+                    <HeaderWrapper>
+                        <Header title='Log In' left={
+                            <TouchableOpacity onPress={() => goBack(null)}>
+                                <Icon name='ios-arrow-back'
+                                      type='Ionicons'
+                                      style={{ color: colors.air, fontSize: 30 }}/>
+                            </TouchableOpacity>
+                        }/>
+                    </HeaderWrapper>
+                    <Image source={iconUser}
+                           resizeMode='contain'
+                           style={{ height: 120, alignSelf: 'center' }}/>
+                    <KeyboardAvoidingView style={{ flex: 1 }}
+                                          behavior="padding"
+                                          keyboardVerticalOffset={20}>
+                        <Form style={{ flex: 1, justifyContent: 'space-around', marginRight: 20 }}>
+                            <Item style={inputWrapperStyle}>
+                                <Image source={iconLogin}
+                                       style={{ height: 18, marginLeft: 10 }}
+                                       resizeMode='contain'/>
+                                <Input style={inputStyle}
+                                       autoCapitalize='none'
+                                       keyboardType='email-address'
+                                       textContentType='emailAddress'
+                                       returnKeyType='next'
+                                       autoCorrect={false}
+                                       underlineColorAndroid='transparent'
+                                       value={this.state.email}
+                                       onSubmitEditing={() => this.passwordInput.wrappedInstance.focus()}
+                                       blurOnSubmit={false}
+                                       onChangeText={(val) => this.onTextChange('email', val)}/>
+                            </Item>
+                            <Item style={inputWrapperStyle}>
+                                <Image source={iconPassword}
+                                       style={{ height: 18, marginLeft: 10 }}
+                                       resizeMode='contain'/>
+                                <Input style={inputStyle}
+                                       autoCorrect={false}
+                                       secureTextEntry
+                                       returnKeyType='send'
+                                       ref={input => {
+                                           this.passwordInput = input
+                                       }}
+                                       textContentType='password'
+                                       value={this.state.password}
+                                       onSubmitEditing={this.login}
+                                       onChangeText={(val) => this.onTextChange('password', val)}/>
+                            </Item>
+                        </Form>
+                    </KeyboardAvoidingView>
+                    <ForgotPassword onPress={this.forgotPassword}>
+                        <ForgotPasswordText>
+                            Forgot password?
+                        </ForgotPasswordText>
+                    </ForgotPassword>
+                    <Footer>
+                        <Button onPress={this.login} text='Continue' version='secondary'/>
+                        <Separator/>
+                        <NoAccountYet onPress={() => this.props.navigation.navigate('Register')}>
+                            <NoAccountYetText>
+                                Don't have an account yet?
+                            </NoAccountYetText>
+                        </NoAccountYet>
+                    </Footer>
+                </Page>
+            </Loader>
         )
     }
 }

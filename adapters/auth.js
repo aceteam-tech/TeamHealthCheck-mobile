@@ -1,12 +1,11 @@
 import Amplify, { Auth } from 'aws-amplify'
-import { CLIENT_ID, IDENTITY_POOL_ID, USER_POOL_ID } from 'babel-dotenv'
+import { CLIENT_ID, USER_POOL_ID } from 'babel-dotenv'
 
 Amplify.configure({
     Auth: {
         region: 'eu-west-2',
         userPoolId: USER_POOL_ID,
-        userPoolWebClientId: CLIENT_ID,
-        identityPoolId: IDENTITY_POOL_ID
+        userPoolWebClientId: CLIENT_ID
     },
     Storage: {
         bucket: 'squad-health-check',

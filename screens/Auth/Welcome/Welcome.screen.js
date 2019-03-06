@@ -1,15 +1,16 @@
 import React from 'react'
 import styled from 'styled-components/native'
 
-import {Button, Text} from 'native-base'
-import {Image} from 'react-native'
+import { Button, Text } from 'native-base'
+import { Image } from 'react-native'
+import { Loader } from '../../../components'
 
-import {login} from '../../../adapters/auth'
+import { login } from '../../../adapters/auth'
 import colors from '../../../constants/Colors'
-import {buttonStyle, buttonTextStyle} from '../../../constants/Style'
+import { buttonStyle, buttonTextStyle } from '../../../constants/Style'
 
-import IconUser from './icon-user-2x.png'
-import WelcomeBG from './welcome-bg.jpg'
+const iconUser = require('./icon-user-2x.png')
+const welcomeBG = require('./welcome-bg.jpg')
 
 const Page = styled.ImageBackground`
     flex: 1;
@@ -52,43 +53,45 @@ const Footer = styled.View`
 
 export default class WelcomeScreen extends React.Component {
     static navigationOptions = {
-        header: null,
+        header: null
     };
 
     login = async () => {
         await login(this.state.email, this.state.password)
-        this.props.navigation.navigate('AuthLoading', {email: this.state.email})
+        this.props.navigation.navigate('AuthLoading', { email: this.state.email })
     }
 
-    render () {
+    render() {
         return (
-            <Page source={WelcomeBG}>
-                <Content>
-                    <Header>
-                        <Image source={IconUser}
-                               resizeMode='contain'
-                               style={{height: 150}}/>
-                    </Header>
-                    <Body>
+            <Loader assetsToLoad={[iconUser, welcomeBG]}>
+                <Page source={welcomeBG}>
+                    <Content>
+                        <Header>
+                            <Image source={iconUser}
+                                   resizeMode='contain'
+                                   style={{ height: 150 }}/>
+                        </Header>
+                        <Body>
                         <WelcomeTitle>Welcome!</WelcomeTitle>
                         <WelcomeSubtitle>Now let's get the team rolling...</WelcomeSubtitle>
-                    </Body>
-                    <Footer>
-                        <Button rounded
-                                light
-                                onPress={()=>this.props.navigation.navigate('Login')}
-                                style={buttonStyle}>
-                            <Text style={buttonTextStyle}>Sign In</Text>
-                        </Button>
-                        <Button rounded
-                                light
-                                onPress={()=>this.props.navigation.navigate('Register')}
-                                style={buttonStyle}>
-                            <Text style={buttonTextStyle}>Sign Up</Text>
-                        </Button>
-                    </Footer>
-                </Content>
-            </Page>
+                        </Body>
+                        <Footer>
+                            <Button rounded
+                                    light
+                                    onPress={() => this.props.navigation.navigate('Login')}
+                                    style={buttonStyle}>
+                                <Text style={buttonTextStyle}>Sign In</Text>
+                            </Button>
+                            <Button rounded
+                                    light
+                                    onPress={() => this.props.navigation.navigate('Register')}
+                                    style={buttonStyle}>
+                                <Text style={buttonTextStyle}>Sign Up</Text>
+                            </Button>
+                        </Footer>
+                    </Content>
+                </Page>
+            </Loader>
         )
     }
 }
