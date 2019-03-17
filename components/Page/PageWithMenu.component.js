@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import BgBlueGradient from './bg-blue-gradient-2x.png'
+import BgBlueGradient from './background.png'
 import teamStore from '../../model/team-store'
-import {Menu} from '../index'
+import Menu from '../Menu/Menu.component'
 
 const Page = styled.ImageBackground`
     flex: 1;

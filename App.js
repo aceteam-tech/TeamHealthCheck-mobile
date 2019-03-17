@@ -5,7 +5,7 @@ import {Loader} from './components'
 export default class App extends React.Component {
     assetsToLoad = [
         // Backgrounds
-        require('./components/Page/bg-blue-gradient-2x.png'),
+        require('./components/Page/background.png'),
         // Tab navigation icons
         require('./navigation/icon-team-active.png'),
         require('./navigation/icon-team-inactive.png'),
@@ -14,6 +14,7 @@ export default class App extends React.Component {
         require('./navigation/icon-diagram-active.png'),
         require('./navigation/icon-diagram-inactive.png')
     ]
+
 
     render() {
         return (

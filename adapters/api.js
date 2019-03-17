@@ -1,6 +1,7 @@
 import { Storage } from 'aws-amplify'
 import { API_URL } from 'babel-dotenv'
 import { getSession } from './auth'
+import {pathname} from 'join-url'
 
 const makeRequest = async (resource, method, body) => {
     try {
@@ -16,7 +17,9 @@ const makeRequest = async (resource, method, body) => {
         if (body) {
             params.body = JSON.stringify(body)
         }
-        const response = await fetch(API_URL + resource, params)
+
+        const url = pathname(API_URL, resource)
+        const response = await fetch(url, params)
         return response.json()
     } catch (e) {
         console.error(e)

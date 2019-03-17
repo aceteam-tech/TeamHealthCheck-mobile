@@ -1,24 +1,60 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
+import colors from '../../constants/Colors'
+import happyFace from './happy-face.png'
+import pokerFace from './poker-face.png'
+import sadFace from './sad-face.png'
+
+const faces = {
+    happy: happyFace,
+    poker: pokerFace,
+    sad: sadFace
+}
 
 const CategoryWrapper = styled.TouchableOpacity`
-  background-color: ${props => props.color};
   border-radius: 10px;
-  margin: 10px 30px;
-  padding: 20px;
+  padding: 10px 20px;
   box-shadow: 0 2px 3px rgba(0,0,0,0.15);
+  flex-direction: row;
+  align-items: flex-end;
+`
+const CategoryFace = styled.Image`
+  width: 64.7px;
+  height: 74px;
+  margin-right: 20px;
+`
+const TextWrapper = styled.View`
+  height: 100px;
+  background-color: #fff;
+  justify-content: center;
+  flex: 1;
+  border-bottom-right-radius: 40px;
+  border-top-right-radius: 40px;
+  border-top-left-radius: 40px;
 `
 const CategoryText = styled.Text`
-  color: #fff;
-  font-size: 16px;
+  margin: 0 10px;
+  color: #0b7aee;
+  font-size: 14px;
+  font-weight: 200;
 `
 
-const CategoryVoteBox = ({text, onPress, color}) =>(
-    <CategoryWrapper onPress={() => onPress()} color={color}>
-        <CategoryText>
-            {text}
-        </CategoryText>
+const CategoryVoteBox = ({ text, onPress, face }) => (
+    <CategoryWrapper onPress={() => onPress()}>
+        <CategoryFace source={faces[face]}/>
+        <TextWrapper>
+            <CategoryText>
+                {text}
+            </CategoryText>
+        </TextWrapper>
     </CategoryWrapper>
 )
+
+CategoryVoteBox.propTypes = {
+    face: PropTypes.oneOf([
+        'happy', 'poker', 'sad'
+    ])
+}
 
 export default CategoryVoteBox

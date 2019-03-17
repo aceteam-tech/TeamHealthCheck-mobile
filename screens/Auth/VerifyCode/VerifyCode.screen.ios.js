@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components/native'
 
 import { Button, Text, Form, Icon } from 'native-base'
@@ -8,6 +8,7 @@ import { Page, PinInput, Loader } from '../../../components'
 import { verify } from '../../../adapters/auth'
 import colors from '../../../constants/Colors'
 import { buttonStyle, buttonTextStyle } from '../../../constants/Style'
+import { switchInput, updateCode } from './VerifyCode.helpers'
 
 const iconVerificationCode = require('./icon-verification-code-2x.png')
 
@@ -28,68 +29,38 @@ const Footer = styled.View`
     justify-content: center;
 `
 
-const button = {
-    paddingLeft: '30%',
-    paddingRight: '30%',
-    textAlign: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: 30
-}
-
-const buttonText = {
-    color: colors.primary,
-    fontSize: 12,
-    fontWeight: 'bold'
-}
-
 export default class VerifyCodeScreen extends React.Component {
-    static navigationOptions = {
-        header: null
-    };
-
     code = []
+    codeLength = 6
 
     state = {
-        code: ['', '', '', '', '', '']
+        code: '',
+
+        activeInput: 0
     }
 
-    onCodeChange = async (i, input) => {
-        if (input) {
-            this.state.code.splice(i, 1, input)
-            if (i < 5) {
-                this.code[i + 1].focus()
-            }
-        }
-        else if (i === 0) {
-            this.state.code.splice(i, 1, '')
-            this.code[i].focus()
-        }
-        else {
-            if (!this.state.code[i]) {
-                this.state.code.splice(i - 1, 2, '', '')
-            } else {
-                this.state.code.splice(i, 1, '')
-            }
-            this.code[i - 1].focus()
-        }
-        this.setState({
-            code: this.state.code
-        })
-        if (i === 5) {
-            await this.verify()
+    onKeyPress = async (i, key) => {
+        const code = updateCode(this.state.code, key, this.codeLength)
+        const activeInputIndex = switchInput(code, this.codeLength)
+        this.setState({ code })
+        this.code[activeInputIndex].focus()
+        if(code.length === this.codeLength){
+            await this.verify(code)
         }
     }
 
-    verify = async () => {
-        const email = this.props.navigation.getParam('user').username
-        const code = this.state.code.join('')
-        await verify(email, code)
-        this.props.navigation.navigate('Login', { email })
+    verify = async (code) => {
+        const email = this.props.navigation.getParam('user')?.username
+        try {
+            await verify(email, code)
+            this.props.navigation.navigate('Login', { email })
+        } catch (e) {
+            console.warn(e)
+        }
     }
 
     render() {
-        const email = this.props.navigation.getParam('user').username
+        const email = this.props.navigation.getParam('user')?.username
         const { goBack } = this.props.navigation
         return (
             <Loader assetsToLoad={[iconVerificationCode]}>
@@ -127,11 +98,11 @@ export default class VerifyCodeScreen extends React.Component {
                                         key={i}
                                         index={i}
                                         autoFocus={i === 0}
-                                        value={this.state.code[i]}
+                                        value={this.state.code[i] || ''}
                                         handle={(ref) => {
                                             this.code[i] = ref
                                         }}
-                                        onChange={this.onCodeChange}
+                                        onKeyPress={this.onKeyPress}
                                     />
                                 ))
                             }

@@ -17,6 +17,7 @@
     "aws-amplify": "^1.1.13",
     "babel-plugin-dotenv": "^0.1.1",
     "expo": "^31.0.2",
+    "join-url": "^2.0.0",
     "lodash": "^4.17.11",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",

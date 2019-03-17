@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import colors from '../../constants/Colors'
-import {TeamLogo} from '../'
+import TeamLogo from '../TeamLogo/TeamLogo.component'
 
 const CardIcon = styled.View`
     margin: 20px;

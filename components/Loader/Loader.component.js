@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import { Platform, StatusBar } from 'react-native'
-import { AppLoading, Asset } from 'expo'
+import { AppLoading, Asset, Font } from 'expo'
 
 const Container = styled.View`
     flex: 1;
@@ -18,7 +18,11 @@ export default class Loader extends React.Component {
         return Promise.all([
             Asset.loadAsync([
                 ...this.props.assetsToLoad
-            ])
+            ]),
+            Font.loadAsync({
+                Roboto: require('native-base/Fonts/Roboto.ttf'),
+                Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf')
+            }),
         ])
     }
 

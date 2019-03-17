@@ -3,7 +3,7 @@ import chunk from 'lodash/chunk'
 import styled from 'styled-components/native'
 import PropTypes from 'prop-types'
 import colors from '../../constants/Colors'
-import {Avatar} from '../'
+import Avatar from '../Avatar/Avatar.component'
 
 const UsersList = styled.View`
   

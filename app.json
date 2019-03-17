@@ -24,10 +24,11 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "tech.aceteam.TeamHealthCheck"
+      "bundleIdentifier": "net.teamhealthcheck",
+      "buildNumber": "2"
     },
     "android": {
-      "package": "tech.aceteam.TeamHealthCheck",
+      "package": "tech.aceteam.health_check",
       "permissions": []
     }
   }

@@ -13,7 +13,7 @@ const PinInput = styled.TextInput`
     textAlign: center
 `
 
-export default ({ autoFocus, value, handle, onChange, index }) => (
+export default ({ autoFocus, value, handle, onKeyPress, index }) => (
     <PinInput
         key={index}
         autoCorrect={false}
@@ -21,8 +21,7 @@ export default ({ autoFocus, value, handle, onChange, index }) => (
         keyboardType='decimal-pad'
         value={value}
         maxLength={1}
-        caretHidden
         ref={ref => handle(ref)}
-        onChange={e => onChange(index, e.nativeEvent.text)}
+        onKeyPress={e => onKeyPress(index, e.nativeEvent.key)}
     />
 )

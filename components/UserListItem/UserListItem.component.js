@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import colors from '../../constants/Colors'
-import {Avatar} from '../'
+import Avatar from '../Avatar/Avatar.component'
 
 const ListItem = styled.View`
   border-bottom-width: 1px;

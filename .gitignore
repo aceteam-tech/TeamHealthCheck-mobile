@@ -7,4 +7,5 @@ npm-debug.*
 *.mobileprovision
 yarn-error.log
 .idea
-.env
+.env*
+keys/
