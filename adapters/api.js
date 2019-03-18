@@ -2,6 +2,7 @@ import { Storage } from 'aws-amplify'
 import { API_URL } from 'babel-dotenv'
 import { getSession } from './auth'
 import {pathname} from 'join-url'
+import appStore from '../model/app.store'
 
 const makeRequest = async (resource, method, body) => {
     try {
@@ -19,8 +20,11 @@ const makeRequest = async (resource, method, body) => {
         }
 
         const url = pathname(API_URL, resource)
-        const response = await fetch(url, params)
-        return response.json()
+        const promise = fetch(url, params)
+        appStore.apiRequestCalled(promise)
+        return promise.then(response => {
+            return response.json()
+        })
     } catch (e) {
         console.error(e)
         return e

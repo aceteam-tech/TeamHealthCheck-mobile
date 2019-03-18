@@ -8,7 +8,7 @@ import teamStore from '../../../model/team-store'
 import userStore from '../../../model/user-store'
 import healthCheckStore from '../../../model/health-check-store'
 import { getHealthCheckStatus, createHealthCheck, endHealthCheck, getHealthChecks } from '../../../adapters/api'
-import { observer } from 'mobx-react/native';
+import { observer } from 'mobx-react/native'
 
 const Footer = styled.View`
     justify-content: center;

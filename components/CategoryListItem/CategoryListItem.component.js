@@ -28,9 +28,12 @@ const ListName = styled.View`
   flex: 1;
 `
 
-const RelativeValue = styled.View`
+const RelativeValuePlaceholder = styled.View`
   margin-left: 10px;
   width: 50px;
+`
+
+const RelativeValue = styled.View`
   align-items: center;
   border-radius: 5px;
   background-color: ${({ value }) => (value > 0 ? '#95e1d5' : '#f9a9a9')};
@@ -52,14 +55,16 @@ const CategoryListItem = ({ category }) => {
             </ListName>
             <ListValues>
                 <ListText>{category.value + '%'}</ListText>
-                {
-                    !!relativeValue
-                    && (
-                        <RelativeValue value={relativeValue}>
-                            <ListText>{relativeValue}</ListText>
-                        </RelativeValue>
-                    )
-                }
+                <RelativeValuePlaceholder>
+                    {
+                        !!relativeValue
+                        && (
+                            <RelativeValue value={relativeValue}>
+                                <ListText>{relativeValue}</ListText>
+                            </RelativeValue>
+                        )
+                    }
+                </RelativeValuePlaceholder>
             </ListValues>
         </ListItem>
     )

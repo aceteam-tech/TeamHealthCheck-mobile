@@ -1,13 +1,8 @@
 import React from 'react'
-import styled from 'styled-components/native'
 import BgBlueGradient from './background.png'
 import teamStore from '../../model/team-store'
 import Menu from '../Menu/Menu.component'
-
-const Page = styled.ImageBackground`
-    flex: 1;
-    padding-top: 40px;
-`
+import Page from './Page.component'
 
 export default class PageWithMenu extends React.Component {
     state = {
