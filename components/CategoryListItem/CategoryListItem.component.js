@@ -20,17 +20,18 @@ const ListText = styled.Text`
 `
 
 const ListValues = styled.View`
-  flex: 1;
   flex-direction: row;
+  margin-right: 10px;
 `
 
 const ListName = styled.View`
-  flex: 3;
+  flex: 1;
 `
 
 const RelativeValue = styled.View`
   margin-left: 10px;
-  padding: 2px 10px;
+  width: 50px;
+  align-items: center;
   border-radius: 5px;
   background-color: ${({ value }) => (value > 0 ? '#95e1d5' : '#f9a9a9')};
 `
@@ -50,7 +51,7 @@ const CategoryListItem = ({ category }) => {
                 <ListText>{category.name}</ListText>
             </ListName>
             <ListValues>
-                <ListText>{category.value}</ListText>
+                <ListText>{category.value + '%'}</ListText>
                 {
                     !!relativeValue
                     && (
