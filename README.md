@@ -1,7 +1,9 @@
 # Team Health Check (mobile)
-<img style="margin-right: 20px" src="docs/printscreen_learning.png"/>
-<img style="margin-right: 20px" src="docs/printscreen_mission.png"/>
-<img style="margin-right: 20px" src="docs/printscreen_dashboard.png"/>
+<div>
+    <img style="margin-right: 20px" src="docs/printscreen_learning.png"/>
+    <img style="margin-right: 20px" src="docs/printscreen_mission.png"/>
+    <img style="margin-right: 20px" src="docs/printscreen_dashboard.png"/>
+</div>
 
 ## Getting started
 1. Configure `.env` file according [configuration](#configuration) section
