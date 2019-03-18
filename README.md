@@ -1,21 +1,26 @@
-# Requirements
-1. node >= v9.8.0
-2. yarn
-3. expo-cli
+# Team Health Check (mobile)
+<img style="margin-right: 20px" src="docs/printscreen_learning.png"/>
+<img style="margin-right: 20px" src="docs/printscreen_mission.png"/>
+<img style="margin-right: 20px" src="docs/printscreen_dashboard.png"/>
 
-# Development
-1.  Create `.env` file in the root folder with app parameters
+## Getting started
+1. Configure `.env` file according [configuration](#configuration) section
+1. Run `npm i`
+1. Run `npm start`
 
-    - CLIENT_ID - aws 'userPoolWebClientId'
-    - USER_POOL_ID - aws user pool id
-    - API_URL - aws api gateway address
+And enjoy coding.
 
-    example of .env file with staging environment parameters :
-    ```
-    CLIENT_ID=7j048gs5jnvh1b2oe6sighllvd
-    USER_POOL_ID=eu-west-2_wZIIzNgND
+## Configuration
+Create `.env` file in the root folder with app parameters
 
-    API_URL=https://mi9640dq32.execute-api.eu-west-2.amazonaws.com/staging
-    ```
+- CLIENT_ID - aws 'userPoolWebClientId'
+- USER_POOL_ID - aws user pool id
+- API_URL - aws api gateway address
 
-2. You are ready to go! type `yarn start`
+example of .env file with staging environment parameters :
+```
+CLIENT_ID=7j048gs5jnvh1b2oe6sighllvd
+USER_POOL_ID=eu-west-2_wZIIzNgND
+
+API_URL=https://mi9640dq32.execute-api.eu-west-2.amazonaws.com/staging
+```
