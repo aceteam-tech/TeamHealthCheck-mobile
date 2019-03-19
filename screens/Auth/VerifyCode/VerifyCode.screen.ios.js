@@ -35,7 +35,6 @@ export default class VerifyCodeScreen extends React.Component {
 
     state = {
         code: '',
-
         activeInput: 0
     }
 

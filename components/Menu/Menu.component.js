@@ -54,7 +54,10 @@ const Header = styled.View`
 `
 
 const HeaderCenter = styled.View`
-  flex: 1;
+  flex: 3;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 `
 
 const HeaderLeft = styled.View`

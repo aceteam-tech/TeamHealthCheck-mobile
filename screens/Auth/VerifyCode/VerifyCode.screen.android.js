@@ -29,20 +29,24 @@ const Footer = styled.View`
 `
 
 export default class VerifyCodeScreen extends React.Component {
+    codeLength = 6
     state = {
         code: ''
     }
 
-    onCodeChange = (code) => {
+    onCodeChange = async (code) => {
         this.setState({
             code
         })
+        if(code.length === this.codeLength){
+            await this.verify(code)
+        }
     }
 
-    verify = async () => {
+    verify = async (code) => {
         const email = this.props.navigation.getParam('user')?.username
         try {
-            await verify(email, this.state.code)
+            await verify(email, code)
             this.props.navigation.navigate('Login', { email })
         } catch (e) {
             console.warn(e)
@@ -66,7 +70,7 @@ export default class VerifyCodeScreen extends React.Component {
                                    resizeMode='contain'
                                    style={{ height: 120 }}/>
                             <HeaderText>Verification Code</HeaderText>
-                            <Text style={{ color: colors.air, marginTop: 16 }}>
+                            <Text style={{ color: colors.air, marginTop: 16, marginLeft: 20, marginRight: 20, textAlign: 'center' }}>
                                 Please type the verification code sent to {email}
                             </Text>
                         </Header>

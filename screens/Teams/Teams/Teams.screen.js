@@ -84,9 +84,7 @@ class TeamsScreenComponent extends React.Component {
             <Loader assetsToLoad={[iconLink, iconPlus]}>
                 <Page>
                     <HeaderWrapper>
-                        <Header title='Teams' right={
-                            <MaterialIcons color='white' size={27} name='menu'/>
-                        }/>
+                        <Header title='Teams'/>
                     </HeaderWrapper>
                     <Content>
                         {
