@@ -5,8 +5,9 @@ class ObservableAppStore {
 
     apiRequestCalled = (promise) => {
         this.loading = true
-        promise.finally(res => {
+        return promise.finally(res => {
             this.loading = false
+            return res
         })
     }
 }

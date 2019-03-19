@@ -7,6 +7,7 @@ import teamsStore from '../../../model/team-store'
 import { Header, Button, Page, TeamCard, Loader } from '../../../components/index'
 import styled from 'styled-components/native'
 import ifNotch from '../../../helpers/ifNotch'
+import colors from '../../../constants/Colors'
 
 const iconLink = require('./icon-link-3x.png')
 const iconPlus = require('./icon-plus-3x.png')
@@ -54,6 +55,19 @@ const MenuItem = styled.TouchableOpacity`
     justify-content: center;
 `
 
+const NoneTeamsWrapper = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`
+
+const NoneTeamsText = styled.Text`
+  color: ${colors.air};
+  font-size: 20px;
+  font-weight: 300;
+  text-align: center;
+`
+
 class TeamsScreenComponent extends React.Component {
     state = {
         isOpen: false,
@@ -86,13 +100,22 @@ class TeamsScreenComponent extends React.Component {
                     <HeaderWrapper>
                         <Header title='Teams'/>
                     </HeaderWrapper>
-                    <Content>
-                        {
-                            teams.map(team => (
-                                <TeamCard key={team.id} onPress={chooseTeam} item={team}/>
-                            ))
-                        }
-                    </Content>
+                    {
+                        !teams.length ?
+                            <NoneTeamsWrapper>
+                                <NoneTeamsText>
+                                    {`You don't have any teams\n\nAdd or join one`}
+                                </NoneTeamsText>
+                            </NoneTeamsWrapper>
+                            :
+                            <Content>
+                                {
+                                    teams.map(team => (
+                                        <TeamCard key={team.id} onPress={chooseTeam} item={team}/>
+                                    ))
+                                }
+                            </Content>
+                    }
                     <AddButtonWrapper>
                         <Button onPress={() => this.toggleMenu()} version='add'/>
                     </AddButtonWrapper>
