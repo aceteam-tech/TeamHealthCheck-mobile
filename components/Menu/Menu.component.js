@@ -7,7 +7,7 @@ import TeamLogo from '../TeamLogo/TeamLogo.component'
 import Page from '../Page/Page.component'
 import IconProfile from './icon-profile.png'
 import IconSettings from './icon-settings.png'
-import IconLogout from './icon-logout.png'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { signOut } from '../../adapters/auth'
 
 const TeamName = styled.Text`
@@ -42,8 +42,7 @@ const MenuTeam = styled.View`
   margin-top: 15px;
 `
 
-const MenuIcon = styled.Image`
-  height: 60px; 
+const MenuIcon = styled(MaterialCommunityIcons)`
   margin: 0 20px;
   align-self: center;
 `
@@ -97,22 +96,21 @@ export default ({ team, visible, navigate, onToggleVisible }) => (
                     </ChangeTeamText>
                 </ChangeTeam>
             </MenuTeam>
-            <MenuItem>
-                <MenuIcon source={IconProfile}
-                          resizeMode='contain'/>
-                <MenuItemText>Profile</MenuItemText>
-            </MenuItem>
-            <MenuItem>
-                <MenuIcon source={IconSettings}
-                          resizeMode='contain'/>
-                <MenuItemText>Settings</MenuItemText>
-            </MenuItem>
+            {/*<MenuItem>*/}
+                {/*<MenuIcon source={IconProfile}*/}
+                          {/*resizeMode='contain'/>*/}
+                {/*<MenuItemText>Profile</MenuItemText>*/}
+            {/*</MenuItem>*/}
+            {/*<MenuItem>*/}
+                {/*<MenuIcon source={IconSettings}*/}
+                          {/*resizeMode='contain'/>*/}
+                {/*<MenuItemText>Settings</MenuItemText>*/}
+            {/*</MenuItem>*/}
             <MenuItem onPress={() => {
                 signOut()
                 navigate('Welcome')
             }}>
-                <MenuIcon source={IconLogout}
-                          resizeMode='contain'/>
+                <MenuIcon color='white' size={27} name='logout'/>
                 <MenuItemText>Log out</MenuItemText>
             </MenuItem>
         </Page>

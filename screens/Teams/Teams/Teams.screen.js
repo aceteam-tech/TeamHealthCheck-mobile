@@ -1,13 +1,15 @@
 import React from 'react'
-import { Image, Text, Animated } from 'react-native'
+import { Image, Text, Animated, TouchableOpacity } from 'react-native'
 import { Content } from 'native-base'
-import { MaterialIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { getMyTeams, getHealthChecks } from '../../../adapters/api'
 import teamsStore from '../../../model/team-store'
 import { Header, Button, Page, TeamCard, Loader } from '../../../components/index'
 import styled from 'styled-components/native'
 import ifNotch from '../../../helpers/ifNotch'
 import colors from '../../../constants/Colors'
+import { signOut } from '../../../adapters/auth'
+import IconLogout from '../../../components/Menu/icon-logout.png'
 
 const iconLink = require('./icon-link-3x.png')
 const iconPlus = require('./icon-plus-3x.png')
@@ -64,9 +66,9 @@ const NoneTeamsWrapper = styled.View`
 const NoneTeamsText = styled.Text`
   color: ${colors.air};
   font-size: 20px;
-  font-weight: 300;
-  text-align: center;
+  
 `
+
 
 class TeamsScreenComponent extends React.Component {
     state = {
@@ -98,13 +100,20 @@ class TeamsScreenComponent extends React.Component {
             <Loader assetsToLoad={[iconLink, iconPlus]}>
                 <Page>
                     <HeaderWrapper>
-                        <Header title='Teams'/>
+                        <Header title='Teams' right={
+                            <TouchableOpacity onPress={() => {
+                                signOut()
+                                navigate('Welcome')}
+                            }>
+                                <MaterialCommunityIcons color='white' size={27} name='logout'/>
+                            </TouchableOpacity>
+                        }/>
                     </HeaderWrapper>
                     {
                         !teams.length ?
                             <NoneTeamsWrapper>
                                 <NoneTeamsText>
-                                    {`You don't have any teams\n\nAdd or join one`}
+                                    {`You don't have any teams.\nAdd or join one.`}
                                 </NoneTeamsText>
                             </NoneTeamsWrapper>
                             :
