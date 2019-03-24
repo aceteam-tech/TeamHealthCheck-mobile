@@ -57,6 +57,7 @@ const TeamDashboardComponent = observer(({ store, navigate }) => (
     </PageWithMenu>
 ))
 
+@observer
 export default class TeamDashboardScreen extends React.Component {
     render() {
         return <TeamDashboardComponent

@@ -1,7 +1,7 @@
 import { Storage } from 'aws-amplify'
 import { API_URL } from 'babel-dotenv'
 import { getSession } from './auth'
-import {pathname} from 'join-url'
+import { pathname } from 'join-url'
 import appStore from '../model/app.store'
 
 const makeRequest = async (resource, method, body) => {
@@ -41,7 +41,10 @@ export const getTeam = async teamId => makeRequest(`team?id=${teamId}`, 'GET')
 
 export const addTeam = async teamName => makeRequest('my-teams', 'POST', { teamName })
 
-export const sendStatus = async (healthCheckId, categories) => makeRequest('health-status', 'POST', { healthCheckId, categories })
+export const sendStatus = async (healthCheckId, categories) => makeRequest('health-status', 'POST', {
+    healthCheckId,
+    categories
+})
 
 export const joinTeam = async code => makeRequest('join-team', 'POST', { code })
 
