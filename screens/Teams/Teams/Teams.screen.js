@@ -2,14 +2,13 @@ import React from 'react'
 import { Image, Text, Animated, TouchableOpacity } from 'react-native'
 import { Content } from 'native-base'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { getMyTeams, getHealthChecks } from '../../../adapters/api'
-import teamsStore from '../../../model/team-store'
+import { getMyTeams } from '../../../adapters/api'
+import teamStore from '../../../model/team-store'
 import { Header, Button, Page, TeamCard, Loader } from '../../../components/index'
 import styled from 'styled-components/native'
 import ifNotch from '../../../helpers/ifNotch'
 import colors from '../../../constants/Colors'
 import { signOut } from '../../../adapters/auth'
-import IconLogout from '../../../components/Menu/icon-logout.png'
 
 const iconLink = require('./icon-link-3x.png')
 const iconPlus = require('./icon-plus-3x.png')
@@ -174,9 +173,7 @@ export default class TeamsScreen extends React.Component {
     }
 
     chooseTeam = async (team) => {
-        const healthChecks = await getHealthChecks(team.id)
-        teamsStore.setTeam(team)
-        teamsStore.setHealthChecks(healthChecks)
+        teamStore.setTeam(team)
         this.props.navigation.navigate('TeamDashboard')
     }
 

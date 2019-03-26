@@ -1,12 +1,13 @@
-import React from 'react';
+import React from 'react'
 import { Content } from 'native-base'
 import { TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { MaterialIcons } from '@expo/vector-icons'
 import { observer } from 'mobx-react/native'
 import teamStore from '../../../model/team-store'
-import {Header, PageWithMenu, CategoryListItem} from '../../../components/index'
+import { Header, PageWithMenu, CategoryListItem } from '../../../components/index'
 import colors from '../../../constants/Colors'
+import { getHealthChecks } from '../../../adapters/api'
 
 const HeaderWrapper = styled.View`
   margin-bottom: 30px;
@@ -26,7 +27,7 @@ const NoHealthCheckText = styled.Text`
   margin-right: 50px;
 `
 
-const TeamDashboardComponent = observer(({ store, navigate }) => (
+const TeamDashboardComponent = ({ lastResults, navigate }) => (
     <PageWithMenu navigate={navigate}>
         {({ onToggleMenu }) => (
             <PageContent>
@@ -38,10 +39,10 @@ const TeamDashboardComponent = observer(({ store, navigate }) => (
                     }/>
                 </HeaderWrapper>
                 {
-                    !!store.lastResults ?
+                    !!lastResults ?
                         <Content>
                             {
-                                store.lastResults.map(c => (
+                                lastResults.map(c => (
                                     <CategoryListItem key={c.id} category={c}/>
                                 ))
                             }
@@ -55,13 +56,18 @@ const TeamDashboardComponent = observer(({ store, navigate }) => (
             </PageContent>
         )}
     </PageWithMenu>
-))
+)
 
 @observer
 export default class TeamDashboardScreen extends React.Component {
+    async componentDidMount() {
+        const healthChecks = await getHealthChecks(teamStore.team.id)
+        teamStore.setHealthChecks(healthChecks)
+    }
+
     render() {
         return <TeamDashboardComponent
-            store={teamStore}
+            lastResults={teamStore.lastResults}
             navigate={this.props.navigation.navigate}
         />
     }
