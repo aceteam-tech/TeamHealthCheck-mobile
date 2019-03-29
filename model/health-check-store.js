@@ -15,6 +15,10 @@ class ObservableHealthCheckStore {
         return this.healthCheck.categories[this.currentCategoryIndex]
     }
 
+    @computed get categoriesCount() {
+        return this.healthCheck.categories.length
+    }
+
     setHealthCheck(healthCheck) {
         this.healthCheck = healthCheck
         this.currentCategoryIndex = 0

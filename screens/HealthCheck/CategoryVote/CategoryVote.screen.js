@@ -12,10 +12,27 @@ const HeaderWrapper = styled.View`
   margin-bottom: 50px;
 `
 
+const Text = styled.Text`
+  color: ${colors.air};
+  font-weight: bold;
+`
+
+const HeaderLeft = ({goBack}) => (
+    <TouchableOpacity onPress={() => goBack(null)}>
+        <Icon name='ios-arrow-back'
+              type='Ionicons'
+              style={{ color: colors.air, fontSize: 30 }}/>
+    </TouchableOpacity>
+)
+
+const HeaderRight = ({categoryIndex, categoriesCount}) => (
+    <Text>{(categoryIndex + 1) + ' / ' + categoriesCount}</Text>
+)
+
 const CategoryVoteComponent = observer(({ navigation, healthCheckStore }) => {
     if (!healthCheckStore.healthCheck.categories) return <Loading/>
     const category = healthCheckStore.currentCategory
-    const { nextCategory, lastCategory, updateCategory } = healthCheckStore
+    const { nextCategory, lastCategory, updateCategory, currentCategoryIndex, categoriesCount } = healthCheckStore
 
     const onCategoryChosen = (value) => {
         updateCategory(value)
@@ -25,13 +42,10 @@ const CategoryVoteComponent = observer(({ navigation, healthCheckStore }) => {
     return (
         <Page>
             <HeaderWrapper>
-                <Header title={category.name} left={
-                    <TouchableOpacity onPress={() => navigation.goBack(null)}>
-                        <Icon name='ios-arrow-back'
-                              type='Ionicons'
-                              style={{ color: colors.air, fontSize: 30 }}/>
-                    </TouchableOpacity>
-                }/>
+                <Header title={category.name}
+                        left={<HeaderLeft goBack={navigation.goBack}/>}
+                        right={<HeaderRight categoryIndex={currentCategoryIndex} categoriesCount={categoriesCount}/>}
+                />
             </HeaderWrapper>
             <Image source={categories[category.image]}
                    resizeMode='contain'
