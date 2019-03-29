@@ -29,7 +29,13 @@
     },
     "android": {
       "package": "tech.aceteam.health_check",
-      "permissions": []
+      "permissions": [],
+      "versionCode": 6,
+      "splash": {
+        "image": "./assets/images/splash-icon-android.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#0CAADC"
+      }
     }
   }
 }
