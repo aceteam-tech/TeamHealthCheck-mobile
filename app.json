@@ -8,12 +8,12 @@
       "ios",
       "android"
     ],
-    "version": "1.1.0",
+    "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/logo/logo.png",
     "splash": {
       "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#0CAADC"
     },
     "updates": {
@@ -25,7 +25,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "net.teamhealthcheck",
-      "buildNumber": "8"
+      "buildNumber": "1"
     },
     "android": {
       "package": "tech.aceteam.health_check",
