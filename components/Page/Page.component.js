@@ -7,7 +7,7 @@ import { observer } from 'mobx-react/native'
 
 const PageCompoponent = styled.ImageBackground`
     flex: 1;
-    padding-top: 40px;
+    padding-top: 20px;
 `
 
 @observer
