@@ -20,10 +20,6 @@ const AddButtonWrapper = styled.View`
   flex-direction: row;
 `
 
-const HeaderWrapper = styled.View`
-  margin-bottom: 30px;
-`
-
 const MenuShadow = styled.TouchableOpacity`
   position: absolute;
   top: 0;
@@ -68,7 +64,6 @@ const NoneTeamsText = styled.Text`
   
 `
 
-
 class TeamsScreenComponent extends React.Component {
     state = {
         isOpen: false,
@@ -98,16 +93,15 @@ class TeamsScreenComponent extends React.Component {
         return (
             <Loader assetsToLoad={[iconLink, iconPlus]}>
                 <Page>
-                    <HeaderWrapper>
-                        <Header title='Teams' right={
-                            <TouchableOpacity onPress={() => {
-                                signOut()
-                                navigate('Welcome')}
-                            }>
-                                <MaterialCommunityIcons color='white' size={27} name='logout'/>
-                            </TouchableOpacity>
-                        }/>
-                    </HeaderWrapper>
+                    <Header title='Teams' right={
+                        <TouchableOpacity onPress={() => {
+                            signOut()
+                            navigate('Welcome')
+                        }
+                        }>
+                            <MaterialCommunityIcons color='white' size={27} name='logout'/>
+                        </TouchableOpacity>
+                    }/>
                     {
                         !teams.length ?
                             <NoneTeamsWrapper>

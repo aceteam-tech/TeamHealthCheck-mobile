@@ -5,8 +5,8 @@ import ifNotch from '../../helpers/ifNotch'
 
 const Header = styled.View`
   flex-direction: row;
-  justifyContent: space-between;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
 `
 
 const HeaderTitle = styled.Text`
@@ -14,6 +14,12 @@ const HeaderTitle = styled.Text`
   font-size: 20px;
   font-weight: bold;
   text-align: center;
+  flex: 3;
+`
+
+const HeaderCenter = styled.View`
+  justify-content: center;
+  align-items: center;
   flex: 3;
 `
 
@@ -28,13 +34,19 @@ const HeaderRight = styled.View`
 `
 
 export default ({ title, left, right }) => (
-    <Header style={{marginTop: ifNotch ? 15 : 0}}>
+    <Header style={{ marginTop: ifNotch ? 15 : 0 }}>
         <HeaderLeft>
             {left}
         </HeaderLeft>
-        <HeaderTitle>
-            {title}
-        </HeaderTitle>
+        {
+            typeof title === 'string' ?
+                <HeaderTitle>
+                    {title}
+                </HeaderTitle> :
+                <HeaderCenter>
+                    {title}
+                </HeaderCenter>
+        }
         <HeaderRight>
             {right}
         </HeaderRight>

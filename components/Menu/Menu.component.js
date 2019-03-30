@@ -5,19 +5,15 @@ import styled from 'styled-components/native'
 import colors from '../../constants/Colors'
 import TeamLogo from '../TeamLogo/TeamLogo.component'
 import Page from '../Page/Page.component'
+import Header from '../Header/Header.component'
 import IconProfile from './icon-profile.png'
 import IconSettings from './icon-settings.png'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { signOut } from '../../adapters/auth'
 
-const TeamName = styled.Text`
-  margin-top: 20px;
-  margin-bottom: 5px;
-  color: ${colors.air};
-  font-size: 24px;
+const ChangeTeam = styled.TouchableOpacity`
+  margin-top: 10px;
 `
-
-const ChangeTeam = styled.TouchableOpacity``
 
 const ChangeTeamText = styled.Text`
   color: ${colors.air};
@@ -42,7 +38,6 @@ const MenuItemText = styled.Text`
 const MenuTeam = styled.View`
   align-items: center;
   margin-bottom: 30px;
-  margin-top: 15px;
 `
 
 const MenuIcon = styled(MaterialCommunityIcons)`
@@ -50,27 +45,18 @@ const MenuIcon = styled(MaterialCommunityIcons)`
   align-self: center;
 `
 
-const Header = styled.View`
-  flex-direction: row;
-  justifyContent: space-between;
-`
-
-const HeaderCenter = styled.View`
-  flex: 3;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-`
-
-const HeaderLeft = styled.View`
-  flex: 1;
-  margin-left: 20px;
-`
 const HeaderRight = styled.TouchableOpacity`
   flex: 1;
-  margin-right: 20px;
   align-items: flex-end;
 `
+
+const RightHeader = ({ onToggleVisible }) => (
+    <HeaderRight onPress={onToggleVisible}>
+        <Icon name='close'
+              type='MaterialIcons'
+              style={{ color: colors.air, fontSize: 30 }}/>
+    </HeaderRight>
+)
 
 export default ({ team, visible, navigate, onToggleVisible }) => (
     <Modal
@@ -81,18 +67,9 @@ export default ({ team, visible, navigate, onToggleVisible }) => (
         onRequestClose={f => f}>
         <Page>
             <MenuTeam>
-                <Header>
-                    <HeaderLeft/>
-                    <HeaderCenter>
-                        <TeamLogo name={team.name} size={96}/>
-                    </HeaderCenter>
-                    <HeaderRight onPress={onToggleVisible}>
-                        <Icon name='close'
-                              type='MaterialIcons'
-                              style={{ color: colors.air, fontSize: 30 }}/>
-                    </HeaderRight>
-                </Header>
-                <TeamName>{team.name}</TeamName>
+                <Header title={<TeamLogo name={team.name} size={96}/>}
+                        right={<RightHeader onToggleVisible={onToggleVisible}/>}
+                />
                 <ChangeTeam onPress={() => navigate('Teams')}>
                     <ChangeTeamText>
                         Change team

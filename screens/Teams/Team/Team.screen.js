@@ -1,21 +1,18 @@
-import React from 'react';
+import React from 'react'
 import { Content } from 'native-base'
 import styled from 'styled-components/native'
 import { TouchableOpacity } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 import teamStore from '../../../model/team-store'
 import { observer } from 'mobx-react/native'
-import {Header, PageWithMenu, TeamLogo, Button, UserListItem} from '../../../components/index'
+import { Header, PageWithMenu, TeamLogo, Button, UserListItem } from '../../../components/index'
 
 const DynamicContent = styled.View`
   flex: 1;
 `
 
-const TeamLogoWrapper = styled.View`
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
+const HeaderWrapper = styled.View`
+  margin-bottom: 20px;
 `
 
 const AddButtonWrapper = styled.View`
@@ -28,32 +25,33 @@ const AddButtonWrapper = styled.View`
   flex-direction: row;
 `
 
+const RightHeader = ({ onToggleMenu }) => (
+    <TouchableOpacity onPress={onToggleMenu}>
+        <MaterialIcons color='white' size={27} name='menu'/>
+    </TouchableOpacity>
+)
+
 const TeamComponent = observer(({ store, navigate }) => (
     <PageWithMenu navigate={navigate}>
         {({ onToggleMenu }) => (
-            !!store.team &&
             <DynamicContent>
-                <Header title={store.team.name} right={
-                    <TouchableOpacity onPress={onToggleMenu}>
-                        <MaterialIcons color='white' size={27} name='menu'/>
-                    </TouchableOpacity>
-                }/>
-
+                <HeaderWrapper>
+                    <Header title={<TeamLogo name={store.team.name}/>}
+                            right={<RightHeader onToggleMenu={onToggleMenu}/>}
+                    />
+                </HeaderWrapper>
                 <Content>
-                    <TeamLogoWrapper>
-                        <TeamLogo name={store.team.name}/>
-                    </TeamLogoWrapper>
                     {
                         store.team.users.map(u => (
                             <UserListItem key={u.id} user={u}/>
                         ))
                     }
                 </Content>
-                    <AddButtonWrapper>
-                        <Button onPress={() => {
-                            navigate('Invite')
-                        }} version='add'/>
-                    </AddButtonWrapper>
+                <AddButtonWrapper>
+                    <Button onPress={() => {
+                        navigate('Invite')
+                    }} version='add'/>
+                </AddButtonWrapper>
             </DynamicContent>
         )}
     </PageWithMenu>
