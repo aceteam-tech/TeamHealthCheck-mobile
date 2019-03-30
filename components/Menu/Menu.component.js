@@ -12,7 +12,7 @@ import { signOut } from '../../adapters/auth'
 
 const TeamName = styled.Text`
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   color: ${colors.air};
   font-size: 24px;
 `
@@ -27,8 +27,11 @@ const ChangeTeamText = styled.Text`
 const MenuItem = styled.TouchableOpacity`
   border-color: ${colors.separator};
   border-bottom-width: 1px;
+  border-top-width: 1px;
   flex-direction: row;
   align-items: center;
+  padding-bottom: 20px;
+  padding-top: 20px;
 `
 
 const MenuItemText = styled.Text`
