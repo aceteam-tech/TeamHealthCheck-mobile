@@ -9,7 +9,7 @@ const ListItem = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   margin-left: 20px;
   margin-bottom: 20px;
 `

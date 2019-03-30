@@ -10,7 +10,7 @@ import colors from '../../../constants/Colors'
 import { getHealthChecks } from '../../../adapters/api'
 
 const HeaderWrapper = styled.View`
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 `
 const PageContent = styled.View`
   flex: 1;

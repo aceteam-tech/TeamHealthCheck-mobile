@@ -20,6 +20,9 @@ const TeamLogoWrapper = styled.View`
 
 const AddButtonWrapper = styled.View`
   justify-content: flex-end;
+  position: absolute;
+  bottom: 0;
+  right: 0;
   margin-bottom: 20px;
   margin-right: 20px;
   flex-direction: row;
@@ -46,11 +49,11 @@ const TeamComponent = observer(({ store, navigate }) => (
                         ))
                     }
                 </Content>
-                <AddButtonWrapper>
-                    <Button onPress={() => {
-                        navigate('Invite')
-                    }} version='add'/>
-                </AddButtonWrapper>
+                    <AddButtonWrapper>
+                        <Button onPress={() => {
+                            navigate('Invite')
+                        }} version='add'/>
+                    </AddButtonWrapper>
             </DynamicContent>
         )}
     </PageWithMenu>
