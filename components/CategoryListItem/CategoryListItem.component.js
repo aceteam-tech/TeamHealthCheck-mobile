@@ -40,7 +40,7 @@ const RelativeValue = styled.View`
 `
 
 const getRelativeValue = (current, previous) => {
-    if (previous && (current - previous) !== 0) {
+    if (typeof previous !== 'undefined' && (current - previous) !== 0) {
         return current - previous
     }
     return ''
@@ -60,7 +60,7 @@ const CategoryListItem = ({ category }) => {
                         !!relativeValue
                         && (
                             <RelativeValue value={relativeValue}>
-                                <ListText>{relativeValue}</ListText>
+                                <ListText>{relativeValue > 0 ? `+${relativeValue}` : relativeValue}</ListText>
                             </RelativeValue>
                         )
                     }
