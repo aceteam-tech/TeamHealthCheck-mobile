@@ -1,50 +1,61 @@
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components/native'
 
-import { Input, Item, Form, Icon } from 'native-base'
-import { KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native'
-import { Button, Header, Separator, Page, Loader } from '../../../components'
+import { Input, Item, Form, Icon, Label } from 'native-base'
+import { Image, TouchableOpacity } from 'react-native'
+import { Button, Header, Page, Loader } from '../../../components'
 
 import { login } from '../../../adapters/auth'
 import colors from '../../../constants/Colors'
+import { labelStyle, inputStyle } from '../../../constants/Style'
 
-const iconLogin = require('./icon-login-2x.png')
-const iconUser = require('./icon-user-2x.png')
-const iconPassword = require('./icon-password-2x.png')
+const loginImage = require('./login-image-2x.png')
 
-const Footer = styled.View`
-    flex: 2;
-    justify-content: center;
-`
-
-const ForgotPassword = NoAccountYet = styled.TouchableOpacity`
+const ForgotPassword = styled.TouchableOpacity`
   margin-top: 25px;
   justify-content: center;
   align-items: center;
 `
 
-const ForgotPasswordText = NoAccountYetText = styled.Text`
-  color: #fff;
+const NoAccountYet = styled.TouchableOpacity`
+  margin-bottom: 25px;
+  justify-content: center;
+  align-items: center;
 `
 
-const inputStyle = {
-    color: colors.air
-}
+const ForgotPasswordText = styled.Text`
+  color: ${colors.air};
+  font-weight: 600;
+  font-size: 15px;
+`
 
-const inputWrapperStyle = {
-    borderBottomWidth: 1,
-    borderColor: colors.air
-}
+const NoAccountYetText = styled.Text`
+  color: ${colors.air};
+  font-size: 16px;
+  font-weight: 300;
+`
 
 const HeaderWrapper = styled.View`
   margin-bottom: 30px;
 `
 
-export default class LoginScreen extends React.Component {
-    static navigationOptions = {
-        header: null
-    };
+const PageContent = styled.View`
+  flex: 1;
+  justify-content: space-between;
+`
 
+const Top = Footer = styled.View``
+const Middle = styled.View`
+  flex: 1;
+  margin-top: 45px;
+`
+
+const formItemStyle = {
+    marginTop: 10,
+    marginBottom: 10,
+}
+
+export default class LoginScreen extends React.Component {
     state = {
         email: '',
         password: ''
@@ -79,10 +90,10 @@ export default class LoginScreen extends React.Component {
     render() {
         const { goBack } = this.props.navigation
         return (
-            <Loader assetsToLoad={[iconLogin, iconPassword, iconUser]}>
-                <Page>
+            <Loader assetsToLoad={[loginImage]}>
+                <Page version={2}>
                     <HeaderWrapper>
-                        <Header title='Log In' left={
+                        <Header title='LOG IN' left={
                             <TouchableOpacity onPress={() => goBack(null)}>
                                 <Icon name='ios-arrow-back'
                                       type='Ionicons'
@@ -90,61 +101,56 @@ export default class LoginScreen extends React.Component {
                             </TouchableOpacity>
                         }/>
                     </HeaderWrapper>
-                    <Image source={iconUser}
-                           resizeMode='contain'
-                           style={{ height: 120, alignSelf: 'center' }}/>
-                    <KeyboardAvoidingView style={{ flex: 1 }}
-                                          behavior="padding"
-                                          keyboardVerticalOffset={20}>
-                        <Form style={{ flex: 1, justifyContent: 'space-around', marginRight: 20 }}>
-                            <Item style={inputWrapperStyle}>
-                                <Image source={iconLogin}
-                                       style={{ height: 18, marginLeft: 10 }}
-                                       resizeMode='contain'/>
-                                <Input style={inputStyle}
-                                       autoCapitalize='none'
-                                       keyboardType='email-address'
-                                       textContentType='emailAddress'
-                                       returnKeyType='next'
-                                       autoCorrect={false}
-                                       underlineColorAndroid='transparent'
-                                       value={this.state.email}
-                                       onSubmitEditing={() => this.passwordInput.wrappedInstance.focus()}
-                                       blurOnSubmit={false}
-                                       onChangeText={(val) => this.onTextChange('email', val)}/>
-                            </Item>
-                            <Item style={inputWrapperStyle}>
-                                <Image source={iconPassword}
-                                       style={{ height: 18, marginLeft: 10 }}
-                                       resizeMode='contain'/>
-                                <Input style={inputStyle}
-                                       autoCorrect={false}
-                                       secureTextEntry
-                                       returnKeyType='send'
-                                       ref={input => {
-                                           this.passwordInput = input
-                                       }}
-                                       textContentType='password'
-                                       value={this.state.password}
-                                       onSubmitEditing={this.login}
-                                       onChangeText={(val) => this.onTextChange('password', val)}/>
-                            </Item>
-                        </Form>
-                    </KeyboardAvoidingView>
-                    <ForgotPassword onPress={this.forgotPassword}>
-                        <ForgotPasswordText>
-                            Forgot password?
-                        </ForgotPasswordText>
-                    </ForgotPassword>
-                    <Footer>
-                        <Button onPress={this.login} text='Continue' version='secondary'/>
-                        <Separator/>
-                        <NoAccountYet onPress={() => this.props.navigation.navigate('Register')}>
-                            <NoAccountYetText>
-                                Don't have an account yet?
-                            </NoAccountYetText>
-                        </NoAccountYet>
-                    </Footer>
+                    <PageContent>
+                        <Top>
+                            <Image source={loginImage}
+                                   resizeMode='contain'
+                                   style={{ height: 120, alignSelf: 'center' }}/>
+                        </Top>
+                        <Middle>
+                            <Form style={{ justifyContent: 'center', marginRight: 20 }}>
+                                <Item floatingLabel style={formItemStyle}>
+                                    <Label style={labelStyle}>Email</Label>
+                                    <Input style={inputStyle}
+                                           autoCapitalize='none'
+                                           keyboardType='email-address'
+                                           textContentType='emailAddress'
+                                           returnKeyType='next'
+                                           autoCorrect={false}
+                                           underlineColorAndroid='transparent'
+                                           value={this.state.email}
+                                           onSubmitEditing={() => this.passwordInput.wrappedInstance.focus()}
+                                           blurOnSubmit={false}
+                                           onChangeText={(val) => this.onTextChange('email', val)}/>
+                                </Item>
+                                <Item floatingLabel style={formItemStyle}>
+                                    <Label style={labelStyle}>Password</Label>
+                                    <Input style={inputStyle}
+                                           secureTextEntry
+                                           returnKeyType='send'
+                                           getRef={input => {this.passwordInput = input}}
+                                           textContentType='password'
+                                           value={this.state.password}
+                                           onSubmitEditing={this.login}
+                                           onChangeText={(val) => this.onTextChange('password', val)}/>
+                                </Item>
+                            </Form>
+                            <ForgotPassword onPress={this.forgotPassword}>
+                                <ForgotPasswordText>
+                                    Forgot password?
+                                </ForgotPasswordText>
+                            </ForgotPassword>
+                        </Middle>
+                        <Footer>
+                            <Button onPress={this.login} text='Continue' version='secondary'/>
+                            <NoAccountYet onPress={() => this.props.navigation.navigate('Register')}>
+                                <NoAccountYetText>
+                                    Don't have an account yet?
+                                </NoAccountYetText>
+                            </NoAccountYet>
+                        </Footer>
+
+                    </PageContent>
                 </Page>
             </Loader>
         )

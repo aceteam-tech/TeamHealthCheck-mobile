@@ -6,6 +6,7 @@ export default class App extends React.Component {
     assetsToLoad = [
         // Backgrounds
         require('./components/Page/background.png'),
+        require('./components/Page/background-v2.png'),
         // Tab navigation icons
         require('./navigation/icon-team-active.png'),
         require('./navigation/icon-team-inactive.png'),

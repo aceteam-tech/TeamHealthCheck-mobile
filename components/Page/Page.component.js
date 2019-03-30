@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import BgBlueGradient from './background.png'
+import BackgroundV1 from './background.png'
+import BackgroundV2 from './background-v2.png'
 import appStore from '../../model/app.store'
 import Loading from '../Loading/Loading.component'
 import { observer } from 'mobx-react/native'
@@ -11,11 +12,11 @@ const PageCompoponent = styled.ImageBackground`
 `
 
 @observer
-export default class Page extends React.Component {
+class Page extends React.Component {
     render() {
-        const {children} = this.props
+        const {children, version} = this.props
         return (
-            <PageCompoponent source={BgBlueGradient}>
+            <PageCompoponent source={version === 2 ? BackgroundV2 : BackgroundV1}>
                 {
                     appStore.loading ? <Loading/> : children
                 }
@@ -23,3 +24,9 @@ export default class Page extends React.Component {
         )
     }
 }
+
+Page.defaultProps = {
+    version: 1
+}
+
+export default Page

@@ -15,6 +15,7 @@ const HeaderTitle = styled.Text`
   font-weight: bold;
   text-align: center;
   flex: 3;
+  align-self: center;
 `
 
 const HeaderCenter = styled.View`
