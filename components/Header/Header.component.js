@@ -11,8 +11,8 @@ const Header = styled.View`
 
 const HeaderTitle = styled.Text`
   color: ${colors.air};
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 17px;
+  font-weight: 600;
   text-align: center;
   flex: 3;
   align-self: center;
