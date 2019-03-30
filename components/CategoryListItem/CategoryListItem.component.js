@@ -10,8 +10,8 @@ const ListItem = styled.View`
   align-items: center;
   justify-content: space-between;
   padding-bottom: 20px;
+  padding-top: 20px;
   margin-left: 20px;
-  margin-bottom: 20px;
 `
 
 const ListText = styled.Text`

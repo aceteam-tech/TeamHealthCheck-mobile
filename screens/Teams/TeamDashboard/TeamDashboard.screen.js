@@ -9,9 +9,8 @@ import { Header, PageWithMenu, CategoryListItem } from '../../../components/inde
 import colors from '../../../constants/Colors'
 import { getHealthChecks } from '../../../adapters/api'
 
-const HeaderWrapper = styled.View`
-  margin-bottom: 15px;
-`
+const HeaderWrapper = styled.View``
+
 const PageContent = styled.View`
   flex: 1;
 `
