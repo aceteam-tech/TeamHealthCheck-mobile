@@ -5,13 +5,13 @@ class ObservableAppStore {
 
     apiRequestCalled = (promise) => {
         this.loading = true
-        return promise.then(res => {
+
+        promise.finally(res => {
             this.loading = false
             return res
-        }).catch(e => {
-            this.loading = false
-            throw new Error(e)
         })
+
+        return promise
     }
 }
 
