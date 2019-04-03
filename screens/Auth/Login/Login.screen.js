@@ -73,7 +73,7 @@ export default class LoginScreen extends React.Component {
             this.props.navigation.navigate('AuthLoading', { email: this.state.email })
         }
         catch (e) {
-            console.error(e)
+            console.log({'e': e});
         }
     }
 
