@@ -8,6 +8,7 @@ import { Button, Header, Page, Loader } from '../../../components'
 import { login } from '../../../adapters/auth'
 import colors from '../../../constants/Colors'
 import { labelStyle, inputStyle } from '../../../constants/Style'
+import appStore from '../../../model/app.store'
 
 const loginImage = require('./login-image-2x.png')
 
@@ -85,6 +86,7 @@ export default class LoginScreen extends React.Component {
         this.setState({
             email: this.props.navigation.getParam('email')
         })
+        appStore.navigation = this.props.navigation
     }
 
     render() {

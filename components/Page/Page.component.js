@@ -5,6 +5,7 @@ import BackgroundV2 from './background-v2.png'
 import appStore from '../../model/app.store'
 import Loading from '../Loading/Loading.component'
 import { observer } from 'mobx-react/native'
+import Error from '../Error/Error.component'
 
 const PageCompoponent = styled.ImageBackground`
     flex: 1;
@@ -15,6 +16,9 @@ const PageCompoponent = styled.ImageBackground`
 class Page extends React.Component {
     render() {
         const {children, version} = this.props
+        if(appStore.error){
+            return <Error />
+        }
         return (
             <PageCompoponent source={version === 2 ? BackgroundV2 : BackgroundV1}>
                 {

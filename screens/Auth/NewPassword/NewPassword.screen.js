@@ -47,7 +47,7 @@ export default class NewPasswordScreen extends React.Component {
             this.props.navigation.navigate('Login')
         }
         catch (e) {
-            console.error(e)
+            console.log(e)
         }
     }
 

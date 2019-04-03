@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {Button as NativeButton, Text} from 'native-base'
 import colors from '../../constants/Colors';
 
-const textStyle = {
+const defaultTextStyle = {
     fontSize: 14,
     textAlign: 'center',
     fontWeight: 'bold',
@@ -20,15 +20,20 @@ const buttonStyle = {
     marginBottom: 30,
     backgroundColor: colors.air
 }
-const Button = ({text, onPress}) => (
+const Button = ({text, textStyle, onPress}) => (
     <NativeButton rounded style={buttonStyle} onPress={onPress}>
-        <Text style={textStyle}>{text.toUpperCase()}</Text>
+        <Text style={[defaultTextStyle, textStyle]}>{text.toUpperCase()}</Text>
     </NativeButton>
 )
 
 Button.propTypes = {
     text: PropTypes.string,
+    textStyle: PropTypes.object,
     onPress: PropTypes.func
+}
+
+Button.defaultProps = {
+    textStyle: {}
 }
 
 export default Button
