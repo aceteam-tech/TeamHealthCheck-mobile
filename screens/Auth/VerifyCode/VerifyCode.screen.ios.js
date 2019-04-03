@@ -54,7 +54,7 @@ export default class VerifyCodeScreen extends React.Component {
             await verify(email, code)
             this.props.navigation.navigate('Login', { email })
         } catch (e) {
-            console.warn(e)
+            console.log(e)
         }
     }
 
