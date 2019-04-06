@@ -1,10 +1,10 @@
-import React from 'react';
-import {Input, Label, Item, Form, Icon} from 'native-base'
-import {KeyboardAvoidingView, TouchableOpacity} from 'react-native'
+import React from 'react'
+import { Input, Label, Item, Form, Icon } from 'native-base'
+import { KeyboardAvoidingView, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
-import {addTeam} from '../../../adapters/api'
-import {Button, Header, Page, TeamLogo} from '../../../components'
-import {labelStyle, inputStyle} from '../../../constants/Style'
+import { addTeam } from '../../../adapters/api'
+import { Button, Header, Page, TeamLogo } from '../../../components'
+import { labelStyle, inputStyle } from '../../../constants/Style'
 
 const LogoWrapper = styled.View`
   flex: 1;
@@ -23,8 +23,8 @@ const HeaderWrapper = styled.View`
 
 export default class AddTeamScreen extends React.Component {
     static navigationOptions = {
-        header: null,
-    };
+        header: null
+    }
 
     state = {
         name: ''
@@ -36,30 +36,31 @@ export default class AddTeamScreen extends React.Component {
         })
     }
 
-    async addTeam () {
+    async addTeam() {
         await addTeam(this.state.name)
         this.props.navigation.push('Teams')
     }
 
-    render () {
-        const {goBack} = this.props.navigation
+    render() {
+        const { goBack } = this.props.navigation
         return (
-            <Page>
-                <HeaderWrapper>
-                    <Header title='Add Team' left={
-                        <TouchableOpacity onPress={() => goBack(null)}>
-                            <Icon name='ios-arrow-back'
-                                  type='Ionicons'
-                                  style={{color: '#FFF', fontSize: 30}}/>
-                        </TouchableOpacity>
-                    }/>
-                </HeaderWrapper>
-                <LogoWrapper>
-                    <TeamLogo name={this.state.name} size={100}/>
-                </LogoWrapper>
-                <KeyboardAvoidingView behavior="padding"
-                                      keyboardVerticalOffset={20}>
-                    <Form style={{justifyContent: 'space-around', marginRight: 15, marginTop: 30}}>
+            <Page dismissKeyboard={true}>
+                <KeyboardAvoidingView style={{ flex: 1 }}
+                                      behavior="position"
+                                      contentContainerStyle={{ flex: 1 }}>
+                    <HeaderWrapper>
+                        <Header title='Add Team' left={
+                            <TouchableOpacity onPress={() => goBack(null)}>
+                                <Icon name='ios-arrow-back'
+                                      type='Ionicons'
+                                      style={{ color: '#FFF', fontSize: 30 }}/>
+                            </TouchableOpacity>
+                        }/>
+                    </HeaderWrapper>
+                    <LogoWrapper>
+                        <TeamLogo name={this.state.name} size={100}/>
+                    </LogoWrapper>
+                    <Form style={{ justifyContent: 'space-around', marginRight: 15, marginTop: 30 }}>
                         <Item floatingLabel>
                             <Label style={labelStyle}>Team name</Label>
                             <Input style={inputStyle}
@@ -70,10 +71,10 @@ export default class AddTeamScreen extends React.Component {
                                    onChangeText={(val) => this.onTextChange('name', val)}/>
                         </Item>
                     </Form>
+                    <Footer>
+                        <Button version='secondary' onPress={() => this.addTeam()} text='Add'/>
+                    </Footer>
                 </KeyboardAvoidingView>
-                <Footer>
-                    <Button version='secondary' onPress={() => this.addTeam()} text='Add'/>
-                </Footer>
             </Page>
         )
     }

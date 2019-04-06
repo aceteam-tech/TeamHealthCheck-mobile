@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components/native'
 
 import { Input, Item, Form, Icon, Label } from 'native-base'
-import { Image, TouchableOpacity } from 'react-native'
+import { Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 import { Button, Header, Page, Loader } from '../../../components'
 
 import { login } from '../../../adapters/auth'
@@ -48,12 +48,13 @@ const PageContent = styled.View`
 const Top = Footer = styled.View``
 const Middle = styled.View`
   flex: 1;
+  justify-content: center;
   margin-top: 45px;
 `
 
 const formItemStyle = {
     marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 10
 }
 
 export default class LoginScreen extends React.Component {
@@ -74,7 +75,7 @@ export default class LoginScreen extends React.Component {
             this.props.navigation.navigate('AuthLoading', { email: this.state.email })
         }
         catch (e) {
-            console.log({'e': e});
+            console.log({ 'e': e })
         }
     }
 
@@ -93,66 +94,72 @@ export default class LoginScreen extends React.Component {
         const { goBack } = this.props.navigation
         return (
             <Loader assetsToLoad={[loginImage]}>
-                <Page version={2}>
-                    <HeaderWrapper>
-                        <Header title='LOG IN' left={
-                            <TouchableOpacity onPress={() => goBack(null)}>
-                                <Icon name='ios-arrow-back'
-                                      type='Ionicons'
-                                      style={{ color: colors.air, fontSize: 30 }}/>
-                            </TouchableOpacity>
-                        }/>
-                    </HeaderWrapper>
-                    <PageContent>
-                        <Top>
-                            <Image source={loginImage}
-                                   resizeMode='contain'
-                                   style={{ height: 120, alignSelf: 'center' }}/>
-                        </Top>
-                        <Middle>
-                            <Form style={{ justifyContent: 'center', marginRight: 20 }}>
-                                <Item floatingLabel style={formItemStyle}>
-                                    <Label style={labelStyle}>Email</Label>
-                                    <Input style={inputStyle}
-                                           autoCapitalize='none'
-                                           keyboardType='email-address'
-                                           textContentType='emailAddress'
-                                           returnKeyType='next'
-                                           autoCorrect={false}
-                                           underlineColorAndroid='transparent'
-                                           value={this.state.email}
-                                           onSubmitEditing={() => this.passwordInput.wrappedInstance.focus()}
-                                           blurOnSubmit={false}
-                                           onChangeText={(val) => this.onTextChange('email', val)}/>
-                                </Item>
-                                <Item floatingLabel style={formItemStyle}>
-                                    <Label style={labelStyle}>Password</Label>
-                                    <Input style={inputStyle}
-                                           secureTextEntry
-                                           returnKeyType='send'
-                                           getRef={input => {this.passwordInput = input}}
-                                           textContentType='password'
-                                           value={this.state.password}
-                                           onSubmitEditing={this.login}
-                                           onChangeText={(val) => this.onTextChange('password', val)}/>
-                                </Item>
-                            </Form>
-                            <ForgotPassword onPress={this.forgotPassword}>
-                                <ForgotPasswordText>
-                                    Forgot password?
-                                </ForgotPasswordText>
-                            </ForgotPassword>
-                        </Middle>
-                        <Footer>
-                            <Button onPress={this.login} text='Continue' version='secondary'/>
-                            <NoAccountYet onPress={() => this.props.navigation.navigate('Register')}>
-                                <NoAccountYetText>
-                                    Don't have an account yet?
-                                </NoAccountYetText>
-                            </NoAccountYet>
-                        </Footer>
+                <Page version={2} dismissKeyboard={true}>
+                    <KeyboardAvoidingView style={{ flex: 1 }}
+                                          behavior="position"
+                                          contentContainerStyle={{ flex: 1 }}>
+                        <HeaderWrapper>
+                            <Header title='LOG IN' left={
+                                <TouchableOpacity onPress={() => goBack(null)}>
+                                    <Icon name='ios-arrow-back'
+                                          type='Ionicons'
+                                          style={{ color: colors.air, fontSize: 30 }}/>
+                                </TouchableOpacity>
+                            }/>
+                        </HeaderWrapper>
+                        <PageContent>
+                            <Top>
+                                <Image source={loginImage}
+                                       resizeMode='contain'
+                                       style={{ height: 120, alignSelf: 'center' }}/>
+                            </Top>
+                            <Middle>
+                                <Form style={{ justifyContent: 'center', marginRight: 20 }}>
+                                    <Item floatingLabel style={formItemStyle}>
+                                        <Label style={labelStyle}>Email</Label>
+                                        <Input style={inputStyle}
+                                               autoCapitalize='none'
+                                               keyboardType='email-address'
+                                               textContentType='emailAddress'
+                                               returnKeyType='next'
+                                               autoCorrect={false}
+                                               underlineColorAndroid='transparent'
+                                               value={this.state.email}
+                                               onSubmitEditing={() => this.passwordInput.wrappedInstance.focus()}
+                                               blurOnSubmit={false}
+                                               onChangeText={(val) => this.onTextChange('email', val)}/>
+                                    </Item>
+                                    <Item floatingLabel style={formItemStyle}>
+                                        <Label style={labelStyle}>Password</Label>
+                                        <Input style={inputStyle}
+                                               secureTextEntry
+                                               returnKeyType='send'
+                                               getRef={input => {
+                                                   this.passwordInput = input
+                                               }}
+                                               textContentType='password'
+                                               value={this.state.password}
+                                               onSubmitEditing={this.login}
+                                               onChangeText={(val) => this.onTextChange('password', val)}/>
+                                    </Item>
+                                </Form>
+                                <ForgotPassword onPress={this.forgotPassword}>
+                                    <ForgotPasswordText>
+                                        Forgot password?
+                                    </ForgotPasswordText>
+                                </ForgotPassword>
+                            </Middle>
+                            <Footer>
+                                <Button onPress={this.login} text='Continue' version='secondary'/>
+                                <NoAccountYet onPress={() => this.props.navigation.navigate('Register')}>
+                                    <NoAccountYetText>
+                                        Don't have an account yet?
+                                    </NoAccountYetText>
+                                </NoAccountYet>
+                            </Footer>
 
-                    </PageContent>
+                        </PageContent>
+                    </KeyboardAvoidingView>
                 </Page>
             </Loader>
         )

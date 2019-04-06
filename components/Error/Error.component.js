@@ -25,7 +25,7 @@ const ErrorDescription = styled.Text`
   color: ${colors.air};
   font-weight: 300;
   font-size: 20px;
-  margin: 10px 0 50px;
+  margin: 10px 15px 50px;
 `
 
 const ErrorComponent = () => (

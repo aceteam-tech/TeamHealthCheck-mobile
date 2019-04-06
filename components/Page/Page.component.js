@@ -6,6 +6,7 @@ import appStore from '../../model/app.store'
 import Loading from '../Loading/Loading.component'
 import { observer } from 'mobx-react/native'
 import Error from '../Error/Error.component'
+import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
 
 const PageCompoponent = styled.ImageBackground`
     flex: 1;
@@ -15,22 +16,27 @@ const PageCompoponent = styled.ImageBackground`
 @observer
 class Page extends React.Component {
     render() {
-        const {children, version} = this.props
-        if(appStore.error){
-            return <Error />
+        const { children, version, dismissKeyboard } = this.props
+        if (appStore.error) {
+            return <Error/>
         }
         return (
             <PageCompoponent source={version === 2 ? BackgroundV2 : BackgroundV1}>
-                {
-                    appStore.loading ? <Loading/> : children
-                }
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss} disabled={!dismissKeyboard} style={{ flex: 1 }}>
+                    <View style={{ flex: 1 }}>
+                        {
+                            appStore.loading ? <Loading/> : children
+                        }
+                    </View>
+                </TouchableWithoutFeedback>
             </PageCompoponent>
         )
     }
 }
 
 Page.defaultProps = {
-    version: 1
+    version: 1,
+    dismissKeyboard: false,
 }
 
 export default Page

@@ -63,7 +63,7 @@ export default class VerifyCodeScreen extends React.Component {
         const { goBack } = this.props.navigation
         return (
             <Loader assetsToLoad={[iconVerificationCode]}>
-                <Page>
+                <Page dismissKeyboard={true}>
                     <View>
                         <TouchableOpacity onPress={() => goBack(null)}>
                             <Icon name='ios-arrow-back'

@@ -38,7 +38,7 @@ export default class VerifyCodeScreen extends React.Component {
         this.setState({
             code
         })
-        if(code.length === this.codeLength){
+        if (code.length === this.codeLength) {
             await this.verify(code)
         }
     }
@@ -58,26 +58,32 @@ export default class VerifyCodeScreen extends React.Component {
         const { goBack } = this.props.navigation
         return (
             <Loader assetsToLoad={[iconVerificationCode]}>
-                <Page>
-                    <View>
-                        <TouchableOpacity onPress={() => goBack(null)}>
-                            <Icon name='ios-arrow-back'
-                                  type='Ionicons'
-                                  style={{ color: '#FFF', fontSize: 30, marginLeft: 20, marginBottom: 20 }}/>
-                        </TouchableOpacity>
-                        <Header>
-                            <Image source={iconVerificationCode}
-                                   resizeMode='contain'
-                                   style={{ height: 120 }}/>
-                            <HeaderText>Verification Code</HeaderText>
-                            <Text style={{ color: colors.air, marginTop: 16, marginLeft: 20, marginRight: 20, textAlign: 'center' }}>
-                                Please type the verification code sent to {email}
-                            </Text>
-                        </Header>
-                    </View>
+                <Page dismissKeyboard={true}>
                     <KeyboardAvoidingView style={{ flex: 1 }}
-                                          behavior="padding"
-                                          keyboardVerticalOffset={20}>
+                                          behavior="position"
+                                          contentContainerStyle={{ flex: 1 }}>
+                        <View>
+                            <TouchableOpacity onPress={() => goBack(null)}>
+                                <Icon name='ios-arrow-back'
+                                      type='Ionicons'
+                                      style={{ color: '#FFF', fontSize: 30, marginLeft: 20, marginBottom: 20 }}/>
+                            </TouchableOpacity>
+                            <Header>
+                                <Image source={iconVerificationCode}
+                                       resizeMode='contain'
+                                       style={{ height: 120 }}/>
+                                <HeaderText>Verification Code</HeaderText>
+                                <Text style={{
+                                    color: colors.air,
+                                    marginTop: 16,
+                                    marginLeft: 20,
+                                    marginRight: 20,
+                                    textAlign: 'center'
+                                }}>
+                                    Please type the verification code sent to {email}
+                                </Text>
+                            </Header>
+                        </View>
                         <Form style={{ flex: 1, justifyContent: 'space-around', marginRight: 15 }}>
                             <Item floatingLabel>
                                 <Label style={labelStyle}>Verification code</Label>
@@ -93,12 +99,13 @@ export default class VerifyCodeScreen extends React.Component {
                                        onChangeText={this.onCodeChange}/>
                             </Item>
                         </Form>
+                        <Footer>
+                            <Button rounded light onPress={this.verify} style={buttonStyle}>
+                                <Text style={buttonTextStyle}>{'Continue'.toUpperCase()}</Text>
+                            </Button>
+                        </Footer>
+
                     </KeyboardAvoidingView>
-                    <Footer>
-                        <Button rounded light onPress={this.verify} style={buttonStyle}>
-                            <Text style={buttonTextStyle}>{'Continue'.toUpperCase()}</Text>
-                        </Button>
-                    </Footer>
                 </Page>
             </Loader>
         )
