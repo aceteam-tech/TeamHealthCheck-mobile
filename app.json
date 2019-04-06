@@ -33,7 +33,7 @@
       "versionCode": 6,
       "splash": {
         "image": "./assets/images/splash-icon-android.png",
-        "resizeMode": "contain",
+        "resizeMode": "cover",
         "backgroundColor": "#0CAADC"
       }
     }
