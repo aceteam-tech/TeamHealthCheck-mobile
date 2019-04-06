@@ -25,7 +25,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "net.teamhealthcheck",
-      "buildNumber": "1"
+      "buildNumber": "2"
     },
     "android": {
       "package": "tech.aceteam.health_check",
