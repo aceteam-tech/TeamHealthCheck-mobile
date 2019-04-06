@@ -35,7 +35,7 @@ const HeaderRight = styled.View`
 `
 
 export default ({ title, left, right }) => (
-    <Header style={{ marginTop: ifNotch ? 15 : 0 }}>
+    <Header style={{ marginTop: ifNotch ? 30 : 0 }}>
         <HeaderLeft>
             {left}
         </HeaderLeft>

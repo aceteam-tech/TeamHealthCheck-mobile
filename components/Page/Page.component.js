@@ -6,7 +6,7 @@ import appStore from '../../model/app.store'
 import Loading from '../Loading/Loading.component'
 import { observer } from 'mobx-react/native'
 import Error from '../Error/Error.component'
-import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
+import { Keyboard, TouchableWithoutFeedback, View, StatusBar } from 'react-native'
 
 const PageCompoponent = styled.ImageBackground`
     flex: 1;
@@ -22,6 +22,7 @@ class Page extends React.Component {
         }
         return (
             <PageCompoponent source={version === 2 ? BackgroundV2 : BackgroundV1}>
+                <StatusBar barStyle="light-content" />
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} disabled={!dismissKeyboard} style={{ flex: 1 }}>
                     <View style={{ flex: 1 }}>
                         {
