@@ -7,7 +7,10 @@ import {Button, Header, Loading, UsersCompactList, PageWithMenu} from '../../../
 import teamStore from '../../../model/team-store'
 import userStore from '../../../model/user-store'
 import healthCheckStore from '../../../model/health-check-store'
-import { getHealthCheckStatus, createHealthCheck, endHealthCheck, getHealthChecks } from '../../../adapters/api'
+import {
+    getHealthCheckStatus, createHealthCheck, endHealthCheck, getHealthChecks,
+    getMyTeams
+} from '../../../adapters/api'
 import { observer } from 'mobx-react/native'
 
 const Footer = styled.View`
@@ -146,7 +149,15 @@ const HealthCheckComponent = observer(({ healthCheckStore, teamStore, userStore,
 })
 
 export default class HealthCheckScreen extends React.Component {
-    async componentDidMount() {
+    componentDidMount() {
+        this.updateSubscription = this.props.navigation.addListener('didFocus', this.update)
+    }
+
+    componentWillUnmount() {
+        this.updateSubscription.remove()
+    }
+
+    async update() {
         const healthCheck = await getHealthCheckStatus(teamStore.team.id)
         healthCheckStore.setHealthCheck(healthCheck)
     }

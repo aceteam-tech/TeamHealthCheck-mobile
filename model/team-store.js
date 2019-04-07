@@ -2,6 +2,8 @@ import { observable, computed } from 'mobx'
 import { lastResults } from '../logic/last-results'
 
 class ObservableTeamStore {
+    @observable teams = []
+
     @observable team = {
         name: '',
         users: []

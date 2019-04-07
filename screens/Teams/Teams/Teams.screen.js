@@ -1,12 +1,13 @@
 import React from 'react'
 import { Image, Text, Animated, TouchableOpacity } from 'react-native'
 import { Content } from 'native-base'
+import { observer } from 'mobx-react/native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import styled from 'styled-components/native'
+
 import { getMyTeams } from '../../../adapters/api'
 import teamStore from '../../../model/team-store'
 import { Header, Button, Page, TeamCard, Loader } from '../../../components/index'
-import styled from 'styled-components/native'
-import ifNotch from '../../../helpers/ifNotch'
 import colors from '../../../constants/Colors'
 import { signOut } from '../../../adapters/auth'
 
@@ -40,7 +41,6 @@ const Menu = styled(Animated.View)`
     justify-content: center;
     flex-direction: row;
     align-items: center;
-    padding-bottom: ${ifNotch ? 20 : 0};
     box-shadow: 0 -2px 3px rgba(0,0,0,0.15);
 `
 
@@ -64,7 +64,8 @@ const NoneTeamsText = styled.Text`
   
 `
 
-class TeamsScreenComponent extends React.Component {
+@observer
+export default class TeamsScreen extends React.Component {
     state = {
         isOpen: false,
         bounceValue: new Animated.Value(200)
@@ -88,8 +89,27 @@ class TeamsScreenComponent extends React.Component {
         this.setState({ isOpen: !this.state.isOpen })
     }
 
+    chooseTeam = async (team) => {
+        teamStore.setTeam(team)
+        this.props.navigation.navigate('TeamDashboard')
+    }
+
+    componentDidMount() {
+        this.updateTeamsSubscription = this.props.navigation.addListener('didFocus', this.updateTeams)
+    }
+
+    componentWillUnmount() {
+        this.updateTeamsSubscription.remove()
+    }
+
+    async updateTeams() {
+        const teams = await getMyTeams()
+        teamStore.teams = teams
+    }
+
     render() {
-        const { teams, chooseTeam, navigate } = this.props
+        const { navigate } = this.props.navigation
+        const { teams } = teamStore
         return (
             <Loader assetsToLoad={[iconLink, iconPlus]}>
                 <Page>
@@ -113,7 +133,7 @@ class TeamsScreenComponent extends React.Component {
                             <Content>
                                 {
                                     teams.map(team => (
-                                        <TeamCard key={team.id} onPress={chooseTeam} item={team}/>
+                                        <TeamCard key={team.id} onPress={this.chooseTeam} item={team}/>
                                     ))
                                 }
                             </Content>
@@ -151,31 +171,5 @@ class TeamsScreenComponent extends React.Component {
 
             </Loader>
         )
-    }
-}
-
-export default class TeamsScreen extends React.Component {
-    state = {
-        teams: []
-    }
-
-    async componentDidMount() {
-        const teams = await getMyTeams()
-        if (teams) {
-            this.setState({ teams })
-        }
-    }
-
-    chooseTeam = async (team) => {
-        teamStore.setTeam(team)
-        this.props.navigation.navigate('TeamDashboard')
-    }
-
-    render() {
-        return <TeamsScreenComponent
-            teams={this.state.teams}
-            chooseTeam={this.chooseTeam}
-            navigate={this.props.navigation.navigate}
-        />
     }
 }

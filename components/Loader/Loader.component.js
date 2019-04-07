@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { Platform, StatusBar } from 'react-native'
 import { AppLoading, Asset, Font } from 'expo'
 
 const Container = styled.View`
@@ -48,7 +47,6 @@ export default class Loader extends React.Component {
         }
         return (
             <Container>
-                {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
                 {
                     this.props.children
                 }

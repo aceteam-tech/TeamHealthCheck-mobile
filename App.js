@@ -1,6 +1,6 @@
 import React from 'react'
 import AppNavigator from './navigation/AppNavigator'
-import {Loader} from './components'
+import { Loader } from './components'
 
 export default class App extends React.Component {
     assetsToLoad = [
@@ -19,11 +19,10 @@ export default class App extends React.Component {
         require('./components/Error/error-icon.png')
     ]
 
-
     render() {
         return (
             <Loader assetsToLoad={this.assetsToLoad}>
-                <AppNavigator />
+                <AppNavigator/>
             </Loader>
         )
     }

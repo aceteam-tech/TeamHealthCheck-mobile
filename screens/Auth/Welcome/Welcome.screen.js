@@ -52,10 +52,6 @@ const Footer = styled.View`
 `
 
 export default class WelcomeScreen extends React.Component {
-    static navigationOptions = {
-        header: null
-    };
-
     login = async () => {
         await login(this.state.email, this.state.password)
         this.props.navigation.navigate('AuthLoading', { email: this.state.email })

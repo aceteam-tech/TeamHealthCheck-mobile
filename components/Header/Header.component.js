@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import colors from '../../constants/Colors'
-import ifNotch from '../../helpers/ifNotch'
 
 const Header = styled.View`
+  margin-top: 15px;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
@@ -35,7 +35,7 @@ const HeaderRight = styled.View`
 `
 
 export default ({ title, left, right }) => (
-    <Header style={{ marginTop: ifNotch ? 30 : 0 }}>
+    <Header>
         <HeaderLeft>
             {left}
         </HeaderLeft>

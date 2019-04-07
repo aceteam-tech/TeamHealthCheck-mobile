@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components/native'
+import { Keyboard, TouchableWithoutFeedback, SafeAreaView, StatusBar } from 'react-native'
 import BackgroundV1 from './background.png'
 import BackgroundV2 from './background-v2.png'
 import appStore from '../../model/app.store'
 import Loading from '../Loading/Loading.component'
 import { observer } from 'mobx-react/native'
 import Error from '../Error/Error.component'
-import { Keyboard, TouchableWithoutFeedback, View, StatusBar } from 'react-native'
 
 const PageCompoponent = styled.ImageBackground`
     flex: 1;
@@ -24,11 +24,11 @@ class Page extends React.Component {
             <PageCompoponent source={version === 2 ? BackgroundV2 : BackgroundV1}>
                 <StatusBar barStyle="light-content" />
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} disabled={!dismissKeyboard} style={{ flex: 1 }}>
-                    <View style={{ flex: 1 }}>
+                    <SafeAreaView style={{flex: 1}}>
                         {
                             appStore.loading ? <Loading/> : children
                         }
-                    </View>
+                    </SafeAreaView>
                 </TouchableWithoutFeedback>
             </PageCompoponent>
         )
