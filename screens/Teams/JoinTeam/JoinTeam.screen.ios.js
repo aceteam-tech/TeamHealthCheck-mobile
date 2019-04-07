@@ -7,6 +7,7 @@ import colors from '../../../constants/Colors'
 import {buttonStyle, buttonTextStyle} from '../../../constants/Style'
 import {Header, Page, PinInput} from '../../../components/index'
 import teamsStore from '../../../model/team-store'
+import { switchInput, updateCode } from '../../Auth/VerifyCode/VerifyCode.helpers'
 
 const Footer = styled.View`
     flex: 1;
@@ -24,48 +25,32 @@ const CodeLabel = styled.Text`
 `
 
 export default class VerifyCodeScreen extends React.Component {
-    static navigationOptions = {
-        header: null,
-    };
-
     code = []
+    codeLength = 6
 
     state = {
-        code: ['', '', '', '', '', '']
+        code: '',
+        activeInput: 0
     }
 
-    onCodeChange = async (i, key) => {
-        if(key !== 'Backspace') {
-            this.state.code.splice(i, 1, key)
-            if (i < 5 && key) {
-                this.code[i + 1].focus()
-            }
-        }
-        else if (i === 0) {
-            this.state.code.splice(i, 1, '')
-            this.code[i].focus()
-        }
-        else {
-            if (!this.state.code[i]) {
-                this.state.code.splice(i - 1, 2, '', '')
-            } else {
-                this.state.code.splice(i, 1, '')
-            }
-            this.code[i - 1].focus()
-        }
-        this.setState({
-            code: this.state.code
-        })
-        if(i === 5){
-            await this.verify()
+    onKeyPress = async (i, key) => {
+        const code = updateCode(this.state.code, key, this.codeLength)
+        const activeInputIndex = switchInput(code, this.codeLength)
+        this.setState({ code })
+        this.code[activeInputIndex].focus()
+        if(code.length === this.codeLength){
+            await this.verify(code)
         }
     }
 
-    verify = async () => {
-        const code = this.state.code.join('')
-        const team = await joinTeam(code)
-        teamsStore.setTeam(team)
-        this.props.navigation.navigate('TeamDashboard')
+    verify = async (code) => {
+        try {
+            const team = await joinTeam(code)
+            teamsStore.setTeam(team)
+            this.props.navigation.navigate('TeamDashboard')
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     render () {
@@ -92,9 +77,11 @@ export default class VerifyCodeScreen extends React.Component {
                                     key={i}
                                     index={i}
                                     autoFocus={i === 0}
-                                    value={this.state.code[i]}
-                                    handle={(ref) => {this.code[i] = ref}}
-                                    onChange={this.onCodeChange}
+                                    value={this.state.code[i] || ''}
+                                    handle={(ref) => {
+                                        this.code[i] = ref
+                                    }}
+                                    onKeyPress={this.onKeyPress}
                                 />
                             ))
                         }
