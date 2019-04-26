@@ -44,11 +44,15 @@ const registerFn = async (navigate) => {
     }
 }
 
+
 export default observer(({ navigation }) => {
     const { goBack } = navigation
     const { name, email, password } = registerFormStore.form
     const { errors, formValidated } = registerFormStore
-    let refs = { email, password }
+    let refs = {
+        email: null,
+        password: null
+    }
     const register = registerFn.bind(null, navigation.navigate)
 
     return (
