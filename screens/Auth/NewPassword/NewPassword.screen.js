@@ -1,12 +1,11 @@
 import React from 'react'
 import styled from 'styled-components/native'
 
-import { Button, Text, Input, Item, Form, Icon, Label } from 'native-base'
-import { KeyboardAvoidingView, Image, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native'
-import { Page, Loader, Header } from '../../../components'
+import { Button, Text, Input, Item, Form, Label } from 'native-base'
+import { KeyboardAvoidingView, Image } from 'react-native'
+import { Page, Loader, Header, ArrowBack } from '../../../components'
 
 import { forgotPasswordSubmit } from '../../../adapters/auth'
-import colors from '../../../constants/Colors'
 import { buttonStyle, buttonTextStyle, labelStyle, inputStyle } from '../../../constants/Style'
 
 const iconLocker = require('./icon-locker-3x.png')
@@ -66,13 +65,7 @@ export default class NewPasswordScreen extends React.Component {
                     <KeyboardAvoidingView style={{ flex: 1 }}
                                           behavior="position"
                                           contentContainerStyle={{ flex: 1 }}>
-                        <Header title='NEW PASSWORD' left={
-                            <TouchableOpacity onPress={() => goBack(null)}>
-                                <Icon name='ios-arrow-back'
-                                      type='Ionicons'
-                                      style={{ color: colors.air, fontSize: 30 }}/>
-                            </TouchableOpacity>
-                        }/>
+                        <Header title='NEW PASSWORD' left={<ArrowBack onPress={() => goBack(null)}/>}/>
                         <PageContent>
                             <Top>
                                 <Image source={iconLocker}

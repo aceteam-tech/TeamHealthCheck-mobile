@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components/native'
 
-import { Button, Text, Form, Icon } from 'native-base'
-import { KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native'
-import { Page, PinInput, Loader, Header } from '../../../components'
+import { Button, Text, Form } from 'native-base'
+import { KeyboardAvoidingView, Image } from 'react-native'
+import { Page, PinInput, Loader, Header, ArrowBack } from '../../../components'
 
 import { verify } from '../../../adapters/auth'
 import colors from '../../../constants/Colors'
@@ -62,13 +62,8 @@ export default class VerifyCodeScreen extends React.Component {
                     <KeyboardAvoidingView style={{ flex: 1 }}
                                           behavior="position"
                                           contentContainerStyle={{ flex: 1 }}>
-                        <Header title='VERIFICATION CODE' left={
-                            <TouchableOpacity onPress={() => goBack(null)}>
-                                <Icon name='ios-arrow-back'
-                                      type='Ionicons'
-                                      style={{ color: colors.air, fontSize: 30 }}/>
-                            </TouchableOpacity>
-                        }/>
+                        <Header title='VERIFICATION CODE' left={<ArrowBack onPress={() => goBack(null)}/>}/>
+
                         <PageContent>
                             <Top>
                                 <Image source={iconVerificationCode}

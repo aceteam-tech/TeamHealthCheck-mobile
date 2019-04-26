@@ -2,11 +2,8 @@ import React from 'react'
 import {observer} from 'mobx-react/native'
 import styled from 'styled-components/native'
 
-import {Icon} from 'native-base'
-import {TouchableOpacity} from 'react-native'
-import {Button, Header, Loading, Page} from '../../../components/index'
+import {Button, Header, Loading, Page, ArrowBack} from '../../../components/index'
 
-import colors from '../../../constants/Colors'
 import healthCheckStore from '../../../model/health-check-store'
 import teamStore from '../../../model/team-store'
 import {sendStatus, getHealthCheckStatus} from '../../../adapters/api'
@@ -29,13 +26,7 @@ const VotingSummaryComponent = observer(({navigation, healthCheckStore, teamStor
     return (
         <Page>
             <HeaderWrapper>
-                <Header title='Summary' left={
-                    <TouchableOpacity onPress={() => navigation.goBack(null)}>
-                        <Icon name='ios-arrow-back'
-                              type='Ionicons'
-                              style={{color: colors.air, fontSize: 30}}/>
-                    </TouchableOpacity>
-                }/>
+                <Header title='Summary' left={<ArrowBack onPress={() => navigation.goBack(null)}/>}/>
             </HeaderWrapper>
             <Button onPress={send} text='Send!' version='secondary'/>
         </Page>

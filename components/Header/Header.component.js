@@ -28,6 +28,7 @@ const HeaderLeft = styled.View`
   flex: 1;
   margin-left: 20px;
 `
+
 const HeaderRight = styled.View`
   flex: 1;
   margin-right: 20px;

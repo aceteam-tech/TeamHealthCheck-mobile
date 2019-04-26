@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components/native'
 
 import { Button, Text, Input, Icon, Item, Form, Label } from 'native-base'
-import { KeyboardAvoidingView, Image, View, TouchableOpacity } from 'react-native'
-import { Page, Loader } from '../../../components'
+import { KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native'
+import { Page, Loader, Header } from '../../../components'
 
 import { verify } from '../../../adapters/auth'
 import colors from '../../../constants/Colors'
@@ -11,21 +11,16 @@ import { buttonStyle, buttonTextStyle, labelStyle, inputStyle } from '../../../c
 
 const iconVerificationCode = require('./icon-verification-code-2x.png')
 
-const Header = styled.View`
-    justifyContent: center;
-    align-items: center;
+const Top = Footer = styled.View``
+const Middle = styled.View`
+  flex: 1;
+  margin-top: 45px;
+  margin-bottom: 20px;
 `
 
-const HeaderText = styled.Text`
-  color: ${colors.air};
+const PageContent = styled.View`
+  flex: 1;
   margin-top: 40px;
-  font-size: 20px;
-  font-weight: bold;
-`
-
-const Footer = styled.View`
-    flex: 1;
-    justify-content: center;
 `
 
 export default class VerifyCodeScreen extends React.Component {

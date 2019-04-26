@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Button as NativeButton, Text} from 'native-base'
+import {Text} from 'native-base'
+import styled from 'styled-components/native'
 import colors from '../../constants/Colors';
 
 const textStyle = {
@@ -10,23 +11,29 @@ const textStyle = {
     color: colors.air
 }
 
-const buttonStyle = {
-    justifyContent: 'center',
-    width: '90%',
-    height: 50,
-    textAlign: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: 30,
-    backgroundColor: 'transparent',
-    borderWidth: 2,
-    borderColor: colors.air
-}
+const ButtonWrapper = styled.View`
+    height: 50px;
+    width: 90%;
+    align-self: center;
+    margin-bottom: 30px;
+`
+
+const ButtonStyle = styled.TouchableOpacity`
+    border-radius: 30px;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+    background-color: transparent;
+    border-width: 2px;
+    border-color: ${colors.air};
+`
 
 const Button = ({text, onPress}) => (
-    <NativeButton rounded style={buttonStyle} onPress={onPress}>
-        <Text style={textStyle}>{text.toUpperCase()}</Text>
-    </NativeButton>
+    <ButtonWrapper>
+        <ButtonStyle onPress={onPress}>
+            <Text style={textStyle}>{text.toUpperCase()}</Text>
+        </ButtonStyle>
+    </ButtonWrapper>
 )
 
 Button.propTypes = {

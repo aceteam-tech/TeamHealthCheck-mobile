@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 
 import { Input, Item, Form, Icon, Label } from 'native-base'
 import { Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
-import { Button, Header, Page, Loader } from '../../../components'
+import { Button, Header, Page, Loader, ArrowBack } from '../../../components'
 
 import { login } from '../../../adapters/auth'
 import colors from '../../../constants/Colors'
@@ -102,13 +102,7 @@ export default class LoginScreen extends React.Component {
                                           behavior="position"
                                           contentContainerStyle={{ flex: 1 }}>
                         <HeaderWrapper>
-                            <Header title='LOG IN' left={
-                                <TouchableOpacity onPress={() => goBack(null)}>
-                                    <Icon name='ios-arrow-back'
-                                          type='Ionicons'
-                                          style={{ color: colors.air, fontSize: 30 }}/>
-                                </TouchableOpacity>
-                            }/>
+                            <Header title='LOG IN' left={<ArrowBack onPress={() => goBack(null)}/>}/>
                         </HeaderWrapper>
                         <PageContent>
                             <Top>

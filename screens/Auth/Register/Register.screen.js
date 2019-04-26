@@ -3,8 +3,8 @@ import styled from 'styled-components/native'
 import { observer } from 'mobx-react/native'
 
 import { Button, Text, Input, Label, Item, Form, Icon } from 'native-base'
-import { Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
-import { Page, Loader, Header } from '../../../components'
+import { Image, KeyboardAvoidingView } from 'react-native'
+import { Page, Loader, Header, ArrowBack } from '../../../components'
 
 import { signUp } from '../../../adapters/auth'
 import colors from '../../../constants/Colors'
@@ -57,13 +57,7 @@ export default observer(({ navigation }) => {
                 <KeyboardAvoidingView style={{ flex: 1 }}
                                       behavior="position"
                                       contentContainerStyle={{ flex: 1 }}>
-                <Header title='CREATE ACCOUNT' left={
-                    <TouchableOpacity onPress={() => goBack(null)}>
-                        <Icon name='ios-arrow-back'
-                              type='Ionicons'
-                              style={{ color: colors.air, fontSize: 30 }}/>
-                    </TouchableOpacity>
-                }/>
+                <Header title='CREATE ACCOUNT' left={<ArrowBack onPress={() => goBack(null)}/>}/>
                     <PageContent>
                         <Top>
                             <Image source={registerImage}

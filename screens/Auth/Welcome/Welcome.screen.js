@@ -1,37 +1,25 @@
 import React from 'react'
 import styled from 'styled-components/native'
-
-import { Button, Text } from 'native-base'
 import { Image } from 'react-native'
-import { Loader } from '../../../components'
 
+import { Loader, Button, Page } from '../../../components'
 import { login } from '../../../adapters/auth'
 import colors from '../../../constants/Colors'
-import { buttonStyle, buttonTextStyle } from '../../../constants/Style'
 
-const iconUser = require('./icon-user-2x.png')
-const welcomeBG = require('./welcome-bg.jpg')
+const iconUser = require('./fun-3x.png')
 
-const Page = styled.ImageBackground`
-    flex: 1;
-    backgroundColor: ${colors.primary};
-    align-items: center;
-`
 
 const Header = styled.View`
-  flex: 2;
   justify-content: center;
 `
 
-const Body = styled.View`
+const Welcome = styled.View`
+  justify-content: center;
   align-items: center;
-  flex: 1;
 `
 
 const Content = styled.View`
-    margin-top: 40px;
-    justifyContent: space-around;
-    align-items: center;
+    justify-content: space-around;
     flex: 1;
 `
 
@@ -47,7 +35,6 @@ const WelcomeSubtitle = styled.Text`
 `
 
 const Footer = styled.View`
-    flex: 2;
     justify-content: flex-start;
 `
 
@@ -59,31 +46,25 @@ export default class WelcomeScreen extends React.Component {
 
     render() {
         return (
-            <Loader assetsToLoad={[iconUser, welcomeBG]}>
-                <Page source={welcomeBG}>
+            <Loader assetsToLoad={[iconUser]}>
+                <Page version={2}>
                     <Content>
                         <Header>
                             <Image source={iconUser}
                                    resizeMode='contain'
-                                   style={{ height: 150 }}/>
+                                   style={{ height: 140, alignSelf: 'center' }}/>
                         </Header>
-                        <Body>
-                        <WelcomeTitle>Welcome!</WelcomeTitle>
-                        <WelcomeSubtitle>Now let's get the team rolling...</WelcomeSubtitle>
-                        </Body>
+                        <Welcome>
+                            <WelcomeTitle>Welcome!</WelcomeTitle>
+                            <WelcomeSubtitle>Now let's get the team rolling...</WelcomeSubtitle>
+                        </Welcome>
                         <Footer>
-                            <Button rounded
-                                    light
-                                    onPress={() => this.props.navigation.navigate('Login')}
-                                    style={buttonStyle}>
-                                <Text style={buttonTextStyle}>Sign In</Text>
-                            </Button>
-                            <Button rounded
-                                    light
-                                    onPress={() => this.props.navigation.navigate('Register')}
-                                    style={buttonStyle}>
-                                <Text style={buttonTextStyle}>Sign Up</Text>
-                            </Button>
+                            <Button version='secondary'
+                                    text='Sign In'
+                                    onPress={() => this.props.navigation.navigate('Login')}/>
+                            <Button version='secondary'
+                                    text='Sign Up'
+                                    onPress={() => this.props.navigation.navigate('Register')}/>
                         </Footer>
                     </Content>
                 </Page>

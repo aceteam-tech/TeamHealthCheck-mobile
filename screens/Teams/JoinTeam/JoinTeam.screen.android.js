@@ -1,13 +1,10 @@
 import React from 'react';
-import { Button, Text, Input, Icon, Item, Form, Label } from 'native-base'
-import {KeyboardAvoidingView, TouchableOpacity} from 'react-native'
+import { Button, Text, Input, Item, Form, Label } from 'native-base'
 import styled from 'styled-components/native'
 import {joinTeam} from '../../../adapters/api'
-import colors from '../../../constants/Colors'
 import { buttonStyle, buttonTextStyle, inputStyle, labelStyle } from '../../../constants/Style'
-import {Header, Page, PinInput} from '../../../components/index'
+import {Header, Page, ArrowBack} from '../../../components/index'
 import teamsStore from '../../../model/team-store'
-import { switchInput, updateCode } from '../../Auth/VerifyCode/VerifyCode.helpers'
 
 const Footer = styled.View`
     flex: 1;
@@ -49,13 +46,7 @@ export default class VerifyCodeScreen extends React.Component {
         return (
             <Page>
                 <HeaderWrapper>
-                    <Header title='Join Team' left={
-                        <TouchableOpacity onPress={() => goBack(null)}>
-                            <Icon name='ios-arrow-back'
-                                  type='Ionicons'
-                                  style={{color: colors.air, fontSize: 30}}/>
-                        </TouchableOpacity>
-                    } />
+                    <Header title='Join Team' left={<ArrowBack onPress={() => goBack(null)}/>} />
                 </HeaderWrapper>
                 <Form style={{ flex: 1, justifyContent: 'space-around', marginRight: 15 }}>
                     <Item floatingLabel>

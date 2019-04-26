@@ -1,9 +1,8 @@
 import React from 'react'
-import { Icon } from 'native-base'
-import { TouchableOpacity, Image } from 'react-native'
+import { Image } from 'react-native'
 import styled from 'styled-components/native'
 import colors from '../../../constants/Colors'
-import { Page, Header, Loading, CategoryVoteBox, Loader } from '../../../components/index'
+import { Page, Header, Loading, CategoryVoteBox, Loader, ArrowBack } from '../../../components/index'
 import healthCheckStore from '../../../model/health-check-store'
 import categories from '../../../assets/categories/category-icons'
 import { observer } from 'mobx-react/native'
@@ -16,14 +15,6 @@ const Text = styled.Text`
   color: ${colors.air};
   font-weight: bold;
 `
-
-const HeaderLeft = ({goBack}) => (
-    <TouchableOpacity onPress={() => goBack(null)}>
-        <Icon name='ios-arrow-back'
-              type='Ionicons'
-              style={{ color: colors.air, fontSize: 30 }}/>
-    </TouchableOpacity>
-)
 
 const HeaderRight = ({categoryIndex, categoriesCount}) => (
     <Text>{(categoryIndex + 1) + ' / ' + categoriesCount}</Text>
@@ -43,7 +34,7 @@ const CategoryVoteComponent = observer(({ navigation, healthCheckStore }) => {
         <Page>
             <HeaderWrapper>
                 <Header title={category.name}
-                        left={<HeaderLeft goBack={navigation.goBack}/>}
+                        left={<ArrowBack onPress={() => navigation.goBack(null)}/>}
                         right={<HeaderRight categoryIndex={currentCategoryIndex} categoriesCount={categoriesCount}/>}
                 />
             </HeaderWrapper>

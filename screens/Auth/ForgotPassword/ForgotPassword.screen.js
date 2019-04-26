@@ -1,12 +1,11 @@
 import React from 'react'
 import styled from 'styled-components/native'
 
-import { Button, Text, Input, Item, Form, Icon, Label } from 'native-base'
-import { KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native'
-import { Page, Header, Loader } from '../../../components'
+import { Button, Text, Input, Item, Form, Label } from 'native-base'
+import { KeyboardAvoidingView, Image } from 'react-native'
+import { Page, Header, Loader, ArrowBack } from '../../../components'
 
 import { forgotPassword } from '../../../adapters/auth'
-import colors from '../../../constants/Colors'
 import { buttonStyle, buttonTextStyle, labelStyle, inputStyle } from '../../../constants/Style'
 
 import IconKey from "./icon-key-3x.png"
@@ -63,13 +62,7 @@ export default class ForgotPasswordScreen extends React.Component {
                     <KeyboardAvoidingView style={{ flex: 1 }}
                                           behavior="position"
                                           contentContainerStyle={{ flex: 1 }}>
-                        <Header title='FORGOT PASSWORD' left={
-                            <TouchableOpacity onPress={() => goBack(null)}>
-                                <Icon name='ios-arrow-back'
-                                      type='Ionicons'
-                                      style={{ color: colors.air, fontSize: 30 }}/>
-                            </TouchableOpacity>
-                        }/>
+                        <Header title='FORGOT PASSWORD' left={<ArrowBack onPress={() => goBack(null)}/>}/>
                         <PageContent>
                             <Top>
                                 <Image source={IconKey}

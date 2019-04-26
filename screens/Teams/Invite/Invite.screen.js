@@ -1,7 +1,6 @@
 import React from 'react'
-import {View, TouchableOpacity} from "react-native"
-import {Icon} from 'native-base'
-import {Header, Page} from '../../../components/index'
+import {View} from "react-native"
+import {Header, Page, ArrowBack} from '../../../components/index'
 import styled from 'styled-components/native'
 import teamStore from '../../../model/team-store'
 import {labelStyle} from "../../../constants/Style"
@@ -30,13 +29,7 @@ export default class InviteScreen extends React.Component {
         return (
             <Page>
                 <HeaderWrapper>
-                    <Header title='Invitation' left={
-                        <TouchableOpacity onPress={() => goBack(null)}>
-                            <Icon name='ios-arrow-back'
-                                  type='Ionicons'
-                                  style={{color: colors.air, fontSize: 30}}/>
-                        </TouchableOpacity>
-                    }/>
+                    <Header title='Invitation' left={<ArrowBack onPress={() => goBack(null)}/>}/>
                 </HeaderWrapper>
                 <View>
                     <CodeLabel style={labelStyle}>Join your team code</CodeLabel>

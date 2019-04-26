@@ -1,9 +1,9 @@
 import React from 'react'
-import { Input, Label, Item, Form, Icon } from 'native-base'
-import { KeyboardAvoidingView, TouchableOpacity } from 'react-native'
+import { Input, Label, Item, Form } from 'native-base'
+import { KeyboardAvoidingView } from 'react-native'
 import styled from 'styled-components/native'
 import { addTeam } from '../../../adapters/api'
-import { Button, Header, Page, TeamLogo } from '../../../components'
+import { Button, Header, Page, TeamLogo, ArrowBack } from '../../../components'
 import { labelStyle, inputStyle } from '../../../constants/Style'
 
 const HeaderWrapper = styled.View`
@@ -49,13 +49,7 @@ export default class AddTeamScreen extends React.Component {
                                       behavior="position"
                                       contentContainerStyle={{ flex: 1 }}>
                     <HeaderWrapper>
-                        <Header title='Add Team' left={
-                            <TouchableOpacity onPress={() => goBack(null)}>
-                                <Icon name='ios-arrow-back'
-                                      type='Ionicons'
-                                      style={{ color: '#FFF', fontSize: 30 }}/>
-                            </TouchableOpacity>
-                        }/>
+                        <Header title='Add Team' left={<ArrowBack onPress={() => goBack(null)}/>}/>
                     </HeaderWrapper>
 
                     <PageContent>
