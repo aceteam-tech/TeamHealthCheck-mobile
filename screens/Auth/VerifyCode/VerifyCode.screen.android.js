@@ -44,7 +44,7 @@ export default class VerifyCodeScreen extends React.Component {
     }
 
     verify = async (code) => {
-        const email = this.props.navigation.getParam('user')?.username
+        const email = this.props.navigation.getParam('email')
         try {
             await verify(email, code)
             this.props.navigation.navigate('Login', { email })
@@ -54,7 +54,7 @@ export default class VerifyCodeScreen extends React.Component {
     }
 
     render() {
-        const email = this.props.navigation.getParam('user')?.username
+        const email = this.props.navigation.getParam('email')
         const { goBack } = this.props.navigation
         return (
             <Loader assetsToLoad={[iconVerificationCode]}>
@@ -62,49 +62,45 @@ export default class VerifyCodeScreen extends React.Component {
                     <KeyboardAvoidingView style={{ flex: 1 }}
                                           behavior="position"
                                           contentContainerStyle={{ flex: 1 }}>
-                        <View>
+                        <Header title='VERIFICATION CODE' left={
                             <TouchableOpacity onPress={() => goBack(null)}>
                                 <Icon name='ios-arrow-back'
                                       type='Ionicons'
-                                      style={{ color: '#FFF', fontSize: 30, marginLeft: 20, marginBottom: 20 }}/>
+                                      style={{ color: colors.air, fontSize: 30 }}/>
                             </TouchableOpacity>
-                            <Header>
+                        }/>
+                        <PageContent>
+                            <Top>
                                 <Image source={iconVerificationCode}
                                        resizeMode='contain'
-                                       style={{ height: 120 }}/>
-                                <HeaderText>Verification Code</HeaderText>
-                                <Text style={{
-                                    color: colors.air,
-                                    marginTop: 16,
-                                    marginLeft: 20,
-                                    marginRight: 20,
-                                    textAlign: 'center'
-                                }}>
+                                       style={{ height: 120, alignSelf: 'center' }}/>
+                            </Top>
+                            <Middle>
+                                <Text style={{ color: colors.air, marginTop: 16, textAlign: 'center' }}>
                                     Please type the verification code sent to {email}
                                 </Text>
-                            </Header>
-                        </View>
-                        <Form style={{ flex: 1, justifyContent: 'space-around', marginRight: 15 }}>
-                            <Item floatingLabel>
-                                <Label style={labelStyle}>Verification code</Label>
-                                <Input style={inputStyle}
-                                       autoCapitalize='none'
-                                       keyboardType='email-address'
-                                       textContentType='emailAddress'
-                                       returnKeyType='send'
-                                       autoCorrect={false}
-                                       underlineColorAndroid='transparent'
-                                       value={this.state.code}
-                                       blurOnSubmit={false}
-                                       onChangeText={this.onCodeChange}/>
-                            </Item>
-                        </Form>
-                        <Footer>
-                            <Button rounded light onPress={this.verify} style={buttonStyle}>
-                                <Text style={buttonTextStyle}>{'Continue'.toUpperCase()}</Text>
-                            </Button>
-                        </Footer>
-
+                                <Form style={{ flex: 1, justifyContent: 'space-around', marginRight: 15 }}>
+                                    <Item floatingLabel>
+                                        <Label style={labelStyle}>Verification code</Label>
+                                        <Input style={inputStyle}
+                                               autoCapitalize='none'
+                                               keyboardType='email-address'
+                                               textContentType='emailAddress'
+                                               returnKeyType='send'
+                                               autoCorrect={false}
+                                               underlineColorAndroid='transparent'
+                                               value={this.state.code}
+                                               blurOnSubmit={false}
+                                               onChangeText={this.onCodeChange}/>
+                                    </Item>
+                                </Form>
+                            </Middle>
+                            <Footer>
+                                <Button rounded light onPress={this.verify} style={buttonStyle}>
+                                    <Text style={buttonTextStyle}>{'Continue'.toUpperCase()}</Text>
+                                </Button>
+                            </Footer>
+                        </PageContent>
                     </KeyboardAvoidingView>
                 </Page>
             </Loader>

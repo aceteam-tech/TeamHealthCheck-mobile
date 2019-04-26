@@ -36,9 +36,9 @@ const ErrorText = styled.Text`
 const registerFn = async (navigate) => {
     const { name, email, password } = registerFormStore.form
     try{
-        const user = await signUp(email, password, name)
+        const user = await signUp(email.toLowerCase(), password, name)
         registerFormStore.clear()
-        navigate('Verify', user)
+        navigate('Verify', {email: user.user.username})
     } catch(e) {
         console.log(e)
     }

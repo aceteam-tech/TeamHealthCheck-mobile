@@ -76,6 +76,9 @@ export default class LoginScreen extends React.Component {
         }
         catch (e) {
             console.log({ 'e': e })
+            if(e.code === 'UserNotConfirmedException'){
+                this.props.navigation.navigate('Verify', { email: this.state.email })
+            }
         }
     }
 

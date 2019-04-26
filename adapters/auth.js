@@ -26,7 +26,7 @@ export const signUp = (email, password, name) => appStore.apiRequestCalled(Auth.
 
 export const verify = (username, code) => appStore.apiRequestCalled(Auth.confirmSignUp(username, code))
 
-export const login = (username, password) => appStore.apiRequestCalled(Auth.signIn(username, password))
+export const login = (username, password) => appStore.apiRequestCalled(Auth.signIn(username, password), ['UserNotConfirmedException'])
 
 export const forgotPassword = username => appStore.apiRequestCalled(Auth.forgotPassword(username))
 

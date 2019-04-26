@@ -6,13 +6,15 @@ class ObservableAppStore {
     @observable error = false
     @observable navigation
 
-    apiRequestCalled = (promise) => {
+    apiRequestCalled = (promise, ignoredExceptions = []) => {
         this.loading = true
 
         promise.catch(e => {
-            this.error = resolveError(e, this.navigation, () => {
-                this.error = false
-            })
+            if(!ignoredExceptions.includes(e.code)){
+                this.error = resolveError(e, this.navigation, () => {
+                    this.error = false
+                })
+            }
         })
 
         promise.finally(res => {
