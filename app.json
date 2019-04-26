@@ -28,7 +28,7 @@
       "buildNumber": "3"
     },
     "android": {
-      "package": "tech.aceteam.health_check",
+      "package": "net.teamhealthcheck",
       "permissions": [],
       "versionCode": 7,
       "splash": {
