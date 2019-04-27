@@ -1,6 +1,5 @@
 import React from 'react'
 import { Content } from 'native-base'
-import { TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { MaterialIcons } from '@expo/vector-icons'
 import { observer } from 'mobx-react/native'
@@ -26,15 +25,19 @@ const NoHealthCheckText = styled.Text`
   margin-right: 50px;
 `
 
+const BurgerButton = styled.TouchableOpacity`
+  padding: 10px 20px;
+`
+
 const TeamDashboardComponent = ({ lastResults, navigate }) => (
     <PageWithMenu navigate={navigate}>
         {({ onToggleMenu }) => (
             <PageContent>
                 <HeaderWrapper>
                     <Header title='Dashboard' right={
-                        <TouchableOpacity onPress={onToggleMenu}>
+                        <BurgerButton onPress={onToggleMenu}>
                             <MaterialIcons color='white' size={27} name='menu'/>
-                        </TouchableOpacity>
+                        </BurgerButton>
                     }/>
                 </HeaderWrapper>
                 {

@@ -6,7 +6,6 @@ const Header = styled.View`
   margin-top: 15px;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
 `
 
 const HeaderTitle = styled.Text`
@@ -14,6 +13,7 @@ const HeaderTitle = styled.Text`
   font-size: 17px;
   font-weight: 600;
   text-align: center;
+  justify-content: center;
   flex: 3;
   align-self: center;
 `
@@ -26,12 +26,10 @@ const HeaderCenter = styled.View`
 
 const HeaderLeft = styled.View`
   flex: 1;
-  margin-left: 20px;
 `
 
 const HeaderRight = styled.View`
   flex: 1;
-  margin-right: 20px;
   align-items: flex-end;
 `
 

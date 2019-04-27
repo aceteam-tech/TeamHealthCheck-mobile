@@ -6,13 +6,12 @@ import colors from '../../constants/Colors'
 import TeamLogo from '../TeamLogo/TeamLogo.component'
 import Page from '../Page/Page.component'
 import Header from '../Header/Header.component'
-import IconProfile from './icon-profile.png'
-import IconSettings from './icon-settings.png'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { signOut } from '../../adapters/auth'
 
 const ChangeTeam = styled.TouchableOpacity`
   margin-top: 10px;
+  padding: 10px 30px;
 `
 
 const ChangeTeamText = styled.Text`
@@ -48,6 +47,7 @@ const MenuIcon = styled(MaterialCommunityIcons)`
 const HeaderRight = styled.TouchableOpacity`
   flex: 1;
   align-items: flex-end;
+  padding: 10px 20px;
 `
 
 const RightHeader = ({ onToggleVisible }) => (
@@ -76,16 +76,6 @@ export default ({ team, visible, navigate, onToggleVisible }) => (
                     </ChangeTeamText>
                 </ChangeTeam>
             </MenuTeam>
-            {/*<MenuItem>*/}
-                {/*<MenuIcon source={IconProfile}*/}
-                          {/*resizeMode='contain'/>*/}
-                {/*<MenuItemText>Profile</MenuItemText>*/}
-            {/*</MenuItem>*/}
-            {/*<MenuItem>*/}
-                {/*<MenuIcon source={IconSettings}*/}
-                          {/*resizeMode='contain'/>*/}
-                {/*<MenuItemText>Settings</MenuItemText>*/}
-            {/*</MenuItem>*/}
             <MenuItem onPress={() => {
                 signOut()
                 navigate('Welcome')

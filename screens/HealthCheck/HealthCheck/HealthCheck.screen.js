@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native'
+import { View } from 'react-native'
 import styled from 'styled-components/native'
 import { MaterialIcons } from '@expo/vector-icons'
 import colors from '../../../constants/Colors'
@@ -39,6 +39,10 @@ const NoHealthCheckText = styled.Text`
   font-size: 20px;
   margin-left: 50px;
   margin-right: 50px;
+`
+
+const BurgerButton = styled.TouchableOpacity`
+  padding: 10px 20px;
 `
 
 const onCreateHealthCheck = async (teamId) => {
@@ -121,9 +125,9 @@ const HealthCheckComponent = observer(({ healthCheckStore, teamStore, userStore,
             {({ onToggleMenu }) => (
                 <PageContent>
                     <Header title='Health Check' right={
-                        <TouchableOpacity onPress={onToggleMenu}>
+                        <BurgerButton onPress={onToggleMenu}>
                             <MaterialIcons color='white' size={27} name='menu'/>
-                        </TouchableOpacity>
+                        </BurgerButton>
                     }/>
                     {
                         typeof ended === 'undefined' && <Loading/>

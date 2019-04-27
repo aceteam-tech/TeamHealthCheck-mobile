@@ -48,6 +48,11 @@ export const sendStatus = async (healthCheckId, categories) => makeRequest('heal
 
 export const joinTeam = async code => makeRequest('join-team', 'POST', { code })
 
+export const removeFromTeam = async (teamId, removedUserId) => makeRequest('remove-from-team', 'POST', {
+    teamId,
+    removedUserId
+})
+
 export const createHealthCheck = async teamId => makeRequest('health-check', 'POST', { teamId })
 
 export const endHealthCheck = async teamId => makeRequest('health-check/end', 'POST', { teamId })

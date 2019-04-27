@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, Text, Animated, TouchableOpacity } from 'react-native'
+import { Image, Text, Animated } from 'react-native'
 import { Content } from 'native-base'
 import { observer } from 'mobx-react/native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
@@ -61,7 +61,10 @@ const NoneTeamsWrapper = styled.View`
 const NoneTeamsText = styled.Text`
   color: ${colors.air};
   font-size: 20px;
-  
+`
+
+const LogoutButton = styled.TouchableOpacity`
+  padding: 10px 20px;
 `
 
 @observer
@@ -114,13 +117,13 @@ export default class TeamsScreen extends React.Component {
             <Loader assetsToLoad={[iconLink, iconPlus]}>
                 <Page>
                     <Header title='Teams' right={
-                        <TouchableOpacity onPress={() => {
+                        <LogoutButton onPress={() => {
                             signOut()
                             navigate('Welcome')
                         }
                         }>
                             <MaterialCommunityIcons color='white' size={27} name='logout'/>
-                        </TouchableOpacity>
+                        </LogoutButton>
                     }/>
                     {
                         !teams.length ?

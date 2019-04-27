@@ -26,6 +26,7 @@
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
+    "react-native-swipeout": "^2.3.6",
     "react-navigation": "^2.18.2",
     "styled-components": "^4.1.2",
     "uuid": "^3.3.2"

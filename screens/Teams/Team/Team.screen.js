@@ -5,6 +5,7 @@ import { TouchableOpacity } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 import teamStore from '../../../model/team-store'
 import { observer } from 'mobx-react/native'
+import {removeFromTeam} from '../../../adapters/api'
 import { Header, PageWithMenu, TeamLogo, Button, UserListItem } from '../../../components/index'
 
 const DynamicContent = styled.View`
@@ -25,10 +26,14 @@ const AddButtonWrapper = styled.View`
   flex-direction: row;
 `
 
+const BurgerButton = styled.TouchableOpacity`
+  padding: 10px 20px;
+`
+
 const RightHeader = ({ onToggleMenu }) => (
-    <TouchableOpacity onPress={onToggleMenu}>
+    <BurgerButton onPress={onToggleMenu}>
         <MaterialIcons color='white' size={27} name='menu'/>
-    </TouchableOpacity>
+    </BurgerButton>
 )
 
 const TeamComponent = observer(({ store, navigate }) => (
@@ -43,7 +48,7 @@ const TeamComponent = observer(({ store, navigate }) => (
                 <Content>
                     {
                         store.team.users.map(u => (
-                            <UserListItem key={u.id} user={u}/>
+                            <UserListItem key={u.id} user={u} removeUser={() => removeFromTeam(store.team.id, u.id)}/>
                         ))
                     }
                 </Content>
