@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components/native'
 
-import { Input, Item, Form, Icon, Label } from 'native-base'
-import { Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
+import { Input, Item, Form, Label } from 'native-base'
+import { Image, KeyboardAvoidingView } from 'react-native'
 import { Button, Header, Page, Loader, ArrowBack } from '../../../components'
 
 import { login } from '../../../adapters/auth'

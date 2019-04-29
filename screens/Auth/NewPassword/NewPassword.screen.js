@@ -8,7 +8,7 @@ import { Page, Loader, Header, ArrowBack } from '../../../components'
 import { forgotPasswordSubmit } from '../../../adapters/auth'
 import { buttonStyle, buttonTextStyle, labelStyle, inputStyle } from '../../../constants/Style'
 
-const iconLocker = require('./icon-locker-3x.png')
+const newPasswordIcon = require('./new-password-3x.png')
 
 const PageContent = styled.View`
   flex-grow: 1;
@@ -60,15 +60,15 @@ export default class NewPasswordScreen extends React.Component {
     render() {
         const { goBack } = this.props.navigation
         return (
-            <Loader assetsToLoad={[iconLocker]}>
-                <Page dismissKeyboard={true}>
+            <Loader assetsToLoad={[newPasswordIcon]}>
+                <Page version={2} dismissKeyboard={true}>
                     <KeyboardAvoidingView style={{ flex: 1 }}
                                           behavior="position"
                                           contentContainerStyle={{ flex: 1 }}>
-                        <Header title='NEW PASSWORD' left={<ArrowBack onPress={() => goBack(null)}/>}/>
+                        <Header title='CHANGE PASSWORD' left={<ArrowBack onPress={() => goBack(null)}/>}/>
                         <PageContent>
                             <Top>
-                                <Image source={iconLocker}
+                                <Image source={newPasswordIcon}
                                        resizeMode='contain'
                                        style={{ height: 120 }}/>
                             </Top>

@@ -8,7 +8,7 @@ import { Page, Header, Loader, ArrowBack } from '../../../components'
 import { forgotPassword } from '../../../adapters/auth'
 import { buttonStyle, buttonTextStyle, labelStyle, inputStyle } from '../../../constants/Style'
 
-import IconKey from "./icon-key-3x.png"
+import forgotPasswordIcon from "./forgot-password-icon-3x.png"
 
 const PageContent = styled.View`
   flex: 1;
@@ -57,15 +57,15 @@ export default class ForgotPasswordScreen extends React.Component {
     render() {
         const { goBack } = this.props.navigation
         return (
-            <Loader assetsToLoad={[IconKey]}>
-                <Page dismissKeyboard={true}>
+            <Loader assetsToLoad={[forgotPasswordIcon]}>
+                <Page version={2} dismissKeyboard={true}>
                     <KeyboardAvoidingView style={{ flex: 1 }}
                                           behavior="position"
                                           contentContainerStyle={{ flex: 1 }}>
-                        <Header title='FORGOT PASSWORD' left={<ArrowBack onPress={() => goBack(null)}/>}/>
+                        <Header title='RESET PASSWORD' left={<ArrowBack onPress={() => goBack(null)}/>}/>
                         <PageContent>
                             <Top>
-                                <Image source={IconKey}
+                                <Image source={forgotPasswordIcon}
                                        resizeMode='contain'
                                        style={{ height: 120 }}/>
                             </Top>
