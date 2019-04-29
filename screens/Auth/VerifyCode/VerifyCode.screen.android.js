@@ -5,11 +5,11 @@ import { Button, Text, Input, Icon, Item, Form, Label } from 'native-base'
 import { KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native'
 import { Page, Loader, Header } from '../../../components'
 
-import { verify } from '../../../adapters/auth'
+import { resendCode, verify } from '../../../adapters/auth'
 import colors from '../../../constants/Colors'
 import { buttonStyle, buttonTextStyle, labelStyle, inputStyle } from '../../../constants/Style'
 
-const iconVerificationCode = require('./icon-verification-code-2x.png')
+const verifyCodeIcon = require('./verify-code-3x.png')
 
 const Top = Footer = styled.View``
 const Middle = styled.View`
@@ -23,10 +23,35 @@ const PageContent = styled.View`
   margin-top: 40px;
 `
 
+const HelperText = styled.Text`
+  color: ${colors.air}; 
+  margin-top: 16px;
+  font-size: 17px; 
+  font-weight: 200;
+  text-align: center
+`
+
+const ResendButton = styled.TouchableOpacity``
+
+const ResendText = styled.Text`
+  color: ${colors.air}; 
+  margin-top: 21px;
+  font-size: 16px; 
+  font-weight: 600;
+  text-align: center
+`
+
 export default class VerifyCodeScreen extends React.Component {
-    codeLength = 6
-    state = {
-        code: ''
+    constructor(props) {
+        super(props)
+        this.email = props.navigation.getParam('email')
+        this.state = {
+            code: '',
+            activeInput: 0,
+            codeSent: false
+        }
+        this.code = []
+        this.codeLength = 6
     }
 
     onCodeChange = async (code) => {
@@ -39,21 +64,35 @@ export default class VerifyCodeScreen extends React.Component {
     }
 
     verify = async (code) => {
-        const email = this.props.navigation.getParam('email')
         try {
-            await verify(email, code)
-            this.props.navigation.navigate('Login', { email })
+            await verify(this.email, code)
+            this.props.navigation.navigate('Login', { email: this.email })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    resendCode = async () => {
+        try {
+            await resendCode(this.email)
+            this.setState({
+                codeSent: true
+            })
+            setTimeout(() => {
+                this.setState({
+                    codeSent: false
+                })
+            }, 3000)
         } catch (e) {
             console.log(e)
         }
     }
 
     render() {
-        const email = this.props.navigation.getParam('email')
         const { goBack } = this.props.navigation
         return (
-            <Loader assetsToLoad={[iconVerificationCode]}>
-                <Page dismissKeyboard={true}>
+            <Loader assetsToLoad={[verifyCodeIcon]}>
+                <Page version={2} dismissKeyboard={true}>
                     <KeyboardAvoidingView style={{ flex: 1 }}
                                           behavior="position"
                                           contentContainerStyle={{ flex: 1 }}>
@@ -66,21 +105,29 @@ export default class VerifyCodeScreen extends React.Component {
                         }/>
                         <PageContent>
                             <Top>
-                                <Image source={iconVerificationCode}
+                                <Image source={verifyCodeIcon}
                                        resizeMode='contain'
                                        style={{ height: 120, alignSelf: 'center' }}/>
                             </Top>
                             <Middle>
-                                <Text style={{ color: colors.air, marginTop: 16, textAlign: 'center' }}>
-                                    Please type the verification code sent to {email}
-                                </Text>
+                                <HelperText>
+                                    Please type the verification code sent to {this.email}
+                                </HelperText>
+
+                                {
+                                    this.state.codeSent ?
+                                        <ResendText>Code has been sent!</ResendText> :
+                                        <ResendButton onPress={this.resendCode}>
+                                            <ResendText>Resend code</ResendText>
+                                        </ResendButton>
+                                }
+
                                 <Form style={{ flex: 1, justifyContent: 'space-around', marginRight: 15 }}>
                                     <Item floatingLabel>
                                         <Label style={labelStyle}>Verification code</Label>
                                         <Input style={inputStyle}
                                                autoCapitalize='none'
-                                               keyboardType='email-address'
-                                               textContentType='emailAddress'
+                                               keyboardType='decimal-pad'
                                                returnKeyType='send'
                                                autoCorrect={false}
                                                underlineColorAndroid='transparent'
