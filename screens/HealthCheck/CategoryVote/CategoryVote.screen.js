@@ -17,7 +17,7 @@ const Text = styled.Text`
 `
 
 const HeaderRight = ({categoryIndex, categoriesCount}) => (
-    <Text>{(categoryIndex + 1) + ' / ' + categoriesCount}</Text>
+    <Text style={{paddingRight: 20}}>{(categoryIndex + 1) + ' / ' + categoriesCount}</Text>
 )
 
 const CategoryVoteComponent = observer(({ navigation, healthCheckStore }) => {

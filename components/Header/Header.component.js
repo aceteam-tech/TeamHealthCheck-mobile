@@ -1,11 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 import colors from '../../constants/Colors'
 
-const Header = styled.View`
+const StyledHeader = styled.View`
   margin-top: 15px;
   flex-direction: row;
   justify-content: space-between;
+  ${({alignItems}) => { alignItems }}
 `
 
 const HeaderTitle = styled.Text`
@@ -34,8 +36,8 @@ const HeaderRight = styled.View`
   align-items: flex-end;
 `
 
-export default ({ title, left, right }) => (
-    <Header>
+const Header = ({ title, left, right, alignItems }) => (
+    <StyledHeader alignItems={alignItems}>
         <HeaderLeft>
             {left}
         </HeaderLeft>
@@ -51,5 +53,18 @@ export default ({ title, left, right }) => (
         <HeaderRight>
             {right}
         </HeaderRight>
-    </Header>
+    </StyledHeader>
 )
+
+Header.defaultProps = {
+    alignItems: 'center'
+}
+
+Header.propTypes = {
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+    left: PropTypes.element,
+    right: PropTypes.element,
+    alignItems: PropTypes.string
+}
+
+export default Header
