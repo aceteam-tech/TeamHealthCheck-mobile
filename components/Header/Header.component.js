@@ -16,6 +16,7 @@ const HeaderTitle = styled.Text`
   justify-content: center;
   flex: 3;
   align-self: center;
+  letter-spacing: 0.85;
 `
 
 const HeaderCenter = styled.View`

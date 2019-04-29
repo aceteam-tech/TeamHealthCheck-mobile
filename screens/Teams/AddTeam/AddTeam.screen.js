@@ -44,12 +44,12 @@ export default class AddTeamScreen extends React.Component {
     render() {
         const { goBack } = this.props.navigation
         return (
-            <Page dismissKeyboard={true}>
+            <Page version={2} dismissKeyboard={true}>
                 <KeyboardAvoidingView style={{ flex: 1 }}
                                       behavior="position"
                                       contentContainerStyle={{ flex: 1 }}>
                     <HeaderWrapper>
-                        <Header title='Add Team' left={<ArrowBack onPress={() => goBack(null)}/>}/>
+                        <Header title='ADD TEAM' left={<ArrowBack onPress={() => goBack(null)}/>}/>
                     </HeaderWrapper>
 
                     <PageContent>

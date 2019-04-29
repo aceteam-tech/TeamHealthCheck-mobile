@@ -9,12 +9,15 @@ const CardIcon = styled.View`
 
 const CardText = styled.Text`
   color: ${colors.air};
+  font-weight: bold;
   font-size: 18px;
+  margin-bottom: 5px;
 `
 
 const TeamMembers = styled.Text`
   color: ${colors.air};
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 100;
 `
 
 const TeamInfo = styled.View`

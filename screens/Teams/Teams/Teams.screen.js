@@ -11,8 +11,8 @@ import { Header, Button, Page, TeamCard, Loader } from '../../../components/inde
 import colors from '../../../constants/Colors'
 import { signOut } from '../../../adapters/auth'
 
-const iconLink = require('./icon-link-3x.png')
-const iconPlus = require('./icon-plus-3x.png')
+const addTeamIcon = require('./add-team-2x.png')
+const joinTeamIcon = require('./join-team-2x.png')
 
 const AddButtonWrapper = styled.View`
   justify-content: flex-end;
@@ -67,6 +67,12 @@ const LogoutButton = styled.TouchableOpacity`
   padding: 10px 20px;
 `
 
+const MenuText = styled.Text`
+  font-size: 14px;
+  color: ${colors.primary};
+  font-weight: 100;
+`
+
 @observer
 export default class TeamsScreen extends React.Component {
     state = {
@@ -75,7 +81,6 @@ export default class TeamsScreen extends React.Component {
     }
 
     toggleMenu() {
-
         let toValue = 200
 
         if (!this.state.isOpen) {
@@ -114,9 +119,9 @@ export default class TeamsScreen extends React.Component {
         const { navigate } = this.props.navigation
         const { teams } = teamStore
         return (
-            <Loader assetsToLoad={[iconLink, iconPlus]}>
-                <Page>
-                    <Header title='Teams' right={
+            <Loader assetsToLoad={[addTeamIcon, joinTeamIcon]}>
+                <Page version={2}>
+                    <Header title='TEAMS' right={
                         <LogoutButton onPress={() => {
                             signOut()
                             navigate('Welcome')
@@ -141,10 +146,12 @@ export default class TeamsScreen extends React.Component {
                                 }
                             </Content>
                     }
-                    <AddButtonWrapper>
-                        <Button onPress={() => this.toggleMenu()} version='add'/>
-                    </AddButtonWrapper>
-
+                    {
+                        !this.state.isOpen &&
+                        <AddButtonWrapper>
+                            <Button onPress={() => this.toggleMenu()} version='add'/>
+                        </AddButtonWrapper>
+                    }
                     {this.state.isOpen
                     && <MenuShadow onPress={() => this.toggleMenu()}/>}
 
@@ -153,20 +160,20 @@ export default class TeamsScreen extends React.Component {
                             navigate('JoinTeam')
                             this.toggleMenu()
                         }}>
-                            <Image source={iconLink}
+                            <Image source={joinTeamIcon}
                                    resizeMode='contain'
                                    style={{ height: 40, alignSelf: 'center', margin: 10 }}/>
-                            <Text>Join Team</Text>
+                            <MenuText>Join Team</MenuText>
                         </MenuItem>
 
                         <MenuItem onPress={() => {
                             navigate('AddTeam')
                             this.toggleMenu()
                         }}>
-                            <Image source={iconPlus}
+                            <Image source={addTeamIcon}
                                    resizeMode='contain'
                                    style={{ height: 40, alignSelf: 'center', margin: 10 }}/>
-                            <Text>Add Team</Text>
+                            <MenuText>Add Team</MenuText>
                         </MenuItem>
                     </Menu>
 
