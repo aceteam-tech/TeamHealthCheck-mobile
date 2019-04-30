@@ -62,3 +62,5 @@ export const uploadFile = async (filename, file) => Storage.put(filename, file, 
         public: 'team-logos/'
     }
 })
+
+export const registerForPushNotifications = async token => makeRequest('push-tokens', 'POST', { token })

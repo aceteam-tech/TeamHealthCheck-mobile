@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, Text, Animated } from 'react-native'
+import { Image, Animated } from 'react-native'
 import { Content } from 'native-base'
 import { observer } from 'mobx-react/native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
@@ -10,6 +10,7 @@ import teamStore from '../../../model/team-store'
 import { Header, Button, Page, TeamCard, Loader } from '../../../components/index'
 import colors from '../../../constants/Colors'
 import { signOut } from '../../../adapters/auth'
+import {register} from '../../../helpers/push.helper'
 
 const addTeamIcon = require('./add-team-2x.png')
 const joinTeamIcon = require('./join-team-2x.png')
@@ -102,8 +103,9 @@ export default class TeamsScreen extends React.Component {
         this.props.navigation.navigate('TeamDashboard')
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.updateTeamsSubscription = this.props.navigation.addListener('didFocus', this.updateTeams)
+        const user = await register()
     }
 
     componentWillUnmount() {
