@@ -47,14 +47,14 @@ const getRelativeValue = (current, previous) => {
 }
 
 const CategoryListItem = ({ category }) => {
-    const relativeValue = getRelativeValue(category.value, category.previousValue)
+    const relativeValue = Math.round(getRelativeValue(category.value, category.previousValue))
     return (
         <ListItem>
             <ListName>
                 <ListText>{category.name}</ListText>
             </ListName>
             <ListValues>
-                <ListText>{category.value + '%'}</ListText>
+                <ListText>{Math.round(category.value) + '%'}</ListText>
                 <RelativeValuePlaceholder>
                     {
                         !!relativeValue
