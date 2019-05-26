@@ -3,12 +3,13 @@ import { API_URL } from 'babel-dotenv'
 import { getSession } from './auth'
 import { pathname } from 'join-url'
 import appStore from '../model/app.store'
+import teamStore from '../model/team-store'
 
 const makeRequest = async (resource, method, body) => {
     try {
         const session = await getSession()
         const headers = {
-            Authorization: session.getIdToken().getJwtToken(),
+            Authorization: 'Bearer ' + session.getIdToken().getJwtToken(),
             'Content-Type': 'application/json'
         }
         const params = {
@@ -31,31 +32,61 @@ const makeRequest = async (resource, method, body) => {
     }
 }
 
-export const getMyTeams = async () => makeRequest('my-teams', 'GET')
+// const actionHandlers = {
+//     getMyTeams: (teams) => teamStore.teams = teams
+// }
 
-export const getHealthCheckStatus = async teamId => makeRequest(`health-check/status?teamId=${teamId}`, 'GET')
+function initWs() {
+    return getSession().then(session => {
+        const token = session.getIdToken().getJwtToken()
+        const ws = new WebSocket('wss://8zdr8v22dd.execute-api.eu-west-2.amazonaws.com/ws?Authorization=' + token)
 
-export const getHealthChecks = async teamId => makeRequest(`health-checks?teamId=${teamId}`, 'GET')
+        return new Promise((resolve, reject) => {
+            ws.onopen = () => {
+                console.log('Connection opened!')
+                resolve(ws)
+            }
 
-export const getTeam = async teamId => makeRequest(`team?id=${teamId}`, 'GET')
+            ws.onmessage = (message) => {
+                const { action, body } = JSON.parse(message.data)
+                console.log({'action': action})
+                // actionHandlers[action](body)
+            }
 
-export const addTeam = async teamName => makeRequest('my-teams', 'POST', { teamName })
+            ws.onerror = (e) => {
+                // an error occurred
+                console.log('error in connection man')
+                console.log(e.message)
+                reject(ws)
+            }
+        })
+    })
+}
 
-export const sendStatus = async (healthCheckId, categories) => makeRequest('health-status', 'POST', {
-    healthCheckId,
-    categories
-})
+// initWs()
 
-export const joinTeam = async code => makeRequest('join-team', 'POST', { code })
-
-export const removeFromTeam = async (teamId, removedUserId) => makeRequest('remove-from-team', 'POST', {
-    teamId,
+export const getMyTeams = async () => makeRequest('teams', 'GET')
+export const addTeam = async teamName => makeRequest('teams', 'POST', { teamName })
+export const joinTeam = async code => makeRequest('teams/members', 'POST', { code })
+export const removeFromTeam = async (teamId, removedUserId) => makeRequest(`teams/${teamId}/members`, 'DELETE', {
     removedUserId
 })
 
-export const createHealthCheck = async teamId => makeRequest('health-check', 'POST', { teamId })
+export const createHealthCheck = async teamId => makeRequest('votings', 'POST', { teamId })
+export const getHealthCheckStatus = async teamId => makeRequest(`votings/${teamId}`, 'GET')
+export const endHealthCheck = async teamId => makeRequest(`votings/${teamId}`, 'PUT' )
+export const getHealthChecks = async teamId => makeRequest(`votings/${teamId}/finished`, 'GET')
+export const sendStatus = async (teamId, categories) => makeRequest(`votings/${teamId}/vote`, 'POST', {
+    categories
+})
 
-export const endHealthCheck = async teamId => makeRequest('health-check/end', 'POST', { teamId })
+export const getTeam = async teamId => makeRequest(`team?id=${teamId}`, 'GET')
+
+
+
+
+
+
 
 export const uploadFile = async (filename, file) => Storage.put(filename, file, {
     customPrefix: {

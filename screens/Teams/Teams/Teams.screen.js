@@ -104,17 +104,9 @@ export default class TeamsScreen extends React.Component {
     }
 
     async componentDidMount() {
-        this.updateTeamsSubscription = this.props.navigation.addListener('didFocus', this.updateTeams)
-        const user = await register()
-    }
-
-    componentWillUnmount() {
-        this.updateTeamsSubscription.remove()
-    }
-
-    async updateTeams() {
         const teams = await getMyTeams()
         teamStore.teams = teams
+        const user = await register()
     }
 
     render() {
