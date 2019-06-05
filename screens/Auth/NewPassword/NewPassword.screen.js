@@ -5,7 +5,7 @@ import { Button, Text, Input, Item, Form, Label } from 'native-base'
 import { KeyboardAvoidingView, Image } from 'react-native'
 import { Page, Loader, Header, ArrowBack } from '../../../components'
 
-import { forgotPasswordSubmit } from '../../../adapters/auth'
+import { forgotPasswordSubmit } from '../../../services/connection/adapters/auth'
 import { buttonStyle, buttonTextStyle, labelStyle, inputStyle } from '../../../constants/Style'
 
 const newPasswordIcon = require('./new-password-3x.png')

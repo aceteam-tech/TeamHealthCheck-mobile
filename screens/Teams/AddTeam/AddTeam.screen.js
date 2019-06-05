@@ -2,7 +2,7 @@ import React from 'react'
 import { Input, Label, Item, Form } from 'native-base'
 import { KeyboardAvoidingView } from 'react-native'
 import styled from 'styled-components/native'
-import { addTeam } from '../../../adapters/api'
+import { addTeam } from '../../../services/connection/adapters/http-api'
 import { Button, Header, Page, TeamLogo, ArrowBack } from '../../../components'
 import { labelStyle, inputStyle } from '../../../constants/Style'
 

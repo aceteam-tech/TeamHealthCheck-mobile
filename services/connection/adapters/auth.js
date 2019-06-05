@@ -1,6 +1,6 @@
 import Amplify, { Auth } from 'aws-amplify'
 import { CLIENT_ID, USER_POOL_ID } from 'babel-dotenv'
-import appStore from '../model/app.store'
+import appStore from '../../../model/app.store'
 
 Amplify.configure({
     Auth: {

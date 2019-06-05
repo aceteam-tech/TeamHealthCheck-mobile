@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 import teamStore from '../../../model/team-store'
 import { observer } from 'mobx-react/native'
-import { removeFromTeam } from '../../../adapters/api'
+import { removeFromTeam } from '../../../services/connection/adapters/http-api'
 import { Header, PageWithMenu, TeamLogo, Button, UserListItem } from '../../../components/index'
 
 const DynamicContent = styled.View`

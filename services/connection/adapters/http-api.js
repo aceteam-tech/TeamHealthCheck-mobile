@@ -2,8 +2,7 @@ import { Storage } from 'aws-amplify'
 import { API_URL } from 'babel-dotenv'
 import { getSession } from './auth'
 import { pathname } from 'join-url'
-import appStore from '../model/app.store'
-import teamStore from '../model/team-store'
+import appStore from '../../../model/app.store'
 
 const makeRequest = async (resource, method, body) => {
     try {
@@ -32,39 +31,6 @@ const makeRequest = async (resource, method, body) => {
     }
 }
 
-// const actionHandlers = {
-//     getMyTeams: (teams) => teamStore.teams = teams
-// }
-
-function initWs() {
-    return getSession().then(session => {
-        const token = session.getIdToken().getJwtToken()
-        const ws = new WebSocket('wss://8zdr8v22dd.execute-api.eu-west-2.amazonaws.com/ws?Authorization=' + token)
-
-        return new Promise((resolve, reject) => {
-            ws.onopen = () => {
-                console.log('Connection opened!')
-                resolve(ws)
-            }
-
-            ws.onmessage = (message) => {
-                const { action, body } = JSON.parse(message.data)
-                console.log({'action': action})
-                // actionHandlers[action](body)
-            }
-
-            ws.onerror = (e) => {
-                // an error occurred
-                console.log('error in connection man')
-                console.log(e.message)
-                reject(ws)
-            }
-        })
-    })
-}
-
-// initWs()
-
 export const getMyTeams = async () => makeRequest('teams', 'GET')
 export const addTeam = async teamName => makeRequest('teams', 'POST', { teamName })
 export const joinTeam = async code => makeRequest('teams/members', 'POST', { code })
@@ -81,12 +47,6 @@ export const sendStatus = async (teamId, categories) => makeRequest(`votings/${t
 })
 
 export const getTeam = async teamId => makeRequest(`team?id=${teamId}`, 'GET')
-
-
-
-
-
-
 
 export const uploadFile = async (filename, file) => Storage.put(filename, file, {
     customPrefix: {

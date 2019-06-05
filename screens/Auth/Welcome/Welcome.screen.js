@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 import { Image } from 'react-native'
 
 import { Loader, Button, Page } from '../../../components'
-import { login } from '../../../adapters/auth'
+import { login } from '../../../services/connection/adapters/auth'
 import colors from '../../../constants/Colors'
 
 const iconUser = require('./fun-3x.png')

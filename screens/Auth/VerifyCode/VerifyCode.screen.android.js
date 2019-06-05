@@ -5,7 +5,7 @@ import { Button, Text, Input, Icon, Item, Form, Label } from 'native-base'
 import { KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native'
 import { Page, Loader, Header } from '../../../components'
 
-import { resendCode, verify } from '../../../adapters/auth'
+import { resendCode, verify } from '../../../services/connection/adapters/auth'
 import colors from '../../../constants/Colors'
 import { buttonStyle, buttonTextStyle, labelStyle, inputStyle } from '../../../constants/Style'
 

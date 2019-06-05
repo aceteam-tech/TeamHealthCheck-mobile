@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Text, Form} from 'native-base'
 import {KeyboardAvoidingView} from 'react-native'
 import styled from 'styled-components/native'
-import {joinTeam} from '../../../adapters/api'
+import {joinTeam} from '../../../services/connection/adapters/http-api'
 import colors from '../../../constants/Colors'
 import { buttonStyle, buttonTextStyle } from '../../../constants/Style'
 import {Header, Page, PinInput, ArrowBack} from '../../../components/index'

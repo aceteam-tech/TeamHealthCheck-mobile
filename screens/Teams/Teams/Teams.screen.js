@@ -5,11 +5,11 @@ import { observer } from 'mobx-react/native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import styled from 'styled-components/native'
 
-import { getMyTeams } from '../../../adapters/api'
+import { getMyTeams } from '../../../services/connection/adapters/http-api'
 import teamStore from '../../../model/team-store'
 import { Header, Button, Page, TeamCard, Loader } from '../../../components/index'
 import colors from '../../../constants/Colors'
-import { signOut } from '../../../adapters/auth'
+import { signOut } from '../../../services/connection/adapters/auth'
 import {register} from '../../../helpers/push.helper'
 
 const addTeamIcon = require('./add-team-2x.png')

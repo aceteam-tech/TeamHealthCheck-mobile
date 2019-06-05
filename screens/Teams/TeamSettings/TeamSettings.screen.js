@@ -4,7 +4,7 @@ import {KeyboardAvoidingView} from 'react-native'
 import styled from 'styled-components/native'
 import colors from '../../../constants/Colors'
 import {ImagePicker, Permissions, FileSystem} from 'expo'
-import {uploadFile} from '../../../adapters/api'
+import {uploadFile} from '../../../services/connection/adapters/http-api'
 import {Buffer} from 'buffer'
 import uuid from 'uuid/v4'
 

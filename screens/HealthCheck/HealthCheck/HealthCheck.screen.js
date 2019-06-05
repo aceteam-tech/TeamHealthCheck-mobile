@@ -10,7 +10,7 @@ import healthCheckStore from '../../../model/health-check-store'
 import {
     getHealthCheckStatus, createHealthCheck, endHealthCheck, getHealthChecks,
     getMyTeams
-} from '../../../adapters/api'
+} from '../../../services/connection/adapters/http-api'
 import { observer } from 'mobx-react/native'
 
 const Footer = styled.View`

@@ -6,7 +6,7 @@ import { observer } from 'mobx-react/native'
 import teamStore from '../../../model/team-store'
 import { Header, PageWithMenu, CategoryListItem } from '../../../components/index'
 import colors from '../../../constants/Colors'
-import { getHealthChecks } from '../../../adapters/api'
+import { getHealthChecks } from '../../../services/connection/adapters/http-api'
 
 const HeaderWrapper = styled.View``
 

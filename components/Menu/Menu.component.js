@@ -7,7 +7,7 @@ import TeamLogo from '../TeamLogo/TeamLogo.component'
 import Page from '../Page/Page.component'
 import Header from '../Header/Header.component'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { signOut } from '../../adapters/auth'
+import { signOut } from '../../services/connection/adapters/auth'
 
 const ChangeTeam = styled.TouchableOpacity`
   margin-top: 10px;

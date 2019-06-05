@@ -4,7 +4,8 @@ import {
     StatusBar,
     View,
 } from 'react-native'
-import { getUser } from '../adapters/auth'
+import { getUser } from '../services/connection/adapters/auth'
+import { initSocketConnection } from '../services/connection/adapters/socket-api'
 import userStore from '../model/user-store'
 
 export default class AuthLoadingScreen extends React.Component {
@@ -18,6 +19,7 @@ export default class AuthLoadingScreen extends React.Component {
         try {
             const user = await getUser()
             userStore.setUser(user.attributes)
+            await initSocketConnection()
             this.props.navigation.navigate('TeamsFlow')
         } catch (e) {
             this.props.navigation.navigate('AuthFlow')

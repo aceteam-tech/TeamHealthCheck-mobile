@@ -5,7 +5,7 @@ import { Button, Text, Form } from 'native-base'
 import { KeyboardAvoidingView, Image } from 'react-native'
 import { Page, PinInput, Loader, Header, ArrowBack } from '../../../components'
 
-import { verify, resendCode } from '../../../adapters/auth'
+import { verify, resendCode } from '../../../services/connection/adapters/auth'
 import colors from '../../../constants/Colors'
 import { buttonStyle, buttonTextStyle } from '../../../constants/Style'
 import { switchInput, updateCode } from './VerifyCode.helpers'

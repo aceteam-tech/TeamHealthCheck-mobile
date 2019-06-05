@@ -5,7 +5,7 @@ import { Input, Item, Form, Label } from 'native-base'
 import { Image, KeyboardAvoidingView } from 'react-native'
 import { Button, Header, Page, Loader, ArrowBack } from '../../../components'
 
-import { login } from '../../../adapters/auth'
+import { login } from '../../../services/connection/adapters/auth'
 import colors from '../../../constants/Colors'
 import { labelStyle, inputStyle } from '../../../constants/Style'
 import appStore from '../../../model/app.store'

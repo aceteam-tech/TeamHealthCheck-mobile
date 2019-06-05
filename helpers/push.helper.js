@@ -1,5 +1,5 @@
 import { Permissions, Notifications } from 'expo'
-import {registerForPushNotifications} from '../adapters/api'
+import {registerForPushNotifications} from '../services/connection/adapters/http-api'
 
 export async function register() {
     let { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS)

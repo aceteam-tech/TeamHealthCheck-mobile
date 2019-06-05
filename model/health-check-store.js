@@ -1,7 +1,10 @@
 import { observable, computed } from 'mobx'
 
 class ObservableHealthCheckStore {
-    @observable healthCheck = {}
+    @observable healthCheck = {
+        usersSubmitted: [],
+        ended: true
+    }
 
     @observable currentCategoryIndex = 0
 
@@ -23,6 +26,10 @@ class ObservableHealthCheckStore {
         this.healthCheck = healthCheck
         this.currentCategoryIndex = 0
         this.categoriesToSend = []
+    }
+
+    userVoted = (user) => {
+        this.healthCheck.usersSubmitted.push(user)
     }
 
     updateCategory = (value) => {

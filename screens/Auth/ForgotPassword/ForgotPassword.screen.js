@@ -5,7 +5,7 @@ import { Button, Text, Input, Item, Form, Label } from 'native-base'
 import { KeyboardAvoidingView, Image } from 'react-native'
 import { Page, Header, Loader, ArrowBack } from '../../../components'
 
-import { forgotPassword } from '../../../adapters/auth'
+import { forgotPassword } from '../../../services/connection/adapters/auth'
 import { buttonStyle, buttonTextStyle, labelStyle, inputStyle } from '../../../constants/Style'
 
 import forgotPasswordIcon from "./forgot-password-icon-3x.png"

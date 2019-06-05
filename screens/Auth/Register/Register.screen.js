@@ -6,7 +6,7 @@ import { Button, Text, Input, Label, Item, Form, Icon } from 'native-base'
 import { Image, KeyboardAvoidingView } from 'react-native'
 import { Page, Loader, Header, ArrowBack } from '../../../components'
 
-import { signUp } from '../../../adapters/auth'
+import { signUp } from '../../../services/connection/adapters/auth'
 import colors from '../../../constants/Colors'
 import { buttonStyle, buttonTextStyle, labelStyle, inputStyle } from '../../../constants/Style'
 import registerFormStore from './register.store'
