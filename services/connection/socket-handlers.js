@@ -1,11 +1,21 @@
 import healthCheckStore from '../../model/health-check-store'
 import teamStore from '../../model/team-store'
 
-export default {
+const socketHandlers = {
     votingStarted: ({voting}) => healthCheckStore.votingStarted(voting),
     userVoted: ({user}) => healthCheckStore.userVoted(user),
     votingFinished: ({voting}) => {
         healthCheckStore.votingFinished()
-        teamStore.votingFinished(voting)
+
+        // If the health check finished without any votes, categories property will be undefined.
+        if(voting.categories){
+            teamStore.votingFinished(voting)
+        }
+    }
+}
+
+export default function handleSocketCallback(event){
+    if(event.teamId === teamStore.team.id){
+        socketHandlers[event.action](event)
     }
 }

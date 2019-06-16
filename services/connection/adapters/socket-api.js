@@ -1,6 +1,6 @@
 import { WEBSOCKET_URL } from 'babel-dotenv'
 import { getSession } from './auth'
-import socketHandlers from '../socket-handlers'
+import handleSocketCallback from '../socket-handlers'
 
 export function initSocketConnection() {
     return getSession().then(session => {
@@ -16,7 +16,7 @@ export function initSocketConnection() {
             ws.onmessage = (message) => {
                 const data = JSON.parse(message.data)
                 console.log({'data': data})
-                socketHandlers[data.action](data)
+                handleSocketCallback(data)
             }
 
             ws.onerror = (e) => {

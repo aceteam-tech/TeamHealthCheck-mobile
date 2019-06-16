@@ -3,76 +3,16 @@ import { Image, Animated } from 'react-native'
 import { Content } from 'native-base'
 import { observer } from 'mobx-react/native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import styled from 'styled-components/native'
-
-import { getMyTeams } from '../../../services/connection/adapters/http-api'
 import teamStore from '../../../model/team-store'
+import teamsStore from '../../../model/teams-store'
 import { Header, Button, Page, TeamCard, Loader } from '../../../components/index'
-import colors from '../../../constants/Colors'
 import { signOut } from '../../../services/connection/adapters/auth'
-import {register} from '../../../helpers/push.helper'
+// import {register} from '../../../helpers/push.helper'
+
+import { Menu, MenuItem, AddButtonWrapper, LogoutButton, MenuShadow, MenuText, NoneTeamsText, NoneTeamsWrapper } from './Teams.styles'
 
 const addTeamIcon = require('./add-team-2x.png')
 const joinTeamIcon = require('./join-team-2x.png')
-
-const AddButtonWrapper = styled.View`
-  justify-content: flex-end;
-  margin-bottom: 20px;
-  margin-right: 20px;
-  flex-direction: row;
-`
-
-const MenuShadow = styled.TouchableOpacity`
-  position: absolute;
-  top: 0;
-  bottom: 0; 
-  left: 0;
-  right: 0;
-  background-color: rgba(0,0,0,.5);
-  display: flex
-`
-
-const Menu = styled(Animated.View)`
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 150px;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-    box-shadow: 0 -2px 3px rgba(0,0,0,0.15);
-`
-
-const MenuItem = styled.TouchableOpacity`
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-`
-
-const NoneTeamsWrapper = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`
-
-const NoneTeamsText = styled.Text`
-  color: ${colors.air};
-  font-size: 20px;
-`
-
-const LogoutButton = styled.TouchableOpacity`
-  padding: 10px 20px;
-`
-
-const MenuText = styled.Text`
-  font-size: 14px;
-  color: ${colors.primary};
-  font-weight: 100;
-`
 
 @observer
 export default class TeamsScreen extends React.Component {
@@ -103,15 +43,9 @@ export default class TeamsScreen extends React.Component {
         this.props.navigation.navigate('TeamDashboard')
     }
 
-    async componentDidMount() {
-        const teams = await getMyTeams()
-        teamStore.teams = teams
-        const user = await register()
-    }
-
     render() {
         const { navigate } = this.props.navigation
-        const { teams } = teamStore
+        const { teams } = teamsStore
         return (
             <Loader assetsToLoad={[addTeamIcon, joinTeamIcon]}>
                 <Page version={2}>

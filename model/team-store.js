@@ -1,9 +1,8 @@
 import { observable, computed } from 'mobx'
+import { AsyncStorage } from 'react-native'
 import { lastResults } from '../logic/last-results'
 
 class ObservableTeamStore {
-    @observable teams = []
-
     @observable team = {
         name: '',
         users: []
@@ -15,8 +14,13 @@ class ObservableTeamStore {
         return lastResults(this.healthChecks)
     }
 
-    setTeam(team) {
+    async getTeamId(){
+        return this.team.id || AsyncStorage.getItem('teamId')
+    }
+
+    async setTeam(team) {
         this.team = team
+        await AsyncStorage.setItem('teamId', team.id)
     }
 
     setHealthChecks(healthChecks) {
