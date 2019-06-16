@@ -29,11 +29,24 @@ class ObservableHealthCheckStore {
     }
 
     userVoted = (user) => {
-        this.healthCheck.usersSubmitted.push(user)
+        this.healthCheck?.usersSubmitted?.push(user)
+    }
+
+    votingFinished = () => {
+        this.healthCheck = {
+            ended: true
+        }
+    }
+
+    votingStarted = () => {
+        this.healthCheck = {
+            usersSubmitted: [],
+            ended: false
+        }
     }
 
     updateCategory = (value) => {
-        this.categoriesToSend.push({
+        this.categoriesToSend?.push({
             id: this.currentCategory.id,
             value
         })

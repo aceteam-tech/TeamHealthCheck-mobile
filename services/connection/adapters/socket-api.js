@@ -15,6 +15,7 @@ export function initSocketConnection() {
 
             ws.onmessage = (message) => {
                 const data = JSON.parse(message.data)
+                console.log({'data': data})
                 socketHandlers[data.action](data)
             }
 
@@ -23,6 +24,11 @@ export function initSocketConnection() {
                 console.log('error in connection man')
                 console.log(e.message)
                 reject(ws)
+            }
+
+            ws.onclose = () => {
+                console.log('closed. Reconnecting...')
+                initSocketConnection()
             }
         })
     })

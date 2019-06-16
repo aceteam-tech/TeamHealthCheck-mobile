@@ -6,7 +6,7 @@ import {Button, Header, Loading, Page, ArrowBack} from '../../../components/inde
 
 import healthCheckStore from '../../../model/health-check-store'
 import teamStore from '../../../model/team-store'
-import {sendStatus, getHealthCheckStatus} from '../../../services/connection/adapters/http-api'
+import {sendStatus} from '../../../services/connection/adapters/http-api'
 
 const HeaderWrapper = styled.View`
   margin-bottom: 50px;
@@ -16,9 +16,7 @@ const VotingSummaryComponent = observer(({navigation, healthCheckStore, teamStor
 
     const send = async () => {
         const {categoriesToSend} = healthCheckStore
-        await sendStatus(teamStore.team.id, categoriesToSend)
-        const newStatus = await getHealthCheckStatus(teamStore.team.id)
-        healthCheckStore.setHealthCheck(newStatus)
+        sendStatus(teamStore.team.id, categoriesToSend)
         navigation.navigate('HealthCheck')
     }
 

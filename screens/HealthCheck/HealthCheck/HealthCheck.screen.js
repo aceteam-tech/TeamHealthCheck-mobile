@@ -117,8 +117,8 @@ const HealthCheckComponent = observer(({ healthCheckStore, teamStore, userStore,
         } else {
             usersNotVoted = users
         }
-        const { sub } = userStore.user
-        votingEnabled = usersNotVoted.map(s => s.id).includes(sub)
+        const { email } = userStore.user
+        votingEnabled = usersNotVoted.map(s => s.email).includes(email)
     }
     return (
         <PageWithMenu navigate={navigate}>
@@ -153,15 +153,7 @@ const HealthCheckComponent = observer(({ healthCheckStore, teamStore, userStore,
 })
 
 export default class HealthCheckScreen extends React.Component {
-    componentDidMount() {
-        this.updateSubscription = this.props.navigation.addListener('didFocus', this.update)
-    }
-
-    componentWillUnmount() {
-        this.updateSubscription.remove()
-    }
-
-    async update() {
+    async componentDidMount() {
         const healthCheck = await getHealthCheckStatus(teamStore.team.id)
         healthCheckStore.setHealthCheck(healthCheck)
     }

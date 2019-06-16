@@ -62,15 +62,7 @@ const TeamDashboardComponent = ({ lastResults, navigate }) => (
 
 @observer
 export default class TeamDashboardScreen extends React.Component {
-    componentDidMount() {
-        this.updateHealthChecksSubscription = this.props.navigation.addListener('didFocus', this.updateHealthChecks)
-    }
-
-    componentWillUnmount() {
-        this.updateHealthChecksSubscription.remove()
-    }
-
-    async updateHealthChecks() {
+    async componentDidMount() {
         const healthChecks = await getHealthChecks(teamStore.team.id)
         teamStore.setHealthChecks(healthChecks)
     }

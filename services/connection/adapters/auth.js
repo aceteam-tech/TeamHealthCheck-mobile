@@ -6,7 +6,8 @@ Amplify.configure({
     Auth: {
         region: 'eu-west-2',
         userPoolId: USER_POOL_ID,
-        userPoolWebClientId: CLIENT_ID
+        userPoolWebClientId: CLIENT_ID,
+        authenticationFlowType: 'USER_PASSWORD_AUTH'
     },
     Storage: {
         bucket: 'squad-health-check',
