@@ -22,6 +22,10 @@ class ObservableTeamStore {
     setHealthChecks(healthChecks) {
         this.healthChecks = healthChecks
     }
+
+    votingFinished(voting){
+        this.healthChecks.push(voting)
+    }
 }
 
 export default new ObservableTeamStore()

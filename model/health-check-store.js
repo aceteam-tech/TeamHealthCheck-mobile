@@ -38,11 +38,8 @@ class ObservableHealthCheckStore {
         }
     }
 
-    votingStarted = () => {
-        this.healthCheck = {
-            usersSubmitted: [],
-            ended: false
-        }
+    votingStarted = (voting) => {
+        this.healthCheck = voting
     }
 
     updateCategory = (value) => {

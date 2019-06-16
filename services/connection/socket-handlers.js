@@ -1,7 +1,11 @@
 import healthCheckStore from '../../model/health-check-store'
+import teamStore from '../../model/team-store'
 
 export default {
-    votingStarted: () => healthCheckStore.votingStarted(),
+    votingStarted: ({voting}) => healthCheckStore.votingStarted(voting),
     userVoted: ({user}) => healthCheckStore.userVoted(user),
-    votingFinished: () => healthCheckStore.votingFinished()
+    votingFinished: ({voting}) => {
+        healthCheckStore.votingFinished()
+        teamStore.votingFinished(voting)
+    }
 }
