@@ -23,6 +23,13 @@ class ObservableTeamStore {
         await AsyncStorage.setItem('teamId', team.id)
     }
 
+    removeUser(removedUserId){
+        this.team = {
+            ...this.team,
+            users: this.team.users.filter(({id}) => id !== removedUserId)
+        }
+    }
+
     setHealthChecks(healthChecks) {
         this.healthChecks = healthChecks
     }

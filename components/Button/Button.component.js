@@ -15,6 +15,10 @@ const Button = (props) => {
     }
 }
 
+Button.defaultProps = {
+    version: 'primary'
+}
+
 Button.propTypes = {
     text: PropTypes.string,
     onPress: PropTypes.func,
