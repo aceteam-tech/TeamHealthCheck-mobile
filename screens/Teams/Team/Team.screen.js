@@ -13,6 +13,12 @@ const RightHeader = ({ onToggleMenu }) => (
     </BurgerButton>
 )
 
+const removeUser = async (teamId, userId) => {
+    removeFromTeam(teamId, userId).then(() => {
+        teamStore.removeUser(userId)
+    })
+}
+
 const TeamComponent = observer(({ navigate, onToggleMenu }) => (
     <DynamicContent>
         <HeaderWrapper>
@@ -25,7 +31,7 @@ const TeamComponent = observer(({ navigate, onToggleMenu }) => (
             {
                 teamStore.team.users.map(u => (
                     <UserListItem key={u.id} user={u}
-                                  removeUser={() => removeFromTeam(teamStore.team.id, u.id)}/>
+                                  removeUser={() => removeUser(teamStore.team.id, u.id)}/>
                 ))
             }
         </Content>

@@ -22,11 +22,10 @@ const makeRequest = async (resource, method, body) => {
         const url = pathname(API_URL, resource)
         const promise = fetch(url, params)
         appStore.apiRequestCalled(promise)
-        return promise.then(response => {
-            return response.json()
-        })
+
+        return promise.then(response => response.json())
     } catch (e) {
-        console.error(e)
+        console.warn({'e': e});
         return e
     }
 }
