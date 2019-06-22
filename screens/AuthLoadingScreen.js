@@ -22,6 +22,11 @@ export default class AuthLoadingScreen extends React.Component {
         const teamId = await teamStore.getTeamId()
         if(teamId){
             const team = teams.find(({id}) => id === teamId)
+            if(!team) {
+                teamStore.resetTeam()
+                return this.props.navigation.navigate('TeamsFlow')
+            }
+
             await teamStore.setTeam(team)
             this.props.navigation.navigate('TeamDashboard')
         } else {

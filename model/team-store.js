@@ -23,6 +23,11 @@ class ObservableTeamStore {
         await AsyncStorage.setItem('teamId', team.id)
     }
 
+    async resetTeam() {
+        this.team = undefined
+        await AsyncStorage.removeItem('teamId')
+    }
+
     removeUser(removedUserId){
         this.team = {
             ...this.team,
