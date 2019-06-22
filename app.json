@@ -8,7 +8,7 @@
       "ios",
       "android"
     ],
-    "version": "1.1.10",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/logo/logo.png",
     "splash": {
@@ -25,12 +25,12 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "net.teamhealthcheck",
-      "buildNumber": "4"
+      "buildNumber": "1"
     },
     "android": {
       "package": "net.teamhealthcheck",
       "permissions": [],
-      "versionCode": 8,
+      "versionCode": 1,
       "splash": {
         "image": "./assets/images/splash-icon-android.png",
         "resizeMode": "cover",
