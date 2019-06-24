@@ -24,12 +24,15 @@ export default class AuthLoadingScreen extends React.Component {
             const team = teams.find(({id}) => id === teamId)
             if(!team) {
                 teamStore.resetTeam()
+                await initSocketConnection()
                 return this.props.navigation.navigate('TeamsFlow')
             }
 
             await teamStore.setTeam(team)
+            await initSocketConnection()
             this.props.navigation.navigate('TeamDashboard')
         } else {
+            await initSocketConnection()
             this.props.navigation.navigate('TeamsFlow')
         }
     }
@@ -38,9 +41,10 @@ export default class AuthLoadingScreen extends React.Component {
     _bootstrapAsync = async () => {
         try {
             const user = await getUser()
-            userStore.setUser(user.attributes)
-            await initSocketConnection()
-            await this.openRecentTeam()
+            if(user){
+                userStore.setUser(user.attributes)
+                await this.openRecentTeam()
+            }
         } catch (e) {
             this.props.navigation.navigate('AuthFlow')
         }
