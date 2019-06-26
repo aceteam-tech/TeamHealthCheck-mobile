@@ -12,7 +12,8 @@ const socketHandlers = {
             teamStore.votingFinished(voting)
         }
     },
-    userRemoved: ({removedUserId}) => teamStore.removeUser(removedUserId)
+    userRemoved: ({removedUserId}) => teamStore.removeUser(removedUserId),
+    newUser: ({user}) => teamStore.newUser(user)
 }
 
 export default function handleSocketCallback(event){

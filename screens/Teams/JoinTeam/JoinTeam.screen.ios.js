@@ -6,7 +6,7 @@ import {joinTeam} from '../../../services/connection/adapters/http-api'
 import colors from '../../../constants/Colors'
 import { buttonStyle, buttonTextStyle } from '../../../constants/Style'
 import {Header, Page, PinInput, ArrowBack} from '../../../components/index'
-import teamsStore from '../../../model/team-store'
+import teamsStore from '../../../model/teams-store'
 import { switchInput, updateCode } from '../../Auth/VerifyCode/VerifyCode.helpers'
 
 const HeaderWrapper = styled.View`
@@ -54,8 +54,7 @@ export default class VerifyCodeScreen extends React.Component {
 
     verify = async (code) => {
         try {
-            const team = await joinTeam(code)
-            teamsStore.setTeam(team)
+            await teamsStore.joinTeam(code)
             this.props.navigation.navigate('TeamDashboard')
         } catch (e) {
             console.log(e)

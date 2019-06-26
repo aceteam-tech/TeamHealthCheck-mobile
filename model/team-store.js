@@ -35,6 +35,10 @@ class ObservableTeamStore {
         }
     }
 
+    newUser(user){
+        this.team.users.push(user)
+    }
+
     setHealthChecks(healthChecks) {
         this.healthChecks = healthChecks
     }

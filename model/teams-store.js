@@ -1,5 +1,6 @@
 import { observable } from 'mobx'
-import { getMyTeams } from '../services/connection/adapters/http-api'
+import { addTeam, getMyTeams, joinTeam } from '../services/connection/adapters/http-api'
+import teamStore from './team-store'
 
 class ObservableTeamsStore {
     @observable teams = []
@@ -8,6 +9,17 @@ class ObservableTeamsStore {
         const teams = await getMyTeams()
         this.teams = teams
         return teams
+    }
+
+    async addTeam(name){
+        const team = await addTeam(name)
+        this.teams.push(team)
+    }
+
+    async joinTeam(code){
+        const team = await joinTeam(code)
+        this.teams.push(team)
+        await teamStore.setTeam(team)
     }
 }
 

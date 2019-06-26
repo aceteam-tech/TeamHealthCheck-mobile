@@ -2,9 +2,9 @@ import React from 'react'
 import { Input, Label, Item, Form } from 'native-base'
 import { KeyboardAvoidingView } from 'react-native'
 import styled from 'styled-components/native'
-import { addTeam } from '../../../services/connection/adapters/http-api'
 import { Button, Header, Page, TeamLogo, ArrowBack } from '../../../components'
 import { labelStyle, inputStyle } from '../../../constants/Style'
+import teamsStore  from '../../../model/teams-store'
 
 const HeaderWrapper = styled.View`
   margin-bottom: 30px;
@@ -37,8 +37,8 @@ export default class AddTeamScreen extends React.Component {
     }
 
     async addTeam() {
-        await addTeam(this.state.name)
-        this.props.navigation.push('Teams')
+        await teamsStore.addTeam(this.state.name)
+        this.props.navigation.goBack()
     }
 
     render() {
