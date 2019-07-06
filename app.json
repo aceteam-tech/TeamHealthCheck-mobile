@@ -25,12 +25,12 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "net.teamhealthcheck",
-      "buildNumber": "1"
+      "buildNumber": "2"
     },
     "android": {
       "package": "net.teamhealthcheck",
       "permissions": [],
-      "versionCode": 10,
+      "versionCode": 11,
       "splash": {
         "image": "./assets/images/splash-icon-android.png",
         "resizeMode": "cover",
