@@ -2,8 +2,8 @@ import React from 'react'
 import { Image } from 'react-native'
 import styled from 'styled-components/native'
 import colors from '../../../constants/Colors'
-import { Page, Header, Loading, CategoryVoteBox, Loader, ArrowBack } from '../../../components/index'
-import healthCheckStore from '../../../model/health-check-store'
+import { Page, Header, CategoryVoteBox, Loader, ArrowBack } from '../../../components/index'
+import userVotesStore from '../../../model/user-votes-store'
 import categories from '../../../assets/categories/category-icons'
 import { observer } from 'mobx-react/native'
 
@@ -20,30 +20,41 @@ const HeaderRight = ({categoryIndex, categoriesCount}) => (
     <Text style={{paddingRight: 20}}>{(categoryIndex + 1) + ' / ' + categoriesCount}</Text>
 )
 
-const CategoryVoteComponent = observer(({ navigation, healthCheckStore }) => {
-    if (!healthCheckStore.healthCheck.categories) return <Loading/>
-    const category = healthCheckStore.currentCategory
-    const { nextCategory, lastCategory, updateCategory, currentCategoryIndex, categoriesCount } = healthCheckStore
+const CategoryVoteComponent = observer(({ navigation }) => {
+    const { nextCategory, previousCategory, updateCategory, currentCategory, lastCategory, categoriesCount, currentCategoryIndex, currentCategoryVote } = userVotesStore
 
     const onCategoryChosen = (value) => {
         updateCategory(value)
-        lastCategory ? navigation.push('Summary') : nextCategory()
+
+        if(lastCategory){
+            navigation.push('Summary')
+        } else {
+            nextCategory()
+        }
+    }
+
+    const onArrowBack = () => {
+        if(currentCategoryIndex === 0){
+            navigation.goBack(null)
+        } else {
+            previousCategory()
+        }
     }
 
     return (
         <Page>
             <HeaderWrapper>
-                <Header title={category.name}
-                        left={<ArrowBack onPress={() => navigation.goBack(null)}/>}
+                <Header title={currentCategory.name}
+                        left={<ArrowBack onPress={onArrowBack}/>}
                         right={<HeaderRight categoryIndex={currentCategoryIndex} categoriesCount={categoriesCount}/>}
                 />
             </HeaderWrapper>
-            <Image source={categories[category.image]}
+            <Image source={categories[currentCategory.image]}
                    resizeMode='contain'
                    style={{ height: 120, alignSelf: 'center', marginBottom: 30 }}/>
-            <CategoryVoteBox text={category.descriptionGreen} face='happy' onPress={() => onCategoryChosen(2)}/>
-            <CategoryVoteBox text={'Ok. Could be better...'} face='poker' onPress={() => onCategoryChosen(1)}/>
-            <CategoryVoteBox text={category.descriptionRed} face='sad' onPress={() => onCategoryChosen(0)}/>
+            <CategoryVoteBox selected={currentCategoryVote?.value === 2} text={currentCategory.descriptionGreen} face='happy' onPress={() => onCategoryChosen(2)}/>
+            <CategoryVoteBox selected={currentCategoryVote?.value === 1} text={'Ok. Could be better...'} face='poker' onPress={() => onCategoryChosen(1)}/>
+            <CategoryVoteBox selected={currentCategoryVote?.value === 0} text={currentCategory.descriptionRed} face='sad' onPress={() => onCategoryChosen(0)}/>
         </Page>
     )
 })
@@ -71,7 +82,6 @@ export default class CategoryVoteScreen extends React.Component {
     render() {
         return <Loader assetsToLoad={this.assetsToLoad}>
             <CategoryVoteComponent
-                healthCheckStore={healthCheckStore}
                 navigation={this.props.navigation}
             />
         </Loader>

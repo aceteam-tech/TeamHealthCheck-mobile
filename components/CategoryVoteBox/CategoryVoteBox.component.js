@@ -13,11 +13,11 @@ const faces = {
 }
 
 const CategoryWrapper = styled.TouchableOpacity`
-  border-radius: 10px;
   padding: 10px 20px;
   box-shadow: 0 2px 3px rgba(0,0,0,0.15);
   flex-direction: row;
   align-items: flex-end;
+  ${({ selected }) => selected && 'background-color: rgba(255, 255, 255, .4)'}
 `
 const CategoryFace = styled.Image`
   width: 64.7px;
@@ -40,8 +40,8 @@ const CategoryText = styled.Text`
   font-weight: 200;
 `
 
-const CategoryVoteBox = ({ text, onPress, face }) => (
-    <CategoryWrapper onPress={() => onPress()}>
+const CategoryVoteBox = ({ text, onPress, face, selected }) => (
+    <CategoryWrapper onPress={() => onPress()} selected={selected} >
         <CategoryFace source={faces[face]}/>
         <TextWrapper>
             <CategoryText>

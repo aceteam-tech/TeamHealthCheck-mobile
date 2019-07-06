@@ -17,9 +17,13 @@ class ObservableTeamsStore {
     }
 
     async joinTeam(code){
-        const team = await joinTeam(code)
-        this.teams.push(team)
-        await teamStore.setTeam(team)
+        try{
+            const team = await joinTeam(code)
+            this.teams.push(team)
+            await teamStore.setTeam(team)
+        } catch (e) {
+            console.warn(e)
+        }
     }
 }
 

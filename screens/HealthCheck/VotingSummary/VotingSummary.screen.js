@@ -5,6 +5,7 @@ import styled from 'styled-components/native'
 import {Button, Header, Loading, Page, ArrowBack} from '../../../components/index'
 
 import healthCheckStore from '../../../model/health-check-store'
+import voteStore from '../../../model/user-votes-store'
 import teamStore from '../../../model/team-store'
 import {sendStatus} from '../../../services/connection/adapters/http-api'
 
@@ -15,8 +16,7 @@ const VotingSummaryComponent = observer(({navigation, healthCheckStore, teamStor
     if(!healthCheckStore.healthCheck.categories) return <Loading />
 
     const send = async () => {
-        const {categoriesToSend} = healthCheckStore
-        sendStatus(teamStore.team.id, categoriesToSend)
+        sendStatus(teamStore.team.id, voteStore.vote.categories)
         navigation.navigate('HealthCheck')
     }
 
