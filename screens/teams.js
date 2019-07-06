@@ -1,7 +1,6 @@
 export JoinTeam from './Teams/JoinTeam/JoinTeam.screen'
 export TeamDashboard from './Teams/TeamDashboard/TeamDashboard.screen'
 export AddTeam from './Teams/AddTeam/AddTeam.screen'
-export Invite from './Teams/Invite/Invite.screen'
 export TeamSettings from './Teams/TeamSettings/TeamSettings.screen'
 export Team from './Teams/Team/Team.screen'
 export Teams from './Teams/Teams/Teams.screen'
