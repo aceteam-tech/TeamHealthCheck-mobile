@@ -6,7 +6,7 @@ import colors from '../../../constants/Colors'
 import {Button, Header, Loading, UsersCompactList, PageWithMenu} from '../../../components/index'
 import teamStore from '../../../model/team-store'
 import userStore from '../../../model/user-store'
-import healthCheckStore from '../../../model/health-check-store'
+import votingStore from '../../../model/voting-store'
 import voteStore from '../../../model/vote-store'
 import {
     getHealthCheckStatus, createHealthCheck, endHealthCheck, getHealthChecks
@@ -47,13 +47,13 @@ const BurgerButton = styled.TouchableOpacity`
 
 const onCreateHealthCheck = async (teamId) => {
     const healthCheck = await createHealthCheck(teamId)
-    healthCheckStore.setHealthCheck(healthCheck)
+    votingStore.setHealthCheck(healthCheck)
 }
 
 const onEndHealthCheck = async (teamId, navigate) => {
     const healthCheck = await endHealthCheck(teamId)
     const healthChecks = await getHealthChecks(teamId)
-    healthCheckStore.setHealthCheck(healthCheck)
+    votingStore.setHealthCheck(healthCheck)
     teamStore.setHealthChecks(healthChecks)
     return navigate('TeamDashboard')
 }
@@ -105,8 +105,8 @@ const HealthCheckActive = ({ usersVoted, usersNotVoted, usersSubmitted, votingEn
     </Body>
 )
 
-const HealthCheckComponent = observer(({ healthCheckStore, teamStore, userStore, navigate }) => {
-    const { ended, usersSubmitted } = healthCheckStore.healthCheck
+const HealthCheckComponent = observer(({ teamStore, userStore, navigate }) => {
+    const { ended, usersSubmitted } = votingStore.healthCheck
     const { users, id: teamId } = teamStore.team
     let usersNotVoted = []
     let usersVoted = usersSubmitted || []
@@ -155,12 +155,11 @@ const HealthCheckComponent = observer(({ healthCheckStore, teamStore, userStore,
 export default class HealthCheckScreen extends React.Component {
     async componentDidMount() {
         const healthCheck = await getHealthCheckStatus(teamStore.team.id)
-        healthCheckStore.setHealthCheck(healthCheck)
+        votingStore.setHealthCheck(healthCheck)
     }
 
     render() {
         return <HealthCheckComponent
-            healthCheckStore={healthCheckStore}
             teamStore={teamStore}
             userStore={userStore}
             navigate={this.props.navigation.navigate}

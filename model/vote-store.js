@@ -1,5 +1,5 @@
 import { observable, computed } from 'mobx'
-import votingStore from './health-check-store'
+import votingStore from './voting-store'
 
 class VoteStore {
     @observable vote

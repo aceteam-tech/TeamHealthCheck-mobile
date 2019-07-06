@@ -1,15 +1,15 @@
-import healthCheckStore from '../../model/health-check-store'
+import votingStore from '../../model/voting-store'
 import teamStore from '../../model/team-store'
 import voteStore from '../../model/vote-store'
 
 const socketHandlers = {
     votingStarted: ({voting}) => {
-        healthCheckStore.votingStarted(voting)
+        votingStore.votingStarted(voting)
         voteStore.restartVote(voting.id)
     },
-    userVoted: ({user}) => healthCheckStore.userVoted(user),
+    userVoted: ({user}) => votingStore.userVoted(user),
     votingFinished: ({voting}) => {
-        healthCheckStore.votingFinished()
+        votingStore.votingFinished()
 
         // If the health check finished without any votes, categories property will be undefined.
         if(voting.categories){

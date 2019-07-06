@@ -4,7 +4,7 @@ import styled from 'styled-components/native'
 
 import {Button, Header, Loading, Page, ArrowBack} from '../../../components/index'
 
-import healthCheckStore from '../../../model/health-check-store'
+import votingStore from '../../../model/voting-store'
 import voteStore from '../../../model/vote-store'
 import teamStore from '../../../model/team-store'
 import {sendStatus} from '../../../services/connection/adapters/http-api'
@@ -12,8 +12,8 @@ import {sendStatus} from '../../../services/connection/adapters/http-api'
 const HeaderWrapper = styled.View`
   margin-bottom: 50px;
 `
-const VotingSummaryComponent = observer(({navigation, healthCheckStore, teamStore}) => {
-    if(!healthCheckStore.healthCheck.categories) return <Loading />
+const VotingSummaryComponent = observer(({navigation, teamStore}) => {
+    if(!votingStore.healthCheck.categories) return <Loading />
 
     const send = async () => {
         sendStatus(teamStore.team.id, voteStore.vote.categories)
@@ -33,7 +33,6 @@ const VotingSummaryComponent = observer(({navigation, healthCheckStore, teamStor
 export default class VotingSummaryScreen extends React.Component {
     render () {
         return <VotingSummaryComponent
-            healthCheckStore={healthCheckStore}
             teamStore={teamStore}
             navigation={this.props.navigation}
         />

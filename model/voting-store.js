@@ -1,6 +1,6 @@
 import { observable } from 'mobx'
 
-class ObservableHealthCheckStore {
+class VotingStore {
     @observable healthCheck = {
         usersSubmitted: [],
         ended: true
@@ -25,4 +25,4 @@ class ObservableHealthCheckStore {
     }
 }
 
-export default new ObservableHealthCheckStore()
+export default new VotingStore()
