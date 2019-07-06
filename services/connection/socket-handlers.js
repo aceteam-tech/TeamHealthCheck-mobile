@@ -1,6 +1,6 @@
 import healthCheckStore from '../../model/health-check-store'
 import teamStore from '../../model/team-store'
-import voteStore from '../../model/user-votes-store'
+import voteStore from '../../model/vote-store'
 
 const socketHandlers = {
     votingStarted: ({voting}) => {

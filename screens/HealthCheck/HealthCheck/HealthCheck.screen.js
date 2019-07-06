@@ -7,7 +7,7 @@ import {Button, Header, Loading, UsersCompactList, PageWithMenu} from '../../../
 import teamStore from '../../../model/team-store'
 import userStore from '../../../model/user-store'
 import healthCheckStore from '../../../model/health-check-store'
-import voteStore from '../../../model/user-votes-store'
+import voteStore from '../../../model/vote-store'
 import {
     getHealthCheckStatus, createHealthCheck, endHealthCheck, getHealthChecks
 } from '../../../services/connection/adapters/http-api'

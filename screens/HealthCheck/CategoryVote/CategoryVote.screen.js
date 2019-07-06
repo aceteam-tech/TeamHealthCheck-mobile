@@ -3,7 +3,7 @@ import { Image } from 'react-native'
 import styled from 'styled-components/native'
 import colors from '../../../constants/Colors'
 import { Page, Header, CategoryVoteBox, Loader, ArrowBack } from '../../../components/index'
-import userVotesStore from '../../../model/user-votes-store'
+import voteStore from '../../../model/vote-store'
 import categories from '../../../assets/categories/category-icons'
 import { observer } from 'mobx-react/native'
 
@@ -21,7 +21,7 @@ const HeaderRight = ({categoryIndex, categoriesCount}) => (
 )
 
 const CategoryVoteComponent = observer(({ navigation }) => {
-    const { nextCategory, previousCategory, updateCategory, currentCategory, lastCategory, categoriesCount, currentCategoryIndex, currentCategoryVote } = userVotesStore
+    const { nextCategory, previousCategory, updateCategory, currentCategory, lastCategory, categoriesCount, currentCategoryIndex, currentCategoryVote } = voteStore
 
     const onCategoryChosen = (value) => {
         updateCategory(value)

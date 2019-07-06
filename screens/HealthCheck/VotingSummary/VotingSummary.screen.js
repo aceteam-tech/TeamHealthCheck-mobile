@@ -5,7 +5,7 @@ import styled from 'styled-components/native'
 import {Button, Header, Loading, Page, ArrowBack} from '../../../components/index'
 
 import healthCheckStore from '../../../model/health-check-store'
-import voteStore from '../../../model/user-votes-store'
+import voteStore from '../../../model/vote-store'
 import teamStore from '../../../model/team-store'
 import {sendStatus} from '../../../services/connection/adapters/http-api'
 
