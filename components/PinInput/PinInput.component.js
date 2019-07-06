@@ -17,7 +17,6 @@ export default ({ autoFocus, value, handle, onKeyPress, index }) => (
     <PinInput
         key={index}
         autoCorrect={false}
-        autoFocus={autoFocus || false}
         keyboardType='decimal-pad'
         value={value}
         maxLength={1}

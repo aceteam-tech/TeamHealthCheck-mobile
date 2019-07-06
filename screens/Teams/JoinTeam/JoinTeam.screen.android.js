@@ -30,17 +30,16 @@ export default class VerifyCodeScreen extends React.Component {
     }
 
     onCodeChange = async (code) => {
-        this.setState({
-            code
+        this.setState({ code }, async () => {
+            if (code.length === this.codeLength) {
+                await this.verify()
+            }
         })
-        if (code.length === this.codeLength) {
-            await this.verify(code)
-        }
     }
 
-    verify = async (code) => {
+    verify = async () => {
         try {
-            const team = await joinTeam(code)
+            const team = await joinTeam(this.state.code)
             teamsStore.setTeam(team)
             this.props.navigation.navigate('TeamDashboard')
         } catch (e) {

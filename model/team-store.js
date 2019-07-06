@@ -35,6 +35,10 @@ class ObservableTeamStore {
         }
     }
 
+    rollbackUsers(users){
+        this.team.users = users
+    }
+
     newUser(user){
         this.team.users.push(user)
     }

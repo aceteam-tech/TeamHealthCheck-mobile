@@ -14,8 +14,10 @@ const RightHeader = ({ onToggleMenu }) => (
 )
 
 const removeUser = async (teamId, userId) => {
-    removeFromTeam(teamId, userId).then(() => {
-        teamStore.removeUser(userId)
+    const teamUsersCopy = [...teamStore.team.users]
+    teamStore.removeUser(userId)
+    removeFromTeam(teamId, userId).catch(() => {
+        teamStore.rollbackUsers(teamUsersCopy)
     })
 }
 

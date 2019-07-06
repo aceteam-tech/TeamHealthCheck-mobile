@@ -4,7 +4,7 @@ import { getSession } from './auth'
 import { pathname } from 'join-url'
 import appStore from '../../../model/app.store'
 
-const makeRequest = async (resource, method, body) => {
+const makeRequest = async (resource, method, body, loading = true) => {
     try {
         const session = await getSession()
         const headers = {
@@ -21,7 +21,9 @@ const makeRequest = async (resource, method, body) => {
 
         const url = pathname(API_URL, resource)
         const promise = fetch(url, params)
-        appStore.apiRequestCalled(promise)
+        if(loading){
+            appStore.apiRequestCalled(promise)
+        }
 
         return promise.then(response => response.json())
     } catch (e) {
@@ -35,7 +37,7 @@ export const addTeam = async teamName => makeRequest('teams', 'POST', { teamName
 export const joinTeam = async code => makeRequest('teams/members', 'POST', { code })
 export const removeFromTeam = async (teamId, removedUserId) => makeRequest(`teams/${teamId}/members`, 'DELETE', {
     removedUserId
-})
+}, false)
 
 export const createHealthCheck = async teamId => makeRequest('votings', 'POST', { teamId })
 export const getHealthCheckStatus = async teamId => makeRequest(`votings/${teamId}`, 'GET')
