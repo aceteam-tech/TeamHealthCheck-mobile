@@ -4,7 +4,7 @@ import { Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
 
 import { HealthCheck, CategoryVote, VotingSummary as Summary } from '../screens/health-check'
-import { Team, TeamSettings, TeamDashboard, Invite } from '../screens/teams'
+import { Team, TeamSettings, TeamDashboard } from '../screens/teams'
 
 // Left tab
 const HealthCheckStack = createStackNavigator({
@@ -39,12 +39,7 @@ DashboardStack.navigationOptions = {
 }
 
 // Right tab
-const TeamStack = createStackNavigator({
-    Team,
-    Invite
-}, { headerMode: 'none' })
-
-TeamStack.navigationOptions = {
+Team.navigationOptions = {
     tabBarLabel: 'Team',
     tabBarIcon: ({ focused }) => (
         focused
@@ -56,7 +51,7 @@ TeamStack.navigationOptions = {
 export default createBottomTabNavigator({
     HealthCheckStack,
     DashboardStack,
-    TeamStack
+    Team
 }, {
     tabBarOptions: {
         style: {

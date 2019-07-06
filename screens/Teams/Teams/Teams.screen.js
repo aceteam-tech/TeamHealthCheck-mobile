@@ -40,7 +40,8 @@ export default class TeamsScreen extends React.Component {
 
     chooseTeam = async (team) => {
         teamStore.setTeam(team)
-        this.props.navigation.navigate('TeamDashboard')
+        const nextScreen = team.users.length > 1 ? 'TeamDashboard' : 'Team'
+        this.props.navigation.navigate(nextScreen)
     }
 
     render() {
