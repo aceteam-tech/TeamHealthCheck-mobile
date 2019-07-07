@@ -1,6 +1,7 @@
 import Amplify, { Auth } from 'aws-amplify'
 import { CLIENT_ID, USER_POOL_ID } from 'babel-dotenv'
 import appStore from '../../../model/app.store'
+import socketStore from './socket.store'
 
 Amplify.configure({
     Auth: {
@@ -23,8 +24,6 @@ export const signUp = (email, password, name) => appStore.apiRequestCalled(Auth.
     }
 }))
 
-
-
 export const verify = (username, code) => appStore.apiRequestCalled(Auth.confirmSignUp(username, code))
 
 export const resendCode = (username) => appStore.apiRequestCalled(Auth.resendSignUp(username))
@@ -39,4 +38,7 @@ export const getSession = async () => Auth.currentSession()
 
 export const getUser = async () => Auth.currentAuthenticatedUser()
 
-export const signOut = () => appStore.apiRequestCalled(Auth.signOut())
+export const signOut = () => {
+    socketStore.logout()
+    appStore.apiRequestCalled(Auth.signOut())
+}

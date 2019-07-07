@@ -5,7 +5,7 @@ import {
     View,
 } from 'react-native'
 import { getUser } from '../services/connection/adapters/auth'
-import { initSocketConnection } from '../services/connection/adapters/socket-api'
+import socketStore from '../services/connection/adapters/socket.store'
 import userStore from '../model/user-store'
 import teamStore from '../model/team-store'
 import teamsStore from '../model/teams-store'
@@ -24,16 +24,16 @@ export default class AuthLoadingScreen extends React.Component {
             const team = teams.find(({id}) => id === teamId)
             if(!team) {
                 teamStore.resetTeam()
-                await initSocketConnection()
+                await socketStore.init()
                 return this.props.navigation.navigate('TeamsFlow')
             }
 
             await teamStore.setTeam(team)
-            await initSocketConnection()
+            await socketStore.init()
             const nextScreen = team.users.length > 1 ? 'TeamDashboard' : 'Team'
             this.props.navigation.navigate(nextScreen)
         } else {
-            await initSocketConnection()
+            await socketStore.init()
             this.props.navigation.navigate('TeamsFlow')
         }
     }
