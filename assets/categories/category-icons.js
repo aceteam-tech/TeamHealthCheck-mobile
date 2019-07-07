@@ -11,15 +11,11 @@ import support from './support.png'
 import mission from './mission.png'
 
 export default {
-    learning,
     deliveringValue,
-    pawnsOrPlayers,
-    speed,
-    teamwork,
+    learning,
     healthOfCodebase,
     fun,
     releasingProcess,
     mission,
-    support,
-    suitableProcess
+    support
 }

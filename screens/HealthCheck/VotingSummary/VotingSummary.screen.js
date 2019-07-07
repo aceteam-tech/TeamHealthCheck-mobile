@@ -21,7 +21,7 @@ const VotingSummaryComponent = observer(({navigation, teamStore}) => {
     }
 
     return (
-        <Page>
+        <Page version={2}>
             <HeaderWrapper>
                 <Header title='Summary' left={<ArrowBack onPress={() => navigation.goBack(null)}/>}/>
             </HeaderWrapper>

@@ -42,14 +42,14 @@ const CategoryVoteComponent = observer(({ navigation }) => {
     }
 
     return (
-        <Page>
+        <Page version={2} >
             <HeaderWrapper>
                 <Header title={currentCategory.name}
                         left={<ArrowBack onPress={onArrowBack}/>}
                         right={<HeaderRight categoryIndex={currentCategoryIndex} categoriesCount={categoriesCount}/>}
                 />
             </HeaderWrapper>
-            <Image source={categories[currentCategory.image]}
+            <Image source={categories[currentCategory.image] || categories.fun}
                    resizeMode='contain'
                    style={{ height: 120, alignSelf: 'center', marginBottom: 30 }}/>
             <CategoryVoteBox selected={currentCategoryVote?.value === 2} text={currentCategory.descriptionGreen} face='happy' onPress={() => onCategoryChosen(2)}/>
