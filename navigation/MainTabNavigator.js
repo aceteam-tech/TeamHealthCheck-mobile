@@ -5,6 +5,13 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import { HealthCheck, CategoryVote, VotingSummary as Summary } from '../screens/health-check'
 import { Team, TeamSettings, TeamDashboard } from '../screens/teams'
+import styled from 'styled-components/native'
+
+const MenuImage = styled.Image`
+  height: 25px;
+  resizeMode: contain;
+`
+
 
 // Left tab
 const HealthCheckStack = createStackNavigator({
@@ -18,8 +25,8 @@ HealthCheckStack.navigationOptions = ({ navigation }) => ({
     tabBarVisible: navigation.state.index === 0,
     tabBarIcon: ({ focused }) => (
         focused
-            ? <Image source={require('./icon-health-check-active.png')}/>
-            : <Image source={require('./icon-health-check-inactive.png')}/>
+            ? <MenuImage source={require('./icon-health-check-active.png')}/>
+            : <MenuImage source={require('./icon-health-check-inactive.png')}/>
     )
 })
 
@@ -33,8 +40,8 @@ DashboardStack.navigationOptions = {
     tabBarLabel: 'Dashboard',
     tabBarIcon: ({ focused }) => (
         focused
-            ? <Image source={require('./icon-diagram-active.png')}/>
-            : <Image source={require('./icon-diagram-inactive.png')}/>
+            ? <MenuImage source={require('./icon-dashboard-active.png')}/>
+            : <MenuImage source={require('./icon-dashboard-inactive.png')}/>
     )
 }
 
@@ -43,8 +50,8 @@ Team.navigationOptions = {
     tabBarLabel: 'Team',
     tabBarIcon: ({ focused }) => (
         focused
-            ? <Image source={require('./icon-team-active.png')}/>
-            : <Image source={require('./icon-team-inactive.png')}/>
+            ? <MenuImage source={require('./icon-team-active.png')}/>
+            : <MenuImage source={require('./icon-team-inactive.png')}/>
     )
 }
 

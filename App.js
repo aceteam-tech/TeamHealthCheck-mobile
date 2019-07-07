@@ -13,8 +13,8 @@ export default class App extends React.Component {
         require('./navigation/icon-team-inactive.png'),
         require('./navigation/icon-health-check-active.png'),
         require('./navigation/icon-health-check-inactive.png'),
-        require('./navigation/icon-diagram-active.png'),
-        require('./navigation/icon-diagram-inactive.png'),
+        require('./navigation/icon-dashboard-active.png'),
+        require('./navigation/icon-dashboard-inactive.png'),
         // Error icon
         require('./components/Error/error-icon.png')
     ]
