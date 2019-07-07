@@ -121,7 +121,7 @@ const HealthCheckComponent = observer(({ teamStore, userStore, navigate }) => {
         votingEnabled = usersNotVoted.map(s => s.email).includes(email)
     }
     return (
-        <PageWithMenu navigate={navigate}>
+        <PageWithMenu navigate={navigate} version={2} >
             {({ onToggleMenu }) => (
                 <PageContent>
                     <Header title='Health Check' right={

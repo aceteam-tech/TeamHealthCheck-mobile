@@ -75,7 +75,7 @@ const TeamComponent = observer(({ navigate, onToggleMenu }) => (
 export default ({ navigation }) => {
     const { navigate } = navigation
     return (
-        <PageWithMenu navigate={navigate}>
+        <PageWithMenu navigate={navigate} version={2} >
             {
                 ({ onToggleMenu }) =>
                     <TeamComponent onToggleMenu={onToggleMenu}
