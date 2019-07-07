@@ -14,10 +14,10 @@ export default class PageWithMenu extends React.Component {
         }))
     }
     render() {
-        const {children, navigate} = this.props
+        const {children, navigate, version} = this.props
         const {menuVisible} = this.state
         return (
-            <Page source={BgBlueGradient}>
+            <Page version={version} >
                 <Menu team={teamStore.team}
                       visible={menuVisible}
                       onToggleVisible={this.onToggleMenu}

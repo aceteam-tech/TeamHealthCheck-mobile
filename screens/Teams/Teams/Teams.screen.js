@@ -49,7 +49,7 @@ export default class TeamsScreen extends React.Component {
         const { teams } = teamsStore
         return (
             <Loader assetsToLoad={[addTeamIcon, joinTeamIcon]}>
-                <Page version={2}>
+                <Page version={2} >
                     <Header title='TEAMS' right={
                         <LogoutButton onPress={() => {
                             signOut()

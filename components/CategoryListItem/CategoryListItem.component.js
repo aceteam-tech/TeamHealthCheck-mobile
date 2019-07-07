@@ -10,13 +10,18 @@ const ListItem = styled.View`
   align-items: center;
   justify-content: space-between;
   padding-bottom: 20px;
-  padding-top: 20px;
+  padding-top: 40px;
   margin-left: 20px;
 `
 
 const ListText = styled.Text`
   color: ${colors.air};
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 14px;
+`
+
+const RelativeValueText = styled(ListText)`
+  text-align: right;
 `
 
 const ListValues = styled.View`
@@ -29,14 +34,14 @@ const ListName = styled.View`
 `
 
 const RelativeValuePlaceholder = styled.View`
-  margin-left: 10px;
-  width: 50px;
+  margin-right: 10px;
+  width: 40px;
 `
 
 const RelativeValue = styled.View`
   align-items: center;
   border-radius: 5px;
-  background-color: ${({ value }) => (value > 0 ? '#95e1d5' : '#f9a9a9')};
+  background-color: ${({ value }) => (value > 0 ? 'rgb(145, 220, 255)' : 'rgb(255, 134, 134)')};
 `
 
 const getRelativeValue = (current, previous) => {
@@ -54,17 +59,17 @@ const CategoryListItem = ({ category }) => {
                 <ListText>{category.name}</ListText>
             </ListName>
             <ListValues>
-                <ListText>{Math.round(category.value) + '%'}</ListText>
                 <RelativeValuePlaceholder>
                     {
                         !!relativeValue
                         && (
                             <RelativeValue value={relativeValue}>
-                                <ListText>{relativeValue > 0 ? `+${relativeValue}` : relativeValue}</ListText>
+                                <RelativeValueText>{relativeValue > 0 ? `+${relativeValue}` : relativeValue}</RelativeValueText>
                             </RelativeValue>
                         )
                     }
                 </RelativeValuePlaceholder>
+                <ListText>{Math.round(category.value) + '%'}</ListText>
             </ListValues>
         </ListItem>
     )

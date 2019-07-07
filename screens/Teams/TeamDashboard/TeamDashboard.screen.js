@@ -30,7 +30,7 @@ const BurgerButton = styled.TouchableOpacity`
 `
 
 const TeamDashboardComponent = ({ lastResults, navigate }) => (
-    <PageWithMenu navigate={navigate}>
+    <PageWithMenu version={2} navigate={navigate}>
         {({ onToggleMenu }) => (
             <PageContent>
                 <HeaderWrapper>
