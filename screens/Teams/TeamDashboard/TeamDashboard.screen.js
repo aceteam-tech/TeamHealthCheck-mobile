@@ -29,38 +29,38 @@ const BurgerButton = styled.TouchableOpacity`
   padding: 10px 20px;
 `
 
-const TeamDashboardComponent = ({ lastResults, navigate }) => (
-    <PageWithMenu version={2} navigate={navigate}>
-        {({ onToggleMenu }) => (
-            <PageContent>
-                <HeaderWrapper>
-                    <Header title='Dashboard' right={
+const TeamDashboardComponent = observer(({ onToggleMenu }) => (
+    <PageContent>
+        <HeaderWrapper>
+            <Header title={
+                teamStore.healthChecks.length ?
+                    'Sprint #' + teamStore.healthChecks.length :
+                    'Team Dashboard'
+            }
+                    right={
                         <BurgerButton onPress={onToggleMenu}>
                             <MaterialIcons color='white' size={27} name='menu'/>
                         </BurgerButton>
                     }/>
-                </HeaderWrapper>
-                {
-                    !!lastResults ?
-                        <Content>
-                            {
-                                lastResults.map(c => (
-                                    <CategoryListItem key={c.id} category={c}/>
-                                ))
-                            }
-                        </Content> :
-                        <Body>
-                        <NoHealthCheckText>
-                            Finish your first Health Check to see the results here
-                        </NoHealthCheckText>
-                        </Body>
-                }
-            </PageContent>
-        )}
-    </PageWithMenu>
-)
+        </HeaderWrapper>
+        {
+            !!teamStore.lastResults ?
+                <Content>
+                    {
+                        teamStore.lastResults.map(c => (
+                            <CategoryListItem key={c.id} category={c}/>
+                        ))
+                    }
+                </Content> :
+                <Body>
+                <NoHealthCheckText>
+                    Finish your first Health Check to see the results here
+                </NoHealthCheckText>
+                </Body>
+        }
+    </PageContent>
+))
 
-@observer
 export default class TeamDashboardScreen extends React.Component {
     async componentDidMount() {
         const healthChecks = await getHealthChecks(teamStore.team.id)
@@ -68,9 +68,14 @@ export default class TeamDashboardScreen extends React.Component {
     }
 
     render() {
-        return <TeamDashboardComponent
-            lastResults={teamStore.lastResults}
-            navigate={this.props.navigation.navigate}
-        />
+        return (
+            <PageWithMenu version={2} navigate={this.props.navigation.navigate}>
+                {({ onToggleMenu }) => (
+                    <TeamDashboardComponent
+                        onToggleMenu={onToggleMenu}
+                    />
+                )}
+            </PageWithMenu>
+        )
     }
 }
