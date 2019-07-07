@@ -14,9 +14,10 @@ const faces = {
 
 const CategoryWrapper = styled.TouchableOpacity`
   padding: 10px 20px;
+  flex: 1;
   box-shadow: 0 2px 3px rgba(0,0,0,0.15);
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
   ${({ selected }) => selected && 'background-color: rgba(255, 255, 255, .4)'}
 `
 const CategoryFace = styled.Image`
@@ -25,8 +26,8 @@ const CategoryFace = styled.Image`
   margin-right: 20px;
 `
 const TextWrapper = styled.View`
-  height: 100px;
   background-color: #fff;
+  min-height: 74px;
   justify-content: center;
   flex: 1;
   border-bottom-right-radius: 40px;
@@ -34,7 +35,7 @@ const TextWrapper = styled.View`
   border-top-left-radius: 40px;
 `
 const CategoryText = styled.Text`
-  margin: 0 10px;
+  margin: 10px 30px;
   color: #0b7aee;
   font-size: 14px;
   font-weight: 200;

@@ -56,13 +56,14 @@ Team.navigationOptions = {
 }
 
 export default createBottomTabNavigator({
-    HealthCheckStack,
     DashboardStack,
+    HealthCheckStack,
     Team
 }, {
     tabBarOptions: {
+        activeTintColor: '#4ba3ff',
         style: {
-            height: 70
+            height: 65
         },
         tabStyle: {
             paddingBottom: 10,

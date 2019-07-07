@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image } from 'react-native'
+import { Image, View } from 'react-native'
 import styled from 'styled-components/native'
 import colors from '../../../constants/Colors'
 import { Page, Header, CategoryVoteBox, Loader, ArrowBack } from '../../../components/index'
@@ -16,8 +16,14 @@ const Text = styled.Text`
   font-weight: bold;
 `
 
-const HeaderRight = ({categoryIndex, categoriesCount}) => (
-    <Text style={{paddingRight: 20}}>{(categoryIndex + 1) + ' / ' + categoriesCount}</Text>
+const SkipVoteWrapper = styled.TouchableOpacity`
+  flex: 1;
+  align-items: center;
+  margin: 20px 0 10px;
+`
+
+const HeaderRight = ({ categoryIndex, categoriesCount }) => (
+    <Text style={{ paddingRight: 20 }}>{(categoryIndex + 1) + ' / ' + categoriesCount}</Text>
 )
 
 const CategoryVoteComponent = observer(({ navigation }) => {
@@ -26,7 +32,7 @@ const CategoryVoteComponent = observer(({ navigation }) => {
     const onCategoryChosen = (value) => {
         updateCategory(value)
 
-        if(lastCategory){
+        if (lastCategory) {
             navigation.push('Summary')
         } else {
             nextCategory()
@@ -34,7 +40,7 @@ const CategoryVoteComponent = observer(({ navigation }) => {
     }
 
     const onArrowBack = () => {
-        if(currentCategoryIndex === 0){
+        if (currentCategoryIndex === 0) {
             navigation.goBack(null)
         } else {
             previousCategory()
@@ -42,19 +48,36 @@ const CategoryVoteComponent = observer(({ navigation }) => {
     }
 
     return (
-        <Page version={2} >
+        <Page version={2}>
             <HeaderWrapper>
                 <Header title={currentCategory.name}
                         left={<ArrowBack onPress={onArrowBack}/>}
                         right={<HeaderRight categoryIndex={currentCategoryIndex} categoriesCount={categoriesCount}/>}
                 />
             </HeaderWrapper>
-            <Image source={categories[currentCategory.image] || categories.fun}
-                   resizeMode='contain'
-                   style={{ height: 120, alignSelf: 'center', marginBottom: 30 }}/>
-            <CategoryVoteBox selected={currentCategoryVote?.value === 2} text={currentCategory.descriptionGreen} face='happy' onPress={() => onCategoryChosen(2)}/>
-            <CategoryVoteBox selected={currentCategoryVote?.value === 1} text={'Ok. Could be better...'} face='poker' onPress={() => onCategoryChosen(1)}/>
-            <CategoryVoteBox selected={currentCategoryVote?.value === 0} text={currentCategory.descriptionRed} face='sad' onPress={() => onCategoryChosen(0)}/>
+            <View style={{ flex: 1 }}>
+                {
+                    categories[currentCategory.image] ?
+                        <Image source={categories[currentCategory.image]}
+                               resizeMode='contain'
+                               style={{ height: '20%', alignSelf: 'center', marginBottom: 30 }}/> :
+                        <View style={{ height: '20%', marginBottom: 30 }}/>
+                }
+                <View style={{ height: '85%' }}>
+                    <CategoryVoteBox selected={currentCategoryVote?.value === 2}
+                                     text={currentCategory.descriptionGreen}
+                                     face='happy' onPress={() => onCategoryChosen(2)}/>
+                    <CategoryVoteBox selected={currentCategoryVote?.value === 1}
+                                     text={'Ok. Could be better...'}
+                                     face='poker' onPress={() => onCategoryChosen(1)}/>
+                    <CategoryVoteBox selected={currentCategoryVote?.value === 0}
+                                     text={currentCategory.descriptionRed}
+                                     face='sad' onPress={() => onCategoryChosen(0)}/>
+                    <SkipVoteWrapper onPress={() => onCategoryChosen(undefined)}>
+                        <Text>Don't wanna vote...</Text>
+                    </SkipVoteWrapper>
+                </View>
+            </View>
         </Page>
     )
 })

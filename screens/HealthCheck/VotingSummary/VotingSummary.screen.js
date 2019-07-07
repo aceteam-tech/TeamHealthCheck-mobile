@@ -16,7 +16,7 @@ const VotingSummaryComponent = observer(({navigation, teamStore}) => {
     if(!votingStore.healthCheck.categories) return <Loading />
 
     const send = async () => {
-        sendStatus(teamStore.team.id, voteStore.vote.categories)
+        sendStatus(teamStore.team.id, voteStore.categories)
         navigation.navigate('HealthCheck')
     }
 

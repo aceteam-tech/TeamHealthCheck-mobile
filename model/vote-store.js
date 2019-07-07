@@ -17,6 +17,10 @@ class VoteStore {
         this.currentCategoryIndex = 0
     }
 
+    @computed get categories() {
+        return this.vote.categories.filter(category => category.value !== undefined)
+    }
+
     @computed get voting() {
         return votingStore.healthCheck
     }
@@ -30,7 +34,7 @@ class VoteStore {
     }
 
     @computed get currentCategoryVote() {
-        if(this.vote.categories.length > this.currentCategoryIndex){
+        if (this.vote.categories.length > this.currentCategoryIndex) {
             return this.vote.categories[this.currentCategoryIndex]
         }
     }
