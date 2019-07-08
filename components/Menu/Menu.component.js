@@ -7,7 +7,7 @@ import TeamLogo from '../TeamLogo/TeamLogo.component'
 import Page from '../Page/Page.component'
 import Header from '../Header/Header.component'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { signOut } from '../../services/connection/adapters/auth'
+import authStore from '../../services/connection/adapters/auth'
 
 const ChangeTeam = styled.TouchableOpacity`
   margin-top: 10px;
@@ -77,7 +77,7 @@ export default ({ team, visible, navigate, onToggleVisible }) => (
                 </ChangeTeam>
             </MenuTeam>
             <MenuItem onPress={() => {
-                signOut()
+                authStore.signOut()
                 navigate('Welcome')
             }}>
                 <MenuIcon color='white' size={27} name='logout'/>

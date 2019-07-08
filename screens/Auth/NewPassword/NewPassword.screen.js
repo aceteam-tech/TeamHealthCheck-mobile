@@ -5,7 +5,7 @@ import { Button, Text, Input, Item, Form, Label } from 'native-base'
 import { KeyboardAvoidingView, Image } from 'react-native'
 import { Page, Loader, Header, ArrowBack } from '../../../components'
 
-import { forgotPasswordSubmit } from '../../../services/connection/adapters/auth'
+import authStore from '../../../services/connection/adapters/auth'
 import { buttonStyle, buttonTextStyle, labelStyle, inputStyle } from '../../../constants/Style'
 
 const newPasswordIcon = require('./new-password-3x.png')
@@ -44,7 +44,7 @@ export default class NewPasswordScreen extends React.Component {
 
     forgotPassword = async () => {
         try {
-            await forgotPasswordSubmit(this.state.email, this.state.code, this.state.password)
+            await authStore.forgotPasswordSubmit(this.state.email, this.state.code, this.state.password)
             this.props.navigation.navigate('Login')
         }
         catch (e) {

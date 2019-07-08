@@ -6,7 +6,7 @@ import { Button, Text, Input, Label, Item, Form, Icon } from 'native-base'
 import { Image, KeyboardAvoidingView } from 'react-native'
 import { Page, Loader, Header, ArrowBack } from '../../../components'
 
-import { signUp } from '../../../services/connection/adapters/auth'
+import authStore from '../../../services/connection/adapters/auth'
 import colors from '../../../constants/Colors'
 import { buttonStyle, buttonTextStyle, labelStyle, inputStyle } from '../../../constants/Style'
 import registerFormStore from './register.store'
@@ -36,7 +36,7 @@ const ErrorText = styled.Text`
 const registerFn = async (navigate) => {
     const { name, email, password } = registerFormStore.form
     try{
-        const user = await signUp(email.toLowerCase(), password, name)
+        const user = await authStore.signUp(email.toLowerCase(), password, name)
         registerFormStore.clear()
         navigate('Verify', {email: user.user.username})
     } catch(e) {

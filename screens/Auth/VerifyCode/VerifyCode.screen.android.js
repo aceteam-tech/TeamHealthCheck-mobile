@@ -5,7 +5,7 @@ import { Button, Text, Input, Icon, Item, Form, Label } from 'native-base'
 import { KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native'
 import { Page, Loader, Header } from '../../../components'
 
-import { resendCode, verify } from '../../../services/connection/adapters/auth'
+import authStore from '../../../services/connection/adapters/auth'
 import colors from '../../../constants/Colors'
 import { buttonStyle, buttonTextStyle, labelStyle, inputStyle } from '../../../constants/Style'
 
@@ -65,7 +65,7 @@ export default class VerifyCodeScreen extends React.Component {
 
     verify = async (code) => {
         try {
-            await verify(this.email, code)
+            await authStore.verify(this.email, code)
             this.props.navigation.navigate('Login', { email: this.email })
         } catch (e) {
             console.log(e)
@@ -74,7 +74,7 @@ export default class VerifyCodeScreen extends React.Component {
 
     resendCode = async () => {
         try {
-            await resendCode(this.email)
+            await authStore.resendCode(this.email)
             this.setState({
                 codeSent: true
             })

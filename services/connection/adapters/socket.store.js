@@ -1,14 +1,14 @@
-import { observable } from 'mobx'
+import { observable, autorun } from 'mobx'
 import { WEBSOCKET_URL } from 'babel-dotenv'
 import handleSocketCallback from '../socket-handlers'
-import { getSession } from './auth'
+import authStore from './auth'
 
 class SocketStore {
     @observable handle = null
     @observable opened = false
 
     async init() {
-        const session = await getSession()
+        const session = await authStore.getSession()
         const token = session.getIdToken().getJwtToken()
         this.handle = new WebSocket(`${WEBSOCKET_URL}?Authorization=${token}`)
         this.mountEvents()

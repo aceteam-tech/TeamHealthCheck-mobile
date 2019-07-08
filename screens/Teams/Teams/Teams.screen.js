@@ -6,7 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import teamStore from '../../../model/team-store'
 import teamsStore from '../../../model/teams-store'
 import { Header, Button, Page, TeamCard, Loader } from '../../../components/index'
-import { signOut } from '../../../services/connection/adapters/auth'
+import authStore from '../../../services/connection/adapters/auth'
 // import {register} from '../../../helpers/push.helper'
 
 import { Menu, MenuItem, AddButtonWrapper, LogoutButton, MenuShadow, MenuText, NoneTeamsText, NoneTeamsWrapper } from './Teams.styles'
@@ -52,7 +52,7 @@ export default class TeamsScreen extends React.Component {
                 <Page version={2} >
                     <Header title='TEAMS' right={
                         <LogoutButton onPress={() => {
-                            signOut()
+                            authStore.signOut()
                             navigate('Welcome')
                         }
                         }>

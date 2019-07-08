@@ -5,7 +5,7 @@ import { Input, Item, Form, Label } from 'native-base'
 import { Image, KeyboardAvoidingView } from 'react-native'
 import { Button, Header, Page, Loader, ArrowBack } from '../../../components'
 
-import { login } from '../../../services/connection/adapters/auth'
+import authStore from '../../../services/connection/adapters/auth'
 import colors from '../../../constants/Colors'
 import { labelStyle, inputStyle } from '../../../constants/Style'
 import appStore from '../../../model/app.store'
@@ -71,7 +71,7 @@ export default class LoginScreen extends React.Component {
 
     login = async () => {
         try {
-            await login(this.state.email, this.state.password)
+            await authStore.login(this.state.email, this.state.password)
             this.props.navigation.navigate('AuthLoading', { email: this.state.email })
         }
         catch (e) {

@@ -1,12 +1,12 @@
 import { Storage } from 'aws-amplify'
 import { API_URL } from 'babel-dotenv'
-import { getSession } from './auth'
+import authStore from './auth'
 import { pathname } from 'join-url'
 import appStore from '../../../model/app.store'
 
 const makeRequest = async (resource, method, body, loading = true) => {
     try {
-        const session = await getSession()
+        const session = await authStore.getSession()
         const headers = {
             Authorization: 'Bearer ' + session.getIdToken().getJwtToken(),
             'Content-Type': 'application/json'

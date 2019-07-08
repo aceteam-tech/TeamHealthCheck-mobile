@@ -1,7 +1,7 @@
 import Amplify, { Auth } from 'aws-amplify'
+import { observable, autorun } from 'mobx'
 import { CLIENT_ID, USER_POOL_ID } from 'babel-dotenv'
 import appStore from '../../../model/app.store'
-import socketStore from './socket.store'
 
 Amplify.configure({
     Auth: {
@@ -16,29 +16,51 @@ Amplify.configure({
     }
 })
 
-export const signUp = (email, password, name) => appStore.apiRequestCalled(Auth.signUp({
-    username: email,
-    password,
-    attributes: {
-        name
+class AuthStore {
+    @observable loggedIn = false
+    
+    constructor(){
+        console.log('AuthStore loaded');
+        autorun(() => {
+            if(this.loggedIn === false){
+                console.log('siema!')
+            }
+        })
     }
-}))
 
-export const verify = (username, code) => appStore.apiRequestCalled(Auth.confirmSignUp(username, code))
+    signUp = (email, password, name) => appStore.apiRequestCalled(Auth.signUp({
+        username: email,
+        password,
+        attributes: {
+            name
+        }
+    }))
 
-export const resendCode = (username) => appStore.apiRequestCalled(Auth.resendSignUp(username))
+    verify = (username, code) => appStore.apiRequestCalled(Auth.confirmSignUp(username, code))
 
-export const login = (username, password) => appStore.apiRequestCalled(Auth.signIn(username, password), ['UserNotConfirmedException'])
+    resendCode = (username) => appStore.apiRequestCalled(Auth.resendSignUp(username))
 
-export const forgotPassword = username => appStore.apiRequestCalled(Auth.forgotPassword(username))
+    login = (username, password) => {
+        return appStore.apiRequestCalled(Auth.signIn(username, password), ['UserNotConfirmedException'])
+            .then(() => {
+                console.log('auth 1')
+                this.loggedIn = true
+            })
+    }
 
-export const forgotPasswordSubmit = (username, code, newPassword) => appStore.apiRequestCalled(Auth.forgotPasswordSubmit(username, code, newPassword))
+    forgotPassword = username => appStore.apiRequestCalled(Auth.forgotPassword(username))
 
-export const getSession = async () => Auth.currentSession()
+    forgotPasswordSubmit = (username, code, newPassword) => appStore.apiRequestCalled(Auth.forgotPasswordSubmit(username, code, newPassword))
 
-export const getUser = async () => Auth.currentAuthenticatedUser()
+    getSession = async () => Auth.currentSession()
 
-export const signOut = () => {
-    socketStore.logout()
-    appStore.apiRequestCalled(Auth.signOut())
+    getUser = async () => Auth.currentAuthenticatedUser()
+
+    signOut = () => {
+        console.log('auth 0')
+        this.loggedIn = false
+        return appStore.apiRequestCalled(Auth.signOut())
+    }
 }
+
+export default new AuthStore()

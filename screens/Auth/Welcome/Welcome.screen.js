@@ -3,7 +3,6 @@ import styled from 'styled-components/native'
 import { Image } from 'react-native'
 
 import { Loader, Button, Page } from '../../../components'
-import { login } from '../../../services/connection/adapters/auth'
 import colors from '../../../constants/Colors'
 
 const iconUser = require('./fun-3x.png')
@@ -39,11 +38,6 @@ const Footer = styled.View`
 `
 
 export default class WelcomeScreen extends React.Component {
-    login = async () => {
-        await login(this.state.email, this.state.password)
-        this.props.navigation.navigate('AuthLoading', { email: this.state.email })
-    }
-
     render() {
         return (
             <Loader assetsToLoad={[iconUser]}>
