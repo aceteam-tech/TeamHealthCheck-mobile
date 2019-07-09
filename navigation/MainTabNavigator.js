@@ -4,7 +4,7 @@ import { Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
 
 import { HealthCheck, CategoryVote, VotingSummary as Summary } from '../screens/health-check'
-import { Team, TeamSettings, TeamDashboard } from '../screens/teams'
+import { Team, TeamSettings, TeamDashboard, DashboardSettings } from '../screens/teams'
 import styled from 'styled-components/native'
 
 const MenuImage = styled.Image`
@@ -33,6 +33,7 @@ HealthCheckStack.navigationOptions = ({ navigation }) => ({
 // Center tab
 const DashboardStack = createStackNavigator({
     TeamDashboard,
+    DashboardSettings,
     TeamSettings
 }, { headerMode: 'none' })
 

@@ -1,5 +1,6 @@
 import votingStore from '../../model/voting-store'
 import teamStore from '../../model/team-store'
+import teamVotingsStore from '../../screens/Teams/TeamDashboard/team-votings.store'
 import voteStore from '../../model/vote-store'
 
 const socketHandlers = {
@@ -13,7 +14,7 @@ const socketHandlers = {
 
         // If the health check finished without any votes, categories property will be undefined.
         if(voting.categories){
-            teamStore.votingFinished(voting)
+            teamVotingsStore.votingFinished(voting)
         }
     },
     userRemoved: ({removedUserId}) => teamStore.removeUser(removedUserId),

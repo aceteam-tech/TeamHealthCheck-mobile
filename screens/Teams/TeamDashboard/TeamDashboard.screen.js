@@ -4,7 +4,8 @@ import styled from 'styled-components/native'
 import { MaterialIcons } from '@expo/vector-icons'
 import { observer } from 'mobx-react/native'
 import teamStore from '../../../model/team-store'
-import { Header, PageWithMenu, CategoryListItem } from '../../../components/index'
+import teamVotingsStore from './team-votings.store'
+import { Header, Page, CategoryListItem } from '../../../components/index'
 import colors from '../../../constants/Colors'
 import { getHealthChecks } from '../../../services/connection/adapters/http-api'
 
@@ -29,25 +30,25 @@ const BurgerButton = styled.TouchableOpacity`
   padding: 10px 20px;
 `
 
-const TeamDashboardComponent = observer(({ onToggleMenu }) => (
+const TeamDashboardComponent = observer(({navigation}) => (
     <PageContent>
         <HeaderWrapper>
             <Header title={
-                teamStore.healthChecks.length ?
-                    'Sprint #' + teamStore.healthChecks.length :
+                teamVotingsStore.votings.length ?
+                    'Sprint #' + teamVotingsStore.votings.length :
                     'Team Dashboard'
             }
                     right={
-                        <BurgerButton onPress={onToggleMenu}>
-                            <MaterialIcons color='white' size={27} name='menu'/>
+                        <BurgerButton onPress={() => navigation.navigate('DashboardSettings')}>
+                            <MaterialIcons color='white' size={27} name='settings'/>
                         </BurgerButton>
                     }/>
         </HeaderWrapper>
         {
-            !!teamStore.lastResults ?
+            !!teamVotingsStore.lastResults ?
                 <Content>
                     {
-                        teamStore.lastResults.map(c => (
+                        teamVotingsStore.lastResults.map(c => (
                             <CategoryListItem key={c.id} category={c}/>
                         ))
                     }
@@ -63,19 +64,15 @@ const TeamDashboardComponent = observer(({ onToggleMenu }) => (
 
 export default class TeamDashboardScreen extends React.Component {
     async componentDidMount() {
-        const healthChecks = await getHealthChecks(teamStore.team.id)
-        teamStore.setHealthChecks(healthChecks)
+        const votings = await getHealthChecks(teamStore.team.id)
+        teamVotingsStore.setVotings(votings)
     }
 
     render() {
         return (
-            <PageWithMenu version={2} navigate={this.props.navigation.navigate}>
-                {({ onToggleMenu }) => (
-                    <TeamDashboardComponent
-                        onToggleMenu={onToggleMenu}
-                    />
-                )}
-            </PageWithMenu>
+            <Page version={2}>
+                <TeamDashboardComponent navigation={this.props.navigation} />
+            </Page>
         )
     }
 }
