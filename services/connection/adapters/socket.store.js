@@ -38,7 +38,7 @@ class SocketStore {
         }
     }
 
-    logout() {
+    close() {
         this.handle.onclose = () => console.log('Connection closed (user logged out)')
         this.handle.close()
         this.opened = false

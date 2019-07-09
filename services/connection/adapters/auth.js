@@ -1,5 +1,4 @@
 import Amplify, { Auth } from 'aws-amplify'
-import { observable, autorun } from 'mobx'
 import { CLIENT_ID, USER_POOL_ID } from 'babel-dotenv'
 import appStore from '../../../model/app.store'
 
@@ -17,17 +16,6 @@ Amplify.configure({
 })
 
 class AuthStore {
-    @observable loggedIn = false
-    
-    constructor(){
-        console.log('AuthStore loaded');
-        autorun(() => {
-            if(this.loggedIn === false){
-                console.log('siema!')
-            }
-        })
-    }
-
     signUp = (email, password, name) => appStore.apiRequestCalled(Auth.signUp({
         username: email,
         password,
@@ -40,13 +28,7 @@ class AuthStore {
 
     resendCode = (username) => appStore.apiRequestCalled(Auth.resendSignUp(username))
 
-    login = (username, password) => {
-        return appStore.apiRequestCalled(Auth.signIn(username, password), ['UserNotConfirmedException'])
-            .then(() => {
-                console.log('auth 1')
-                this.loggedIn = true
-            })
-    }
+    login = (username, password) => appStore.apiRequestCalled(Auth.signIn(username, password), ['UserNotConfirmedException'])
 
     forgotPassword = username => appStore.apiRequestCalled(Auth.forgotPassword(username))
 
@@ -56,11 +38,7 @@ class AuthStore {
 
     getUser = async () => Auth.currentAuthenticatedUser()
 
-    signOut = () => {
-        console.log('auth 0')
-        this.loggedIn = false
-        return appStore.apiRequestCalled(Auth.signOut())
-    }
+    signOut = () => appStore.apiRequestCalled(Auth.signOut())
 }
 
 export default new AuthStore()

@@ -7,6 +7,7 @@ import teamStore from '../../../model/team-store'
 import teamsStore from '../../../model/teams-store'
 import { Header, Button, Page, TeamCard, Loader } from '../../../components/index'
 import authStore from '../../../services/connection/adapters/auth'
+import socketStore from '../../../services/connection/adapters/socket.store'
 // import {register} from '../../../helpers/push.helper'
 
 import { Menu, MenuItem, AddButtonWrapper, LogoutButton, MenuShadow, MenuText, NoneTeamsText, NoneTeamsWrapper } from './Teams.styles'
@@ -53,6 +54,7 @@ export default class TeamsScreen extends React.Component {
                     <Header title='TEAMS' right={
                         <LogoutButton onPress={() => {
                             authStore.signOut()
+                            socketStore.close()
                             navigate('Welcome')
                         }
                         }>

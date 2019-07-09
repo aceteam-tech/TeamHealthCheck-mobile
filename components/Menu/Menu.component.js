@@ -8,6 +8,7 @@ import Page from '../Page/Page.component'
 import Header from '../Header/Header.component'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import authStore from '../../services/connection/adapters/auth'
+import socketStore from '../../services/connection/adapters/socket.store'
 
 const ChangeTeam = styled.TouchableOpacity`
   margin-top: 10px;
@@ -78,6 +79,7 @@ export default ({ team, visible, navigate, onToggleVisible }) => (
             </MenuTeam>
             <MenuItem onPress={() => {
                 authStore.signOut()
+                socketStore.close()
                 navigate('Welcome')
             }}>
                 <MenuIcon color='white' size={27} name='logout'/>
