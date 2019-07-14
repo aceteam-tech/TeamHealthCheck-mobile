@@ -44,36 +44,26 @@ const RelativeValue = styled.View`
   background-color: ${({ value }) => (value > 0 ? 'rgb(145, 220, 255)' : 'rgb(255, 134, 134)')};
 `
 
-const getRelativeValue = (current, previous) => {
-    if (typeof previous !== 'undefined' && (current - previous) !== 0) {
-        return current - previous
-    }
-    return ''
-}
-
-const CategoryListItem = ({ category }) => {
-    const relativeValue = Math.round(getRelativeValue(category.value, category.previousValue))
-    return (
-        <ListItem>
-            <ListName>
-                <ListText>{category.name}</ListText>
-            </ListName>
-            <ListValues>
-                <RelativeValuePlaceholder>
-                    {
-                        !!relativeValue
-                        && (
-                            <RelativeValue value={relativeValue}>
-                                <RelativeValueText>{relativeValue > 0 ? `+${relativeValue}` : relativeValue}</RelativeValueText>
-                            </RelativeValue>
-                        )
-                    }
-                </RelativeValuePlaceholder>
-                <ListText>{Math.round(category.value) + '%'}</ListText>
-            </ListValues>
-        </ListItem>
-    )
-}
+const CategoryListItem = ({ category }) => (
+    <ListItem>
+        <ListName>
+            <ListText>{category.name}</ListText>
+        </ListName>
+        <ListValues>
+            <RelativeValuePlaceholder>
+                {
+                    !!category.relativeValue
+                    && (
+                        <RelativeValue value={category.relativeValue}>
+                            <RelativeValueText>{category.relativeValue > 0 ? `+${category.relativeValue}` : category.relativeValue}</RelativeValueText>
+                        </RelativeValue>
+                    )
+                }
+            </RelativeValuePlaceholder>
+            <ListText>{Math.round(category.value) + '%'}</ListText>
+        </ListValues>
+    </ListItem>
+)
 
 CategoryListItem.propTypes = {
     category: PropTypes.shape({

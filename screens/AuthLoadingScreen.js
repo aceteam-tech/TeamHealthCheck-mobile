@@ -30,7 +30,7 @@ export default class AuthLoadingScreen extends React.Component {
 
             await teamStore.setTeam(team)
             await socketStore.init()
-            const nextScreen = team.users.length > 1 ? 'HealthCheck' : 'Team'
+            const nextScreen = team.users.length > 1 ? 'TeamDashboard' : 'Team'
             this.props.navigation.navigate(nextScreen)
         } else {
             await socketStore.init()

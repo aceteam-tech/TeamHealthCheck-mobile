@@ -30,25 +30,37 @@ const BurgerButton = styled.TouchableOpacity`
   padding: 10px 20px;
 `
 
-const TeamDashboardComponent = observer(({navigation}) => (
+const buildTitle = ({ current, compared }) => {
+    if (!current) {
+        return 'Team Dashboard'
+    } else if (compared) {
+        return `Sprint #${current} (${compared})`
+    }
+    return `Sprint #${current}`
+}
+
+const renderSettings = (navigation) => (
+    <BurgerButton onPress={() => navigation.navigate('DashboardSettings')}>
+        <MaterialIcons color='white' size={27} name='settings'/>
+    </BurgerButton>
+)
+
+const TeamDashboardComponent = observer(({ navigation }) => (
     <PageContent>
         <HeaderWrapper>
-            <Header title={
-                teamVotingsStore.votings.length ?
-                    'Sprint #' + teamVotingsStore.votings.length :
-                    'Team Dashboard'
-            }
-                    right={
-                        <BurgerButton onPress={() => navigation.navigate('DashboardSettings')}>
-                            <MaterialIcons color='white' size={27} name='settings'/>
-                        </BurgerButton>
-                    }/>
+            <Header title={buildTitle(teamVotingsStore.votings)}
+                    {
+                        ...(teamVotingsStore.votings.items.length > 1 ?
+                            { right: renderSettings(navigation) } :
+                            {})
+                    }
+            />
         </HeaderWrapper>
         {
-            !!teamVotingsStore.lastResults ?
+            !!teamVotingsStore.currentVoting ?
                 <Content>
                     {
-                        teamVotingsStore.lastResults.map(c => (
+                        teamVotingsStore.currentVoting.map(c => (
                             <CategoryListItem key={c.id} category={c}/>
                         ))
                     }
@@ -71,7 +83,7 @@ export default class TeamDashboardScreen extends React.Component {
     render() {
         return (
             <Page version={2}>
-                <TeamDashboardComponent navigation={this.props.navigation} />
+                <TeamDashboardComponent navigation={this.props.navigation}/>
             </Page>
         )
     }
