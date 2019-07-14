@@ -8,7 +8,7 @@
       "ios",
       "android"
     ],
-    "version": "2.0.3",
+    "version": "2.1.0",
     "orientation": "portrait",
     "icon": "./assets/logo/logo.png",
     "splash": {
@@ -30,7 +30,7 @@
     "android": {
       "package": "net.teamhealthcheck",
       "permissions": [],
-      "versionCode": 12,
+      "versionCode": 14,
       "splash": {
         "image": "./assets/images/splash-icon-android.png",
         "resizeMode": "cover",
