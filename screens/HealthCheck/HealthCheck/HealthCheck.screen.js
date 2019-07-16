@@ -7,9 +7,8 @@ import {Button, Header, Loading, UsersCompactList, PageWithMenu} from '../../../
 import teamStore from '../../../model/team-store'
 import userStore from '../../../model/user-store'
 import votingStore from '../../../model/voting-store'
-import voteStore from '../../../model/vote-store'
 import {
-    getHealthCheckStatus, createHealthCheck, endHealthCheck, getHealthChecks
+    getHealthCheckStatus, createHealthCheck, endHealthCheck
 } from '../../../services/connection/adapters/http-api'
 import { observer } from 'mobx-react/native'
 
@@ -52,9 +51,7 @@ const onCreateHealthCheck = async (teamId) => {
 
 const onEndHealthCheck = async (teamId, navigate) => {
     const healthCheck = await endHealthCheck(teamId)
-    const healthChecks = await getHealthChecks(teamId)
     votingStore.setHealthCheck(healthCheck)
-    teamStore.setHealthChecks(healthChecks)
     return navigate('TeamDashboard')
 }
 

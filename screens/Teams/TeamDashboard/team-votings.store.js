@@ -31,7 +31,15 @@ class TeamVotingsStore {
     }
 
     votingFinished(voting) {
-        this.votings.items.push(voting)
+        const items = this.votings.items.concat(new Voting(voting))
+        const current = items.length
+        const compared = current > 1 ? current - 1 : undefined
+        this.votings = {
+            ...this.votings,
+            items,
+            current,
+            compared
+        }
     }
 
     changeCurrentSprint = () => {
