@@ -34,13 +34,15 @@ const ErrorText = styled.Text`
 `
 
 const registerFn = async (navigate) => {
-    const { name, email, password } = registerFormStore.form
-    try{
-        const user = await authStore.signUp(email.toLowerCase(), password, name)
-        registerFormStore.clear()
-        navigate('Verify', {email: user.user.username})
-    } catch(e) {
-        console.log(e)
+    if (registerFormStore.formValidated) {
+        const {name, email, password} = registerFormStore.form
+        try {
+            const user = await authStore.signUp(email.toLowerCase(), password, name)
+            registerFormStore.clear()
+            navigate('Verify', {email: user.user.username})
+        } catch (e) {
+            console.log(e)
+        }
     }
 }
 
@@ -115,7 +117,7 @@ export default observer(({ navigation }) => {
                         </Middle>
                         <Footer>
                             {
-                                !!formValidated &&
+                                formValidated &&
                                 <Button rounded light onPress={register} style={buttonStyle}>
                                     <Text style={buttonTextStyle}>{'Continue'.toUpperCase()}</Text>
                                 </Button>
